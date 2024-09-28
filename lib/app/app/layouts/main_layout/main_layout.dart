@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../controllers/main_controller.dart';
+import 'components/drawer_content.dart';
 
 class MainLayout extends StatelessWidget {
   const MainLayout({required this.child, super.key});
@@ -20,7 +21,14 @@ class MainLayout extends StatelessWidget {
     bool isTablet2 = screenWidth < 890;
     bool isDesktop = screenWidth > 720;
     return Scaffold(
-      appBar: !isTablet
+      drawer: isTablet2
+          ? Drawer(
+              child: DrawerContent(
+                isMobile: true,
+              ),
+            )
+          : null,
+      appBar: !isTablet2
           ? AppBar(
               toolbarHeight: 70,
               centerTitle: true,
@@ -57,11 +65,12 @@ class MainLayout extends StatelessWidget {
             ),
       body: Row(
         children: [
-          if (!isTablet)
-            //poner el drawer aqui
+          if (!isTablet2)
             Container(
-              width: 120,
-              color: Colors.black,
+              width: 240,
+              child: DrawerContent(
+                isMobile: false,
+              ),
             ),
           Expanded(
             child: child,
