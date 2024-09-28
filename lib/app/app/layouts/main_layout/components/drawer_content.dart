@@ -51,7 +51,7 @@ class DrawerContent extends StatelessWidget {
           ),
         ListTile(
           title: const Text('Productos'),
-          onTap: () => Get.toNamed(Routes.PRODUCTS),
+          onTap: () => Get.offNamed(Routes.PRODUCTS),
         ),
       ],
     );
