@@ -17,11 +17,27 @@ class ChangeColorDialog extends StatelessWidget {
         title: Text('Personaliza tu app'),
         content: Container(
           constraints: BoxConstraints(maxWidth: 450),
-          child: Wrap(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              for (int i = 0; i < ListThemes.list.length; i++) ...[
-                colorAvatar(ListThemes.list[i])
-              ]
+              Wrap(
+                children: [
+                  for (int i = 0; i < ListThemes.list.length; i++) ...[
+                    colorAvatar(ListThemes.list[i])
+                  ]
+                ],
+              ),
+              SizedBox(height: 8),
+              SwitchListTile(
+                  title: Text(
+                    'Dark Mode',
+                    textAlign: TextAlign.start,
+                  ),
+                  value: Get.find<MainController>().isThemeModeDark,
+                  onChanged: (_) {
+                    Get.find<MainController>().changeThemeMode();
+                  }),
             ],
           ),
         ),
@@ -35,9 +51,6 @@ class ChangeColorDialog extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Get.find<MainController>().onChangeColorTheme(theme);
-          Future.delayed(Duration(milliseconds: 200), () {
-            Get.back();
-          });
         },
         child: CircleAvatar(
           radius: 24,
