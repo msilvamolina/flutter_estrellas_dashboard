@@ -16,7 +16,6 @@ class LoginScreen extends StatelessWidget {
   final bool isDialog;
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = Theme.of(context).colorScheme.primary;
     return GetBuilder<LoginDialogController>(
         init: LoginDialogController(),
         builder: (controller) {
@@ -30,17 +29,6 @@ class LoginScreen extends StatelessWidget {
                         width: 400,
                         child: ListBody(
                           children: <Widget>[
-                            if (isDialog)
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.help_outline),
-                                  ),
-                                ],
-                              ),
                             Center(
                               child: LogoApp(
                                 size: 180,
@@ -48,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 16),
                             Text(
-                              '¡Bienvenido al\nMariscal!',
+                              'Holis :D',
                               textAlign: TextAlign.center,
                               style: TypographyStyle.h1Mobile
                                   .copyWith(fontWeight: FontWeight.w700),
@@ -114,82 +102,7 @@ class LoginScreen extends StatelessWidget {
                                 );
                               },
                             ),
-                            SizedBox(height: 8),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text('Olvidé mi contraseña',
-                                  style: TypographyStyle.linkRegularLarge),
-                            ),
-                            SizedBox(height: 26),
-                            GetBuilder<MainController>(
-                              id: 'input',
-                              builder: (_) {
-                                return Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Hero(
-                                      tag: 'buttonGoogle',
-                                      child: ColorFiltered(
-                                        colorFilter: ColorFilter.mode(
-                                          primaryColor,
-                                          BlendMode
-                                              .srcIn, // Aplica el color a la imagen
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/google.png',
-                                          width: 46,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 16),
-                                    Hero(
-                                      tag: 'buttonApple',
-                                      child: ColorFiltered(
-                                        colorFilter: ColorFilter.mode(
-                                          primaryColor,
-                                          BlendMode
-                                              .srcIn, // Aplica el color a la imagen
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/apple.png',
-                                          width: 46,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(width: 16),
-                                    Hero(
-                                      tag: 'buttonFacebook',
-                                      child: ColorFiltered(
-                                        colorFilter: ColorFilter.mode(
-                                          primaryColor,
-                                          BlendMode
-                                              .srcIn, // Aplica el color a la imagen
-                                        ),
-                                        child: Image.asset(
-                                          'assets/images/facebook.png',
-                                          width: 46,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                            SizedBox(height: 36),
-                            ElevatedButton(
-                              onPressed: controller.openRegisterDialog,
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                width: double.infinity,
-                                child: Text(
-                                  'Regístrate',
-                                  textAlign: TextAlign.center,
-                                  style: TypographyStyle.bodyRegularLarge
-                                      .copyWith(fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                            ),
+                            SizedBox(height: 120),
                           ],
                         ),
                       );

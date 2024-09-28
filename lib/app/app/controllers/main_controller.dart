@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:estrellas_dashboard/app/app/dialogs/register/register_dialog.dart';
-import 'package:estrellas_dashboard/app/app/dialogs/register_basic_data/register_basic_data_dialog.dart';
 import 'package:estrellas_dashboard/app/components/dialogs/loader_dialog.dart';
 import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/auth/user_repository.dart';
@@ -96,42 +94,19 @@ class MainController extends GetxController {
 
     if (isAuthenticated) {
       _userData = await userRepository.getUserDataFirebase();
-      if (userData != null) {
-        _userStatus = UserStatus.full;
-      } else {
-        _userStatus = UserStatus.needBasicData;
-      }
+      _userStatus = UserStatus.full;
     } else {
       _userStatus = UserStatus.notLogged;
     }
 
     update(['login']);
 
-    if (!kIsWeb) {
-      if (_userStatus == UserStatus.notLogged) {
-        Get.offAllNamed(Routes.LOGIN);
-        // if (!_isWelcome) {
-        //   Get.offAllNamed(Routes.WELCOME);
-        // } else {
-        //   Get.offAllNamed(Routes.LOGIN);
-        // }
-      }
-      if (_userStatus == UserStatus.needBasicData) {
-        Get.offAllNamed(Routes.REGISTER_BASIC_DATA);
-      }
-      if (_userStatus == UserStatus.full) {
-        Get.offAllNamed(Routes.HOME);
-      }
-    } else {
-      if (_userStatus == UserStatus.needBasicData) {
-        openRegisterBasicDataDialog();
-      }
-      if (_userStatus == UserStatus.full) {
-        if (login) {
-          String name = userData!.firstName;
-          Snackbars.success('Hola $name!');
-        }
-      }
+    if (_userStatus == UserStatus.notLogged) {
+      Get.offAllNamed(Routes.LOGIN);
+    }
+
+    if (_userStatus == UserStatus.full) {
+      Get.offAllNamed(Routes.HOME);
     }
   }
 
@@ -172,33 +147,6 @@ class MainController extends GetxController {
         return ChangeColorDialog();
       },
     );
-  }
-
-  void openRegisterDialog() {
-    if (kIsWeb) {
-      showDialog(
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return RegisterDialog();
-        },
-      );
-    } else {
-      Get.toNamed(Routes.REGISTER);
-    }
-  }
-
-  void openRegisterBasicDataDialog() {
-    if (kIsWeb) {
-      showDialog(
-        barrierDismissible: false,
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return RegisterBasicDataDialog();
-        },
-      );
-    } else {
-      Get.offAndToNamed(Routes.REGISTER_BASIC_DATA);
-    }
   }
 
   void openAlertHelpText() {

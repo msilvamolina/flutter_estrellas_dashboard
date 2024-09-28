@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
       initialBinding: MainBinding(),
-      title: "The Mariscal",
+      title: "Estrellas Dashboard",
       locale: const Locale('es'),
       fallbackLocale: const Locale('es'),
       debugShowCheckedModeBanner: false,

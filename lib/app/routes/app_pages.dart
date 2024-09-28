@@ -6,10 +6,6 @@ import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
 import '../modules/auth/forgot_password/views/forgot_password_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
-import '../modules/auth/register/bindings/register_binding.dart';
-import '../modules/auth/register/views/register_view.dart';
-import '../modules/auth/register_basic_data/bindings/register_basic_data_binding.dart';
-import '../modules/auth/register_basic_data/views/register_basic_data_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
 import '../modules/auth/welcome/bindings/welcome_binding.dart';
@@ -44,18 +40,6 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: _Paths.REGISTER,
-      page: () => const RegisterView(),
-      binding: RegisterBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: _Paths.REGISTER_BASIC_DATA,
-      page: () => const RegisterBasicDataView(),
-      binding: RegisterBasicDataBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

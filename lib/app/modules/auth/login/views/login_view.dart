@@ -36,13 +36,6 @@ class LoginView extends GetView<LoginController> {
                     );
                   },
                 ),
-                Hero(
-                  tag: 'helpButton',
-                  child: IconButton(
-                    onPressed: controller.mainController.openAlertHelpText,
-                    icon: Icon(Icons.help_outline),
-                  ),
-                ),
               ],
             ),
             body: Center(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 TextTheme createTextTheme(BuildContext context) {
-  String font = 'Inter';
+  String font = 'Montserrat';
   TextTheme baseTextTheme = Theme.of(context).textTheme;
   TextTheme bodyTextTheme = GoogleFonts.getTextTheme(font, baseTextTheme);
   TextTheme displayTextTheme = GoogleFonts.getTextTheme(font, baseTextTheme);

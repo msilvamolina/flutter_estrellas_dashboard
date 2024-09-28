@@ -82,9 +82,4 @@ class LoginDialogController extends GetxController {
       },
     );
   }
-
-  void openRegisterDialog() {
-    Get.back();
-    mainController.openRegisterDialog();
-  }
 }

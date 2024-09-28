@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/components/logo/logo_img.dart';
@@ -14,25 +15,14 @@ class LogoApp extends StatelessWidget {
     Color surface = Theme.of(context).colorScheme.surface;
     Color primary = Theme.of(context).colorScheme.primary;
 
-    Color backgroundImageDark = primary;
-    Color colorImageDark = surface;
-
-    Color backgroundImage = surface;
     Color colorImage = primary;
 
-    return AnimatedCrossFade(
-      duration: const Duration(milliseconds: 200),
-      crossFadeState:
-          isDark ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-      firstChild: LogoImg(
-        size: size,
-        backgroundImage: backgroundImageDark,
-        colorImage: colorImageDark,
-      ),
-      secondChild: LogoImg(
-        size: size,
-        backgroundImage: backgroundImage,
-        colorImage: colorImage,
+    return SvgPicture.asset(
+      'assets/svg/logo.svg',
+      height: 180,
+      colorFilter: ColorFilter.mode(
+        colorImage,
+        BlendMode.srcIn,
       ),
     );
   }
