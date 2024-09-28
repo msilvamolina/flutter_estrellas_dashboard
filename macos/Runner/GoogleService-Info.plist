@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBy1sJBQzIVnEZIWYezJ2SjbQYk1wRYTI8</string>
+	<string>AIzaSyDHHht_6tXufxbq0C_Puji6XstH3Y4NEv4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>152860353239</string>
+	<string>802823199567</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>app.estrellas.dashboard.dev</string>
 	<key>PROJECT_ID</key>
-	<string>the-mariscal-qa</string>
+	<string>estrellas-dev-ecd61</string>
 	<key>STORAGE_BUCKET</key>
-	<string>the-mariscal-qa.appspot.com</string>
+	<string>estrellas-dev-ecd61.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:152860353239:ios:65b076c63af16f35ee8692</string>
+	<string>1:802823199567:ios:2a1f27f9bbb989bc5e033a</string>
 </dict>
 </plist>
