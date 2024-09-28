@@ -73,7 +73,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var textTheme = createTextTheme(context);
     var theme = ThemeService.getTheme();
     bool isDark = ThemeService.isSavedDarkMode();
 
@@ -84,10 +83,8 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('es'),
       debugShowCheckedModeBanner: false,
       theme: isDark ? theme.theme.dark(context) : theme.theme.light(context),
-      // darkTheme: theme.theme.dark(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
-      // builder: (context, child) => MainLayout(child: child!),
     );
   }
 }

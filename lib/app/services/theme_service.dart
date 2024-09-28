@@ -26,7 +26,7 @@ class ThemeService {
   }
 
   static String readSavedTheme() {
-    return _getStorage.read(colorKey) ?? 'black';
+    return _getStorage.read(colorKey) ?? 'green';
   }
 
   static void saveThemeMode(bool isDarkMode) {
