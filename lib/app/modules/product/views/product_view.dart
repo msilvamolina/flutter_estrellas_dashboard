@@ -8,7 +8,7 @@ import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 
 import 'package:get/get.dart';
 
-import '../../../components/layouts/dialog_layout.dart';
+import '../../../app/layouts/dialog_layout/dialog_layout.dart';
 import '../controllers/product_controller.dart';
 
 class ProductView extends GetView<ProductController> {

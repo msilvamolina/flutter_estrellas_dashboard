@@ -13,7 +13,7 @@ import 'package:estrellas_dashboard/app/themes/themes/blue.dart';
 import 'package:estrellas_dashboard/app/themes/themes/red.dart';
 import 'package:estrellas_dashboard/app/themes/util.dart';
 import 'app/app/bindings/main_binding.dart';
-import 'app/app/layout/main_layout.dart';
+import 'app/app/layouts/main_layout/main_layout.dart';
 import 'app/config/firebase_config.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/dependency_injection.dart';

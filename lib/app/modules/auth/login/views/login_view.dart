@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:estrellas_dashboard/app/components/layouts/auth_layout.dart';
+import 'package:estrellas_dashboard/app/app/layouts/auth_layout/auth_layout.dart';
 import 'package:estrellas_dashboard/app/modules/auth/login/controllers/login_controller.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
