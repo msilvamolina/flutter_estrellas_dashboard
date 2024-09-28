@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../app/layouts/main_layout/main_layout.dart';
+import '../../../components/widgets/custom_floating_action_button.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/products_controller.dart';
 
@@ -14,9 +15,9 @@ class ProductsView extends GetView<ProductsController> {
 
     return MainLayout(
       currentRoute: Routes.PRODUCTS,
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text('Agregar producto'),
-        icon: Icon(Icons.add),
+      floatingActionButton: CustomFloatingActionButton(
+        label: 'Agregar producto',
+        icon: Icons.add,
         onPressed: () {},
       ),
       appBarTitle: 'Productos',
