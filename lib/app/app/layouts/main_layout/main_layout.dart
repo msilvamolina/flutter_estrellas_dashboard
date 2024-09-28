@@ -8,12 +8,12 @@ import '../../controllers/main_controller.dart';
 import 'components/drawer_content.dart';
 
 class MainLayout extends StatelessWidget {
-  const MainLayout({required this.child, super.key});
+  const MainLayout({this.appBarTitle, required this.child, super.key});
   final Widget child;
-
+  final Widget? appBarTitle;
   @override
   Widget build(BuildContext context) {
-    MainController mainController = Get.find();
+    MainController mainController = Get.find<MainController>();
     double screenWidth = MediaQuery.of(context).size.width;
     bool isTinyPhone = screenWidth < 320;
     bool isMobile = screenWidth < 480;
@@ -61,7 +61,15 @@ class MainLayout extends StatelessWidget {
               ),
             )
           : AppBar(
-              title: Text('mobile'),
+              title: appBarTitle ??
+                  SvgPicture.asset(
+                    'assets/svg/fulllogo.svg',
+                    height: 30,
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.primary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
             ),
       body: Row(
         children: [
