@@ -49,13 +49,13 @@ class DrawerContent extends StatelessWidget {
               ],
             ),
           ),
-        ListTile(
-          title: const Text('Home'),
-          onTap: () => Get.offNamed(Routes.HOME),
+        menuOption(
+          title: 'Home',
+          route: Routes.HOME,
         ),
-        ListTile(
-          title: const Text('Productos'),
-          onTap: () => Get.offNamed(Routes.PRODUCTS),
+        menuOption(
+          title: 'Productos',
+          route: Routes.PRODUCTS,
         ),
         SizedBox(height: 400),
         ListTile(
@@ -65,4 +65,10 @@ class DrawerContent extends StatelessWidget {
       ],
     );
   }
+
+  Widget menuOption({required String title, required String route}) => ListTile(
+        title: Text(title),
+        onTap: currentRoute != route ? () => Get.offNamed(route) : null,
+        selected: currentRoute == route,
+      );
 }
