@@ -27,7 +27,7 @@ class _VideoButtonsState extends State<VideoButtons> {
       children: [
         Spacer(),
         InkWell(
-          onTap: mainController.openLoginDialog,
+          onTap: () {},
           child: SvgPicture.asset(
             'assets/svg/BookmarkSimple.svg',
             width: iconSize,

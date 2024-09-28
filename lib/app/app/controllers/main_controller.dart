@@ -12,8 +12,7 @@ import '../../components/snackbars/snackbars.dart';
 import '../../data/models/theme_model.dart';
 import '../../data/models/user_data/user_data.dart';
 import '../../services/theme_service.dart';
-import '../dialogs/app/change_color_dialog.dart';
-import '../dialogs/login/login_dialog.dart';
+import '../dialogs/change_color_dialog.dart';
 
 enum UserStatus {
   loading,
@@ -129,15 +128,6 @@ class MainController extends GetxController {
       ThemeService.saveThemeMode(_isThemeModeDark);
       checkUser();
     });
-  }
-
-  void openLoginDialog() {
-    showDialog(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return LoginDialog();
-      },
-    );
   }
 
   void changeThemeColor() {

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/models/theme_model.dart';
-import 'package:estrellas_dashboard/app/services/theme_service.dart';
 import 'package:estrellas_dashboard/app/themes/themes.dart';
 
 class ChangeColorDialog extends StatelessWidget {
@@ -15,7 +14,7 @@ class ChangeColorDialog extends StatelessWidget {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
       child: AlertDialog(
-        title: Text('Elige un color'),
+        title: Text('Personaliza tu app'),
         content: Container(
           constraints: BoxConstraints(maxWidth: 450),
           child: Wrap(

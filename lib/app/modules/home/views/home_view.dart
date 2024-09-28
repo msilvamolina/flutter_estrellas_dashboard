@@ -183,28 +183,15 @@ class _HomeViewState extends State<HomeView> {
                                       child: SizedBox(width: 60),
                                     ),
                                   ),
-                                if (mainController.userStatus ==
-                                    UserStatus.notLogged)
-                                  ElevatedButton(
-                                    onPressed: mainController.openLoginDialog,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .primaryContainer, // Color secundario
-                                    ),
-                                    child: Text('Ingresar'),
+                                ElevatedButton(
+                                  onPressed: mainController.signOut,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .secondaryContainer, // Color secundario
                                   ),
-                                if (mainController.userStatus ==
-                                    UserStatus.full)
-                                  ElevatedButton(
-                                    onPressed: mainController.signOut,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .secondaryContainer, // Color secundario
-                                    ),
-                                    child: Text('Cerrar sesión'),
-                                  ),
+                                  child: Text('Cerrar sesión'),
+                                ),
                               ],
                             );
                           },

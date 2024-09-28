@@ -2,14 +2,11 @@ import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
-import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
-import '../modules/auth/forgot_password/views/forgot_password_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/auth/welcome/bindings/welcome_binding.dart';
-import '../modules/auth/welcome/views/welcome_view.dart';
+
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/product/bindings/product_binding.dart';
@@ -40,18 +37,6 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: _Paths.FORGOT_PASSWORD,
-      page: () => const ForgotPasswordView(),
-      binding: ForgotPasswordBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: _Paths.WELCOME,
-      page: () => const WelcomeView(),
-      binding: WelcomeBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
