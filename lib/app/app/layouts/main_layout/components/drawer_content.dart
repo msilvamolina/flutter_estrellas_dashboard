@@ -1,4 +1,5 @@
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/routes/app_pages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,10 +8,12 @@ import 'package:get/get.dart';
 class DrawerContent extends StatelessWidget {
   const DrawerContent({
     required this.isMobile,
+    required this.currentRoute,
     super.key,
   });
 
   final bool isMobile;
+  final String currentRoute;
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -47,18 +50,8 @@ class DrawerContent extends StatelessWidget {
             ),
           ),
         ListTile(
-          title: const Text('Item 1'),
-          onTap: () {
-            // Update the state of the app.
-            // ...
-          },
-        ),
-        ListTile(
-          title: const Text('Item 2'),
-          onTap: () {
-            // Update the state of the app.
-            // ...
-          },
+          title: const Text('Productos'),
+          onTap: () => Get.toNamed(Routes.PRODUCTS),
         ),
       ],
     );

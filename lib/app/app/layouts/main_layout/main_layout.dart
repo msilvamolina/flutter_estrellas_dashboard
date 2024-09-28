@@ -8,9 +8,17 @@ import '../../controllers/main_controller.dart';
 import 'components/drawer_content.dart';
 
 class MainLayout extends StatelessWidget {
-  const MainLayout({this.appBarTitle, required this.child, super.key});
+  const MainLayout({
+    this.appBarTitle,
+    this.floatingActionButton,
+    required this.currentRoute,
+    required this.child,
+    super.key,
+  });
   final Widget child;
-  final Widget? appBarTitle;
+  final String? appBarTitle;
+  final Widget? floatingActionButton;
+  final String currentRoute;
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -20,11 +28,14 @@ class MainLayout extends StatelessWidget {
     bool isTablet = screenWidth < 740;
     bool isTablet2 = screenWidth < 890;
     bool isDesktop = screenWidth > 720;
+
     return Scaffold(
+      floatingActionButton: floatingActionButton,
       drawer: isTablet2
           ? Drawer(
               child: DrawerContent(
                 isMobile: true,
+                currentRoute: currentRoute,
               ),
             )
           : null,
@@ -61,15 +72,16 @@ class MainLayout extends StatelessWidget {
               ),
             )
           : AppBar(
-              title: appBarTitle ??
-                  SvgPicture.asset(
-                    'assets/svg/fulllogo.svg',
-                    height: 30,
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.primary,
-                      BlendMode.srcIn,
+              title: appBarTitle != null
+                  ? Text(appBarTitle!)
+                  : SvgPicture.asset(
+                      'assets/svg/fulllogo.svg',
+                      height: 30,
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.primary,
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
             ),
       body: Row(
         children: [
@@ -77,6 +89,7 @@ class MainLayout extends StatelessWidget {
             Container(
               width: 240,
               child: DrawerContent(
+                currentRoute: currentRoute,
                 isMobile: false,
               ),
             ),

@@ -6,11 +6,12 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/product/bindings/product_binding.dart';
 import '../modules/product/views/product_view.dart';
+import '../modules/products/bindings/products_binding.dart';
+import '../modules/products/views/products_view.dart';
 
 part 'app_routes.dart';
 
@@ -45,6 +46,11 @@ class AppPages {
       binding: ProductBinding(),
       transition: Transition.downToUp,
       opaque: false,
+    ),
+    GetPage(
+      name: _Paths.PRODUCTS,
+      page: () => const ProductsView(),
+      binding: ProductsBinding(),
     ),
   ];
 }
