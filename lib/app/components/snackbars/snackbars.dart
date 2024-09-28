@@ -13,29 +13,17 @@ class Snackbars {
       margin: const EdgeInsets.all(16),
       // colorText: white,
       backgroundColor: Colors.red.withOpacity(0.5),
-      icon: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2),
-        child: SvgPicture.asset(
-          'assets/svg/logo.svg',
-        ),
-      ),
     );
   }
 
-  static void success(String error) {
+  static void success(String msg) {
     Get.snackbar(
-      'Bien hecho!',
-      error,
+      'Great!',
+      msg,
       maxWidth: 600,
       margin: const EdgeInsets.all(16),
       // colorText: white,
       backgroundColor: Colors.green.withOpacity(0.5),
-      icon: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 2),
-        child: SvgPicture.asset(
-          'assets/svg/logo.svg',
-        ),
-      ),
     );
   }
 }
