@@ -1,4 +1,4 @@
-package com.themariscal.app.qa
+package app.estrellas.dashboard.dev
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/app/controllers/main_controller.dart';
-import 'package:the_mariscal/app/services/theme_service.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/services/theme_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 

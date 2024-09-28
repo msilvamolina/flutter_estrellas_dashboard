@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:the_mariscal/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 
 class AuthLayout extends StatefulWidget {
   const AuthLayout({

@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/services/theme_service.dart';
-import 'package:the_mariscal/app/themes/styles/typography.dart';
+import 'package:estrellas_dashboard/app/services/theme_service.dart';
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';

@@ -1,4 +1,4 @@
-import 'package:the_mariscal/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:get/get.dart';
 
 class RegisterBasicDataController extends GetxController {

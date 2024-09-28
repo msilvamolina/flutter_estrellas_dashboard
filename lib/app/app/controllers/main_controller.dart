@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/app/dialogs/register/register_dialog.dart';
-import 'package:the_mariscal/app/app/dialogs/register_basic_data/register_basic_data_dialog.dart';
-import 'package:the_mariscal/app/components/dialogs/loader_dialog.dart';
-import 'package:the_mariscal/app/data/providers/local/local_storage.dart';
-import 'package:the_mariscal/app/data/providers/repositories/auth/user_repository.dart';
-import 'package:the_mariscal/app/routes/app_pages.dart';
-import 'package:the_mariscal/app/themes/styles/typography.dart';
+import 'package:estrellas_dashboard/app/app/dialogs/register/register_dialog.dart';
+import 'package:estrellas_dashboard/app/app/dialogs/register_basic_data/register_basic_data_dialog.dart';
+import 'package:estrellas_dashboard/app/components/dialogs/loader_dialog.dart';
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/auth/user_repository.dart';
+import 'package:estrellas_dashboard/app/routes/app_pages.dart';
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:get/get.dart';
-import 'package:the_mariscal/app/themes/themes/black.dart';
+import 'package:estrellas_dashboard/app/themes/themes/black.dart';
 
 import '../../components/snackbars/snackbars.dart';
 import '../../data/models/theme_model.dart';

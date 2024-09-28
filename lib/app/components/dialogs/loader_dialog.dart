@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/themes/styles/typography.dart';
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
 

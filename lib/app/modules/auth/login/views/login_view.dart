@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/app/dialogs/login/login_screen.dart';
-import 'package:the_mariscal/app/components/layouts/auth_layout.dart';
-import 'package:the_mariscal/app/modules/auth/login/controllers/login_controller.dart';
+import 'package:estrellas_dashboard/app/app/dialogs/login/login_screen.dart';
+import 'package:estrellas_dashboard/app/components/layouts/auth_layout.dart';
+import 'package:estrellas_dashboard/app/modules/auth/login/controllers/login_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../app/controllers/main_controller.dart';

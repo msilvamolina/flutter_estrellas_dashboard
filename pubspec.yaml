@@ -1,5 +1,5 @@
-name: the_mariscal
-description: "The Mariscal"
+name: estrellas_dashboard
+description: "Estrellas Dashboard"
 publish_to: "none"
 
 version: 1.0.2+2
@@ -52,49 +52,49 @@ flutter:
     - assets/lotties/
 
   fonts:
-    - family: Inter
+    - family: Montserrat
       fonts:
-        - asset: assets/fonts/Inter/Inter_18pt-Thin.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
           weight: 100
-        - asset: assets/fonts/Inter/Inter_18pt-ExtraLight.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/Inter/Inter_18pt-Light.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
           weight: 300
-        - asset: assets/fonts/Inter/Inter_18pt-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Inter/Inter_18pt-Medium.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Inter/Inter_18pt-SemiBold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Inter/Inter_18pt-Bold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Inter/Inter_18pt-ExtraBold.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/Inter/Inter_18pt-Black.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
           weight: 900
-        - asset: assets/fonts/Inter/Inter_18pt-Italic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Italic.ttf
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-ThinItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ThinItalic.ttf
           weight: 100
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-ExtraLightItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf
           weight: 200
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-LightItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-LightItalic.ttf
           weight: 300
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-MediumItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-MediumItalic.ttf
           weight: 500
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-SemiBoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf
           weight: 600
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-BoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-BoldItalic.ttf
           weight: 700
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf
           weight: 800
           style: italic
-        - asset: assets/fonts/Inter/Inter_18pt-BlackItalic.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-BlackItalic.ttf
           weight: 900
           style: italic

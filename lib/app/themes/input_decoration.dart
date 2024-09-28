@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/services/theme_service.dart';
+import 'package:estrellas_dashboard/app/services/theme_service.dart';
 import 'package:get/get.dart';
 
 import '../app/controllers/main_controller.dart';

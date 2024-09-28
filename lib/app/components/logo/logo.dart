@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:the_mariscal/app/app/controllers/main_controller.dart';
-import 'package:the_mariscal/app/components/logo/logo_img.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/components/logo/logo_img.dart';
 
 class LogoApp extends StatelessWidget {
   const LogoApp({required this.size, super.key});

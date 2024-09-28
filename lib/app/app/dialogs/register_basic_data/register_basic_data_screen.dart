@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/app/controllers/main_controller.dart';
-import 'package:the_mariscal/app/themes/input_decoration.dart';
-import 'package:the_mariscal/app/themes/styles/typography.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/themes/input_decoration.dart';
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';

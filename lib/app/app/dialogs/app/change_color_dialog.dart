@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:the_mariscal/app/app/controllers/main_controller.dart';
-import 'package:the_mariscal/app/data/models/theme_model.dart';
-import 'package:the_mariscal/app/services/theme_service.dart';
-import 'package:the_mariscal/app/themes/themes.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/data/models/theme_model.dart';
+import 'package:estrellas_dashboard/app/services/theme_service.dart';
+import 'package:estrellas_dashboard/app/themes/themes.dart';
 
 class ChangeColorDialog extends StatelessWidget {
   const ChangeColorDialog({super.key});
