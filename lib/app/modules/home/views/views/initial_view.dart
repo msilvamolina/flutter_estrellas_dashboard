@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../data/models/video_model.dart';
 import '../../../../themes/styles/typography.dart';
+import '../../../../utils/responsive.dart';
 import '../components/video.dart';
 import '../components/video_card.dart';
 
@@ -15,9 +16,6 @@ class InitialView extends StatefulWidget {
 class _InitialViewState extends State<InitialView> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    bool isMobile = screenWidth < 480;
-
     List<VideoModel> videoList = [
       VideoModel(
         id: 'video1',
@@ -104,7 +102,7 @@ class _InitialViewState extends State<InitialView> {
     return SafeArea(
       child: Center(
         child: Container(
-          margin: EdgeInsets.all(isMobile ? 0 : 16),
+          margin: EdgeInsets.all(Responsive.isMobile(context) ? 0 : 16),
           width: double.infinity,
           height: double.infinity,
           child: PageView.builder(

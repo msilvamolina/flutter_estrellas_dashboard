@@ -13,8 +13,6 @@ class VideoLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    bool isMobile = screenWidth < 480;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(

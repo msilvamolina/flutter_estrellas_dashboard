@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../utils/responsive.dart';
 import '../../controllers/main_controller.dart';
 import 'components/drawer_content.dart';
 
@@ -22,16 +23,10 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
-    double screenWidth = MediaQuery.of(context).size.width;
-    bool isTinyPhone = screenWidth < 320;
-    bool isMobile = screenWidth < 480;
-    bool isTablet = screenWidth < 740;
-    bool isTablet2 = screenWidth < 890;
-    bool isDesktop = screenWidth > 720;
 
     return Scaffold(
       floatingActionButton: floatingActionButton,
-      drawer: isTablet2
+      drawer: Responsive.isTablet2(context)
           ? Drawer(
               child: DrawerContent(
                 isMobile: true,
@@ -39,7 +34,7 @@ class MainLayout extends StatelessWidget {
               ),
             )
           : null,
-      appBar: !isTablet2
+      appBar: !Responsive.isTablet2(context)
           ? AppBar(
               toolbarHeight: 70,
               centerTitle: true,
@@ -85,7 +80,7 @@ class MainLayout extends StatelessWidget {
             ),
       body: Row(
         children: [
-          if (!isTablet2)
+          if (!Responsive.isTablet2(context))
             Container(
               width: 240,
               child: DrawerContent(

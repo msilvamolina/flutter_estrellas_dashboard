@@ -16,9 +16,6 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    bool isMobile = screenWidth < 480;
-
     return VideoApp(
       videoModel: videoModel,
       onCompleted: onCompleted,

@@ -97,8 +97,7 @@ class _VideoAppState extends State<VideoApp> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    bool isMobile = screenWidth < 480;
-    bool isTablet = screenWidth < 740;
+
     bool showExpandedVideo = screenWidth < 640;
     bool showButtonsOutside = screenWidth < 840;
 
