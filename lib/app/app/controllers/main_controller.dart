@@ -119,6 +119,7 @@ class MainController extends GetxController {
   }
 
   void signOut() {
+    String theme = ThemeService.readSavedTheme();
     _userStatus = UserStatus.loading;
     update(['login']);
     userRepository.signOut();
@@ -126,6 +127,7 @@ class MainController extends GetxController {
       _userStatus = UserStatus.notLogged;
       update(['login']);
       ThemeService.saveThemeMode(_isThemeModeDark);
+      ThemeService.saveThemeColor(theme);
       checkUser();
     });
   }

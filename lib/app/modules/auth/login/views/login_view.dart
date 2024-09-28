@@ -52,13 +52,6 @@ class LoginView extends GetView<LoginController> {
                                       size: 180,
                                     ),
                                   ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    'Holis :D',
-                                    textAlign: TextAlign.center,
-                                    style: TypographyStyle.h1Mobile
-                                        .copyWith(fontWeight: FontWeight.w700),
-                                  ),
                                   SizedBox(height: 26),
                                   GetBuilder<MainController>(
                                     id: 'input',

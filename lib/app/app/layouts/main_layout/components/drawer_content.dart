@@ -50,8 +50,17 @@ class DrawerContent extends StatelessWidget {
             ),
           ),
         ListTile(
+          title: const Text('Home'),
+          onTap: () => Get.offNamed(Routes.HOME),
+        ),
+        ListTile(
           title: const Text('Productos'),
           onTap: () => Get.offNamed(Routes.PRODUCTS),
+        ),
+        SizedBox(height: 400),
+        ListTile(
+          title: const Text('Salir'),
+          onTap: mainController.signOut,
         ),
       ],
     );

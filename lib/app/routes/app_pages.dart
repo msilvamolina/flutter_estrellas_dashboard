@@ -51,6 +51,7 @@ class AppPages {
       name: _Paths.PRODUCTS,
       page: () => const ProductsView(),
       binding: ProductsBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }
