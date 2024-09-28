@@ -11,8 +11,6 @@ class ProductsView extends GetView<ProductsController> {
   const ProductsView({super.key});
   @override
   Widget build(BuildContext context) {
-    bool isTablet2 = MediaQuery.of(context).size.width < 890;
-
     return MainLayout(
       currentRoute: Routes.PRODUCTS,
       floatingActionButton: CustomFloatingActionButton(
