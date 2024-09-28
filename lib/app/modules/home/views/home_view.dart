@@ -65,7 +65,11 @@ class _HomeViewState extends State<HomeView> {
                           },
                           child: SvgPicture.asset(
                             'assets/svg/fulllogo.svg',
-                            height: 30,
+                            height: 40,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).colorScheme.primary,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
                         Spacer(),
