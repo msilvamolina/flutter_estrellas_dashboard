@@ -30,14 +30,15 @@ class ChangeColorDialog extends StatelessWidget {
               ),
               SizedBox(height: 8),
               SwitchListTile(
-                  title: Text(
-                    'Dark Mode',
-                    textAlign: TextAlign.start,
-                  ),
-                  value: Get.find<MainController>().isThemeModeDark,
-                  onChanged: (_) {
-                    Get.find<MainController>().changeThemeMode();
-                  }),
+                title: Text(
+                  'Dark Mode',
+                  textAlign: TextAlign.start,
+                ),
+                value: Get.find<MainController>().isThemeModeDark,
+                onChanged: (_) {
+                  Get.find<MainController>().changeThemeMode();
+                },
+              ),
             ],
           ),
         ),
