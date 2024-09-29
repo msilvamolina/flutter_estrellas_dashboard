@@ -19,13 +19,37 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Text(
+                'API: ',
+                style: TypographyStyle.bodyBlackLarge,
+              ),
+              Text(
+                'Endpoint: ',
+                style: TypographyStyle.bodyBlackMedium,
+              ),
+            ],
+          ),
+          SizedBox(height: 8),
+          Row(
+            children: [
+              Text(
+                'Endpoint: ',
+                style: TypographyStyle.bodyBlackLarge,
+              ),
+              Text(
+                'Endpoint: ',
+                style: TypographyStyle.bodyBlackMedium,
+              ),
+            ],
+          ),
+          SizedBox(height: 24),
           Button(
             label: 'Get Products',
             onPressed: () {},
           ),
-          SizedBox(
-            height: 24,
-          ),
+          SizedBox(height: 18),
           Text(
             'Result',
             style: TypographyStyle.h3Mobile,
