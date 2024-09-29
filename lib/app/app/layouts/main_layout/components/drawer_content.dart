@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../themes/styles/typography.dart';
+
 class DrawerContent extends StatelessWidget {
   const DrawerContent({
     required this.isMobile,
@@ -57,29 +59,16 @@ class DrawerContent extends StatelessWidget {
           title: 'Productos',
           route: Routes.PRODUCTS,
         ),
-        menuOption(
-          title: 'Test Endpoints',
-          route: Routes.TEST_ENDPOINTS,
-        ),
         ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
           // initiallyExpanded: index == selected,
           expandedAlignment: Alignment.centerLeft,
-          title: Text(
-            'Test Endpoints',
-          ),
+          title: const Text('Test Endpoints'),
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                children: [
-                  Icon(Icons.http),
-                  SizedBox(width: 8),
-                  Text(
-                    'Get products',
-                  ),
-                ],
-              ),
+            menuOptionChildren(
+              icon: Icons.http,
+              title: 'Get products',
+              route: Routes.TEST_GET_PRODUCTS,
             ),
           ],
         ),
@@ -94,6 +83,21 @@ class DrawerContent extends StatelessWidget {
 
   Widget menuOption({required String title, required String route}) => ListTile(
         title: Text(title),
+        onTap: currentRoute != route ? () => Get.offNamed(route) : null,
+        selected: currentRoute == route,
+      );
+
+  Widget menuOptionChildren({
+    required String title,
+    required String route,
+    IconData? icon,
+  }) =>
+      ListTile(
+        leading: icon != null ? Icon(icon) : null,
+        title: Text(
+          title,
+          style: TypographyStyle.bodyRegularMedium,
+        ),
         onTap: currentRoute != route ? () => Get.offNamed(route) : null,
         selected: currentRoute == route,
       );
