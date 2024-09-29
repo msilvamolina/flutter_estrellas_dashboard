@@ -20,7 +20,7 @@ class ProductsView extends GetView<ProductsController> {
       ),
       appBarTitle: 'Productos',
       child: Center(
-        child: Text('holis'),
+        child: Text('Productos'),
       ),
     );
   }

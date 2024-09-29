@@ -11,11 +11,13 @@ class DrawerContent extends StatelessWidget {
   const DrawerContent({
     required this.isMobile,
     required this.currentRoute,
+    this.mainCurrentRoute,
     super.key,
   });
 
   final bool isMobile;
   final String currentRoute;
+  final String? mainCurrentRoute;
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -61,7 +63,7 @@ class DrawerContent extends StatelessWidget {
         ),
         ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
-          // initiallyExpanded: index == selected,
+          initiallyExpanded: mainCurrentRoute == Routes.TEST_ENDPOINTS,
           expandedAlignment: Alignment.centerLeft,
           title: const Text('Test Endpoints'),
           children: [

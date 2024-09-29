@@ -11,6 +11,7 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+      mainCurrentRoute: Routes.TEST_ENDPOINTS,
       currentRoute: Routes.TEST_GET_PRODUCTS,
       appBarTitle: 'Test Get Products',
       child: Center(

@@ -10,16 +10,19 @@ import 'components/drawer_content.dart';
 
 class MainLayout extends StatelessWidget {
   const MainLayout({
-    this.appBarTitle,
-    this.floatingActionButton,
     required this.currentRoute,
     required this.child,
+    this.appBarTitle,
+    this.floatingActionButton,
+    this.mainCurrentRoute,
     super.key,
   });
   final Widget child;
   final String? appBarTitle;
   final Widget? floatingActionButton;
   final String currentRoute;
+  final String? mainCurrentRoute;
+
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -31,6 +34,7 @@ class MainLayout extends StatelessWidget {
               child: DrawerContent(
                 isMobile: true,
                 currentRoute: currentRoute,
+                mainCurrentRoute: mainCurrentRoute,
               ),
             )
           : null,
@@ -84,6 +88,7 @@ class MainLayout extends StatelessWidget {
             Container(
               width: 240,
               child: DrawerContent(
+                mainCurrentRoute: mainCurrentRoute,
                 currentRoute: currentRoute,
                 isMobile: false,
               ),
