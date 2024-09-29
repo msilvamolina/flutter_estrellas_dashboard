@@ -61,6 +61,32 @@ class DrawerContent extends StatelessWidget {
           title: 'Test Endpoints',
           route: Routes.TEST_ENDPOINTS,
         ),
+        ExpansionTile(
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
+          // key: Key(index.toString()),
+          // initiallyExpanded: index == selected,
+          expandedAlignment:
+              Alignment.centerLeft, // Alinea los hijos a la izquierda
+
+          title: Text(
+            'Test Endpoints',
+          ),
+          onExpansionChanged: ((newState) {}),
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                children: [
+                  Icon(Icons.http),
+                  SizedBox(width: 8),
+                  Text(
+                    'Get products',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         SizedBox(height: 400),
         ListTile(
           title: const Text('Salir'),
