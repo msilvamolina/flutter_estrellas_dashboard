@@ -12,6 +12,7 @@ abstract class Routes {
   static const WELCOME = _Paths.WELCOME;
   static const PRODUCT = _Paths.PRODUCT;
   static const PRODUCTS = _Paths.PRODUCTS;
+  static const TEST_ENDPOINTS = _Paths.TEST_ENDPOINTS;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const WELCOME = '/welcome';
   static const PRODUCT = '/product';
   static const PRODUCTS = '/products';
+  static const TEST_ENDPOINTS = '/test-endpoints';
 }

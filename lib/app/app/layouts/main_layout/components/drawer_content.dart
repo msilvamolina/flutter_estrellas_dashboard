@@ -57,6 +57,10 @@ class DrawerContent extends StatelessWidget {
           title: 'Productos',
           route: Routes.PRODUCTS,
         ),
+        menuOption(
+          title: 'Test Endpoints',
+          route: Routes.TEST_ENDPOINTS,
+        ),
         SizedBox(height: 400),
         ListTile(
           title: const Text('Salir'),

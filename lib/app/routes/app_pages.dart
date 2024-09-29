@@ -12,6 +12,8 @@ import '../modules/product/bindings/product_binding.dart';
 import '../modules/product/views/product_view.dart';
 import '../modules/products/bindings/products_binding.dart';
 import '../modules/products/views/products_view.dart';
+import '../modules/test_endpoints/bindings/test_endpoints_binding.dart';
+import '../modules/test_endpoints/views/test_endpoints_view.dart';
 
 part 'app_routes.dart';
 
@@ -51,6 +53,12 @@ class AppPages {
       name: _Paths.PRODUCTS,
       page: () => const ProductsView(),
       binding: ProductsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.TEST_ENDPOINTS,
+      page: () => const TestEndpointsView(),
+      binding: TestEndpointsBinding(),
       transition: Transition.fadeIn,
     ),
   ];
