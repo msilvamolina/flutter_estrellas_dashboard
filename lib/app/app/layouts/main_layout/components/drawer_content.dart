@@ -1,6 +1,5 @@
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/routes/app_pages.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -61,11 +60,9 @@ class DrawerContent extends StatelessWidget {
           title: 'Productos',
           route: Routes.PRODUCTS,
         ),
-        ExpansionTile(
-          expandedCrossAxisAlignment: CrossAxisAlignment.start,
-          initiallyExpanded: mainCurrentRoute == Routes.TEST_ENDPOINTS,
-          expandedAlignment: Alignment.centerLeft,
-          title: const Text('Test Endpoints'),
+        menuOptionExpansion(
+          title: 'Test Endpoints',
+          route: Routes.TEST_ENDPOINTS,
           children: [
             menuOptionChildren(
               icon: Icons.http,
@@ -74,7 +71,7 @@ class DrawerContent extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 400),
+        const SizedBox(height: 400),
         ListTile(
           title: const Text('Salir'),
           onTap: mainController.signOut,
@@ -82,6 +79,19 @@ class DrawerContent extends StatelessWidget {
       ],
     );
   }
+
+  Widget menuOptionExpansion({
+    required String title,
+    required String route,
+    required List<Widget> children,
+  }) =>
+      ExpansionTile(
+        expandedCrossAxisAlignment: CrossAxisAlignment.start,
+        initiallyExpanded: mainCurrentRoute == route,
+        expandedAlignment: Alignment.centerLeft,
+        title: Text(title),
+        children: children,
+      );
 
   Widget menuOption({required String title, required String route}) => ListTile(
         title: Text(title),
