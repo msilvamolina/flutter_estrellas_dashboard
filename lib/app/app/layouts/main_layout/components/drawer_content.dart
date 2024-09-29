@@ -63,15 +63,11 @@ class DrawerContent extends StatelessWidget {
         ),
         ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.start,
-          // key: Key(index.toString()),
           // initiallyExpanded: index == selected,
-          expandedAlignment:
-              Alignment.centerLeft, // Alinea los hijos a la izquierda
-
+          expandedAlignment: Alignment.centerLeft,
           title: Text(
             'Test Endpoints',
           ),
-          onExpansionChanged: ((newState) {}),
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
