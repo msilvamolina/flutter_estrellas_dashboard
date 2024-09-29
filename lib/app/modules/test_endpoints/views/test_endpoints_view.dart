@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../app/layouts/main_layout/main_layout.dart';
+import '../../../components/widgets/button.dart';
 import '../controllers/test_endpoints_controller.dart';
 
 class TestEndpointsView extends GetView<TestEndpointsController> {
@@ -13,8 +14,13 @@ class TestEndpointsView extends GetView<TestEndpointsController> {
     return MainLayout(
       currentRoute: Routes.TEST_ENDPOINTS,
       appBarTitle: 'Test endpoints',
-      child: Center(
-        child: Text('test'),
+      child: Column(
+        children: [
+          Button(
+            label: 'Get Products',
+            onPressed: () {},
+          ),
+        ],
       ),
     );
   }

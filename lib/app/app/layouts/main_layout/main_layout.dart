@@ -89,7 +89,13 @@ class MainLayout extends StatelessWidget {
               ),
             ),
           Expanded(
-            child: child,
+            child: Center(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                constraints: BoxConstraints(maxWidth: 600),
+                child: child,
+              ),
+            ),
           ),
         ],
       ),
