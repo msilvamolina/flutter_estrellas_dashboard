@@ -22,17 +22,17 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
   @override
   Widget build(BuildContext context) {
     bool breakingPoint = !Responsive.isMobile(context);
-    return MainLayout(
-      maxWidth: 900,
-      mainCurrentRoute: Routes.TEST_ENDPOINTS,
-      currentRoute: Routes.TEST_LOGIN_APP_DROPI,
-      appBarTitle: 'Test Login App Dropi',
-      child: GetBuilder<TestLoginAppDropiController>(
-        id: 'view',
-        builder: (_) {
-          return ReactiveFormBuilder(
-              form: controller.buildForm,
-              builder: (context, form, child) {
+    return ReactiveFormBuilder(
+        form: controller.buildForm,
+        builder: (context, form, child) {
+          return MainLayout(
+            maxWidth: 900,
+            mainCurrentRoute: Routes.TEST_ENDPOINTS,
+            currentRoute: Routes.TEST_LOGIN_APP_DROPI,
+            appBarTitle: 'Test Login App Dropi',
+            child: GetBuilder<TestLoginAppDropiController>(
+              id: 'view',
+              builder: (_) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -103,9 +103,9 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
                       ),
                   ],
                 );
-              });
-        },
-      ),
-    );
+              },
+            ),
+          );
+        });
   }
 }

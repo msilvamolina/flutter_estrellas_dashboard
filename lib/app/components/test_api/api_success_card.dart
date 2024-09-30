@@ -29,11 +29,11 @@ class ApiSuccessCard extends StatelessWidget {
           secondChild: const SizedBox(height: 8),
           child: const Spacer(),
         ),
-        // if (success != 'null')
-        SuccessCard(
-          success: success,
-          statusCode: statusCode,
-        ),
+        if (success != 'null')
+          SuccessCard(
+            success: success,
+            statusCode: statusCode,
+          ),
       ],
     );
   }
