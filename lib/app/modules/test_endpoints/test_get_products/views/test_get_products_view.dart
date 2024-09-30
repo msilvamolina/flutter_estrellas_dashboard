@@ -18,7 +18,7 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      maxWidth: 800,
+      maxWidth: 900,
       mainCurrentRoute: Routes.TEST_ENDPOINTS,
       currentRoute: Routes.TEST_GET_PRODUCTS,
       appBarTitle: 'Test Get Products',
@@ -54,8 +54,22 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
               // const SizedBox(height: 16),
               if (controller.result != null)
                 Expanded(
-                  child: JsonView(
-                    jsonString: controller.result.toString(),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: SuccessCard(
+                          success: controller.success.toString(),
+                          statusCode: controller.statusCode.toString(),
+                        ),
+                      ),
+                      Expanded(
+                        child: JsonView(
+                          jsonString: controller.result.toString(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
             ],
