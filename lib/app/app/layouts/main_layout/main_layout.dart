@@ -66,6 +66,11 @@ class MainLayout extends StatelessWidget {
                         BlendMode.srcIn,
                       ),
                     ),
+                    if (appBarTitle != null) ...[
+                      Spacer(),
+                      Text(appBarTitle!),
+                      Spacer(),
+                    ],
                   ],
                 ),
               ),
