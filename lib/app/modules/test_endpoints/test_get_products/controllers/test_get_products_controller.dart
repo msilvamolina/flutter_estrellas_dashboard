@@ -9,7 +9,6 @@ import 'package:http/http.dart';
 class TestGetProductsController extends GetxController {
   ApiRepository apiRepository = ApiRepository();
   String url = 'api/products/allProducts/?term=Protector';
-  String baseUrl = ApiServices.baseUrl;
 
   dynamic _result;
   dynamic get result => _result;
