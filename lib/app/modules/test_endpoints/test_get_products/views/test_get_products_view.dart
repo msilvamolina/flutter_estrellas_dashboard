@@ -65,15 +65,31 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Row(
+                    child: Column(
                       children: [
-                        Text(
-                          'success: ',
-                          style: TypographyStyle.bodyBlackLarge,
+                        Row(
+                          children: [
+                            Text(
+                              'success: ',
+                              style: TypographyStyle.bodyBlackLarge,
+                            ),
+                            Text(
+                              controller.success.toString(),
+                              style: TypographyStyle.bodyBlackMedium,
+                            ),
+                          ],
                         ),
-                        Text(
-                          controller.success.toString(),
-                          style: TypographyStyle.bodyBlackMedium,
+                        Row(
+                          children: [
+                            Text(
+                              'status code: ',
+                              style: TypographyStyle.bodyBlackLarge,
+                            ),
+                            Text(
+                              controller.statusCode.toString(),
+                              style: TypographyStyle.bodyBlackMedium,
+                            ),
+                          ],
                         ),
                       ],
                     ),

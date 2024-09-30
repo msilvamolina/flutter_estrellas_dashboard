@@ -11,24 +11,21 @@ class ApiRepository {
   ApiServices services = ApiServices();
   UserController userController = Get.find<UserController>();
 
-  Future<Either<dynamic, dynamic>> testApiEndpointGet({
+  Future<Response?> testApiEndpointGet({
     required String url,
   }) async {
     try {
-      // Map<String, String> body = {
-      //   "email": email,
-      //   "password": password,
-      // };
       Response response = await services.get(url: url);
-      dynamic decode = json.decode(response.body);
+      return response;
+      // dynamic decode = json.decode(response.body);
 
-      if (response.statusCode == 200) {
-        return right(decode);
-      } else {
-        return left(decode);
-      }
+      // if (response.statusCode == 200) {
+      //   return right(response);
+      // } else {
+      //   return left(response);
+      // }
     } catch (e) {
-      return left(e.toString());
+      return null;
     }
   }
 }
