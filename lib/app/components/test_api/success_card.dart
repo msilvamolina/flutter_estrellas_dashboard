@@ -13,6 +13,8 @@ class SuccessCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primary = Theme.of(context).colorScheme.primary;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -21,6 +23,7 @@ class SuccessCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   'success: ',
@@ -28,11 +31,13 @@ class SuccessCard extends StatelessWidget {
                 ),
                 Text(
                   success,
-                  style: TypographyStyle.bodyBlackMedium,
+                  style:
+                      TypographyStyle.bodyBlackMedium.copyWith(color: primary),
                 ),
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   'status code: ',
@@ -40,7 +45,8 @@ class SuccessCard extends StatelessWidget {
                 ),
                 Text(
                   statusCode,
-                  style: TypographyStyle.bodyBlackMedium,
+                  style:
+                      TypographyStyle.bodyBlackMedium.copyWith(color: primary),
                 ),
               ],
             ),
