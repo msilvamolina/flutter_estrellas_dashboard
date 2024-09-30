@@ -11,21 +11,32 @@ class TestGetProductsController extends GetxController {
   dynamic _result;
   dynamic get result => _result;
 
-  dynamic _resultError;
-  dynamic get resultError => _resultError;
+  bool? _success;
+  bool? get success => _success;
+
+  bool _loading = false;
+  bool get loading => _loading;
 
   Future<void> getInfo() async {
+    _loading = true;
+    _result = null;
+    _success = null;
+    update(['view']);
+
     Either<dynamic, dynamic> resultFold =
         await apiRepository.testApiEndpointGet(url: url);
 
+    _loading = false;
     resultFold.fold(
       (response) {
-        _resultError = response;
-        update(['result']);
+        _success = false;
+        _result = response;
+        update(['view']);
       },
       (response) {
+        _success = true;
         _result = response;
-        update(['result']);
+        update(['view']);
       },
     );
   }
