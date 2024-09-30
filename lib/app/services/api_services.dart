@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 
 class ApiServices {
   static var client = http.Client();
-  String baseUrl = "content-750539670627.us-east1.run.app";
+  static String baseUrl = "dev-api.estrellas.app";
 
   Future<Response> get({
     required String url,

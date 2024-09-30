@@ -26,7 +26,7 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
                 style: TypographyStyle.bodyBlackLarge,
               ),
               Text(
-                'Endpoint: ',
+                controller.baseUrl,
                 style: TypographyStyle.bodyBlackMedium,
               ),
             ],
@@ -39,7 +39,7 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
                 style: TypographyStyle.bodyBlackLarge,
               ),
               Text(
-                'Endpoint: ',
+                controller.url,
                 style: TypographyStyle.bodyBlackMedium,
               ),
             ],
@@ -47,12 +47,23 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
           SizedBox(height: 24),
           Button(
             label: 'Get Products',
-            onPressed: () {},
+            onPressed: controller.getInfo,
           ),
           SizedBox(height: 18),
           Text(
-            'Result',
+            'Result: ',
             style: TypographyStyle.h3Mobile,
+          ),
+          GetBuilder<TestGetProductsController>(
+            id: 'result',
+            builder: (_) {
+              return Column(
+                children: [
+                  Text(controller.result.toString()),
+                  Text(controller.resultError.toString())
+                ],
+              );
+            },
           ),
         ],
       ),
