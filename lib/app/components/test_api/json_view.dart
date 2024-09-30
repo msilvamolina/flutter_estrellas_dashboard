@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:json_editor/json_editor.dart';
 
 class JsonView extends StatelessWidget {
-  const JsonView({required this.jsonString, super.key});
-  final String jsonString;
+  const JsonView({required this.json, super.key});
+  final dynamic json;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,9 @@ class JsonView extends StatelessWidget {
               bracketStyle: TextStyle(color: Colors.purple, fontSize: 22),
             ),
       ),
-      child: JsonEditor.string(
+      child: JsonEditor.object(
         enabled: false,
-        jsonString: jsonString,
+        object: json,
       ),
     );
   }

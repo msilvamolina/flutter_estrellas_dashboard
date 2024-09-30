@@ -66,6 +66,11 @@ class DrawerContent extends StatelessWidget {
           children: [
             menuOptionChildren(
               icon: Icons.http,
+              title: 'Login App Dropi',
+              route: Routes.TEST_LOGIN_APP_DROPI,
+            ),
+            menuOptionChildren(
+              icon: Icons.http,
               title: 'Get products',
               route: Routes.TEST_GET_PRODUCTS,
             ),

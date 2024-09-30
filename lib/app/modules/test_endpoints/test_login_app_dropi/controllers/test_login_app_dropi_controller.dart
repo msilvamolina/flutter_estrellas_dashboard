@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:estrellas_dashboard/app/data/providers/repositories/api_auth_repository.dart';
-import 'package:estrellas_dashboard/app/services/api_services.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-// import 'package:get/get.dart';
+
+import '../../../../data/providers/repositories/api_auth_repository.dart';
 import 'package:http/http.dart';
 
-class TestGetProductsController extends GetxController {
+class TestLoginAppDropiController extends GetxController {
   ApiRepository apiRepository = ApiRepository();
-  String url = 'api/products/allProducts/?term=Protector';
+  String url = 'api/users/login/';
 
   dynamic _result;
   dynamic get result => _result;
@@ -28,7 +27,13 @@ class TestGetProductsController extends GetxController {
     _success = null;
     update(['view']);
 
-    Response? response = await apiRepository.testApiEndpointGet(url: url);
+    Map<String, String> body = {
+      "email": 'email',
+      "password": 'password',
+    };
+
+    Response? response =
+        await apiRepository.testApiEndpointPost(url: url, body: body);
     _loading = false;
 
     if (response != null) {

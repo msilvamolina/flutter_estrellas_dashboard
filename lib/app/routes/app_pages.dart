@@ -14,6 +14,8 @@ import '../modules/products/bindings/products_binding.dart';
 import '../modules/products/views/products_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
+import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
+import '../modules/test_endpoints/test_login_app_dropi/views/test_login_app_dropi_view.dart';
 
 part 'app_routes.dart';
 
@@ -59,6 +61,12 @@ class AppPages {
       name: _Paths.TEST_GET_PRODUCTS,
       page: () => const TestGetProductsView(),
       binding: TestGetProductsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.TEST_LOGIN_APP_DROPI,
+      page: () => const TestLoginAppDropiView(),
+      binding: TestLoginAppDropiBinding(),
       transition: Transition.fadeIn,
     ),
   ];

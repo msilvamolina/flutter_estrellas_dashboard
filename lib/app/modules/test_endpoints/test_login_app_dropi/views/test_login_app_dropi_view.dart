@@ -1,29 +1,26 @@
-import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/test_api/api_card.dart';
-import '../../../../components/test_api/success_card.dart';
-import '../../../../components/widgets/button.dart';
 import '../../../../components/test_api/json_view.dart';
+import '../../../../components/test_api/success_card.dart';
 import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/responsive.dart';
-import '../controllers/test_get_products_controller.dart';
-import 'package:json_editor/json_editor.dart';
+import '../controllers/test_login_app_dropi_controller.dart';
 
-class TestGetProductsView extends GetView<TestGetProductsController> {
-  const TestGetProductsView({super.key});
+class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
+  const TestLoginAppDropiView({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       maxWidth: 900,
       mainCurrentRoute: Routes.TEST_ENDPOINTS,
-      currentRoute: Routes.TEST_GET_PRODUCTS,
-      appBarTitle: 'Test Get Products',
-      child: GetBuilder<TestGetProductsController>(
+      currentRoute: Routes.TEST_LOGIN_APP_DROPI,
+      appBarTitle: 'Test Login App Dropi',
+      child: GetBuilder<TestLoginAppDropiController>(
         id: 'view',
         builder: (_) {
           return Column(

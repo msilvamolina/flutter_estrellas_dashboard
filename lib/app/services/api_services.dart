@@ -10,10 +10,8 @@ class ApiServices {
 
   Future<Response> get({
     required String url,
+    Map<String, String>? headers,
   }) async {
-    Map<String, String> headers = {
-      // "token": userController.token ?? '',
-    };
     var uri = Uri.https(baseUrl, url);
     Response response = await client.get(uri, headers: headers);
 
@@ -23,10 +21,8 @@ class ApiServices {
   Future<Response> post({
     required String url,
     required Map<String, String> body,
+    Map<String, String>? headers,
   }) async {
-    Map<String, String> headers = {
-      // "token": userController.token ?? '',
-    };
     var uri = Uri.https(baseUrl, url);
     Response response = await client.post(uri, body: body, headers: headers);
 

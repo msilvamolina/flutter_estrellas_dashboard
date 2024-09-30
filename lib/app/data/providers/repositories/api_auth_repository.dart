@@ -13,17 +13,25 @@ class ApiRepository {
 
   Future<Response?> testApiEndpointGet({
     required String url,
+    Map<String, String>? headers,
   }) async {
     try {
-      Response response = await services.get(url: url);
+      Response response = await services.get(headers: headers, url: url);
       return response;
-      // dynamic decode = json.decode(response.body);
+    } catch (e) {
+      return null;
+    }
+  }
 
-      // if (response.statusCode == 200) {
-      //   return right(response);
-      // } else {
-      //   return left(response);
-      // }
+  Future<Response?> testApiEndpointPost({
+    required String url,
+    required Map<String, String> body,
+    Map<String, String>? headers,
+  }) async {
+    try {
+      Response response =
+          await services.post(headers: headers, url: url, body: body);
+      return response;
     } catch (e) {
       return null;
     }
