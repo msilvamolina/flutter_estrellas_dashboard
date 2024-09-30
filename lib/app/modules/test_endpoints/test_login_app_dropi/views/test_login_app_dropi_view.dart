@@ -5,10 +5,12 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/test_api/api_card.dart';
+import '../../../../components/test_api/api_success_card.dart';
 import '../../../../components/test_api/json_view.dart';
 import '../../../../components/test_api/success_card.dart';
 import '../../../../components/utils/expanded_or_null.dart';
 import '../../../../components/utils/row_or_column.dart';
+import '../../../../components/utils/sizedbox_responsive.dart';
 import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/input_decoration.dart';
@@ -34,7 +36,11 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ApiCard(url: controller.url),
+                    ApiSuccessCard(
+                      url: controller.url,
+                      success: controller.success.toString(),
+                      statusCode: controller.statusCode.toString(),
+                    ),
                     const SizedBox(height: 24),
                     RowOrColumn(
                       breakingPoint: breakingPoint,
@@ -50,7 +56,10 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
                             ),
                           ),
                         ),
-                        // Sized
+                        SizedBoxResponsive(
+                          value: 16,
+                          breakingPoint: breakingPoint,
+                        ),
                         ExpandedOrNull(
                           breakingPoint: !Responsive.isMobile(context),
                           child: ReactiveTextField(
@@ -70,14 +79,7 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
                     //   onPressed: controller.getInfo,
                     // ),
                     const SizedBox(height: 16),
-                    if (Responsive.isTablet(context))
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: SuccessCard(
-                          success: controller.success.toString(),
-                          statusCode: controller.statusCode.toString(),
-                        ),
-                      ),
+
                     if (controller.result != null)
                       Expanded(
                         child: Row(
