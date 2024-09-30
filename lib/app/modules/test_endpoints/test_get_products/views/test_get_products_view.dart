@@ -10,6 +10,7 @@ import '../../../../components/widgets/button.dart';
 import '../../../../components/test_api/json_view.dart';
 import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../utils/responsive.dart';
 import '../controllers/test_get_products_controller.dart';
 import 'package:json_editor/json_editor.dart';
 
@@ -28,42 +29,35 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ApiCard(
-                url: controller.url,
-              ),
-              SizedBox(height: 24),
+              ApiCard(url: controller.url),
+              const SizedBox(height: 24),
               LoadingButton(
                 label: 'Get Info',
                 isLoading: controller.loading,
                 onPressed: controller.getInfo,
               ),
-              SizedBox(height: 16),
-              // if (controller.result != null)
-              //   Padding(
-              //     padding: const EdgeInsets.only(top: 18, bottom: 8),
-              //     child: Text(
-              //       'Result: ',
-              //       style: TypographyStyle.h3Mobile,
-              //     ),
-              //   ),
-              // if (controller.success != null)
-              //   SuccessCard(
-              //     success: controller.success.toString(),
-              //     statusCode: controller.statusCode.toString(),
-              //   ),
-              // const SizedBox(height: 16),
+              const SizedBox(height: 16),
+              if (Responsive.isTablet(context))
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: SuccessCard(
+                    success: controller.success.toString(),
+                    statusCode: controller.statusCode.toString(),
+                  ),
+                ),
               if (controller.result != null)
                 Expanded(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: SuccessCard(
-                          success: controller.success.toString(),
-                          statusCode: controller.statusCode.toString(),
+                      if (!Responsive.isTablet(context))
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: SuccessCard(
+                            success: controller.success.toString(),
+                            statusCode: controller.statusCode.toString(),
+                          ),
                         ),
-                      ),
                       Expanded(
                         child: JsonView(
                           jsonString: controller.result.toString(),

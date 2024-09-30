@@ -16,9 +16,11 @@ class MainLayout extends StatelessWidget {
     this.floatingActionButton,
     this.mainCurrentRoute,
     this.maxWidth,
+    this.bottomNavigationBar,
     super.key,
   });
   final Widget child;
+  final Widget? bottomNavigationBar;
   final String? appBarTitle;
   final Widget? floatingActionButton;
   final String currentRoute;
@@ -29,6 +31,7 @@ class MainLayout extends StatelessWidget {
     MainController mainController = Get.find<MainController>();
 
     return Scaffold(
+      bottomNavigationBar: bottomNavigationBar,
       floatingActionButton: floatingActionButton,
       drawer: Responsive.isTablet2(context)
           ? Drawer(
