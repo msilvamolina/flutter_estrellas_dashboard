@@ -8,6 +8,7 @@ import '../../../../components/test_api/api_card.dart';
 import '../../../../components/test_api/success_card.dart';
 import '../../../../components/widgets/button.dart';
 import '../../../../components/test_api/json_view.dart';
+import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/test_get_products_controller.dart';
 import 'package:json_editor/json_editor.dart';
@@ -30,8 +31,9 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
                 url: controller.url,
               ),
               SizedBox(height: 24),
-              Button(
+              LoadingButton(
                 label: 'Get Info',
+                isLoading: controller.loading,
                 onPressed: controller.getInfo,
               ),
               SizedBox(height: 18),
