@@ -61,41 +61,65 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
               SizedBox(
                 height: 8,
               ),
-              Expanded(
-                child: JsonEditorTheme(
-                  themeData: JsonEditorThemeData(
-                    darkTheme:
-                        JsonEditorThemeData.defaultTheme().darkTheme!.copyWith(
-                              defaultStyle: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary),
-                              errorStyle: TextStyle(color: Colors.pink[100]),
-                              keyStyle: TextStyle(color: Colors.white),
-                              boolStyle: TextStyle(color: Colors.yellow[100]),
-                              numberStyle: TextStyle(color: Colors.yellow[100]),
-                              stringStyle: TextStyle(color: Colors.amber),
-                              bracketStyle:
-                                  TextStyle(color: Colors.yellow, fontSize: 22),
-                            ),
-                    lightTheme:
-                        JsonEditorThemeData.defaultTheme().lightTheme!.copyWith(
-                              defaultStyle: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary),
-                              errorStyle: TextStyle(color: Colors.pink),
-                              keyStyle: TextStyle(color: Colors.white),
-                              boolStyle: TextStyle(color: Colors.orange),
-                              numberStyle: TextStyle(color: Colors.orange),
-                              stringStyle: TextStyle(color: Colors.orange),
-                              bracketStyle:
-                                  TextStyle(color: Colors.purple, fontSize: 22),
-                            ),
-                  ),
-                  child: JsonEditor.string(
-                    enabled: false,
-                    jsonString: controller.result.toString(),
-                    // onValueChanged: viewModel.onValueChanged,
+              if (controller.success != null)
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Text(
+                          'success: ',
+                          style: TypographyStyle.bodyBlackLarge,
+                        ),
+                        Text(
+                          controller.success.toString(),
+                          style: TypographyStyle.bodyBlackMedium,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+              SizedBox(
+                height: 16,
               ),
+              if (controller.result != null)
+                Expanded(
+                  child: JsonEditorTheme(
+                    themeData: JsonEditorThemeData(
+                      darkTheme: JsonEditorThemeData.defaultTheme()
+                          .darkTheme!
+                          .copyWith(
+                            defaultStyle: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
+                            errorStyle: TextStyle(color: Colors.pink[100]),
+                            keyStyle: TextStyle(color: Colors.white),
+                            boolStyle: TextStyle(color: Colors.yellow[100]),
+                            numberStyle: TextStyle(color: Colors.yellow[100]),
+                            stringStyle: TextStyle(color: Colors.amber),
+                            bracketStyle:
+                                TextStyle(color: Colors.yellow, fontSize: 22),
+                          ),
+                      lightTheme: JsonEditorThemeData.defaultTheme()
+                          .lightTheme!
+                          .copyWith(
+                            defaultStyle: TextStyle(
+                                color: Theme.of(context).colorScheme.primary),
+                            errorStyle: TextStyle(color: Colors.pink),
+                            keyStyle: TextStyle(color: Colors.white),
+                            boolStyle: TextStyle(color: Colors.orange),
+                            numberStyle: TextStyle(color: Colors.orange),
+                            stringStyle: TextStyle(color: Colors.orange),
+                            bracketStyle:
+                                TextStyle(color: Colors.purple, fontSize: 22),
+                          ),
+                    ),
+                    child: JsonEditor.string(
+                      enabled: false,
+                      jsonString: controller.result.toString(),
+                      // onValueChanged: viewModel.onValueChanged,
+                    ),
+                  ),
+                ),
             ],
           );
         },
