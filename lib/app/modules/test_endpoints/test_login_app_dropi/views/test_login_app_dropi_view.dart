@@ -19,6 +19,7 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
   const TestLoginAppDropiView({super.key});
   @override
   Widget build(BuildContext context) {
+    bool breakingPoint = !Responsive.isMobile(context);
     return MainLayout(
       maxWidth: 900,
       mainCurrentRoute: Routes.TEST_ENDPOINTS,
@@ -36,10 +37,10 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
                     ApiCard(url: controller.url),
                     const SizedBox(height: 24),
                     RowOrColumn(
-                      breakingPoint: !Responsive.isMobile(context),
+                      breakingPoint: breakingPoint,
                       children: [
                         ExpandedOrNull(
-                          breakingPoint: !Responsive.isMobile(context),
+                          breakingPoint: breakingPoint,
                           child: ReactiveTextField(
                             formControlName: Fields.email.name,
                             keyboardType: TextInputType.emailAddress,
