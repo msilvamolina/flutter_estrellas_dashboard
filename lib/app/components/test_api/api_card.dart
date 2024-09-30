@@ -12,8 +12,9 @@ class ApiCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Wrap(
           children: [
             Text(
               'API: ',
@@ -26,7 +27,8 @@ class ApiCard extends StatelessWidget {
           ],
         ),
         SizedBox(height: 8),
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.start,
           children: [
             Text(
               'Endpoint: ',

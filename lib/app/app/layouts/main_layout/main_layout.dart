@@ -15,6 +15,7 @@ class MainLayout extends StatelessWidget {
     this.appBarTitle,
     this.floatingActionButton,
     this.mainCurrentRoute,
+    this.maxWidth,
     super.key,
   });
   final Widget child;
@@ -22,7 +23,7 @@ class MainLayout extends StatelessWidget {
   final Widget? floatingActionButton;
   final String currentRoute;
   final String? mainCurrentRoute;
-
+  final double? maxWidth;
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -102,7 +103,7 @@ class MainLayout extends StatelessWidget {
             child: Center(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                constraints: BoxConstraints(maxWidth: 600),
+                constraints: BoxConstraints(maxWidth: maxWidth ?? 600),
                 child: child,
               ),
             ),

@@ -18,6 +18,7 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+      maxWidth: 800,
       mainCurrentRoute: Routes.TEST_ENDPOINTS,
       currentRoute: Routes.TEST_GET_PRODUCTS,
       appBarTitle: 'Test Get Products',
@@ -36,18 +37,21 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
                 isLoading: controller.loading,
                 onPressed: controller.getInfo,
               ),
-              SizedBox(height: 18),
-              Text(
-                'Result: ',
-                style: TypographyStyle.h3Mobile,
-              ),
-              const SizedBox(height: 8),
-              if (controller.success != null)
-                SuccessCard(
-                  success: controller.success.toString(),
-                  statusCode: controller.statusCode.toString(),
-                ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
+              // if (controller.result != null)
+              //   Padding(
+              //     padding: const EdgeInsets.only(top: 18, bottom: 8),
+              //     child: Text(
+              //       'Result: ',
+              //       style: TypographyStyle.h3Mobile,
+              //     ),
+              //   ),
+              // if (controller.success != null)
+              //   SuccessCard(
+              //     success: controller.success.toString(),
+              //     statusCode: controller.statusCode.toString(),
+              //   ),
+              // const SizedBox(height: 16),
               if (controller.result != null)
                 Expanded(
                   child: JsonView(
