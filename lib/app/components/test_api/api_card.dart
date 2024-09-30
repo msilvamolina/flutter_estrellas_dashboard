@@ -15,10 +15,13 @@ class ApiCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Wrap(
+          crossAxisAlignment: WrapCrossAlignment.start,
+          verticalDirection: VerticalDirection.up,
           children: [
             Text(
               'API: ',
-              style: TypographyStyle.bodyBlackLarge,
+              style: TypographyStyle.bodyBlackLarge
+                  .copyWith(fontWeight: FontWeight.w700),
             ),
             Text(
               ApiServices.baseUrl,
@@ -26,13 +29,15 @@ class ApiCard extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Wrap(
           crossAxisAlignment: WrapCrossAlignment.start,
+          verticalDirection: VerticalDirection.up,
           children: [
             Text(
               'Endpoint: ',
-              style: TypographyStyle.bodyBlackLarge,
+              style: TypographyStyle.bodyBlackLarge
+                  .copyWith(fontWeight: FontWeight.w700),
             ),
             Text(
               url,
