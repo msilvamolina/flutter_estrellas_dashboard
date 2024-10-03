@@ -5,38 +5,29 @@ import '../../../app/layouts/main_layout/main_layout.dart';
 import '../../../components/widgets/custom_floating_action_button.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/products_controller.dart';
+import '../tabs/tab_estrellas_1.dart';
+import '../tabs/tab_estrellas_2.dart';
 
 class ProductsView extends GetView<ProductsController> {
   const ProductsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    return const DefaultTabController(
       length: 2,
       child: MainLayout(
-        maxWidth: 800,
+        maxWidth: double.infinity,
         currentRoute: Routes.PRODUCTS,
-        floatingActionButton: CustomFloatingActionButton(
-          label: 'Agregar producto',
-          icon: Icons.add,
-          onPressed: () {},
-        ),
         appBarWidget: TabBar(
-          tabs: const [
+          tabs: [
             Tab(text: 'Estrellas 1.0'),
             Tab(text: 'Estrellas 2.0'),
           ],
         ),
-        child: Column(
+        child: TabBarView(
           children: [
-            Expanded(
-              child: TabBarView(
-                children: const [
-                  Center(child: Text('Vista de Lista de Productos')),
-                  Center(child: Text('Vista de Estadísticas')),
-                ],
-              ),
-            ),
+            TabEstrellas1(),
+            TabEstrellas2(),
           ],
         ),
       ),
