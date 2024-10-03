@@ -48,11 +48,11 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
                         ExpandedOrNull(
                           breakingPoint: breakingPoint,
                           child: ReactiveTextField(
-                            formControlName: Fields.email.name,
-                            keyboardType: TextInputType.emailAddress,
+                            formControlName: Fields.user.name,
+                            keyboardType: TextInputType.text,
                             decoration: CustomInputDecoration.inputDecoration(
-                              text: "E-mail",
-                              icon: Icons.email,
+                              text: "User",
+                              icon: Icons.person,
                             ),
                           ),
                         ),

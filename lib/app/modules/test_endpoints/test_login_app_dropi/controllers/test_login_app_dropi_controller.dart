@@ -7,7 +7,7 @@ import '../../../../data/providers/repositories/api_auth_repository.dart';
 import 'package:http/http.dart';
 
 enum Fields {
-  email('email'),
+  user('user'),
   password('password');
 
   const Fields(this.name);
@@ -19,16 +19,18 @@ class TestLoginAppDropiController extends GetxController {
   String url = 'api/users/login/';
 
   FormGroup buildForm() => fb.group(<String, Object>{
-        Fields.email.name: FormControl<String>(
+        Fields.user.name: FormControl<String>(
+          value: '1144076614',
           validators: [
             Validators.required,
-            Validators.email,
+            Validators.minLength(6),
           ],
         ),
         Fields.password.name: FormControl<String>(
+          value: '1144076614',
           validators: [
             Validators.required,
-            Validators.minLength(8),
+            Validators.minLength(6),
           ],
         ),
       });
@@ -51,11 +53,11 @@ class TestLoginAppDropiController extends GetxController {
     _success = null;
     update(['view']);
 
-    String email = data[Fields.email.name].toString();
+    String user = data[Fields.user.name].toString();
     String password = data[Fields.password.name].toString();
 
     Map<String, String> body = {
-      "email": email,
+      "user": user,
       "password": password,
     };
 
