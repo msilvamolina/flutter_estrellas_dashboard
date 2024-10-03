@@ -55,8 +55,8 @@ class TestLoginAppDropiController extends GetxController {
     String password = data[Fields.password.name].toString();
 
     Map<String, String> body = {
-      "email": 'email',
-      "password": 'password',
+      "email": email,
+      "password": password,
     };
 
     Response? response =

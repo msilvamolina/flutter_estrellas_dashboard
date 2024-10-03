@@ -63,23 +63,27 @@ class TestLoginAppDropiView extends GetView<TestLoginAppDropiController> {
                         ExpandedOrNull(
                           breakingPoint: !Responsive.isMobile(context),
                           child: ReactiveTextField(
-                            formControlName: Fields.email.name,
-                            keyboardType: TextInputType.emailAddress,
+                            formControlName: Fields.password.name,
+                            keyboardType: TextInputType.text,
                             decoration: CustomInputDecoration.inputDecoration(
-                              text: "E-mail",
-                              icon: Icons.email,
+                              text: "Contraseña",
+                              icon: Icons.security,
                             ),
                           ),
                         ),
                       ],
                     ),
-                    // LoadingButton(
-                    //   label: 'Get Info',
-                    //   isLoading: controller.loading,
-                    //   onPressed: controller.getInfo,
-                    // ),
                     const SizedBox(height: 16),
-
+                    ReactiveFormConsumer(
+                      builder: (context, form, child) => LoadingButton(
+                        label: 'Check',
+                        isLoading: controller.loading,
+                        onPressed: (form.valid)
+                            ? () => controller.sendForm(form.value)
+                            : null,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     if (controller.result != null)
                       Expanded(
                         child: Row(

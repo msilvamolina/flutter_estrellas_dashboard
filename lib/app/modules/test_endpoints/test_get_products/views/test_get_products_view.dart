@@ -32,7 +32,7 @@ class TestGetProductsView extends GetView<TestGetProductsController> {
               ApiCard(url: controller.url),
               const SizedBox(height: 24),
               LoadingButton(
-                label: 'Get Info',
+                label: 'Check',
                 isLoading: controller.loading,
                 onPressed: controller.getInfo,
               ),
