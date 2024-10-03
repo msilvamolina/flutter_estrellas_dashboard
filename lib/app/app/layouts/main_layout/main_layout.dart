@@ -13,6 +13,7 @@ class MainLayout extends StatelessWidget {
     required this.currentRoute,
     required this.child,
     this.appBarTitle,
+    this.appBarWidget,
     this.floatingActionButton,
     this.mainCurrentRoute,
     this.maxWidth,
@@ -22,6 +23,7 @@ class MainLayout extends StatelessWidget {
   final Widget child;
   final Widget? bottomNavigationBar;
   final String? appBarTitle;
+  final Widget? appBarWidget;
   final Widget? floatingActionButton;
   final String currentRoute;
   final String? mainCurrentRoute;
@@ -70,7 +72,14 @@ class MainLayout extends StatelessWidget {
                         BlendMode.srcIn,
                       ),
                     ),
-                    if (appBarTitle != null) ...[
+                    if (appBarWidget != null)
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 32),
+                          child: appBarWidget!,
+                        ),
+                      )
+                    else if (appBarTitle != null) ...[
                       Spacer(),
                       Text(appBarTitle!),
                       Spacer(),
@@ -80,16 +89,18 @@ class MainLayout extends StatelessWidget {
               ),
             )
           : AppBar(
-              title: appBarTitle != null
-                  ? Text(appBarTitle!)
-                  : SvgPicture.asset(
-                      'assets/svg/fulllogo.svg',
-                      height: 30,
-                      colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.primary,
-                        BlendMode.srcIn,
-                      ),
-                    ),
+              title: appBarWidget != null
+                  ? appBarWidget!
+                  : appBarTitle != null
+                      ? Text(appBarTitle!)
+                      : SvgPicture.asset(
+                          'assets/svg/fulllogo.svg',
+                          height: 30,
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.primary,
+                            BlendMode.srcIn,
+                          ),
+                        ),
             ),
       body: Row(
         children: [
