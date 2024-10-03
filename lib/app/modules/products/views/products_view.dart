@@ -13,12 +13,12 @@ class ProductsView extends GetView<ProductsController> {
 
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
       length: 2,
       child: MainLayout(
         maxWidth: double.infinity,
         currentRoute: Routes.PRODUCTS,
-        appBarWidget: TabBar(
+        appBarWidget: const TabBar(
           tabs: [
             Tab(text: 'Estrellas 1.0'),
             Tab(text: 'Estrellas 2.0'),
@@ -26,8 +26,8 @@ class ProductsView extends GetView<ProductsController> {
         ),
         child: TabBarView(
           children: [
-            TabEstrellas1(),
-            TabEstrellas2(),
+            TabEstrellas1(controller: controller),
+            TabEstrellas2(controller: controller),
           ],
         ),
       ),

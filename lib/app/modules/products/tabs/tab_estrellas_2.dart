@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../components/widgets/custom_floating_action_button.dart';
+import '../controllers/products_controller.dart';
 
 class TabEstrellas2 extends StatelessWidget {
-  const TabEstrellas2({super.key});
+  const TabEstrellas2({required this.controller, super.key});
 
+  final ProductsController controller;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: CustomFloatingActionButton(
-        label: 'Agregar producto',
-        icon: Icons.add,
-        onPressed: () {},
-      ),
-      body: Center(child: Text('holis :D')),
+    controller.getDataVersion2();
+
+    return GetBuilder<ProductsController>(
+      builder: (_) {
+        return Center(
+          child: Text('holis :D'),
+        );
+      },
     );
   }
 }
