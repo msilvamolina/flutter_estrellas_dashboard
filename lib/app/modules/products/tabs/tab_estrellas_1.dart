@@ -1,3 +1,6 @@
+import 'package:estrellas_dashboard/app/modules/products/widgets/products_error_widget.dart';
+import 'package:estrellas_dashboard/app/modules/products/widgets/products_list_widget.dart';
+import 'package:estrellas_dashboard/app/modules/products/widgets/produtcs_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,12 +18,10 @@ class TabEstrellas1 extends StatelessWidget {
       id: 'tab1View',
       builder: (_) {
         return !controller.isLoading
-            ? SingleChildScrollView(
-                child: Text(controller.data.toString()),
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
-              );
+            ? controller.data != null
+                ? ProductsListWidget(list: controller.data!)
+                : const ProductsErrorWidget()
+            : const ProdutcsLoadingWidget();
       },
     );
   }
