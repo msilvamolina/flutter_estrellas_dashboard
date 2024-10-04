@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../helpers/friendly_helpers.dart';
 import '../../helpers/model_helpers.dart';
 
 part 'product.freezed.dart';

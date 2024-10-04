@@ -12,10 +12,15 @@ class TabEstrellas1 extends StatelessWidget {
     controller.getDataVersion1();
 
     return GetBuilder<ProductsController>(
+      id: 'tab1View',
       builder: (_) {
-        return Center(
-          child: Text('holis :D'),
-        );
+        return !controller.isLoading
+            ? SingleChildScrollView(
+                child: Text(controller.data.toString()),
+              )
+            : const Center(
+                child: CircularProgressIndicator(),
+              );
       },
     );
   }

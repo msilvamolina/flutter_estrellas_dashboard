@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../../data/providers/repositories/api_auth_repository.dart';
+import '../../../../data/providers/repositories/api_test_repository.dart';
 import 'package:http/http.dart';
 
 enum Fields {
@@ -15,7 +15,7 @@ enum Fields {
 }
 
 class TestLoginAppDropiController extends GetxController {
-  ApiRepository apiRepository = ApiRepository();
+  ApiTestRepository apiRepository = ApiTestRepository();
   String url = 'api/users/login/';
 
   FormGroup buildForm() => fb.group(<String, Object>{

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:estrellas_dashboard/app/data/providers/repositories/api_auth_repository.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/api_test_repository.dart';
 import 'package:estrellas_dashboard/app/services/api_services.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 // import 'package:get/get.dart';
 import 'package:http/http.dart';
 
 class TestGetProductsController extends GetxController {
-  ApiRepository apiRepository = ApiRepository();
+  ApiTestRepository apiRepository = ApiTestRepository();
   String url = 'api/products/allProducts/?term=Protector';
 
   dynamic _result;

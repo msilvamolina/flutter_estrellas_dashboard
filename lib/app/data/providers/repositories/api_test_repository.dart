@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 import '../../../app/controllers/user_controller.dart';
 import '../../../services/api_services.dart';
 
-class ApiRepository {
+class ApiTestRepository {
   ApiServices services = ApiServices();
   UserController userController = Get.find<UserController>();
 
