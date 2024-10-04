@@ -12,8 +12,16 @@ class ProductsListWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: list.length,
       itemBuilder: (context, index) {
-        return ProductCard(
-          product: list[index],
+        return Padding(
+          padding: EdgeInsets.only(
+              top: index == 0 ? 8 : 0,
+              bottom: index == (list.length - 1) ? 48 : 0),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: ProductCard(
+              product: list[index],
+            ),
+          ),
         );
       },
     );

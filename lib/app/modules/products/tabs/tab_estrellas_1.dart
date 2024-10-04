@@ -18,9 +18,9 @@ class TabEstrellas1 extends StatelessWidget {
       id: 'tab1View',
       builder: (_) {
         return !controller.isLoading
-            ? controller.data != null
-                ? ProductsListWidget(list: controller.data!)
-                : const ProductsErrorWidget()
+            ? controller.responseError != null
+                ? ProductsErrorWidget(error: controller.responseError!)
+                : ProductsListWidget(list: controller.data)
             : const ProdutcsLoadingWidget();
       },
     );

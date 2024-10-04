@@ -1,12 +1,13 @@
 import 'package:flutter/widgets.dart';
 
 class ProductsErrorWidget extends StatelessWidget {
-  const ProductsErrorWidget({super.key});
+  const ProductsErrorWidget({required this.error, super.key});
 
+  final String error;
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Error'),
+      child: Text(error),
     );
   }
 }
