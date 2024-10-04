@@ -17,8 +17,7 @@ class ProductsRepository {
       if (response.statusCode != 200) {
         return left('Error status code: ${response.statusCode}');
       }
-      dynamic body = response.body;
-      dynamic json = jsonDecode(body);
+      dynamic json = jsonDecode(response.body);
       List<dynamic> bodyList = json['data']['products'];
 
       if (bodyList.isEmpty) {
