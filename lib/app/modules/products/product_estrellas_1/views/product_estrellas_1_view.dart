@@ -31,11 +31,11 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
         rows: [
           TableRowModel(
             label: 'ID',
-            widget: Text(controller.product.id),
+            widget: SelectableText(controller.product.id),
           ),
           TableRowModel(
             label: 'Name',
-            widget: Text(controller.product.name),
+            widget: SelectableText(controller.product.name),
           ),
           TableRowModel(
             label: 'Provider',

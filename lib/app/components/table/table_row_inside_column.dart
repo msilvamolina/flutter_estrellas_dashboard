@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estrellas_dashboard/app/utils/responsive.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../themes/styles/typography.dart';
@@ -52,7 +53,7 @@ class TableRowInsideColumn extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: Text(
+                        child: SelectableText(
                           element.text,
                           style: TypographyStyle.bodyRegularSmall,
                         ),
