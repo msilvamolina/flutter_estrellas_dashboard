@@ -10,6 +10,7 @@ abstract class ProductModel implements _$ProductModel {
   const ProductModel._();
 
   const factory ProductModel({
+    @JsonKey(name: '_id') required String id,
     required String name,
     required String usefulId,
     required String videoUrl,

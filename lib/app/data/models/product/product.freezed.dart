@@ -20,6 +20,8 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductModel {
+  @JsonKey(name: '_id')
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get usefulId => throw _privateConstructorUsedError;
   String get videoUrl => throw _privateConstructorUsedError;
@@ -53,7 +55,8 @@ abstract class $ProductModelCopyWith<$Res> {
       _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
   $Res call(
-      {String name,
+      {@JsonKey(name: '_id') String id,
+      String name,
       String usefulId,
       String videoUrl,
       String description,
@@ -85,6 +88,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? usefulId = null,
     Object? videoUrl = null,
@@ -102,6 +106,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -175,7 +183,8 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
+      {@JsonKey(name: '_id') String id,
+      String name,
       String usefulId,
       String videoUrl,
       String description,
@@ -205,6 +214,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? name = null,
     Object? usefulId = null,
     Object? videoUrl = null,
@@ -222,6 +232,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? updatedAt = null,
   }) {
     return _then(_$ProductModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -290,7 +304,8 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductModelImpl extends _ProductModel {
   const _$ProductModelImpl(
-      {required this.name,
+      {@JsonKey(name: '_id') required this.id,
+      required this.name,
       required this.usefulId,
       required this.videoUrl,
       required this.description,
@@ -310,6 +325,9 @@ class _$ProductModelImpl extends _ProductModel {
   factory _$ProductModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: '_id')
+  final String id;
   @override
   final String name;
   @override
@@ -343,7 +361,7 @@ class _$ProductModelImpl extends _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(name: $name, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, updatedAt: $updatedAt)';
+    return 'ProductModel(id: $id, name: $name, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, updatedAt: $updatedAt)';
   }
 
   @override
@@ -351,6 +369,7 @@ class _$ProductModelImpl extends _ProductModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.usefulId, usefulId) ||
                 other.usefulId == usefulId) &&
@@ -381,6 +400,7 @@ class _$ProductModelImpl extends _ProductModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       name,
       usefulId,
       videoUrl,
@@ -415,7 +435,8 @@ class _$ProductModelImpl extends _ProductModel {
 
 abstract class _ProductModel extends ProductModel {
   const factory _ProductModel(
-      {required final String name,
+      {@JsonKey(name: '_id') required final String id,
+      required final String name,
       required final String usefulId,
       required final String videoUrl,
       required final String description,
@@ -435,6 +456,9 @@ abstract class _ProductModel extends ProductModel {
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$ProductModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: '_id')
+  String get id;
   @override
   String get name;
   @override
