@@ -16,9 +16,11 @@ class AppbarTitleWithBack extends StatelessWidget {
       crossAxisAlignment: !Responsive.isTablet2(context)
           ? CrossAxisAlignment.start
           : CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: Responsive.isTablet2(context)
+          ? MainAxisAlignment.start
+          : MainAxisAlignment.center,
       children: [
-        if (Responsive.isTablet2(context)) ...[
+        if (Responsive.isTablet2(context) && !Responsive.isMobile(context)) ...[
           IconButton(
             onPressed: Get.back,
             icon: const Icon(
@@ -26,28 +28,15 @@ class AppbarTitleWithBack extends StatelessWidget {
               size: 34,
             ),
           ),
-          const Spacer(),
         ],
-        Center(
-          child: Padding(
-            padding:
-                EdgeInsets.only(bottom: !Responsive.isTablet2(context) ? 8 : 0),
-            child: Text(
-              title,
-              style: TypographyStyle.h3Mobile,
-            ),
+        Padding(
+          padding:
+              EdgeInsets.only(bottom: !Responsive.isTablet2(context) ? 8 : 0),
+          child: Text(
+            title,
+            style: TypographyStyle.h3Mobile,
           ),
         ),
-        if (Responsive.isTablet2(context)) ...[
-          const Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert_rounded,
-              size: 34,
-            ),
-          ),
-        ],
       ],
     );
   }
