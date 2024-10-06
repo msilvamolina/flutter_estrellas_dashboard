@@ -6,6 +6,7 @@ const double _h3DesktopSize = 39;
 const double _h1MobileSize = 32;
 const double _h2MobileSize = 26;
 const double _h3MobileSize = 20;
+const double _h4MobileSize = 18;
 const double _bodyLargeSize = 16;
 const double _bodyMediumSize = 14;
 const double _bodySmallSize = 12;
@@ -49,6 +50,12 @@ abstract class TypographyStyle {
   );
   static TextStyle h3Mobile = textStyle.copyWith(
     fontSize: _h3MobileSize,
+    height: 1.36,
+    letterSpacing: 0,
+    fontWeight: FontWeight.w600,
+  );
+  static TextStyle h4Mobile = textStyle.copyWith(
+    fontSize: _h4MobileSize,
     height: 1.36,
     letterSpacing: 0,
     fontWeight: FontWeight.w600,
