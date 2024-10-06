@@ -12,6 +12,7 @@ import 'package:estrellas_dashboard/app/themes/themes/black.dart';
 import 'package:estrellas_dashboard/app/themes/themes/blue.dart';
 import 'package:estrellas_dashboard/app/themes/themes/red.dart';
 import 'package:estrellas_dashboard/app/themes/util.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'app/app/bindings/main_binding.dart';
 import 'app/app/layouts/main_layout/main_layout.dart';
 import 'app/config/firebase_config.dart';
@@ -22,6 +23,8 @@ import 'app/themes/themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('es', null);
+
   await GetStorage.init();
   await initFirebase();
 

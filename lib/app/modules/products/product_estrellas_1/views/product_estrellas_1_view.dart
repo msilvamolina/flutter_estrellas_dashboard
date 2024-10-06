@@ -12,6 +12,7 @@ import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/appbars/appbar_title_with_back.dart';
 import '../../../../components/table/models/table_row_strings_model.dart';
 import '../../../../components/table/table_row.dart';
+import '../../../../components/table/table_row_date.dart';
 import '../../../../components/table/table_row_inside_column.dart';
 import '../../../../components/table/table_row_text.dart';
 import '../../../../components/table/table_row_video.dart';
@@ -69,9 +70,18 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
                     controller.product.suggestedPrice)),
           ),
           TableRowModel(
+            label: 'isPercentage',
+            widget:
+                TableRowText(text: controller.product.isPercentage.toString()),
+          ),
+          TableRowModel(
+            label: 'type',
+            widget: TableRowText(text: controller.product.type),
+          ),
+          TableRowModel(
             label: 'category',
             widget: TableRowInsideColumn(
-              cellWidth: 70,
+              cellWidth: 50,
               rows: [
                 TableRowStringsModel(
                   label: 'id',
@@ -112,6 +122,28 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
           TableRowModel(
             label: 'videoUrl',
             widget: TableRowVideo(url: controller.product.videoUrl),
+          ),
+          TableRowModel(
+            label: 'createdAt',
+            widget: TableRowDate(date: controller.product.createdAt),
+          ),
+          TableRowModel(
+            label: 'updatedAt',
+            widget: TableRowDate(date: controller.product.updatedAt),
+          ),
+          TableRowModel(
+            label: 'uploadDate',
+            widget: TableRowDate(date: controller.product.uploadDate),
+          ),
+          TableRowModel(
+            label: 'description',
+            widget: TableRowText(text: controller.product.description),
+          ),
+          TableRowModel(
+            label: '',
+            widget: SizedBox(
+              height: 80,
+            ),
           ),
         ],
       ),
