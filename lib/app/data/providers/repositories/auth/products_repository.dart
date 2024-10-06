@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:estrellas_dashboard/app/data/models/product/product.dart';
+import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:http/http.dart';
 
 import '../../../../services/api_services.dart';

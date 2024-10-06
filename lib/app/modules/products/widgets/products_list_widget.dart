@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../../data/models/product/product.dart';
+import '../../../data/models/product/product/product.dart';
 import 'product_card.dart';
 
 class ProductsListWidget extends StatelessWidget {

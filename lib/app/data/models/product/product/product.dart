@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../helpers/model_helpers.dart';
+import '../../../helpers/model_helpers.dart';
+import '../category/product_category.dart';
+import '../provider/product_provider.dart';
 
 part 'product.freezed.dart';
 part 'product.g.dart';
@@ -11,7 +13,10 @@ abstract class ProductModel implements _$ProductModel {
 
   const factory ProductModel({
     @JsonKey(name: '_id') required String id,
+    required ProductProviderModel provider,
+    required ProductCategoryModel category,
     required String name,
+    required String externalId,
     required String usefulId,
     required String videoUrl,
     required String description,

@@ -22,7 +22,10 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
+  ProductProviderModel get provider => throw _privateConstructorUsedError;
+  ProductCategoryModel get category => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get externalId => throw _privateConstructorUsedError;
   String get usefulId => throw _privateConstructorUsedError;
   String get videoUrl => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -56,7 +59,10 @@ abstract class $ProductModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
+      ProductProviderModel provider,
+      ProductCategoryModel category,
       String name,
+      String externalId,
       String usefulId,
       String videoUrl,
       String description,
@@ -71,6 +77,9 @@ abstract class $ProductModelCopyWith<$Res> {
       String createdAt,
       String uploadDate,
       String updatedAt});
+
+  $ProductProviderModelCopyWith<$Res> get provider;
+  $ProductCategoryModelCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -89,7 +98,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @override
   $Res call({
     Object? id = null,
+    Object? provider = null,
+    Object? category = null,
     Object? name = null,
+    Object? externalId = null,
     Object? usefulId = null,
     Object? videoUrl = null,
     Object? description = null,
@@ -110,9 +122,21 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      provider: null == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as ProductProviderModel,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as ProductCategoryModel,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      externalId: null == externalId
+          ? _value.externalId
+          : externalId // ignore: cast_nullable_to_non_nullable
               as String,
       usefulId: null == usefulId
           ? _value.usefulId
@@ -172,6 +196,26 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
               as String,
     ) as $Val);
   }
+
+  /// Create a copy of ProductModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductProviderModelCopyWith<$Res> get provider {
+    return $ProductProviderModelCopyWith<$Res>(_value.provider, (value) {
+      return _then(_value.copyWith(provider: value) as $Val);
+    });
+  }
+
+  /// Create a copy of ProductModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductCategoryModelCopyWith<$Res> get category {
+    return $ProductCategoryModelCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -184,7 +228,10 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
+      ProductProviderModel provider,
+      ProductCategoryModel category,
       String name,
+      String externalId,
       String usefulId,
       String videoUrl,
       String description,
@@ -199,6 +246,11 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       String createdAt,
       String uploadDate,
       String updatedAt});
+
+  @override
+  $ProductProviderModelCopyWith<$Res> get provider;
+  @override
+  $ProductCategoryModelCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -215,7 +267,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? provider = null,
+    Object? category = null,
     Object? name = null,
+    Object? externalId = null,
     Object? usefulId = null,
     Object? videoUrl = null,
     Object? description = null,
@@ -236,9 +291,21 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      provider: null == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as ProductProviderModel,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as ProductCategoryModel,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      externalId: null == externalId
+          ? _value.externalId
+          : externalId // ignore: cast_nullable_to_non_nullable
               as String,
       usefulId: null == usefulId
           ? _value.usefulId
@@ -305,7 +372,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 class _$ProductModelImpl extends _ProductModel {
   const _$ProductModelImpl(
       {@JsonKey(name: '_id') required this.id,
+      required this.provider,
+      required this.category,
       required this.name,
+      required this.externalId,
       required this.usefulId,
       required this.videoUrl,
       required this.description,
@@ -329,7 +399,13 @@ class _$ProductModelImpl extends _ProductModel {
   @JsonKey(name: '_id')
   final String id;
   @override
+  final ProductProviderModel provider;
+  @override
+  final ProductCategoryModel category;
+  @override
   final String name;
+  @override
+  final String externalId;
   @override
   final String usefulId;
   @override
@@ -361,7 +437,7 @@ class _$ProductModelImpl extends _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, name: $name, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, updatedAt: $updatedAt)';
+    return 'ProductModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, updatedAt: $updatedAt)';
   }
 
   @override
@@ -370,7 +446,13 @@ class _$ProductModelImpl extends _ProductModel {
         (other.runtimeType == runtimeType &&
             other is _$ProductModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.provider, provider) ||
+                other.provider == provider) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.externalId, externalId) ||
+                other.externalId == externalId) &&
             (identical(other.usefulId, usefulId) ||
                 other.usefulId == usefulId) &&
             (identical(other.videoUrl, videoUrl) ||
@@ -398,24 +480,28 @@ class _$ProductModelImpl extends _ProductModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      usefulId,
-      videoUrl,
-      description,
-      type,
-      sku,
-      price,
-      active,
-      isPercentage,
-      points,
-      suggestedPrice,
-      thumbnail,
-      createdAt,
-      uploadDate,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        provider,
+        category,
+        name,
+        externalId,
+        usefulId,
+        videoUrl,
+        description,
+        type,
+        sku,
+        price,
+        active,
+        isPercentage,
+        points,
+        suggestedPrice,
+        thumbnail,
+        createdAt,
+        uploadDate,
+        updatedAt
+      ]);
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.
@@ -436,7 +522,10 @@ class _$ProductModelImpl extends _ProductModel {
 abstract class _ProductModel extends ProductModel {
   const factory _ProductModel(
       {@JsonKey(name: '_id') required final String id,
+      required final ProductProviderModel provider,
+      required final ProductCategoryModel category,
       required final String name,
+      required final String externalId,
       required final String usefulId,
       required final String videoUrl,
       required final String description,
@@ -460,7 +549,13 @@ abstract class _ProductModel extends ProductModel {
   @JsonKey(name: '_id')
   String get id;
   @override
+  ProductProviderModel get provider;
+  @override
+  ProductCategoryModel get category;
+  @override
   String get name;
+  @override
+  String get externalId;
   @override
   String get usefulId;
   @override
