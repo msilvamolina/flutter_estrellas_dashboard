@@ -1,8 +1,8 @@
-import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:get/get.dart';
 
-class ProductController extends GetxController {
-  MainController mainController = Get.find();
+class ProductEstrellas1Controller extends GetxController {
+  //TODO: Implement ProductEstrellas1Controller
+
   final count = 0.obs;
   @override
   void onInit() {

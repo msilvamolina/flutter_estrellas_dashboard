@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../app/layouts/main_layout/main_layout.dart';
-import '../../../components/widgets/custom_floating_action_button.dart';
-import '../../../routes/app_pages.dart';
+import '../../../../app/layouts/main_layout/main_layout.dart';
+import '../../../../components/widgets/custom_floating_action_button.dart';
+import '../../../../routes/app_pages.dart';
 import '../controllers/products_controller.dart';
 import '../tabs/tab_estrellas_1.dart';
 import '../tabs/tab_estrellas_2.dart';

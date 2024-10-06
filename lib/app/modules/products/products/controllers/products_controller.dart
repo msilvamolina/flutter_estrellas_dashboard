@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
-import '../../../data/models/product/product/product.dart';
-import '../../../data/providers/repositories/auth/products_repository.dart';
+import '../../../../data/models/product/product/product.dart';
+import '../../../../data/providers/repositories/auth/products_repository.dart';
 
 class ProductsController extends GetxController {
   ProductsRepository repository = ProductsRepository();

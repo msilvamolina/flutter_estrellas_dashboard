@@ -8,10 +8,10 @@ import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/product/bindings/product_binding.dart';
-import '../modules/product/views/product_view.dart';
-import '../modules/products/bindings/products_binding.dart';
-import '../modules/products/views/products_view.dart';
+import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
+import '../modules/products/product_estrellas_1/views/product_estrellas_1_view.dart';
+import '../modules/products/products/bindings/products_binding.dart';
+import '../modules/products/products/views/products_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
@@ -45,13 +45,6 @@ class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: _Paths.PRODUCT,
-      page: () => const ProductView(),
-      binding: ProductBinding(),
-      transition: Transition.downToUp,
-      opaque: false,
-    ),
-    GetPage(
       name: _Paths.PRODUCTS,
       page: () => const ProductsView(),
       binding: ProductsBinding(),
@@ -67,6 +60,12 @@ class AppPages {
       name: _Paths.TEST_LOGIN_APP_DROPI,
       page: () => const TestLoginAppDropiView(),
       binding: TestLoginAppDropiBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_ESTRELLAS_1,
+      page: () => const ProductEstrellas1View(),
+      binding: ProductEstrellas1Binding(),
       transition: Transition.fadeIn,
     ),
   ];

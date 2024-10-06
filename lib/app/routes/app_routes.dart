@@ -15,6 +15,7 @@ abstract class Routes {
   static const TEST_ENDPOINTS = _Paths.TEST_ENDPOINTS;
   static const TEST_GET_PRODUCTS = _Paths.TEST_GET_PRODUCTS;
   static const TEST_LOGIN_APP_DROPI = _Paths.TEST_LOGIN_APP_DROPI;
+  static const PRODUCT_ESTRELLAS_1 = _Paths.PRODUCT_ESTRELLAS_1;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const TEST_ENDPOINTS = '/test-endpoints';
   static const TEST_GET_PRODUCTS = '/test-get-products';
   static const TEST_LOGIN_APP_DROPI = '/test-login-app-dropi';
+  static const PRODUCT_ESTRELLAS_1 = '/product-estrellas-1';
 }
