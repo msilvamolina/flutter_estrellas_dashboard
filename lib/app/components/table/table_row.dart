@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../utils/responsive.dart';
 import '../utils/widget_or_widget.dart';
-import 'model/table_row_model.dart';
+import 'models/table_row_model.dart';
 import 'table_row_desktop.dart';
 
 class TableWidgetRow extends StatelessWidget {

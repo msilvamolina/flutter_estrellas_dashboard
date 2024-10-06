@@ -2,7 +2,7 @@ import 'package:estrellas_dashboard/app/utils/responsive.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'model/table_row_model.dart';
+import 'models/table_row_model.dart';
 
 class TableRowDesktop extends StatelessWidget {
   const TableRowDesktop({required this.border, required this.row, super.key});
