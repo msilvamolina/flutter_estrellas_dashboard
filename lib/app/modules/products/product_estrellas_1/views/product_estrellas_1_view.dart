@@ -20,7 +20,7 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
 
   @override
   Widget build(BuildContext context) {
-    Color border = Theme.of(context).colorScheme.primary;
+    Color border = Theme.of(context).colorScheme.primary.withOpacity(0.2);
 
     return MainLayout(
       maxWidth: double.infinity,
