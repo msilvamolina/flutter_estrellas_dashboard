@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estrellas_dashboard/app/components/table/models/table_row_model.dart';
+import 'package:estrellas_dashboard/app/components/table/table_row_image.dart';
 import 'package:estrellas_dashboard/app/components/table/table_widget.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:estrellas_dashboard/app/utils/responsive.dart';
@@ -13,7 +14,7 @@ import '../../../../components/table/models/table_row_strings_model.dart';
 import '../../../../components/table/table_row.dart';
 import '../../../../components/table/table_row_inside_column.dart';
 import '../../../../components/table/table_row_text.dart';
-import '../../../../components/table/text_row_video.dart';
+import '../../../../components/table/table_row_video.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/money_amount.dart';
 import '../controllers/product_estrellas_1_controller.dart';
@@ -103,6 +104,10 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
                 ),
               ],
             ),
+          ),
+          TableRowModel(
+            label: 'thumbnail',
+            widget: TableRowImage(url: controller.product.thumbnail),
           ),
           TableRowModel(
             label: 'videoUrl',
