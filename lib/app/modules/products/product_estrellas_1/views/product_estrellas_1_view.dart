@@ -12,6 +12,8 @@ import '../../../../components/appbars/appbar_title_with_back.dart';
 import '../../../../components/table/models/table_row_strings_model.dart';
 import '../../../../components/table/table_row.dart';
 import '../../../../components/table/table_row_inside_column.dart';
+import '../../../../components/table/table_row_text.dart';
+import '../../../../components/table/text_row_video.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/product_estrellas_1_controller.dart';
 
@@ -30,33 +32,45 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
         border: border,
         rows: [
           TableRowModel(
-            label: 'ID',
-            widget: SelectableText(controller.product.id),
+            label: 'id',
+            widget: TableRowText(text: controller.product.id),
           ),
           TableRowModel(
-            label: 'Name',
-            widget: SelectableText(controller.product.name),
+            label: 'externalId',
+            widget: TableRowText(text: controller.product.externalId),
           ),
           TableRowModel(
-            label: 'Provider',
+            label: 'usefulId',
+            widget: TableRowText(text: controller.product.usefulId),
+          ),
+          TableRowModel(
+            label: 'name',
+            widget: TableRowText(text: controller.product.name),
+          ),
+          TableRowModel(
+            label: 'provider',
             widget: TableRowInsideColumn(
               cellWidth: 70,
               imageUrl: controller.product.provider.avatarUrl,
               rows: [
                 TableRowStringsModel(
-                  label: 'ID',
+                  label: 'id',
                   text: controller.product.provider.id,
                 ),
                 TableRowStringsModel(
-                  label: 'Name',
+                  label: 'name',
                   text: controller.product.provider.name,
                 ),
                 TableRowStringsModel(
-                  label: 'AvatarUrl',
+                  label: 'avatarUrl',
                   text: controller.product.provider.avatarUrl,
                 ),
               ],
             ),
+          ),
+          TableRowModel(
+            label: 'videoUrl',
+            widget: TableRowVideo(url: controller.product.videoUrl),
           ),
         ],
       ),
