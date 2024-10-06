@@ -11,11 +11,20 @@ abstract class ProductModel implements _$ProductModel {
 
   const factory ProductModel({
     required String name,
+    required String usefulId,
+    required String videoUrl,
     required String description,
+    required String type,
+    required String sku,
     required double price,
+    required bool active,
+    required bool isPercentage,
+    required int points,
     required double suggestedPrice,
     required String thumbnail,
     required String createdAt,
+    required String uploadDate,
+    required String updatedAt,
   }) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>

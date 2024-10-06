@@ -21,11 +21,20 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductModel {
   String get name => throw _privateConstructorUsedError;
+  String get usefulId => throw _privateConstructorUsedError;
+  String get videoUrl => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+  String get sku => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  bool get active => throw _privateConstructorUsedError;
+  bool get isPercentage => throw _privateConstructorUsedError;
+  int get points => throw _privateConstructorUsedError;
   double get suggestedPrice => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
+  String get uploadDate => throw _privateConstructorUsedError;
+  String get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this ProductModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,11 +54,20 @@ abstract class $ProductModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
+      String usefulId,
+      String videoUrl,
       String description,
+      String type,
+      String sku,
       double price,
+      bool active,
+      bool isPercentage,
+      int points,
       double suggestedPrice,
       String thumbnail,
-      String createdAt});
+      String createdAt,
+      String uploadDate,
+      String updatedAt});
 }
 
 /// @nodoc
@@ -68,25 +86,62 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @override
   $Res call({
     Object? name = null,
+    Object? usefulId = null,
+    Object? videoUrl = null,
     Object? description = null,
+    Object? type = null,
+    Object? sku = null,
     Object? price = null,
+    Object? active = null,
+    Object? isPercentage = null,
+    Object? points = null,
     Object? suggestedPrice = null,
     Object? thumbnail = null,
     Object? createdAt = null,
+    Object? uploadDate = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      usefulId: null == usefulId
+          ? _value.usefulId
+          : usefulId // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoUrl: null == videoUrl
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      sku: null == sku
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
               as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      active: null == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPercentage: null == isPercentage
+          ? _value.isPercentage
+          : isPercentage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
       suggestedPrice: null == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
@@ -98,6 +153,14 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      uploadDate: null == uploadDate
+          ? _value.uploadDate
+          : uploadDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -113,11 +176,20 @@ abstract class _$$ProductModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
+      String usefulId,
+      String videoUrl,
       String description,
+      String type,
+      String sku,
       double price,
+      bool active,
+      bool isPercentage,
+      int points,
       double suggestedPrice,
       String thumbnail,
-      String createdAt});
+      String createdAt,
+      String uploadDate,
+      String updatedAt});
 }
 
 /// @nodoc
@@ -134,25 +206,62 @@ class __$$ProductModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? usefulId = null,
+    Object? videoUrl = null,
     Object? description = null,
+    Object? type = null,
+    Object? sku = null,
     Object? price = null,
+    Object? active = null,
+    Object? isPercentage = null,
+    Object? points = null,
     Object? suggestedPrice = null,
     Object? thumbnail = null,
     Object? createdAt = null,
+    Object? uploadDate = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$ProductModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      usefulId: null == usefulId
+          ? _value.usefulId
+          : usefulId // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoUrl: null == videoUrl
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      sku: null == sku
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
               as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      active: null == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPercentage: null == isPercentage
+          ? _value.isPercentage
+          : isPercentage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
       suggestedPrice: null == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
@@ -165,6 +274,14 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
+      uploadDate: null == uploadDate
+          ? _value.uploadDate
+          : uploadDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -174,11 +291,20 @@ class __$$ProductModelImplCopyWithImpl<$Res>
 class _$ProductModelImpl extends _ProductModel {
   const _$ProductModelImpl(
       {required this.name,
+      required this.usefulId,
+      required this.videoUrl,
       required this.description,
+      required this.type,
+      required this.sku,
       required this.price,
+      required this.active,
+      required this.isPercentage,
+      required this.points,
       required this.suggestedPrice,
       required this.thumbnail,
-      required this.createdAt})
+      required this.createdAt,
+      required this.uploadDate,
+      required this.updatedAt})
       : super._();
 
   factory _$ProductModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -187,19 +313,37 @@ class _$ProductModelImpl extends _ProductModel {
   @override
   final String name;
   @override
+  final String usefulId;
+  @override
+  final String videoUrl;
+  @override
   final String description;
   @override
+  final String type;
+  @override
+  final String sku;
+  @override
   final double price;
+  @override
+  final bool active;
+  @override
+  final bool isPercentage;
+  @override
+  final int points;
   @override
   final double suggestedPrice;
   @override
   final String thumbnail;
   @override
   final String createdAt;
+  @override
+  final String uploadDate;
+  @override
+  final String updatedAt;
 
   @override
   String toString() {
-    return 'ProductModel(name: $name, description: $description, price: $price, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt)';
+    return 'ProductModel(name: $name, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, updatedAt: $updatedAt)';
   }
 
   @override
@@ -208,21 +352,50 @@ class _$ProductModelImpl extends _ProductModel {
         (other.runtimeType == runtimeType &&
             other is _$ProductModelImpl &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.usefulId, usefulId) ||
+                other.usefulId == usefulId) &&
+            (identical(other.videoUrl, videoUrl) ||
+                other.videoUrl == videoUrl) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.sku, sku) || other.sku == sku) &&
             (identical(other.price, price) || other.price == price) &&
+            (identical(other.active, active) || other.active == active) &&
+            (identical(other.isPercentage, isPercentage) ||
+                other.isPercentage == isPercentage) &&
+            (identical(other.points, points) || other.points == points) &&
             (identical(other.suggestedPrice, suggestedPrice) ||
                 other.suggestedPrice == suggestedPrice) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.createdAt == createdAt) &&
+            (identical(other.uploadDate, uploadDate) ||
+                other.uploadDate == uploadDate) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, description, price,
-      suggestedPrice, thumbnail, createdAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      usefulId,
+      videoUrl,
+      description,
+      type,
+      sku,
+      price,
+      active,
+      isPercentage,
+      points,
+      suggestedPrice,
+      thumbnail,
+      createdAt,
+      uploadDate,
+      updatedAt);
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.
@@ -243,11 +416,20 @@ class _$ProductModelImpl extends _ProductModel {
 abstract class _ProductModel extends ProductModel {
   const factory _ProductModel(
       {required final String name,
+      required final String usefulId,
+      required final String videoUrl,
       required final String description,
+      required final String type,
+      required final String sku,
       required final double price,
+      required final bool active,
+      required final bool isPercentage,
+      required final int points,
       required final double suggestedPrice,
       required final String thumbnail,
-      required final String createdAt}) = _$ProductModelImpl;
+      required final String createdAt,
+      required final String uploadDate,
+      required final String updatedAt}) = _$ProductModelImpl;
   const _ProductModel._() : super._();
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
@@ -256,15 +438,33 @@ abstract class _ProductModel extends ProductModel {
   @override
   String get name;
   @override
+  String get usefulId;
+  @override
+  String get videoUrl;
+  @override
   String get description;
   @override
+  String get type;
+  @override
+  String get sku;
+  @override
   double get price;
+  @override
+  bool get active;
+  @override
+  bool get isPercentage;
+  @override
+  int get points;
   @override
   double get suggestedPrice;
   @override
   String get thumbnail;
   @override
   String get createdAt;
+  @override
+  String get uploadDate;
+  @override
+  String get updatedAt;
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.
