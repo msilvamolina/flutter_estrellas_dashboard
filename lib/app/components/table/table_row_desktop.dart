@@ -1,5 +1,7 @@
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:estrellas_dashboard/app/utils/responsive.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'models/table_row_model.dart';
@@ -12,6 +14,8 @@ class TableRowDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isTablet = Responsive.isTablet(context);
+    Color primary = Theme.of(context).colorScheme.primary;
+
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -24,7 +28,10 @@ class TableRowDesktop extends StatelessWidget {
           Container(
             width: !isTablet ? 160 : 120,
             padding: const EdgeInsets.all(16),
-            child: Text(row.label),
+            child: Text(
+              row.label,
+              style: TypographyStyle.bodyBlackMedium.copyWith(color: primary),
+            ),
           ),
           Expanded(
             child: Container(

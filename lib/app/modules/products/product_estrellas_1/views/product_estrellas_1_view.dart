@@ -15,6 +15,7 @@ import '../../../../components/table/table_row_inside_column.dart';
 import '../../../../components/table/table_row_text.dart';
 import '../../../../components/table/text_row_video.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../utils/money_amount.dart';
 import '../controllers/product_estrellas_1_controller.dart';
 
 class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
@@ -46,6 +47,41 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
           TableRowModel(
             label: 'name',
             widget: TableRowText(text: controller.product.name),
+          ),
+          TableRowModel(
+            label: 'active',
+            widget: TableRowText(text: controller.product.active.toString()),
+          ),
+          TableRowModel(
+            label: 'points',
+            widget: TableRowText(text: controller.product.points.toString()),
+          ),
+          TableRowModel(
+            label: 'price',
+            widget: TableRowText(
+                text: MoneyAmount.convertMoneyString(controller.product.price)),
+          ),
+          TableRowModel(
+            label: 'suggestedPrice',
+            widget: TableRowText(
+                text: MoneyAmount.convertMoneyString(
+                    controller.product.suggestedPrice)),
+          ),
+          TableRowModel(
+            label: 'category',
+            widget: TableRowInsideColumn(
+              cellWidth: 70,
+              rows: [
+                TableRowStringsModel(
+                  label: 'id',
+                  text: controller.product.category.id,
+                ),
+                TableRowStringsModel(
+                  label: 'name',
+                  text: controller.product.category.name,
+                ),
+              ],
+            ),
           ),
           TableRowModel(
             label: 'provider',

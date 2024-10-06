@@ -1,5 +1,6 @@
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'models/table_row_model.dart';
@@ -12,6 +13,8 @@ class TableRowMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primary = Theme.of(context).colorScheme.primary;
+
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -22,9 +25,12 @@ class TableRowMobile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            row.label,
-            style: TypographyStyle.bodyBlackSmall,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 2),
+            child: Text(
+              row.label,
+              style: TypographyStyle.bodyBlackSmall.copyWith(color: primary),
+            ),
           ),
           row.widget,
         ],
