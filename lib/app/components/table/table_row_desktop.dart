@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/utils/responsive.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -10,6 +11,7 @@ class TableRowDesktop extends StatelessWidget {
   final TableRowModel row;
   @override
   Widget build(BuildContext context) {
+    bool isTablet = Responsive.isTablet(context);
     return Row(
       children: [
         Container(
@@ -19,7 +21,7 @@ class TableRowDesktop extends StatelessWidget {
               bottom: BorderSide(color: border, width: 1),
             ),
           ),
-          width: 160,
+          width: !isTablet ? 160 : 120,
           padding: const EdgeInsets.all(16),
           child: Text(row.label),
         ),

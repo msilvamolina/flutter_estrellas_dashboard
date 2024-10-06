@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,6 +12,23 @@ class TableRowMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: border, width: 1),
+        ),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            row.label,
+            style: TypographyStyle.bodyBlackSmall,
+          ),
+          row.widget,
+        ],
+      ),
+    );
   }
 }

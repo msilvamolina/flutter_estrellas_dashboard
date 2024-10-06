@@ -15,7 +15,7 @@ class TableWidgetRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WidgetOrWidget(
-      breakingPoint: Responsive.isTablet2(context),
+      breakingPoint: Responsive.isMobile(context),
       secondChild: TableRowDesktop(
         border: border,
         row: row,
