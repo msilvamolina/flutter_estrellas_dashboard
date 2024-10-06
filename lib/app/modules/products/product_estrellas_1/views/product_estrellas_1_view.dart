@@ -13,49 +13,84 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
 
   @override
   Widget build(BuildContext context) {
+    Color border = Theme.of(context).colorScheme.primary;
+
     return MainLayout(
-        maxWidth: double.infinity,
-        currentRoute: Routes.PRODUCT_ESTRELLAS_1,
-        appBarWidget: Row(
-          crossAxisAlignment: !Responsive.isTablet2(context)
-              ? CrossAxisAlignment.start
-              : CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (Responsive.isTablet2(context)) ...[
-              IconButton(
-                onPressed: Get.back,
-                icon: const Icon(
-                  Icons.chevron_left,
-                  size: 34,
-                ),
-              ),
-              const Spacer(),
-            ],
-            Center(
-              child: Padding(
-                padding: EdgeInsets.only(
-                    bottom: !Responsive.isTablet2(context) ? 8 : 0),
-                child: Text(
-                  controller.product.name,
-                  style: TypographyStyle.h3Mobile,
-                ),
+      maxWidth: double.infinity,
+      currentRoute: Routes.PRODUCT_ESTRELLAS_1,
+      appBarWidget: Row(
+        crossAxisAlignment: !Responsive.isTablet2(context)
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (Responsive.isTablet2(context)) ...[
+            IconButton(
+              onPressed: Get.back,
+              icon: const Icon(
+                Icons.chevron_left,
+                size: 34,
               ),
             ),
-            if (Responsive.isTablet2(context)) ...[
-              const Spacer(),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.more_vert_rounded,
-                  size: 34,
-                ),
+            const Spacer(),
+          ],
+          Center(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: !Responsive.isTablet2(context) ? 8 : 0),
+              child: Text(
+                controller.product.name,
+                style: TypographyStyle.h3Mobile,
               ),
-            ],
+            ),
+          ),
+          if (Responsive.isTablet2(context)) ...[
+            const Spacer(),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.more_vert_rounded,
+                size: 34,
+              ),
+            ),
+          ],
+        ],
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: border, width: 1),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      right: BorderSide(color: border, width: 1),
+                      bottom: BorderSide(color: border, width: 1),
+                    ),
+                  ),
+                  width: 160,
+                  padding: EdgeInsets.all(16),
+                  child: Text('ID'),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: border, width: 1),
+                      ),
+                    ),
+                    padding: EdgeInsets.all(16),
+                    child: Text(controller.product.id),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
-        child: Center(
-          child: Text(controller.product.name),
-        ));
+      ),
+    );
   }
 }
