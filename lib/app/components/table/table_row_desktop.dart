@@ -12,31 +12,33 @@ class TableRowDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isTablet = Responsive.isTablet(context);
-    return Row(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            border: Border(
-              right: BorderSide(color: border, width: 1),
-              bottom: BorderSide(color: border, width: 1),
-            ),
-          ),
-          width: !isTablet ? 160 : 120,
-          padding: const EdgeInsets.all(16),
-          child: Text(row.label),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: border, width: 1),
         ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: border, width: 1),
-              ),
-            ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: !isTablet ? 160 : 120,
             padding: const EdgeInsets.all(16),
-            child: row.widget,
+            child: Text(row.label),
           ),
-        ),
-      ],
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  left: BorderSide(color: border, width: 1),
+                ),
+              ),
+              padding: const EdgeInsets.all(16),
+              child: row.widget,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
