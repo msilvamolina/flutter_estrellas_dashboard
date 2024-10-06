@@ -59,6 +59,7 @@ class DrawerContent extends StatelessWidget {
         menuOption(
           title: 'Productos',
           route: Routes.PRODUCTS,
+          backRoute: Routes.PRODUCT_ESTRELLAS_1,
         ),
         menuOptionExpansion(
           title: 'Test Endpoints',
@@ -98,9 +99,22 @@ class DrawerContent extends StatelessWidget {
         children: children,
       );
 
-  Widget menuOption({required String title, required String route}) => ListTile(
+  void getBack() {
+    if (isMobile) {
+      Get.back();
+      Get.back();
+    } else {
+      Get.back();
+    }
+  }
+
+  Widget menuOption(
+          {required String title, required String route, String? backRoute}) =>
+      ListTile(
         title: Text(title),
-        onTap: currentRoute != route ? () => Get.offNamed(route) : null,
+        onTap: currentRoute != route
+            ? () => backRoute == currentRoute ? getBack() : Get.offNamed(route)
+            : null,
         selected: currentRoute == route,
       );
 
