@@ -57,6 +57,11 @@ class DrawerContent extends StatelessWidget {
           route: Routes.HOME,
         ),
         menuOption(
+          title: 'Videos',
+          route: Routes.VIDEOS_LIST,
+          backRoute: Routes.CREATE_VIDEO,
+        ),
+        menuOption(
           title: 'Productos',
           route: Routes.PRODUCTS,
           backRoute: Routes.PRODUCT_ESTRELLAS_1,

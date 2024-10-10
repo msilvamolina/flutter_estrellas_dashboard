@@ -16,6 +16,8 @@ abstract class Routes {
   static const TEST_GET_PRODUCTS = _Paths.TEST_GET_PRODUCTS;
   static const TEST_LOGIN_APP_DROPI = _Paths.TEST_LOGIN_APP_DROPI;
   static const PRODUCT_ESTRELLAS_1 = _Paths.PRODUCT_ESTRELLAS_1;
+  static const VIDEOS_LIST = _Paths.VIDEOS_LIST;
+  static const CREATE_VIDEO = _Paths.CREATE_VIDEO;
 }
 
 abstract class _Paths {
@@ -33,4 +35,6 @@ abstract class _Paths {
   static const TEST_GET_PRODUCTS = '/test-get-products';
   static const TEST_LOGIN_APP_DROPI = '/test-login-app-dropi';
   static const PRODUCT_ESTRELLAS_1 = '/product-estrellas-1';
+  static const VIDEOS_LIST = '/videos-list';
+  static const CREATE_VIDEO = '/create-video';
 }
