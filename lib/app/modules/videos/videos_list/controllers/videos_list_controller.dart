@@ -1,23 +1,16 @@
+import 'package:estrellas_dashboard/app/data/models/videos/video_post_model.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/videos/videos_repository.dart';
 import 'package:get/get.dart';
 
 class VideosListController extends GetxController {
-  //TODO: Implement VideosListController
+  final VideosRepository _repository = VideosRepository();
 
-  final count = 0.obs;
+  final RxList<VideoPostModel> _list = <VideoPostModel>[].obs;
+  List<VideoPostModel> get list => _list.toList();
+
   @override
   void onInit() {
+    _list.bindStream(_repository.getVideos());
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

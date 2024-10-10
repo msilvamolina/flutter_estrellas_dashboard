@@ -1,4 +1,5 @@
 import 'package:estrellas_dashboard/app/components/widgets/custom_floating_action_button.dart';
+import 'package:estrellas_dashboard/app/data/models/videos/video_post_model.dart';
 import 'package:estrellas_dashboard/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +19,20 @@ class VideosListView extends GetView<VideosListController> {
         onPressed: () => Get.toNamed(Routes.CREATE_VIDEO),
       ),
       currentRoute: Routes.VIDEOS_LIST,
-      child: Center(
-        child: Text('VIDEOS_LIST'),
+      child: Obx(
+        () => controller.list.isNotEmpty
+            ? ListView.separated(
+                itemCount: controller.list.length,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                itemBuilder: (context, index) {
+                  VideoPostModel element = controller.list[index];
+                  return Text(element.toString());
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+              )
+            : const Text('no data'),
       ),
     );
   }

@@ -12,12 +12,9 @@ class VideosRepository {
 
   Stream<List<VideoPostModel>> getVideos() async* {
     try {
-      String uid = _firebaseAuth.currentUser!.uid;
-
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
           .collection('videos')
-          .doc(uid)
-          .collection('expenses')
+          .orderBy('name', descending: true)
           .snapshots();
 
       yield* snapshots.map((snapshot) {
