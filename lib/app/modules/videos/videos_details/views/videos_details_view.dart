@@ -11,6 +11,7 @@ class VideosDetailsView extends GetView<VideosDetailsController> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+      showMenu: false,
       currentRoute: Routes.VIDEOS_DETAILS,
       appBarTitle: 'Video Details',
       child: GetBuilder<VideosDetailsController>(

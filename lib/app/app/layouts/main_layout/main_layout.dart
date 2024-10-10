@@ -18,6 +18,7 @@ class MainLayout extends StatelessWidget {
     this.mainCurrentRoute,
     this.maxWidth,
     this.bottomNavigationBar,
+    this.showMenu = true,
     super.key,
   });
   final Widget child;
@@ -28,6 +29,7 @@ class MainLayout extends StatelessWidget {
   final String currentRoute;
   final String? mainCurrentRoute;
   final double? maxWidth;
+  final bool showMenu;
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -36,13 +38,15 @@ class MainLayout extends StatelessWidget {
       bottomNavigationBar: bottomNavigationBar,
       floatingActionButton: floatingActionButton,
       drawer: Responsive.isTablet2(context)
-          ? Drawer(
-              child: DrawerContent(
-                isMobile: true,
-                currentRoute: currentRoute,
-                mainCurrentRoute: mainCurrentRoute,
-              ),
-            )
+          ? showMenu
+              ? Drawer(
+                  child: DrawerContent(
+                    isMobile: true,
+                    currentRoute: currentRoute,
+                    mainCurrentRoute: mainCurrentRoute,
+                  ),
+                )
+              : null
           : null,
       appBar: !Responsive.isTablet2(context)
           ? AppBar(

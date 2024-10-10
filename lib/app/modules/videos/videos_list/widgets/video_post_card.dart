@@ -9,6 +9,7 @@ class VideoPostCard extends StatelessWidget {
     required this.videoPostModel,
     super.key,
   });
+  
 
   final VideoPostModel videoPostModel;
 
