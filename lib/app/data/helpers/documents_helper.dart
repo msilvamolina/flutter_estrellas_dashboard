@@ -7,8 +7,8 @@ class DocumentHelpers {
           DocumentReference docRef) async =>
       await docRef.get().then((DocumentSnapshot doc) => doc);
 
-  static Future<UserData> getUserFromReference(dynamic ref) async {
-    DocumentSnapshot doc = await getDocumentFromReference(ref);
-    return UserData.fromDocument(doc);
-  }
+  // static Future<UserData> getUserFromReference(dynamic ref) async {
+  //   DocumentSnapshot doc = await getDocumentFromReference(ref);
+  //   return UserData.fromDocument(doc);
+  // }
 }

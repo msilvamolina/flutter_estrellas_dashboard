@@ -18,10 +18,8 @@ class CreateVideoView extends GetView<CreateVideoController> {
         form: controller.buildForm,
         builder: (context, form, child) {
           return MainLayout(
-            maxWidth: 900,
-            mainCurrentRoute: Routes.TEST_ENDPOINTS,
-            currentRoute: Routes.TEST_LOGIN_APP_DROPI,
-            appBarTitle: 'Test Login App Dropi',
+            currentRoute: Routes.CREATE_VIDEO,
+            appBarTitle: 'Crear video',
             child: GetBuilder<CreateVideoController>(
               id: 'view',
               builder: (_) {
@@ -32,13 +30,13 @@ class CreateVideoView extends GetView<CreateVideoController> {
                       formControlName: Fields.videoName.name,
                       keyboardType: TextInputType.text,
                       decoration: CustomInputDecoration.inputDecoration(
-                        text: "User",
+                        text: "Video",
                       ),
                     ),
                     const SizedBox(height: 16),
                     ReactiveFormConsumer(
                       builder: (context, form, child) => LoadingButton(
-                        label: 'Check',
+                        label: 'Guardar',
                         isLoading: controller.loading,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)

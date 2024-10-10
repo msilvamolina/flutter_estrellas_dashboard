@@ -36,5 +36,5 @@ abstract class ProductModel implements _$ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
 
-  Map<String, dynamic> toDocument() => ModelHelpers().toDocument(toJson());
+  Map<String, dynamic> toDocument() => ModelHelpers.toDocument(toJson());
 }
