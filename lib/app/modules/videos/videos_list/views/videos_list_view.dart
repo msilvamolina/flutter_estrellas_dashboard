@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../controllers/videos_list_controller.dart';
+import '../widgets/video_post_card.dart';
 
 class VideosListView extends GetView<VideosListController> {
   const VideosListView({super.key});
@@ -23,11 +24,10 @@ class VideosListView extends GetView<VideosListController> {
         () => controller.list.isNotEmpty
             ? ListView.separated(
                 itemCount: controller.list.length,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 itemBuilder: (context, index) {
-                  VideoPostModel element = controller.list[index];
-                  return Text(element.toString());
+                  return VideoPostCard(
+                    videoPostModel: controller.list[index],
+                  );
                 },
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),

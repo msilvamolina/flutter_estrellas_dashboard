@@ -18,6 +18,7 @@ abstract class Routes {
   static const PRODUCT_ESTRELLAS_1 = _Paths.PRODUCT_ESTRELLAS_1;
   static const VIDEOS_LIST = _Paths.VIDEOS_LIST;
   static const CREATE_VIDEO = _Paths.CREATE_VIDEO;
+  static const VIDEOS_DETAILS = _Paths.VIDEOS_DETAILS;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const PRODUCT_ESTRELLAS_1 = '/product-estrellas-1';
   static const VIDEOS_LIST = '/videos-list';
   static const CREATE_VIDEO = '/create-video';
+  static const VIDEOS_DETAILS = '/videos-details';
 }

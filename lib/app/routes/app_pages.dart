@@ -6,8 +6,6 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/videos/create_video/bindings/create_video_binding.dart';
-import '../modules/videos/create_video/views/create_video_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
@@ -18,8 +16,12 @@ import '../modules/test_endpoints/test_get_products/bindings/test_get_products_b
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
 import '../modules/test_endpoints/test_login_app_dropi/views/test_login_app_dropi_view.dart';
+import '../modules/videos/create_video/bindings/create_video_binding.dart';
+import '../modules/videos/create_video/views/create_video_view.dart';
 import '../modules/videos/videos_list/bindings/videos_list_binding.dart';
 import '../modules/videos/videos_list/views/videos_list_view.dart';
+import '../modules/videos/videos_details/bindings/videos_details_binding.dart';
+import '../modules/videos/videos_details/views/videos_details_view.dart';
 
 part 'app_routes.dart';
 
@@ -83,6 +85,11 @@ class AppPages {
       page: () => CreateVideoView(),
       binding: CreateVideoBinding(),
       transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.VIDEOS_DETAILS,
+      page: () => const VideosDetailsView(),
+      binding: VideosDetailsBinding(),
     ),
   ];
 }

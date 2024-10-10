@@ -11,9 +11,10 @@ import '../../../../utils/responsive.dart';
 import '../controllers/create_video_controller.dart';
 
 class CreateVideoView extends GetView<CreateVideoController> {
+  const CreateVideoView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    bool breakingPoint = !Responsive.isMobile(context);
     return ReactiveFormBuilder(
         form: controller.buildForm,
         builder: (context, form, child) {
