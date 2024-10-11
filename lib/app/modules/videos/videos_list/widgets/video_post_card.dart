@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estrellas_dashboard/app/data/models/videos/video_post_model.dart';
 import 'package:estrellas_dashboard/app/routes/app_pages.dart';
-import 'package:flutter/foundation.dart';
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +10,6 @@ class VideoPostCard extends StatelessWidget {
     required this.videoPostModel,
     super.key,
   });
-  
 
   final VideoPostModel videoPostModel;
 
@@ -23,8 +23,30 @@ class VideoPostCard extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: Text(
-            videoPostModel.toString(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                videoPostModel.name,
+                style: TypographyStyle.h4Mobile,
+              ),
+              const SizedBox(height: 8),
+              RichText(
+                textAlign: TextAlign.start,
+                text: TextSpan(
+                  text: 'Creado por: ',
+                  style: TypographyStyle.bodyBlackLarge,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: videoPostModel.createdByEmail,
+                      style: TypographyStyle.bodyRegularMedium,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              CachedNetworkImage(imageUrl: videoPostModel.thumbnail)
+            ],
           ),
         ),
       ),
