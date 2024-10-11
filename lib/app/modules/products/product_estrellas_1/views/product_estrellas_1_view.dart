@@ -16,6 +16,7 @@ import '../../../../components/table/table_row_date.dart';
 import '../../../../components/table/table_row_inside_column.dart';
 import '../../../../components/table/table_row_text.dart';
 import '../../../../components/table/table_row_video.dart';
+import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/money_amount.dart';
 import '../controllers/product_estrellas_1_controller.dart';
@@ -29,6 +30,11 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
 
     return MainLayout(
       showMenu: false,
+      floatingActionButton: CustomFloatingActionButton(
+        label: 'Copiar a 2.0',
+        icon: Icons.compare_arrows_rounded,
+        onPressed: controller.copyToFirebase,
+      ),
       maxWidth: double.infinity,
       currentRoute: Routes.PRODUCT_ESTRELLAS_1,
       appBarWidget: AppbarTitleWithBack(title: controller.product.name),
