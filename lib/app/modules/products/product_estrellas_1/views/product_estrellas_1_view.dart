@@ -86,6 +86,10 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
             widget: TableRowText(text: controller.product.type),
           ),
           TableRowModel(
+            label: 'sku',
+            widget: TableRowText(text: controller.product.sku),
+          ),
+          TableRowModel(
             label: 'category',
             widget: TableRowInsideColumn(
               cellWidth: 50,

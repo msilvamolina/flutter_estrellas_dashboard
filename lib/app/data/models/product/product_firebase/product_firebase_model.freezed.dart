@@ -20,6 +20,7 @@ ProductFirebaseModel _$ProductFirebaseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductFirebaseModel {
+  String get id => throw _privateConstructorUsedError;
   dynamic get provider => throw _privateConstructorUsedError;
   dynamic get category => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -58,7 +59,8 @@ abstract class $ProductFirebaseModelCopyWith<$Res> {
       _$ProductFirebaseModelCopyWithImpl<$Res, ProductFirebaseModel>;
   @useResult
   $Res call(
-      {dynamic provider,
+      {String id,
+      dynamic provider,
       dynamic category,
       String name,
       String externalId,
@@ -96,6 +98,7 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? provider = freezed,
     Object? category = freezed,
     Object? name = null,
@@ -118,6 +121,10 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       provider: freezed == provider
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
@@ -211,7 +218,8 @@ abstract class _$$ProductFirebaseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic provider,
+      {String id,
+      dynamic provider,
       dynamic category,
       String name,
       String externalId,
@@ -246,6 +254,7 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? provider = freezed,
     Object? category = freezed,
     Object? name = null,
@@ -268,6 +277,10 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$ProductFirebaseModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       provider: freezed == provider
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
@@ -356,7 +369,8 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   const _$ProductFirebaseModelImpl(
-      {required this.provider,
+      {required this.id,
+      required this.provider,
       required this.category,
       required this.name,
       required this.externalId,
@@ -381,6 +395,8 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   factory _$ProductFirebaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductFirebaseModelImplFromJson(json);
 
+  @override
+  final String id;
   @override
   final dynamic provider;
   @override
@@ -424,7 +440,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseModel(provider: $provider, category: $category, name: $name, externalId: $externalId, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
   }
 
   @override
@@ -432,6 +448,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductFirebaseModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other.provider, provider) &&
             const DeepCollectionEquality().equals(other.category, category) &&
             (identical(other.name, name) || other.name == name) &&
@@ -469,6 +486,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        id,
         const DeepCollectionEquality().hash(provider),
         const DeepCollectionEquality().hash(category),
         name,
@@ -511,7 +529,8 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
 abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   const factory _ProductFirebaseModel(
-      {required final dynamic provider,
+      {required final String id,
+      required final dynamic provider,
       required final dynamic category,
       required final String name,
       required final String externalId,
@@ -536,6 +555,8 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   factory _ProductFirebaseModel.fromJson(Map<String, dynamic> json) =
       _$ProductFirebaseModelImpl.fromJson;
 
+  @override
+  String get id;
   @override
   dynamic get provider;
   @override

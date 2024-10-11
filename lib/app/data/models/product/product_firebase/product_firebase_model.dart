@@ -12,6 +12,7 @@ abstract class ProductFirebaseModel implements _$ProductFirebaseModel {
   const ProductFirebaseModel._();
 
   const factory ProductFirebaseModel({
+    required String id,
     required dynamic provider,
     required dynamic category,
     required String name,

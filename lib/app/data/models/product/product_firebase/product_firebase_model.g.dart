@@ -9,6 +9,7 @@ part of 'product_firebase_model.dart';
 _$ProductFirebaseModelImpl _$$ProductFirebaseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductFirebaseModelImpl(
+      id: json['id'] as String,
       provider: json['provider'],
       category: json['category'],
       name: json['name'] as String,
@@ -34,6 +35,7 @@ _$ProductFirebaseModelImpl _$$ProductFirebaseModelImplFromJson(
 Map<String, dynamic> _$$ProductFirebaseModelImplToJson(
         _$ProductFirebaseModelImpl instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'provider': instance.provider,
       'category': instance.category,
       'name': instance.name,
