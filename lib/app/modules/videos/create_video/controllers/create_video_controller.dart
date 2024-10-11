@@ -1,7 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../../../app/controllers/main_controller.dart';
 import '../../../../data/providers/repositories/videos/videos_repository.dart';
 
 enum Fields {
@@ -13,6 +16,7 @@ enum Fields {
 
 class CreateVideoController extends GetxController {
   final VideosRepository _repository = VideosRepository();
+  final MainController _mainController = Get.find<MainController>();
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.videoName.name: FormControl<String>(
@@ -27,23 +31,28 @@ class CreateVideoController extends GetxController {
   bool get loading => _loading;
 
   Future<void> sendForm(Map<String, Object?> data) async {
-    _loading = true;
-
-    update(['view']);
-
     String videoName = data[Fields.videoName.name].toString();
+    String uuid = const Uuid().v4();
+    String videoId = 'video-$uuid';
 
-    Either<String, Unit> response = await _repository.saveVideo(
-      name: videoName,
-    );
+    final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    if (video != null) {
+      _mainController.showLoader();
 
-    response.fold((failure) {
-      Get.snackbar("Error", failure);
-      _loading = false;
-      update(['view']);
-    }, (_) {
+      Either<String, Unit> response = await _repository.uploadVideo(
+        videoId: videoId,
+        name: videoName,
+        videoPath: video.path,
+      );
       Get.back();
-      Get.snackbar(videoName, "Guardada exitosamente");
-    });
+      response.fold((failure) {
+        Get.snackbar("Error", failure);
+        _loading = false;
+        update(['view']);
+      }, (_) {
+        Get.back();
+        Get.snackbar(videoName, "Guardado exitosamente");
+      });
+    }
   }
 }

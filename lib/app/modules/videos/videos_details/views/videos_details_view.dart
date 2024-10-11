@@ -25,11 +25,11 @@ class VideosDetailsView extends GetView<VideosDetailsController> {
                 controller.videoPostModel.toString(),
               ),
               const SizedBox(height: 16),
-              LoadingButton(
-                label: 'Subir video',
-                isLoading: false,
-                onPressed: controller.pickVideo,
-              ),
+              // LoadingButton(
+              //   label: 'Subir video',
+              //   isLoading: false,
+              //   onPressed: controller.pickVideo,
+              // ),
             ],
           );
         },

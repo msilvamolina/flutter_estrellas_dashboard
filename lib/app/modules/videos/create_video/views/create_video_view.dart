@@ -37,7 +37,7 @@ class CreateVideoView extends GetView<CreateVideoController> {
                     const SizedBox(height: 16),
                     ReactiveFormConsumer(
                       builder: (context, form, child) => LoadingButton(
-                        label: 'Guardar',
+                        label: 'Subir video',
                         isLoading: controller.loading,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)

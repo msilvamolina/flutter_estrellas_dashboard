@@ -84,12 +84,22 @@ class VideosRepository {
   }
 
   Future<Either<String, Unit>> uploadVideo(
-      String videoId, String videoPath) async {
+      {required String videoId,
+      required String name,
+      required String videoPath}) async {
     try {
+      String uid = _firebaseAuth.currentUser!.uid;
+      String email = _firebaseAuth.currentUser!.email!;
+
       String videoUrl = await _uploadVideoToStorage(videoId, videoPath);
       String thumbnail = await _uploadImageToStorage(videoId, videoPath);
 
-      await _firebaseFirestore.collection('videos').doc(videoId).update({
+      await _firebaseFirestore.collection('videos').doc(videoId).set({
+        'name': name,
+        'id': videoId,
+        'createdById': uid,
+        'createdByEmail': email,
+        'createdAt': DateTime.now(),
         'videoUrl': videoUrl,
         'thumbnail': thumbnail,
       });

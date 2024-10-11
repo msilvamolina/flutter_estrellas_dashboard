@@ -14,13 +14,4 @@ class VideosDetailsController extends GetxController {
     videoPostModel = Get.arguments as VideoPostModel;
     super.onInit();
   }
-
-  Future<void> pickVideo() async {
-    final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
-    if (video != null) {
-      _mainController.showLoader();
-      await _repository.uploadVideo(videoPostModel.id, video.path);
-      Get.back();
-    }
-  }
 }
