@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
+import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/videos_details_controller.dart';
 
@@ -22,7 +23,13 @@ class VideosDetailsView extends GetView<VideosDetailsController> {
             children: [
               Text(
                 controller.videoPostModel.toString(),
-              )
+              ),
+              const SizedBox(height: 16),
+              LoadingButton(
+                label: 'Subir video',
+                isLoading: false,
+                onPressed: controller.pickVideo,
+              ),
             ],
           );
         },
