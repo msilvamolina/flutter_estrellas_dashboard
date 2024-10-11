@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:estrellas_dashboard/app/data/providers/repositories/auth/products_repository.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
 import 'package:get/get.dart';
 
 import '../../../../app/controllers/main_controller.dart';
@@ -9,7 +9,7 @@ import '../../../../data/providers/repositories/products/products_repository.dar
 class ProductEstrellas1Controller extends GetxController {
   late ProductModel product;
   final MainController _mainController = Get.find<MainController>();
-  final ProductsFirebaseRepository _repository = ProductsFirebaseRepository();
+  final ProductsRepository _repository = ProductsRepository();
   @override
   void onInit() {
     product = Get.arguments as ProductModel;

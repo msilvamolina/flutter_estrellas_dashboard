@@ -1,0 +1,67 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../helpers/friendly_helpers.dart';
+import '../../../helpers/model_helpers.dart';
+
+part 'product_firebase_model.freezed.dart';
+part 'product_firebase_model.g.dart';
+
+@freezed
+abstract class ProductFirebaseModel implements _$ProductFirebaseModel {
+  const ProductFirebaseModel._();
+
+  const factory ProductFirebaseModel({
+    required dynamic provider,
+    required dynamic category,
+    required String name,
+    required String externalId,
+    required String usefulId,
+    required String videoUrl,
+    required String description,
+    required String type,
+    required String sku,
+    required double price,
+    required bool active,
+    required bool isPercentage,
+    required int points,
+    required double suggestedPrice,
+    required String thumbnail,
+    required String createdAt,
+    String? uploadDate,
+    String? searchField,
+    dynamic reference,
+    String? updatedAt,
+  }) = _ProductFirebaseModel;
+
+  factory ProductFirebaseModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductFirebaseModelFromJson(json);
+
+  factory ProductFirebaseModel.fromDocument(DocumentSnapshot doc) {
+    ProductFirebaseModel data =
+        ProductFirebaseModel.fromJson(ModelHelpers.fromDocument(doc.data()!));
+    String searchField = data.name;
+
+    return data.copyWith(
+      reference: doc.reference,
+      searchField: FriendlyHelpers.friendlySearchField(searchField),
+    );
+  }
+
+  Map<String, dynamic> toDocument() => ModelHelpers.toDocument(toJson());
+
+  static Future<ProductFirebaseModel?> fromReference(dynamic reference) async {
+    try {
+      DocumentSnapshot<Object?>? data =
+          await ModelHelpers.fromReference(reference as DocumentReference);
+
+      if (data != null) {
+        return ProductFirebaseModel.fromDocument(data);
+      }
+
+      return null;
+    } catch (_) {
+      return null;
+    }
+  }
+}
