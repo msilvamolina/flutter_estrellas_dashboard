@@ -28,6 +28,7 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
     Color border = Theme.of(context).colorScheme.primary.withOpacity(0.2);
 
     return MainLayout(
+      showMenu: false,
       maxWidth: double.infinity,
       currentRoute: Routes.PRODUCT_ESTRELLAS_1,
       appBarWidget: AppbarTitleWithBack(title: controller.product.name),
