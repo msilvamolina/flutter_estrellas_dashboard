@@ -97,19 +97,52 @@ class ProductsRepository {
     }
   }
 
-  Future<Either<String, Unit>> uploadImage({
+  Future<Either<String, Unit>> saveImage({
+    required String name,
     required String id,
     required String productId,
     required String path,
   }) async {
-    Reference ref =
-        _firebaseStorage.ref().child('products/$productId/images/').child(id);
+    try {
+      String? imageUrl =
+          await uploadImage(id: id, productId: productId, path: path);
 
-    UploadTask uploadTask = ref.putFile(File(path));
-    TaskSnapshot snap = await uploadTask;
-    String downloadUrl = await snap.ref.getDownloadURL();
+      if (imageUrl != null) {
+        await _firebaseFirestore
+            .collection('products')
+            .doc(productId)
+            .collection('images')
+            .doc(id)
+            .set({
+          'id': id,
+          'name': name,
+          'imageUrl': imageUrl,
+          'createdAt': DateTime.now(),
+        });
+        return right(unit);
+      }
+      return left('image null');
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 
-    print('downloadUrl $downloadUrl');
-    return right(unit);
+  Future<String?> uploadImage({
+    required String id,
+    required String productId,
+    required String path,
+  }) async {
+    try {
+      Reference ref =
+          _firebaseStorage.ref().child('products/$productId/').child(id);
+
+      UploadTask uploadTask = ref.putFile(File(path));
+      TaskSnapshot snap = await uploadTask;
+      String downloadUrl = await snap.ref.getDownloadURL();
+
+      return downloadUrl;
+    } on FirebaseException catch (e) {
+      return null;
+    }
   }
 }

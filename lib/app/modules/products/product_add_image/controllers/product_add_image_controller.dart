@@ -73,7 +73,7 @@ class ProductAddImageController extends GetxController {
   }
 
   Future<void> sendForm(Map<String, Object?> data) async {
-    String videoName = data[Fields.imageName.name].toString();
+    String name = data[Fields.imageName.name].toString();
     String uuid = const Uuid().v4();
     String imageId = 'image-$uuid';
 
@@ -83,8 +83,9 @@ class ProductAddImageController extends GetxController {
       if (croppedFile != null) {
         _mainController.showLoader();
 
-        Either<String, Unit> response = await _repository.uploadImage(
+        Either<String, Unit> response = await _repository.saveImage(
           id: imageId,
+          name: name,
           productId: product.id,
           path: croppedFile.path,
         );
@@ -95,7 +96,7 @@ class ProductAddImageController extends GetxController {
           update(['view']);
         }, (_) {
           Get.back();
-          Get.snackbar(videoName, "Guardado exitosamente");
+          Get.snackbar(name, "Guardada exitosamente");
         });
       }
     }
