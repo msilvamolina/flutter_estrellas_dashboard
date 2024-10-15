@@ -25,14 +25,25 @@ class ProductImagesView extends GetView<ProductImagesController> {
       currentRoute: Routes.PRODUCT_ADD_IMAGE,
       appBarTitle: 'Añadir imagen',
       appBarWidget: AppbarTitleWithBack(title: controller.product.name),
-      child: GetBuilder<ProductImagesController>(
-        id: 'view',
-        builder: (_) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [],
-          );
-        },
+      child: Obx(
+        () => controller.list.isNotEmpty
+            ? ListView.separated(
+                itemCount: controller.list.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        top: index == 0 ? 8 : 0,
+                        bottom: index == (controller.list.length - 1) ? 48 : 0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(controller.list[index].toString()),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+              )
+            : const Text('no data'),
       ),
     );
   }
