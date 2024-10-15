@@ -12,6 +12,7 @@ import '../../../../components/table/table_row_inside_column.dart';
 import '../../../../components/table/table_row_text.dart';
 import '../../../../components/table/table_row_video.dart';
 import '../../../../components/table/table_widget.dart';
+import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/money_amount.dart';
 import '../controllers/product_estrellas_2_controller.dart';
@@ -27,6 +28,14 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
       showMenu: false,
       maxWidth: double.infinity,
       currentRoute: Routes.PRODUCT_ESTRELLAS_2,
+      floatingActionButton: CustomFloatingActionButton(
+        label: 'Images',
+        icon: Icons.image_rounded,
+        onPressed: () => Get.toNamed(
+          Routes.PRODUCT_IMAGES,
+          arguments: controller.product,
+        ),
+      ),
       appBarWidget: AppbarTitleWithBack(title: controller.product.name),
       child: TableWidget(
         border: border,

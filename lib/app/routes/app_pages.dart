@@ -8,10 +8,12 @@ import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/products/product_estrellas_2/bindings/product_estrellas_2_binding.dart';
-import '../modules/products/product_estrellas_2/views/product_estrellas_2_view.dart';
+import '../modules/products/product_images/bindings/product_images_binding.dart';
+import '../modules/products/product_images/views/product_images_view.dart';
 import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
 import '../modules/products/product_estrellas_1/views/product_estrellas_1_view.dart';
+import '../modules/products/product_estrellas_2/bindings/product_estrellas_2_binding.dart';
+import '../modules/products/product_estrellas_2/views/product_estrellas_2_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
 import '../modules/products/products/views/products_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
@@ -97,6 +99,11 @@ class AppPages {
       name: _Paths.PRODUCT_ESTRELLAS_2,
       page: () => const ProductEstrellas2View(),
       binding: ProductEstrellas2Binding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_IMAGES,
+      page: () => const ProductImagesView(),
+      binding: ProductImagesBinding(),
     ),
   ];
 }
