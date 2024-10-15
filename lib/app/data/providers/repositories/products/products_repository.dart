@@ -12,6 +12,7 @@ import 'package:http/http.dart';
 
 import '../../../../services/api_services.dart';
 import '../../../models/product/product_firebase/product_firebase_model.dart';
+import '../../../models/product_variant/product_variant_model.dart';
 
 class ProductsRepository {
   ApiServices services = ApiServices();
@@ -70,6 +71,23 @@ class ProductsRepository {
       yield* snapshots.map((snapshot) {
         return snapshot.docs
             .map((doc) => ProductImageModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Stream<List<ProductVariantModel>> getProductVariants(
+      {required String productId}) async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('products/$productId/variants')
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => ProductVariantModel.fromDocument(doc))
             .toList();
       });
     } catch (e) {
@@ -161,6 +179,28 @@ class ProductsRepository {
       return downloadUrl;
     } on FirebaseException catch (e) {
       return null;
+    }
+  }
+
+  Future<Either<String, Unit>> saveVariant({
+    required String name,
+    required String id,
+    required String productId,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants')
+          .doc(id)
+          .set({
+        'id': id,
+        'name': name,
+        'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
     }
   }
 }
