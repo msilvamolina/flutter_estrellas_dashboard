@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
+import '../../../../components/appbars/appbar_title_with_back.dart';
 import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/input_decoration.dart';
@@ -21,6 +22,7 @@ class ProductAddImageView extends GetView<ProductAddImageController> {
             showMenu: false,
             currentRoute: Routes.PRODUCT_ADD_IMAGE,
             appBarTitle: 'Añadir imagen',
+            appBarWidget: AppbarTitleWithBack(title: controller.product.name),
             child: GetBuilder<ProductAddImageController>(
               id: 'view',
               builder: (_) {
