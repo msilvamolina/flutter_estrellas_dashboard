@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/instance_manager.dart';
 import 'package:http/http.dart';
 
@@ -12,6 +15,8 @@ import '../../../models/product/product_firebase/product_firebase_model.dart';
 class ProductsRepository {
   ApiServices services = ApiServices();
   final FirebaseFirestore _firebaseFirestore = Get.find<FirebaseFirestore>();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseStorage _firebaseStorage = Get.find<FirebaseStorage>();
 
   Future<Either<String, List<ProductModel>>> getProductsFromBackend() async {
     String url = 'api/products/allProducts/?term=Protector';
@@ -90,5 +95,21 @@ class ProductsRepository {
     } on FirebaseException catch (e) {
       return left(e.code);
     }
+  }
+
+  Future<Either<String, Unit>> uploadImage({
+    required String id,
+    required String productId,
+    required String path,
+  }) async {
+    Reference ref =
+        _firebaseStorage.ref().child('products/$productId/images/').child(id);
+
+    UploadTask uploadTask = ref.putFile(File(path));
+    TaskSnapshot snap = await uploadTask;
+    String downloadUrl = await snap.ref.getDownloadURL();
+
+    print('downloadUrl $downloadUrl');
+    return right(unit);
   }
 }

@@ -1,5 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:uuid/uuid.dart';
@@ -15,7 +18,7 @@ enum Fields {
 }
 
 class ProductAddImageController extends GetxController {
-  // final VideosRepository _repository = VideosRepository();
+  final ProductsRepository _repository = ProductsRepository();
   // final ProductsRepository _productsRepository = ProductsRepository();
   final MainController _mainController = Get.find<MainController>();
   late ProductFirebaseModel product;
@@ -39,44 +42,62 @@ class ProductAddImageController extends GetxController {
     super.onInit();
   }
 
+  Future<CroppedFile?> cropImage(String imagePath) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: imagePath,
+      aspectRatio: const CropAspectRatio(ratioX: 800, ratioY: 800),
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+          ],
+        ),
+        IOSUiSettings(
+          rectWidth: 800,
+          rectHeight: 800,
+          title: 'Cropper',
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+          ],
+        ),
+        WebUiSettings(
+          context: Get.context!,
+        ),
+      ],
+    );
+
+    return croppedFile;
+  }
+
   Future<void> sendForm(Map<String, Object?> data) async {
     String videoName = data[Fields.imageName.name].toString();
     String uuid = const Uuid().v4();
-    String videoId = 'image-$uuid';
-
-    // if (_productSelected == null) {
-    //   _productsError = 'Selecciona un producto';
-    //   update(['view']);
-    //   return;
-    // }
-
-    // ProductFirebaseModel? _product = getProduct();
-
-    // if (_product == null) {
-    //   _productsError = 'Selecciona un producto válido';
-    //   update(['view']);
-    //   return;
-    // }
+    String imageId = 'image-$uuid';
 
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
-      // _mainController.showLoader();
+      CroppedFile? croppedFile = await cropImage(image.path);
+      if (croppedFile != null) {
+        _mainController.showLoader();
 
-      // Either<String, Unit> response = await _repository.uploadVideo(
-      //   videoId: videoId,
-      //   name: videoName,
-      //   videoPath: video.path,
-      //   product: _product,
-      // );
-      // Get.back();
-      // response.fold((failure) {
-      //   Get.snackbar("Error", failure);
-      //   _loading = false;
-      //   update(['view']);
-      // }, (_) {
-      //   Get.back();
-      //   Get.snackbar(videoName, "Guardado exitosamente");
-      // });
+        Either<String, Unit> response = await _repository.uploadImage(
+          id: imageId,
+          productId: product.id,
+          path: croppedFile.path,
+        );
+        Get.back();
+        response.fold((failure) {
+          Get.snackbar("Error", failure);
+          _loading = false;
+          update(['view']);
+        }, (_) {
+          Get.back();
+          Get.snackbar(videoName, "Guardado exitosamente");
+        });
+      }
     }
   }
 }
