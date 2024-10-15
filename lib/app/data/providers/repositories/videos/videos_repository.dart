@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_compress/video_compress.dart';
 
+import '../../../models/product/product_firebase/product_firebase_model.dart';
 import '../../../models/videos/video_post_model.dart';
 
 class VideosRepository {
@@ -83,10 +84,12 @@ class VideosRepository {
     return thumbnail;
   }
 
-  Future<Either<String, Unit>> uploadVideo(
-      {required String videoId,
-      required String name,
-      required String videoPath}) async {
+  Future<Either<String, Unit>> uploadVideo({
+    required String videoId,
+    required String name,
+    required String videoPath,
+    required ProductFirebaseModel product,
+  }) async {
     try {
       String uid = _firebaseAuth.currentUser!.uid;
       String email = _firebaseAuth.currentUser!.email!;
@@ -102,6 +105,12 @@ class VideosRepository {
         'createdAt': DateTime.now(),
         'videoUrl': videoUrl,
         'thumbnail': thumbnail,
+        'product': {
+          'name': product.name,
+          'id': product.id,
+          'thumbnail': product.thumbnail,
+          'reference': product.reference,
+        }
       });
 
       return right(unit);

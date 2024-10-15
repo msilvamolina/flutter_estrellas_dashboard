@@ -59,6 +59,9 @@ class CreateVideoController extends GetxController {
     update(['view']);
   }
 
+  ProductFirebaseModel? getProduct() => listProducts.firstWhereOrNull(
+      (ProductFirebaseModel element) => element.id == _productSelected);
+
   Future<void> sendForm(Map<String, Object?> data) async {
     String videoName = data[Fields.videoName.name].toString();
     String uuid = const Uuid().v4();
@@ -66,6 +69,14 @@ class CreateVideoController extends GetxController {
 
     if (_productSelected == null) {
       _productsError = 'Selecciona un producto';
+      update(['view']);
+      return;
+    }
+
+    ProductFirebaseModel? _product = getProduct();
+
+    if (_product == null) {
+      _productsError = 'Selecciona un producto válido';
       update(['view']);
       return;
     }
@@ -78,6 +89,7 @@ class CreateVideoController extends GetxController {
         videoId: videoId,
         name: videoName,
         videoPath: video.path,
+        product: _product,
       );
       Get.back();
       response.fold((failure) {
