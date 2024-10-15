@@ -28,6 +28,9 @@ class CreateVideoController extends GetxController {
   String? _productSelected;
   String? get productSelected => _productSelected;
 
+  String? _productsError;
+  String? get productsError => _productsError;
+
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.videoName.name: FormControl<String>(
           validators: [
@@ -50,7 +53,9 @@ class CreateVideoController extends GetxController {
   void onProductSelected(String? value) {
     _productSelected = value;
 
-    print('value=> $value');
+    if (value != null) {
+      _productsError = null;
+    }
     update(['view']);
   }
 
@@ -58,6 +63,12 @@ class CreateVideoController extends GetxController {
     String videoName = data[Fields.videoName.name].toString();
     String uuid = const Uuid().v4();
     String videoId = 'video-$uuid';
+
+    if (_productSelected == null) {
+      _productsError = 'Selecciona un producto';
+      update(['view']);
+      return;
+    }
 
     final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
     if (video != null) {

@@ -17,8 +17,6 @@ class CreateVideoView extends GetView<CreateVideoController> {
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = Theme.of(context).colorScheme.primary.withOpacity(0.5);
-
     return ReactiveFormBuilder(
         form: controller.buildForm,
         builder: (context, form, child) {
@@ -41,23 +39,18 @@ class CreateVideoView extends GetView<CreateVideoController> {
                     ),
                     const SizedBox(height: 16),
                     Obx(
-                      () => Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: primaryColor, width: 1),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: DropDown(
-                          selectedValue: controller.productSelected,
-                          values: controller.listProducts
-                              .map(
-                                (ProductFirebaseModel value) => OptionDropDown(
-                                  text: value.name,
-                                  value: value.id,
-                                ),
-                              )
-                              .toList(),
-                          onChanged: controller.onProductSelected,
-                        ),
+                      () => DropDown(
+                        error: controller.productsError,
+                        selectedValue: controller.productSelected,
+                        values: controller.listProducts
+                            .map(
+                              (ProductFirebaseModel value) => OptionDropDown(
+                                text: value.name,
+                                value: value.id,
+                              ),
+                            )
+                            .toList(),
+                        onChanged: controller.onProductSelected,
                       ),
                     ),
                     const SizedBox(height: 26),

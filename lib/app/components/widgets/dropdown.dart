@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/material.dart';
 
 class OptionDropDown {
@@ -15,6 +16,7 @@ class DropDown extends StatelessWidget {
     required this.values,
     required this.onChanged,
     this.selectedValue,
+    this.error,
     this.expanded = true,
     super.key,
   });
@@ -23,23 +25,49 @@ class DropDown extends StatelessWidget {
   final List<OptionDropDown> values;
   final Function(String?)? onChanged;
   final bool expanded;
+  final String? error;
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: selectedValue,
-      isExpanded: true,
-      underline: const SizedBox.shrink(),
-      alignment: AlignmentDirectional.bottomEnd,
-      items: values.map<DropdownMenuItem<String>>((OptionDropDown option) {
-        return DropdownMenuItem<String>(
-          value: option.value,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(option.text),
+    Color primaryColor = Theme.of(context).colorScheme.primary.withOpacity(0.5);
+    Color errorColor = Theme.of(context).colorScheme.error;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: error != null ? errorColor : primaryColor, width: 1),
+            borderRadius: BorderRadius.circular(8.0),
           ),
-        );
-      }).toList(),
-      onChanged: onChanged,
+          child: DropdownButton<String>(
+            value: selectedValue,
+            isExpanded: true,
+            underline: const SizedBox.shrink(),
+            alignment: AlignmentDirectional.bottomEnd,
+            items:
+                values.map<DropdownMenuItem<String>>((OptionDropDown option) {
+              return DropdownMenuItem<String>(
+                value: option.value,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(option.text),
+                ),
+              );
+            }).toList(),
+            onChanged: onChanged,
+          ),
+        ),
+        if (error != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Text(
+              error!,
+              style:
+                  TypographyStyle.bodyRegularSmall.copyWith(color: errorColor),
+            ),
+          )
+      ],
     );
   }
 }
