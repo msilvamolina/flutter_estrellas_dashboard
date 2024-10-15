@@ -19,32 +19,32 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
         label: 'Agregar',
         icon: Icons.add,
         onPressed: () => Get.toNamed(
-          Routes.PRODUCT_VARIANTS,
+          Routes.PRODUCT_ADD_VARIANT,
           arguments: controller.product,
         ),
       ),
       showMenu: false,
-      currentRoute: Routes.PRODUCT_ADD_IMAGE,
+      currentRoute: Routes.PRODUCT_VARIANTS,
       appBarTitle: 'Variaciones',
       appBarWidget: AppbarTitleWithBack(title: 'Variaciones'),
       child: Obx(
         () => controller.list.isNotEmpty
-            ? GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
-                  childAspectRatio: 1.0,
-                ),
+            ? ListView.separated(
                 itemCount: controller.list.length,
                 itemBuilder: (context, index) {
-                  return _listItem(
-                    context: context,
-                    variant: controller.list[index],
-                    index: index,
-                    resetSlide: false,
+                  return GestureDetector(
+                    onLongPressDown: (val) {},
+                    child: _listItem(
+                      context: context,
+                      variant: controller.list[index],
+                      index: index,
+                      resetSlide: false,
+                      // Reverse engineering the notion, meaning the Slidable widget will close all slid item, except one with false, i.e the currently slide item
+                    ),
                   );
                 },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
               )
             : const Text('no data'),
       ),
@@ -78,70 +78,64 @@ Slideable _listItem({
         backgroudColor: Colors.transparent,
       ),
     ],
-    child: Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 12,
-      ),
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 214, 214, 214),
-        border: Border.all(
-          width: 1,
-          color: const Color.fromARGB(124, 158, 158, 158),
+    child: Card(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 12,
         ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-              color: Colors.grey[350],
-              shape: BoxShape.circle,
-              border: Border.all(
-                width: 1,
-                color: Colors.white,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                color: Colors.grey[350],
+                shape: BoxShape.circle,
+                border: Border.all(
+                  width: 1,
+                  color: Colors.white,
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: SizedBox.shrink(),
               ),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: SizedBox.shrink(),
+            const SizedBox(
+              width: 5,
             ),
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Name",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Name",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  variant.name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
+                  const SizedBox(height: 2),
+                  Text(
+                    variant.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Text(
-            "#${index + 1}",
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
+            Text(
+              "#${index + 1}",
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );

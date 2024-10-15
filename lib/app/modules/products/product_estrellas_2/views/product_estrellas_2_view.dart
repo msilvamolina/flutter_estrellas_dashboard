@@ -32,9 +32,9 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
-            child: const Icon(Icons.image_rounded),
+            child: const Icon(Icons.layers),
             onPressed: () => Get.toNamed(
-              Routes.PRODUCT_IMAGES,
+              Routes.PRODUCT_VARIANTS,
               arguments: controller.product,
             ),
           ),
