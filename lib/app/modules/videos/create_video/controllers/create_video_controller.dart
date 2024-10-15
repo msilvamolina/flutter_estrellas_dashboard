@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/product/product_firebase/product_firebase_model.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -16,7 +18,15 @@ enum Fields {
 
 class CreateVideoController extends GetxController {
   final VideosRepository _repository = VideosRepository();
+  final ProductsRepository _productsRepository = ProductsRepository();
   final MainController _mainController = Get.find<MainController>();
+
+  final RxList<ProductFirebaseModel> _listProducts =
+      <ProductFirebaseModel>[].obs;
+  List<ProductFirebaseModel> get listProducts => _listProducts.toList();
+
+  String? _productSelected;
+  String? get productSelected => _productSelected;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.videoName.name: FormControl<String>(
@@ -29,6 +39,20 @@ class CreateVideoController extends GetxController {
 
   bool _loading = false;
   bool get loading => _loading;
+
+  @override
+  Future<void> onInit() async {
+    _listProducts.bindStream(_productsRepository.getProductsFromFirebase());
+
+    super.onInit();
+  }
+
+  void onProductSelected(String? value) {
+    _productSelected = value;
+
+    print('value=> $value');
+    update(['view']);
+  }
 
   Future<void> sendForm(Map<String, Object?> data) async {
     String videoName = data[Fields.videoName.name].toString();

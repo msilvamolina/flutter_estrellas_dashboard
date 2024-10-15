@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/components/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/widgets/loadingButton.dart';
+import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/input_decoration.dart';
 import '../../../../utils/responsive.dart';
@@ -15,10 +17,13 @@ class CreateVideoView extends GetView<CreateVideoController> {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).colorScheme.primary.withOpacity(0.5);
+
     return ReactiveFormBuilder(
         form: controller.buildForm,
         builder: (context, form, child) {
           return MainLayout(
+            showMenu: false,
             currentRoute: Routes.CREATE_VIDEO,
             appBarTitle: 'Crear video',
             child: GetBuilder<CreateVideoController>(
@@ -31,10 +36,31 @@ class CreateVideoView extends GetView<CreateVideoController> {
                       formControlName: Fields.videoName.name,
                       keyboardType: TextInputType.text,
                       decoration: CustomInputDecoration.inputDecoration(
-                        text: "Video",
+                        text: "Nombre",
                       ),
                     ),
                     const SizedBox(height: 16),
+                    Obx(
+                      () => Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: primaryColor, width: 1),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: DropDown(
+                          selectedValue: controller.productSelected,
+                          values: controller.listProducts
+                              .map(
+                                (ProductFirebaseModel value) => OptionDropDown(
+                                  text: value.name,
+                                  value: value.id,
+                                ),
+                              )
+                              .toList(),
+                          onChanged: controller.onProductSelected,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 26),
                     ReactiveFormConsumer(
                       builder: (context, form, child) => LoadingButton(
                         label: 'Subir video',
