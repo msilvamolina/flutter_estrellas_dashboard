@@ -28,13 +28,25 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
       showMenu: false,
       maxWidth: double.infinity,
       currentRoute: Routes.PRODUCT_ESTRELLAS_2,
-      floatingActionButton: CustomFloatingActionButton(
-        label: 'Images',
-        icon: Icons.image_rounded,
-        onPressed: () => Get.toNamed(
-          Routes.PRODUCT_IMAGES,
-          arguments: controller.product,
-        ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            child: const Icon(Icons.image_rounded),
+            onPressed: () => Get.toNamed(
+              Routes.PRODUCT_IMAGES,
+              arguments: controller.product,
+            ),
+          ),
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            child: const Icon(Icons.image_rounded),
+            onPressed: () => Get.toNamed(
+              Routes.PRODUCT_IMAGES,
+              arguments: controller.product,
+            ),
+          ),
+        ],
       ),
       appBarWidget: AppbarTitleWithBack(title: controller.product.name),
       child: TableWidget(
