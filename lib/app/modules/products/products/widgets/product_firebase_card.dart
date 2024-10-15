@@ -16,7 +16,7 @@ class ProductFirebaseCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () =>
-            Get.toNamed(Routes.PRODUCT_ESTRELLAS_1, arguments: product),
+            Get.toNamed(Routes.PRODUCT_ESTRELLAS_2, arguments: product),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
