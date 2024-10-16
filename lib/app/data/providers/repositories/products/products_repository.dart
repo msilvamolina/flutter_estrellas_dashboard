@@ -229,18 +229,16 @@ class ProductsRepository {
         "client_phone": "3127559567",
         "client_surname": "Diana Patricia",
         "department_id": "81",
-        "catalogue":
-            catalogue, // Este sigue siendo un objeto, pero se codificará a JSON
+        "catalogue": catalogue,
         "user_id": "6463b06a7420bf4da4c1ecef",
       };
 
-      // Aquí convertimos el body a una cadena JSON
       String bodyJson = jsonEncode(body);
 
       Response response = await services.post(
         url: url,
         headers: headers,
-        body: bodyJson, // Enviar el body como JSON
+        body: bodyJson,
       );
 
       dynamic json = jsonDecode(response.body);
