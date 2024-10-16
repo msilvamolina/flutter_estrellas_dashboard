@@ -6,12 +6,14 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
+import '../modules/products/create_product/bindings/create_product_binding.dart';
+import '../modules/products/create_product/views/create_product_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/products/product_add_variant/bindings/product_add_variant_binding.dart';
-import '../modules/products/product_add_variant/views/product_add_variant_view.dart';
 import '../modules/products/product_add_image/bindings/product_add_image_binding.dart';
 import '../modules/products/product_add_image/views/product_add_image_view.dart';
+import '../modules/products/product_add_variant/bindings/product_add_variant_binding.dart';
+import '../modules/products/product_add_variant/views/product_add_variant_view.dart';
 import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
 import '../modules/products/product_estrellas_1/views/product_estrellas_1_view.dart';
 import '../modules/products/product_estrellas_2/bindings/product_estrellas_2_binding.dart';
@@ -125,6 +127,11 @@ class AppPages {
       name: _Paths.PRODUCT_ADD_VARIANT,
       page: () => const ProductAddVariantView(),
       binding: ProductAddVariantBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_PRODUCT,
+      page: () => const CreateProductView(),
+      binding: CreateProductBinding(),
     ),
   ];
 }

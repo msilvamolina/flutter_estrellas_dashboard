@@ -16,6 +16,11 @@ class ProductsView extends GetView<ProductsController> {
     return DefaultTabController(
       length: 2,
       child: MainLayout(
+        floatingActionButton: CustomFloatingActionButton(
+          label: 'Agregar',
+          icon: Icons.add,
+          onPressed: () => Get.toNamed(Routes.CREATE_PRODUCT),
+        ),
         maxWidth: double.infinity,
         currentRoute: Routes.PRODUCTS,
         appBarWidget: const TabBar(
