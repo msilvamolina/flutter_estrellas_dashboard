@@ -167,6 +167,172 @@ class ProductsRepository {
     }
   }
 
+  Future<Either<String, dynamic>> createMultipleOrder() async {
+    String url = 'api/orders/create-order';
+    print('createMultipleOrder() ');
+    try {
+      dynamic headers = {
+        'Content-Type': 'application/json',
+        'x-token':
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
+      };
+
+      var products = [
+        {
+          "product_id": "66edec97326a2a22f473abbb",
+          "client_quantity": 2,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66fb2b12c05c9fb458e63a8b",
+          "client_quantity": 5,
+          "variation_id": 131961
+        },
+        {
+          "product_id": "66edec99326a2a22f473abbd",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edec9b326a2a22f473abc1",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edec9a326a2a22f473abbf",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edeca0326a2a22f473abc9",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edec9c326a2a22f473abc3",
+          "client_quantity": 1,
+          "variation_id": ""
+        }
+      ];
+
+      var catalogue = {
+        "id": "66f1e6f58b85f745c53f2fa1",
+        "products": products,
+      };
+
+      Map<String, dynamic> body = {
+        "city_id": "1222",
+        "client_direction": "Cra 01 #12-34 B/ San Vicente",
+        "client_email": "dianasierra@dropi.co",
+        "client_name": "Martin Silva",
+        "client_notes": "Holis",
+        "client_phone": "3127559567",
+        "client_surname": "Diana Patricia",
+        "department_id": "81",
+        "catalogue":
+            catalogue, // Este sigue siendo un objeto, pero se codificará a JSON
+        "user_id": "6463b06a7420bf4da4c1ecef",
+      };
+
+      // Aquí convertimos el body a una cadena JSON
+      String bodyJson = jsonEncode(body);
+
+      Response response = await services.post(
+        url: url,
+        headers: headers,
+        body: bodyJson, // Enviar el body como JSON
+      );
+
+      dynamic json = jsonDecode(response.body);
+      print(json.toString());
+
+      return right(unit);
+    } catch (e) {
+      print('error: $e');
+      return left(e.toString());
+    }
+  }
+
+  Future<Either<String, dynamic>> createMultipleOrders() async {
+    String baseUrl = "dev-api.estrellas.app";
+    // String baseUrl = "41e8-186-85-250-3.ngrok-free.app";
+
+    String url = 'api/orders/create-order';
+    try {
+      print('createMultipleOrders');
+
+      // string to uri
+      var uri = Uri.https(baseUrl, url);
+
+      var request = http.MultipartRequest("POST", uri);
+
+      var products = [
+        {
+          "product_id": "66edec97326a2a22f473abbb",
+          "client_quantity": 2,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66fb2b12c05c9fb458e63a8b",
+          "client_quantity": 5,
+          "variation_id": 131961
+        },
+        {
+          "product_id": "66edec99326a2a22f473abbd",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edec9b326a2a22f473abc1",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edec9a326a2a22f473abbf",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edeca0326a2a22f473abc9",
+          "client_quantity": 1,
+          "variation_id": ""
+        },
+        {
+          "product_id": "66edec9c326a2a22f473abc3",
+          "client_quantity": 1,
+          "variation_id": ""
+        }
+      ];
+
+      Map<String, dynamic> catalogue = {
+        "id": "66f1e6f58b85f745c53f2fa1",
+        "products": products,
+      };
+
+      request.fields['catalogue'] = jsonEncode(catalogue);
+      // request.fields['name'] = 'Provider Martin';
+      // request.fields['phone'] = '3155125062';
+
+      request.headers['x-token'] =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc";
+
+      log(request.fields.toString());
+      // send
+      var response = await request.send();
+      print(response.statusCode);
+
+      // listen for response
+      response.stream.transform(utf8.decoder).listen((value) {
+        print(value);
+      });
+
+      return right('list');
+    } catch (e) {
+      print('error $e');
+      return left(e.toString());
+    }
+  }
+
   Future<Either<String, dynamic>> createProduct() async {
     String baseUrl = "dev-api.estrellas.app";
 

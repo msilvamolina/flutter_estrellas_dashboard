@@ -20,7 +20,7 @@ class ApiServices {
 
   Future<Response> post({
     required String url,
-    required dynamic body,
+    required Object? body,
     Map<String, String>? headers,
   }) async {
     var uri = Uri.https(baseUrl, url);
