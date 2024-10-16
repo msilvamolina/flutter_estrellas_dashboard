@@ -52,6 +52,37 @@ class ProductsRepository {
     }
   }
 
+  Future<Either<String, Unit>> getCities(String departments) async {
+    String url = 'api/localities/cities-by-department/$departments';
+    try {
+      print('getCities $departments');
+      dynamic headers = {
+        'x-token':
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
+      };
+      Response response = await services.get(url: url, headers: headers);
+      // if (response.statusCode != 200) {
+      //   return left('Error status code: ${response.statusCode}');
+      // }
+      dynamic json = jsonDecode(response.body);
+
+      log(json.toString());
+      // if (bodyList.isEmpty) {
+      //   return left('List Products is empty');
+      // }
+
+      // List<ProductModel> list = List<ProductModel>.generate(
+      //   bodyList.length,
+      //   (int index) => ProductModel.fromJson(bodyList[index]),
+      // );
+
+      return right(unit);
+    } catch (e) {
+      print('error $e');
+      return left(e.toString());
+    }
+  }
+
   Future<Either<String, Unit>> getOrderById(String orderId) async {
     String url = 'api/orders/?id=$orderId&user=6463b06a7420bf4da4c1ecef';
     try {

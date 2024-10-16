@@ -72,6 +72,12 @@ class CreateProductView extends GetView<CreateProductController> {
             isLoading: controller.isLoading,
             onPressed: controller.getDepartments,
           ),
+          const SizedBox(height: 16),
+          LoadingButton(
+            label: 'getCities',
+            isLoading: controller.isLoading,
+            onPressed: controller.getCities,
+          ),
         ],
       ),
     );

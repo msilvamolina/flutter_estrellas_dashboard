@@ -46,4 +46,8 @@ class CreateProductController extends GetxController {
   Future<void> getDepartments() async {
     await _repository.getDepartments();
   }
+
+  Future<void> getCities() async {
+    await _repository.getCities('49');
+  }
 }
