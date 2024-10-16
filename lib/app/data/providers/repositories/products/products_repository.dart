@@ -126,7 +126,23 @@ class ProductsRepository {
         'x-token':
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
       };
-      Response response = await services.get(url: url, headers: headers);
+
+      Map<String, String> body = {
+        "city_id": "1222",
+        "client_direction": "Cra 01 #12-34 B/ San Vicente",
+        "client_email": "dianasierra@dropi.co",
+        "client_name": "Diana Patricia",
+        "client_notes": "Notica",
+        "client_phone": "3127559567",
+        "client_quantity": '1',
+        "client_surname": "Diana Patricia",
+        "department_id": "81",
+        "product_id": "66e5d4df6c9cc90fce0b1a57",
+        "user_id": "6463b06a7420bf4da4c1ecef",
+        "variation_id": 'null',
+      };
+      Response response =
+          await services.post(url: url, headers: headers, body: body);
 
       // if (response.statusCode != 200) {
       //   return left('Error status code: ${response.statusCode}');
