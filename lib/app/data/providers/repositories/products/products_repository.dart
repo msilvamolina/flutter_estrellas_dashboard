@@ -120,7 +120,7 @@ class ProductsRepository {
 
   Future<Either<String, dynamic>> createOrder() async {
     String url = 'api/orders/create-order';
-    print('getProviders() ');
+    print('createOrder() ');
     try {
       dynamic headers = {
         'x-token':
@@ -131,15 +131,15 @@ class ProductsRepository {
         "city_id": "1222",
         "client_direction": "Cra 01 #12-34 B/ San Vicente",
         "client_email": "dianasierra@dropi.co",
-        "client_name": "Diana Patricia",
-        "client_notes": "Notica",
+        "client_name": "Martin Silva",
+        "client_notes": "Holis",
         "client_phone": "3127559567",
         "client_quantity": '1',
         "client_surname": "Diana Patricia",
         "department_id": "81",
-        "product_id": "66e5d4df6c9cc90fce0b1a57",
+        "product_id": "66edec97326a2a22f473abbb",
         "user_id": "6463b06a7420bf4da4c1ecef",
-        "variation_id": 'null',
+        // "variation_id": null,
       };
       Response response =
           await services.post(url: url, headers: headers, body: body);
@@ -189,11 +189,11 @@ class ProductsRepository {
       // create multipart request
       var request = new http.MultipartRequest("POST", uri);
 
-      request.fields['provider'] = '66b67ce444bf72694de06abc';
-      request.fields['name'] = 'Producto de prueba';
-      request.fields['price'] = '1234';
-      request.fields['suggestedPrice'] = '1111';
-      request.fields['points'] = '991';
+      request.fields['provider'] = '670ff9a87abfe911332de786';
+      request.fields['name'] = 'Producto de Martin';
+      request.fields['price'] = '45678';
+      request.fields['suggestedPrice'] = '43787';
+      request.fields['points'] = '888';
       // multipart that takes file
       var multipartFile = new http.MultipartFile('image', stream, length,
           filename: basename(imageFile.path));
@@ -265,12 +265,12 @@ class ProductsRepository {
       var request = new http.MultipartRequest("POST", uri);
 
       Map<String, dynamic> body = {
-        'email': 'providermartin33@yopmail.com',
-        'name': 'Provider Martin 33',
-        'surname': 'silva',
-        'phone': '3155125062',
-        'document': '901811318',
-        'porcentage': '36',
+        'email': 'provider1@estrellas.app',
+        'name': 'Provider 1',
+        'surname': 'Estrellas',
+        'phone': '345645678',
+        'document': '345645678',
+        'porcentage': '30',
       };
 
       request.fields['provider'] = jsonEncode(body);
