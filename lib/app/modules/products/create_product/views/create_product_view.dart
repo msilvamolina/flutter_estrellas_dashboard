@@ -54,6 +54,18 @@ class CreateProductView extends GetView<CreateProductController> {
             isLoading: controller.isLoading,
             onPressed: controller.createMultipleOrder,
           ),
+          const SizedBox(height: 16),
+          LoadingButton(
+            label: 'get order OrderById',
+            isLoading: controller.isLoading,
+            onPressed: controller.getOrderById,
+          ),
+          const SizedBox(height: 16),
+          LoadingButton(
+            label: 'get Multiple OrderById',
+            isLoading: controller.isLoading,
+            onPressed: controller.getMultipleOrderById,
+          ),
         ],
       ),
     );
