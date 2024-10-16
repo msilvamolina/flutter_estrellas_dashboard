@@ -22,4 +22,8 @@ class CreateProductController extends GetxController {
   Future<void> getProviders() async {
     await _repository.getProviders();
   }
+
+  Future<void> getNewProducts() async {
+    await _repository.getNewProducts();
+  }
 }
