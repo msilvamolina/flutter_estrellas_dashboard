@@ -42,4 +42,8 @@ class CreateProductController extends GetxController {
   Future<void> getMultipleOrderById() async {
     await _repository.getOrderById('2859364');
   }
+
+  Future<void> getDepartments() async {
+    await _repository.getDepartments();
+  }
 }

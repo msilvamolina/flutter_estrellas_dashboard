@@ -66,6 +66,12 @@ class CreateProductView extends GetView<CreateProductController> {
             isLoading: controller.isLoading,
             onPressed: controller.getMultipleOrderById,
           ),
+          const SizedBox(height: 16),
+          LoadingButton(
+            label: 'getDepartments',
+            isLoading: controller.isLoading,
+            onPressed: controller.getDepartments,
+          ),
         ],
       ),
     );
