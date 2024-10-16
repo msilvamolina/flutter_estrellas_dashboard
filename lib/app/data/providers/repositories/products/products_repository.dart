@@ -26,6 +26,37 @@ class ProductsRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseStorage _firebaseStorage = Get.find<FirebaseStorage>();
 
+  Future<Either<String, Unit>> getCategories() async {
+    String url = 'api/products/categories';
+    try {
+      print('getCategories');
+      dynamic headers = {
+        'x-token':
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
+      };
+      Response response = await services.get(url: url, headers: headers);
+      // if (response.statusCode != 200) {
+      //   return left('Error status code: ${response.statusCode}');
+      // }
+      dynamic json = jsonDecode(response.body);
+
+      log(json.toString());
+      // if (bodyList.isEmpty) {
+      //   return left('List Products is empty');
+      // }
+
+      // List<ProductModel> list = List<ProductModel>.generate(
+      //   bodyList.length,
+      //   (int index) => ProductModel.fromJson(bodyList[index]),
+      // );
+
+      return right(unit);
+    } catch (e) {
+      print('error $e');
+      return left(e.toString());
+    }
+  }
+
   Future<Either<String, Unit>> getDepartments() async {
     String url = 'api/localities/departments';
     try {
