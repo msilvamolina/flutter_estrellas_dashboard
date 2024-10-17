@@ -317,6 +317,55 @@ class ProductsRepository {
     }
   }
 
+  Future<Either<String, dynamic>> createWarehouse() async {
+    String url = 'api/warehouse/create-warehouse';
+    print('createWarehouse() ');
+    try {
+      dynamic headers = {
+        'x-token':
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
+      };
+
+      Map<String, String> body = {
+        "city_id": "1222",
+        "client_direction": "Cra 01 #12-34 B/ San Vicente",
+        "client_email": "dianasierra@dropi.co",
+        "client_name": "Martin Silva",
+        "client_notes": "Holis",
+        "client_phone": "3127559567",
+        "client_quantity": '1',
+        "client_surname": "Diana Patricia",
+        "department_id": "81",
+        "product_id": "66edec97326a2a22f473abbb",
+        "user_id": "6463b06a7420bf4da4c1ecef",
+        // "variation_id": null,
+      };
+      Response response =
+          await services.post(url: url, headers: headers, body: body);
+
+      // if (response.statusCode != 200) {
+      //   return left('Error status code: ${response.statusCode}');
+      // }
+      dynamic json = jsonDecode(response.body);
+      // List<dynamic> bodyList = json['data']['providers'];
+
+      // if (bodyList.isEmpty) {
+      //   return left('List Products is empty');
+      // }
+
+      print(json.toString());
+      // List<ProductModel> list = List<ProductModel>.generate(
+      //   bodyList.length,
+      //   (int index) => ProductModel.fromJson(bodyList[index]),
+      // );
+
+      return right(unit);
+    } catch (e) {
+      print('error: $e');
+      return left(e.toString());
+    }
+  }
+
   Future<Either<String, dynamic>> createMultipleOrder() async {
     String url = 'api/orders/create-order';
     print('createMultipleOrder() ');

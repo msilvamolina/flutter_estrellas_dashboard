@@ -39,6 +39,10 @@ class CreateProductController extends GetxController {
     await _repository.getOrders();
   }
 
+  Future<void> createWarehouse() async {
+    await _repository.createWarehouse();
+  }
+
   Future<void> getOrderById() async {
     await _repository.getOrderById('2859363');
   }

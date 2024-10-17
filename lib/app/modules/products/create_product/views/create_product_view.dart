@@ -91,6 +91,12 @@ class CreateProductView extends GetView<CreateProductController> {
               isLoading: controller.isLoading,
               onPressed: controller.getOrders,
             ),
+            const SizedBox(height: 16),
+            LoadingButton(
+              label: 'createWarehouse',
+              isLoading: controller.isLoading,
+              onPressed: controller.createWarehouse,
+            ),
             const SizedBox(height: 80),
           ],
         ),

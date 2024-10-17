@@ -17,7 +17,7 @@ import macos_ui
 import macos_window_utils
 import package_info_plus
 import path_provider_foundation
-import sqflite
+import sqflite_darwin
 import video_compress
 import video_player_avfoundation
 
