@@ -274,20 +274,20 @@ class ProductsRepository {
     try {
       dynamic headers = {
         'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkxODA5OTksImV4cCI6MTcyOTI2NzM5OX0.kpxDRxnFzpxFm60ypSpw70BRYgJpQV1rVGCDzzYNNDY",
       };
 
       Map<String, String> body = {
         "city_id": "1222",
         "client_direction": "Cra 01 #12-34 B/ San Vicente",
         "client_email": "dianasierra@dropi.co",
-        "client_name": "Martin Silva",
+        "client_name": "Super Martin Silva",
         "client_notes": "Holis",
         "client_phone": "3127559567",
         "client_quantity": '1',
         "client_surname": "Diana Patricia",
         "department_id": "81",
-        "product_id": "66edec97326a2a22f473abbb",
+        "product_id": "67118d2ed9b74b6beec0c64d",
         "user_id": "6463b06a7420bf4da4c1ecef",
         // "variation_id": null,
       };
@@ -546,9 +546,9 @@ class ProductsRepository {
       var request = new http.MultipartRequest("POST", uri);
 
       request.fields['provider'] = '67113828273871d1eaf51334';
-      request.fields['name'] = 'Super Producto de Martin';
-      request.fields['price'] = '98765';
-      request.fields['suggestedPrice'] = '99999';
+      request.fields['name'] = 'Super Producto de Martin 22';
+      request.fields['price'] = '26150';
+      request.fields['suggestedPrice'] = '39990';
       request.fields['points'] = '999';
       request.fields['warehouseID'] = '67113882273871d1eaf51340';
       // multipart that takes file
