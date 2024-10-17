@@ -327,11 +327,11 @@ class ProductsRepository {
       };
 
       Map<String, String> body = {
-        "name": "Bodega prueba 22",
+        "name": "Bodega de Martin",
         "phone": "3213440349",
         "city": "6569e63abcefff5266ac0778",
-        "address": "1222",
-        "provider": "66e45ce4fbf0728ee8b01200"
+        "address": "Direccion de Martin",
+        "provider": "67113828273871d1eaf51334"
       };
       Response response =
           await services.post(url: url, headers: headers, body: body);
@@ -545,12 +545,12 @@ class ProductsRepository {
       // create multipart request
       var request = new http.MultipartRequest("POST", uri);
 
-      request.fields['provider'] = '670ff9a87abfe911332de786';
-      request.fields['name'] = 'Producto de Martin';
-      request.fields['price'] = '45678';
-      request.fields['suggestedPrice'] = '43787';
-      request.fields['points'] = '888';
-      request.fields['warehouseID'] = '66e45ce4fbf0728ee8b01200';
+      request.fields['provider'] = '67113828273871d1eaf51334';
+      request.fields['name'] = 'Super Producto de Martin';
+      request.fields['price'] = '98765';
+      request.fields['suggestedPrice'] = '99999';
+      request.fields['points'] = '999';
+      request.fields['warehouseID'] = '67113882273871d1eaf51340';
       // multipart that takes file
       var multipartFile = new http.MultipartFile('image', stream, length,
           filename: basename(imageFile.path));
@@ -606,7 +606,7 @@ class ProductsRepository {
     try {
       print('createProvider');
       String imagePath =
-          '/Users/martin/Library/Developer/CoreSimulator/Devices/4A18C68A-D8DF-4E65-BBF8-2F43BF34682D/data/Containers/Data/Application/262D9AF5-C934-4BFA-B5C0-327DBE17E49F/tmp/image_cropper_877471C9-F912-461D-8E29-6D9546B2861C-83396-0000039EC181E6F8.jpg';
+          '/Users/martin/Library/Developer/CoreSimulator/Devices/4A18C68A-D8DF-4E65-BBF8-2F43BF34682D/data/Containers/Data/Application/40A27E08-6987-4CC6-8AA1-CB983ED3DE73/tmp/image_cropper_F7AE5C8A-9A7C-41CC-BD16-5849FAE6BD7B-30840-000004B35CE6CE56.jpg';
       File imageFile = File(imagePath);
 
       // open a bytestream
@@ -622,12 +622,12 @@ class ProductsRepository {
       var request = new http.MultipartRequest("POST", uri);
 
       Map<String, dynamic> body = {
-        'email': 'provider1@estrellas.app',
-        'name': 'Provider 1',
-        'surname': 'Estrellas',
-        'phone': '345645678',
-        'document': '345645678',
-        'porcentage': '30',
+        'email': 'superproveedor@estrellas.app',
+        'name': 'Super Proveedor Martin',
+        'surname': 'Silva',
+        'phone': '123123123',
+        'document': '123123123',
+        'porcentage': '50',
       };
 
       request.fields['provider'] = jsonEncode(body);
@@ -635,7 +635,7 @@ class ProductsRepository {
       // request.fields['phone'] = '3155125062';
 
       request.headers['x-token'] =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc";
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkxODA5OTksImV4cCI6MTcyOTI2NzM5OX0.kpxDRxnFzpxFm60ypSpw70BRYgJpQV1rVGCDzzYNNDY";
 
       // multipart that takes file
       var multipartFile = new http.MultipartFile('avatarURL', stream, length,
