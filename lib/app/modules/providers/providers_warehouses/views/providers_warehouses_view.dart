@@ -17,13 +17,7 @@ class ProvidersWarehousesView extends GetView<ProvidersWarehousesController> {
   Widget build(BuildContext context) {
     return MainLayout(
       showMenu: false,
-      floatingActionButton: CustomFloatingActionButton(
-        label: 'Agregar',
-        icon: Icons.add,
-        onPressed: () => Get.toNamed(Routes.CREATE_PRODUCT),
-      ),
-      appBarWidget:
-          AppbarTitleWithBack(title: controller.provider.name.toString()),
+      appBarWidget: const AppbarTitleWithBack(title: 'Bodegas'),
       maxWidth: double.infinity,
       currentRoute: Routes.PROVIDERS_WAREHOUSES,
       child: Column(
