@@ -17,11 +17,12 @@ class TabEstrellas1 extends StatelessWidget {
     return GetBuilder<ProvidersListController>(
       id: 'tab1View',
       builder: (_) {
-        return !controller.isLoading
-            ? controller.responseError != null
-                ? ProductsErrorWidget(error: controller.responseError!)
-                : ProductsListWidget(list: controller.data)
-            : const ProdutcsLoadingWidget();
+        return Text(controller.data.toString());
+        // return !controller.isLoading
+        //     ? controller.responseError != null
+        //         ? ProductsErrorWidget(error: controller.responseError!)
+        //         : ProductsListWidget(list: controller.data)
+        //     : const ProdutcsLoadingWidget();
       },
     );
   }

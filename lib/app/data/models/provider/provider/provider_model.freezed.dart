@@ -22,14 +22,19 @@ ProviderModel _$ProviderModelFromJson(Map<String, dynamic> json) {
 mixin _$ProviderModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  List<ProviderWarehouseModel> get warehouses =>
+  List<ProviderWarehouseModel>? get warehouses =>
       throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get document => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
-  String get externalID => throw _privateConstructorUsedError;
-  bool get isActive => throw _privateConstructorUsedError;
+  int? get externalID => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get document => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
+  bool? get isActive => throw _privateConstructorUsedError;
+  int? get porcentage => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  String? get uploadDate => throw _privateConstructorUsedError;
+  String? get updatedAt => throw _privateConstructorUsedError;
+  String? get avatarUrl => throw _privateConstructorUsedError;
 
   /// Serializes this ProviderModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,13 +54,18 @@ abstract class $ProviderModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      List<ProviderWarehouseModel> warehouses,
-      String name,
-      String email,
-      String document,
-      String phone,
-      String externalID,
-      bool isActive});
+      List<ProviderWarehouseModel>? warehouses,
+      int? externalID,
+      String? name,
+      String? email,
+      String? document,
+      String? phone,
+      bool? isActive,
+      int? porcentage,
+      String? createdAt,
+      String? uploadDate,
+      String? updatedAt,
+      String? avatarUrl});
 }
 
 /// @nodoc
@@ -74,47 +84,72 @@ class _$ProviderModelCopyWithImpl<$Res, $Val extends ProviderModel>
   @override
   $Res call({
     Object? id = null,
-    Object? warehouses = null,
-    Object? name = null,
-    Object? email = null,
-    Object? document = null,
-    Object? phone = null,
-    Object? externalID = null,
-    Object? isActive = null,
+    Object? warehouses = freezed,
+    Object? externalID = freezed,
+    Object? name = freezed,
+    Object? email = freezed,
+    Object? document = freezed,
+    Object? phone = freezed,
+    Object? isActive = freezed,
+    Object? porcentage = freezed,
+    Object? createdAt = freezed,
+    Object? uploadDate = freezed,
+    Object? updatedAt = freezed,
+    Object? avatarUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      warehouses: null == warehouses
+      warehouses: freezed == warehouses
           ? _value.warehouses
           : warehouses // ignore: cast_nullable_to_non_nullable
-              as List<ProviderWarehouseModel>,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      document: null == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalID: null == externalID
+              as List<ProviderWarehouseModel>?,
+      externalID: freezed == externalID
           ? _value.externalID
           : externalID // ignore: cast_nullable_to_non_nullable
-              as String,
-      isActive: null == isActive
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      document: freezed == document
+          ? _value.document
+          : document // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      porcentage: freezed == porcentage
+          ? _value.porcentage
+          : porcentage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uploadDate: freezed == uploadDate
+          ? _value.uploadDate
+          : uploadDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -129,13 +164,18 @@ abstract class _$$ProviderModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      List<ProviderWarehouseModel> warehouses,
-      String name,
-      String email,
-      String document,
-      String phone,
-      String externalID,
-      bool isActive});
+      List<ProviderWarehouseModel>? warehouses,
+      int? externalID,
+      String? name,
+      String? email,
+      String? document,
+      String? phone,
+      bool? isActive,
+      int? porcentage,
+      String? createdAt,
+      String? uploadDate,
+      String? updatedAt,
+      String? avatarUrl});
 }
 
 /// @nodoc
@@ -152,47 +192,72 @@ class __$$ProviderModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? warehouses = null,
-    Object? name = null,
-    Object? email = null,
-    Object? document = null,
-    Object? phone = null,
-    Object? externalID = null,
-    Object? isActive = null,
+    Object? warehouses = freezed,
+    Object? externalID = freezed,
+    Object? name = freezed,
+    Object? email = freezed,
+    Object? document = freezed,
+    Object? phone = freezed,
+    Object? isActive = freezed,
+    Object? porcentage = freezed,
+    Object? createdAt = freezed,
+    Object? uploadDate = freezed,
+    Object? updatedAt = freezed,
+    Object? avatarUrl = freezed,
   }) {
     return _then(_$ProviderModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      warehouses: null == warehouses
+      warehouses: freezed == warehouses
           ? _value._warehouses
           : warehouses // ignore: cast_nullable_to_non_nullable
-              as List<ProviderWarehouseModel>,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      document: null == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalID: null == externalID
+              as List<ProviderWarehouseModel>?,
+      externalID: freezed == externalID
           ? _value.externalID
           : externalID // ignore: cast_nullable_to_non_nullable
-              as String,
-      isActive: null == isActive
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      document: freezed == document
+          ? _value.document
+          : document // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isActive: freezed == isActive
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
+      porcentage: freezed == porcentage
+          ? _value.porcentage
+          : porcentage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uploadDate: freezed == uploadDate
+          ? _value.uploadDate
+          : uploadDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -202,13 +267,18 @@ class __$$ProviderModelImplCopyWithImpl<$Res>
 class _$ProviderModelImpl extends _ProviderModel {
   const _$ProviderModelImpl(
       {@JsonKey(name: '_id') required this.id,
-      required final List<ProviderWarehouseModel> warehouses,
-      required this.name,
-      required this.email,
-      required this.document,
-      required this.phone,
-      required this.externalID,
-      required this.isActive})
+      final List<ProviderWarehouseModel>? warehouses,
+      this.externalID,
+      this.name,
+      this.email,
+      this.document,
+      this.phone,
+      this.isActive,
+      this.porcentage,
+      this.createdAt,
+      this.uploadDate,
+      this.updatedAt,
+      this.avatarUrl})
       : _warehouses = warehouses,
         super._();
 
@@ -218,30 +288,42 @@ class _$ProviderModelImpl extends _ProviderModel {
   @override
   @JsonKey(name: '_id')
   final String id;
-  final List<ProviderWarehouseModel> _warehouses;
+  final List<ProviderWarehouseModel>? _warehouses;
   @override
-  List<ProviderWarehouseModel> get warehouses {
+  List<ProviderWarehouseModel>? get warehouses {
+    final value = _warehouses;
+    if (value == null) return null;
     if (_warehouses is EqualUnmodifiableListView) return _warehouses;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_warehouses);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final String name;
+  final int? externalID;
   @override
-  final String email;
+  final String? name;
   @override
-  final String document;
+  final String? email;
   @override
-  final String phone;
+  final String? document;
   @override
-  final String externalID;
+  final String? phone;
   @override
-  final bool isActive;
+  final bool? isActive;
+  @override
+  final int? porcentage;
+  @override
+  final String? createdAt;
+  @override
+  final String? uploadDate;
+  @override
+  final String? updatedAt;
+  @override
+  final String? avatarUrl;
 
   @override
   String toString() {
-    return 'ProviderModel(id: $id, warehouses: $warehouses, name: $name, email: $email, document: $document, phone: $phone, externalID: $externalID, isActive: $isActive)';
+    return 'ProviderModel(id: $id, warehouses: $warehouses, externalID: $externalID, name: $name, email: $email, document: $document, phone: $phone, isActive: $isActive, porcentage: $porcentage, createdAt: $createdAt, uploadDate: $uploadDate, updatedAt: $updatedAt, avatarUrl: $avatarUrl)';
   }
 
   @override
@@ -252,15 +334,25 @@ class _$ProviderModelImpl extends _ProviderModel {
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._warehouses, _warehouses) &&
+            (identical(other.externalID, externalID) ||
+                other.externalID == externalID) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.document, document) ||
                 other.document == document) &&
             (identical(other.phone, phone) || other.phone == phone) &&
-            (identical(other.externalID, externalID) ||
-                other.externalID == externalID) &&
             (identical(other.isActive, isActive) ||
-                other.isActive == isActive));
+                other.isActive == isActive) &&
+            (identical(other.porcentage, porcentage) ||
+                other.porcentage == porcentage) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.uploadDate, uploadDate) ||
+                other.uploadDate == uploadDate) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.avatarUrl, avatarUrl) ||
+                other.avatarUrl == avatarUrl));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -269,12 +361,17 @@ class _$ProviderModelImpl extends _ProviderModel {
       runtimeType,
       id,
       const DeepCollectionEquality().hash(_warehouses),
+      externalID,
       name,
       email,
       document,
       phone,
-      externalID,
-      isActive);
+      isActive,
+      porcentage,
+      createdAt,
+      uploadDate,
+      updatedAt,
+      avatarUrl);
 
   /// Create a copy of ProviderModel
   /// with the given fields replaced by the non-null parameter values.
@@ -295,13 +392,18 @@ class _$ProviderModelImpl extends _ProviderModel {
 abstract class _ProviderModel extends ProviderModel {
   const factory _ProviderModel(
       {@JsonKey(name: '_id') required final String id,
-      required final List<ProviderWarehouseModel> warehouses,
-      required final String name,
-      required final String email,
-      required final String document,
-      required final String phone,
-      required final String externalID,
-      required final bool isActive}) = _$ProviderModelImpl;
+      final List<ProviderWarehouseModel>? warehouses,
+      final int? externalID,
+      final String? name,
+      final String? email,
+      final String? document,
+      final String? phone,
+      final bool? isActive,
+      final int? porcentage,
+      final String? createdAt,
+      final String? uploadDate,
+      final String? updatedAt,
+      final String? avatarUrl}) = _$ProviderModelImpl;
   const _ProviderModel._() : super._();
 
   factory _ProviderModel.fromJson(Map<String, dynamic> json) =
@@ -311,19 +413,29 @@ abstract class _ProviderModel extends ProviderModel {
   @JsonKey(name: '_id')
   String get id;
   @override
-  List<ProviderWarehouseModel> get warehouses;
+  List<ProviderWarehouseModel>? get warehouses;
   @override
-  String get name;
+  int? get externalID;
   @override
-  String get email;
+  String? get name;
   @override
-  String get document;
+  String? get email;
   @override
-  String get phone;
+  String? get document;
   @override
-  String get externalID;
+  String? get phone;
   @override
-  bool get isActive;
+  bool? get isActive;
+  @override
+  int? get porcentage;
+  @override
+  String? get createdAt;
+  @override
+  String? get uploadDate;
+  @override
+  String? get updatedAt;
+  @override
+  String? get avatarUrl;
 
   /// Create a copy of ProviderModel
   /// with the given fields replaced by the non-null parameter values.

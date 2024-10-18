@@ -10,11 +10,11 @@ _$ProviderWarehouseModelImpl _$$ProviderWarehouseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProviderWarehouseModelImpl(
       id: json['_id'] as String,
-      name: json['name'] as String,
-      phone: json['phone'] as String,
-      city: json['city'] as String,
-      address: json['address'] as String,
-      externalID: json['externalID'] as String,
+      name: json['name'] as String?,
+      phone: json['phone'] as String?,
+      city: json['city'] as String?,
+      address: json['address'] as String?,
+      externalID: json['externalID'] as String?,
     );
 
 Map<String, dynamic> _$$ProviderWarehouseModelImplToJson(

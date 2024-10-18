@@ -23,11 +23,11 @@ ProviderWarehouseModel _$ProviderWarehouseModelFromJson(
 mixin _$ProviderWarehouseModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String get externalID => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  String? get externalID => throw _privateConstructorUsedError;
 
   /// Serializes this ProviderWarehouseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,11 +47,11 @@ abstract class $ProviderWarehouseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      String name,
-      String phone,
-      String city,
-      String address,
-      String externalID});
+      String? name,
+      String? phone,
+      String? city,
+      String? address,
+      String? externalID});
 }
 
 /// @nodoc
@@ -71,37 +71,37 @@ class _$ProviderWarehouseModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? phone = null,
-    Object? city = null,
-    Object? address = null,
-    Object? externalID = null,
+    Object? name = freezed,
+    Object? phone = freezed,
+    Object? city = freezed,
+    Object? address = freezed,
+    Object? externalID = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
+              as String?,
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalID: null == externalID
+              as String?,
+      externalID: freezed == externalID
           ? _value.externalID
           : externalID // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -117,11 +117,11 @@ abstract class _$$ProviderWarehouseModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      String name,
-      String phone,
-      String city,
-      String address,
-      String externalID});
+      String? name,
+      String? phone,
+      String? city,
+      String? address,
+      String? externalID});
 }
 
 /// @nodoc
@@ -140,37 +140,37 @@ class __$$ProviderWarehouseModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? phone = null,
-    Object? city = null,
-    Object? address = null,
-    Object? externalID = null,
+    Object? name = freezed,
+    Object? phone = freezed,
+    Object? city = freezed,
+    Object? address = freezed,
+    Object? externalID = freezed,
   }) {
     return _then(_$ProviderWarehouseModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
+              as String?,
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalID: null == externalID
+              as String?,
+      externalID: freezed == externalID
           ? _value.externalID
           : externalID // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -180,11 +180,11 @@ class __$$ProviderWarehouseModelImplCopyWithImpl<$Res>
 class _$ProviderWarehouseModelImpl implements _ProviderWarehouseModel {
   const _$ProviderWarehouseModelImpl(
       {@JsonKey(name: '_id') required this.id,
-      required this.name,
-      required this.phone,
-      required this.city,
-      required this.address,
-      required this.externalID});
+      this.name,
+      this.phone,
+      this.city,
+      this.address,
+      this.externalID});
 
   factory _$ProviderWarehouseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProviderWarehouseModelImplFromJson(json);
@@ -193,15 +193,15 @@ class _$ProviderWarehouseModelImpl implements _ProviderWarehouseModel {
   @JsonKey(name: '_id')
   final String id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String phone;
+  final String? phone;
   @override
-  final String city;
+  final String? city;
   @override
-  final String address;
+  final String? address;
   @override
-  final String externalID;
+  final String? externalID;
 
   @override
   String toString() {
@@ -247,11 +247,11 @@ class _$ProviderWarehouseModelImpl implements _ProviderWarehouseModel {
 abstract class _ProviderWarehouseModel implements ProviderWarehouseModel {
   const factory _ProviderWarehouseModel(
       {@JsonKey(name: '_id') required final String id,
-      required final String name,
-      required final String phone,
-      required final String city,
-      required final String address,
-      required final String externalID}) = _$ProviderWarehouseModelImpl;
+      final String? name,
+      final String? phone,
+      final String? city,
+      final String? address,
+      final String? externalID}) = _$ProviderWarehouseModelImpl;
 
   factory _ProviderWarehouseModel.fromJson(Map<String, dynamic> json) =
       _$ProviderWarehouseModelImpl.fromJson;
@@ -260,15 +260,15 @@ abstract class _ProviderWarehouseModel implements ProviderWarehouseModel {
   @JsonKey(name: '_id')
   String get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get phone;
+  String? get phone;
   @override
-  String get city;
+  String? get city;
   @override
-  String get address;
+  String? get address;
   @override
-  String get externalID;
+  String? get externalID;
 
   /// Create a copy of ProviderWarehouseModel
   /// with the given fields replaced by the non-null parameter values.

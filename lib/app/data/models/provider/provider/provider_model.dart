@@ -12,13 +12,18 @@ abstract class ProviderModel implements _$ProviderModel {
 
   const factory ProviderModel({
     @JsonKey(name: '_id') required String id,
-    required List<ProviderWarehouseModel> warehouses,
-    required String name,
-    required String email,
-    required String document,
-    required String phone,
-    required String externalID,
-    required bool isActive,
+    List<ProviderWarehouseModel>? warehouses,
+    int? externalID,
+    String? name,
+    String? email,
+    String? document,
+    String? phone,
+    bool? isActive,
+    int? porcentage,
+    String? createdAt,
+    String? uploadDate,
+    String? updatedAt,
+    String? avatarUrl,
   }) = _ProviderModel;
 
   factory ProviderModel.fromJson(Map<String, dynamic> json) =>

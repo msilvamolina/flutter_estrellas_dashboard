@@ -10,6 +10,7 @@ import 'package:http/http.dart';
 
 import '../../../../services/api_services.dart';
 import '../../../models/product/product/product.dart';
+import '../../../models/provider/provider/provider_model.dart';
 
 class ProvidersRepository {
   ApiServices services = ApiServices();
@@ -17,9 +18,8 @@ class ProvidersRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseStorage _firebaseStorage = Get.find<FirebaseStorage>();
 
-  Future<Either<String, dynamic>> getProvidersFromBackend() async {
+  Future<Either<String, List<ProviderModel>>> getProvidersFromBackend() async {
     String url = 'api/provider/get-all';
-    print('getProvidersFromBackend');
     try {
       Response response = await services.getWithToken(url: url);
 
@@ -27,19 +27,18 @@ class ProvidersRepository {
         return left('Error status code: ${response.statusCode}');
       }
       dynamic json = jsonDecode(response.body);
-      log(json.toString());
       List<dynamic> bodyList = json['data']['providers'];
 
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
+      if (bodyList.isEmpty) {
+        return left('List Products is empty');
+      }
 
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
+      List<ProviderModel> list = List<ProviderModel>.generate(
+        bodyList.length,
+        (int index) => ProviderModel.fromJson(bodyList[index]),
+      );
 
-      return right(unit);
+      return right(list);
     } catch (e) {
       return left(e.toString());
     }

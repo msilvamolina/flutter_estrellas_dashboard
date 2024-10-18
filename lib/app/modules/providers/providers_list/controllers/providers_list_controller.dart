@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/models/product/product/product.dart';
@@ -7,8 +10,8 @@ import '../../../../data/providers/repositories/providers/providers_repository.d
 
 class ProvidersListController extends GetxController {
   final ProvidersRepository _repository = ProvidersRepository();
-  final List<ProductModel> _data = <ProductModel>[];
-  List<ProductModel> get data => _data;
+  final List<ProviderModel> _data = <ProviderModel>[];
+  List<ProviderModel> get data => _data;
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
@@ -31,17 +34,16 @@ class ProvidersListController extends GetxController {
     _data.clear();
     update(['tab1View']);
 
-    await _repository.getProvidersFromBackend();
+    Either<String, List<ProviderModel>> response =
+        await _repository.getProvidersFromBackend();
+    _isLoading = false;
 
-    // Either<String, List<ProductModel>> response =
-    //     await _repository.getProvidersFromBackend();
-    // _isLoading = false;
-
-    // response.fold((error) {
-    //   _responseError = error;
-    // }, (list) {
-    //   _data.addAll(list);
-    // });
-    // update(['tab1View']);
+    response.fold((error) {
+      _responseError = error;
+    }, (list) {
+      log(list.toString());
+      _data.addAll(list);
+    });
+    update(['tab1View']);
   }
 }
