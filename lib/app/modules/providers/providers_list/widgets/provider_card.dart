@@ -16,7 +16,7 @@ class ProviderCard extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: () =>
-            Get.toNamed(Routes.PRODUCT_ESTRELLAS_1, arguments: provider),
+            Get.toNamed(Routes.PROVIDERS_ESTRELLAS_1, arguments: provider),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
