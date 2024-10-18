@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/providers_list_controller.dart';
+import '../widgets/providers_error_widget.dart';
+import '../widgets/providers_list_widget.dart';
+import '../widgets/providers_loading_widget.dart';
 
 class TabEstrellas1 extends StatelessWidget {
   const TabEstrellas1({required this.controller, super.key});
@@ -17,12 +20,11 @@ class TabEstrellas1 extends StatelessWidget {
     return GetBuilder<ProvidersListController>(
       id: 'tab1View',
       builder: (_) {
-        return Text(controller.data.toString());
-        // return !controller.isLoading
-        //     ? controller.responseError != null
-        //         ? ProductsErrorWidget(error: controller.responseError!)
-        //         : ProductsListWidget(list: controller.data)
-        //     : const ProdutcsLoadingWidget();
+        return !controller.isLoading
+            ? controller.responseError != null
+                ? ProvidersErrorWidget(error: controller.responseError!)
+                : ProvidersListWidget(list: controller.data)
+            : const ProvidersLoadingWidget();
       },
     );
   }

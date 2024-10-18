@@ -41,7 +41,6 @@ class ProvidersListController extends GetxController {
     response.fold((error) {
       _responseError = error;
     }, (list) {
-      log(list.toString());
       _data.addAll(list);
     });
     update(['tab1View']);
