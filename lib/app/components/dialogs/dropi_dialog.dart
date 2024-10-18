@@ -69,7 +69,7 @@ class LoaderDropiDialog extends StatelessWidget {
                               : SvgPicture.asset(
                                   'assets/svg/dropi.svg',
                                   width: 180,
-                                  colorFilter: ColorFilter.mode(
+                                  colorFilter: const ColorFilter.mode(
                                     Colors.red,
                                     BlendMode.srcIn,
                                   ),
@@ -86,7 +86,7 @@ class LoaderDropiDialog extends StatelessWidget {
                               : SvgPicture.asset(
                                   'assets/svg/logo.svg',
                                   width: 180,
-                                  colorFilter: ColorFilter.mode(
+                                  colorFilter: const ColorFilter.mode(
                                     Colors.red,
                                     BlendMode.srcIn,
                                   ),
@@ -149,14 +149,14 @@ class LoaderDropiDialog extends StatelessWidget {
                                       fontWeight: FontWeight.w600,
                                       color: Colors.redAccent[100]),
                                 ),
-                                SizedBox(height: 22),
+                                const SizedBox(height: 22),
                                 Text(
                                   '¿Qué pasó?',
                                   textAlign: TextAlign.center,
                                   style: TypographyStyle.h4Mobile
                                       .copyWith(fontWeight: FontWeight.w500),
                                 ),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Card(
                                   color: Colors.red[800],
                                   child: Padding(
