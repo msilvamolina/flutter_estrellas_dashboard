@@ -6,6 +6,8 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
+import '../modules/providers/create_provider/bindings/create_provider_binding.dart';
+import '../modules/providers/create_provider/views/create_provider_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/products/create_product/bindings/create_product_binding.dart';
@@ -153,6 +155,11 @@ class AppPages {
       name: _Paths.PROVIDERS_WAREHOUSES,
       page: () => const ProvidersWarehousesView(),
       binding: ProvidersWarehousesBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_PROVIDER,
+      page: () => const CreateProviderView(),
+      binding: CreateProviderBinding(),
     ),
   ];
 }

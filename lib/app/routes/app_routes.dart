@@ -28,6 +28,7 @@ abstract class Routes {
   static const PROVIDERS_LIST = _Paths.PROVIDERS_LIST;
   static const PROVIDERS_ESTRELLAS_1 = _Paths.PROVIDERS_ESTRELLAS_1;
   static const PROVIDERS_WAREHOUSES = _Paths.PROVIDERS_WAREHOUSES;
+  static const CREATE_PROVIDER = _Paths.CREATE_PROVIDER;
 }
 
 abstract class _Paths {
@@ -57,4 +58,5 @@ abstract class _Paths {
   static const PROVIDERS_LIST = '/providers-list';
   static const PROVIDERS_ESTRELLAS_1 = '/providers-estrellas-1';
   static const PROVIDERS_WAREHOUSES = '/providers-warehouses';
+  static const CREATE_PROVIDER = '/create-provider';
 }
