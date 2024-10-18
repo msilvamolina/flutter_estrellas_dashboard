@@ -36,6 +36,9 @@ class MainController extends GetxController {
   bool _isWelcome = false;
   bool _isThemeModeDark = false;
 
+  String? _token;
+  String? get token => _token;
+
   bool get isThemeModeDark => _isThemeModeDark;
 
   RxBool isThemeModeDark2 = false.obs;
@@ -55,6 +58,10 @@ class MainController extends GetxController {
 
     checkUser();
     super.onReady();
+  }
+
+  void setToken(String value) {
+    _token = value;
   }
 
   void checkTheme() {
