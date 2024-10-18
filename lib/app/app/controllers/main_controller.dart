@@ -48,6 +48,7 @@ class MainController extends GetxController {
   dynamic get themeColor => _themeColor;
 
   RxString dropiMessage = ''.obs;
+  RxBool dropiDialog = true.obs;
 
   @override
   Future<void> onInit() async {
@@ -68,7 +69,11 @@ class MainController extends GetxController {
   }
 
   void setDropiMessage(String message) {
-    dropiMessage?.value = message;
+    dropiMessage.value = message;
+  }
+
+  void setDropiDialog(bool value) {
+    dropiDialog.value = value;
   }
 
   void checkTheme() {
