@@ -24,10 +24,12 @@ import '../modules/products/product_variants/bindings/product_variants_binding.d
 import '../modules/products/product_variants/views/product_variants_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
 import '../modules/products/products/views/products_view.dart';
-import '../modules/providers/providers_list/bindings/providers_list_binding.dart';
-import '../modules/providers/providers_list/views/providers_list_view.dart';
 import '../modules/providers/providers_estrellas_1/bindings/providers_estrellas_1_binding.dart';
 import '../modules/providers/providers_estrellas_1/views/providers_estrellas_1_view.dart';
+import '../modules/providers/providers_list/bindings/providers_list_binding.dart';
+import '../modules/providers/providers_list/views/providers_list_view.dart';
+import '../modules/providers/providers_warehouses/bindings/providers_warehouses_binding.dart';
+import '../modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
@@ -146,6 +148,11 @@ class AppPages {
       name: _Paths.PROVIDERS_ESTRELLAS_1,
       page: () => const ProvidersEstrellas1View(),
       binding: ProvidersEstrellas1Binding(),
+    ),
+    GetPage(
+      name: _Paths.PROVIDERS_WAREHOUSES,
+      page: () => const ProvidersWarehousesView(),
+      binding: ProvidersWarehousesBinding(),
     ),
   ];
 }

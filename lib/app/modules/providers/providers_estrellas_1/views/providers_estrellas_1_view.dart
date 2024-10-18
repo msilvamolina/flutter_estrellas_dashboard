@@ -31,7 +31,7 @@ class ProvidersEstrellas1View extends GetView<ProvidersEstrellas1Controller> {
           FloatingActionButton(
             child: const Icon(Icons.warehouse),
             onPressed: () => Get.toNamed(
-              Routes.PRODUCT_VARIANTS,
+              Routes.PROVIDERS_WAREHOUSES,
               arguments: controller.provider,
             ),
           ),
