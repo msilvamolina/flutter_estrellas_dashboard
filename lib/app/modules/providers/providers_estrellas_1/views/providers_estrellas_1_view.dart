@@ -25,10 +25,25 @@ class ProvidersEstrellas1View extends GetView<ProvidersEstrellas1Controller> {
 
     return MainLayout(
       showMenu: false,
-      floatingActionButton: CustomFloatingActionButton(
-        label: 'Copiar a 2.0',
-        icon: Icons.compare_arrows_rounded,
-        onPressed: controller.copyToFirebase,
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            child: const Icon(Icons.warehouse),
+            onPressed: () => Get.toNamed(
+              Routes.PRODUCT_VARIANTS,
+              arguments: controller.provider,
+            ),
+          ),
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            child: const Icon(Icons.compare_arrows_rounded),
+            onPressed: () => Get.toNamed(
+              Routes.PRODUCT_IMAGES,
+              arguments: controller.provider,
+            ),
+          ),
+        ],
       ),
       maxWidth: double.infinity,
       currentRoute: Routes.PROVIDERS_ESTRELLAS_1,
