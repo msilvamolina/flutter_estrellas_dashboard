@@ -8,6 +8,7 @@ import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:get/get.dart';
 import 'package:estrellas_dashboard/app/themes/themes/black.dart';
 
+import '../../components/dialogs/dropi_dialog.dart';
 import '../../components/snackbars/snackbars.dart';
 import '../../data/models/theme_model.dart';
 import '../../data/models/user_data/user_data.dart';
@@ -46,6 +47,8 @@ class MainController extends GetxController {
   dynamic _themeColor;
   dynamic get themeColor => _themeColor;
 
+  RxString dropiMessage = ''.obs;
+
   @override
   Future<void> onInit() async {
     _isWelcome = await localStorage.getWelcome();
@@ -62,6 +65,10 @@ class MainController extends GetxController {
 
   void setToken(String value) {
     _token = value;
+  }
+
+  void setDropiMessage(String message) {
+    dropiMessage?.value = message;
   }
 
   void checkTheme() {
@@ -188,6 +195,17 @@ class MainController extends GetxController {
       context: Get.context!,
       builder: (BuildContext context) {
         return LoaderDialog(title: title, message: message);
+      },
+    );
+  }
+
+  void showDropiLoader() {
+    setDropiMessage('Espero un momento por favor');
+    showDialog(
+      barrierColor: Colors.transparent,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return const LoaderDropiDialog();
       },
     );
   }

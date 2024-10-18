@@ -54,7 +54,8 @@ class CreateProviderView extends GetView<CreateProviderController> {
                     ReactiveFormConsumer(
                       builder: (context, form, child) => LoadingButton(
                         label: 'Subir video',
-                        isLoading: controller.loading,
+                        // isLoading: controller.loading,
+                        isLoading: false,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)
                             : null,

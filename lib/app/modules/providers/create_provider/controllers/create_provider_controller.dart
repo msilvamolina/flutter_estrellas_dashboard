@@ -57,6 +57,13 @@ class CreateProviderController extends GetxController {
   //     (ProductFirebaseModel element) => element.id == _productSelected);
 
   Future<void> sendForm(Map<String, Object?> data) async {
+    _mainController.showDropiLoader();
+
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Future.delayed(Duration(seconds: 1), () {
+      _mainController.setDropiMessage('Generando Token');
+    });
     // String videoName = data[Fields.videoName.name].toString();
     // String uuid = const Uuid().v4();
     // String videoId = 'video-$uuid';
