@@ -57,12 +57,39 @@ class CreateProviderController extends GetxController {
   //     (ProductFirebaseModel element) => element.id == _productSelected);
 
   Future<void> sendForm(Map<String, Object?> data) async {
+    _mainController.setDropiDialog(true);
+
     _mainController.showDropiLoader();
 
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Future.delayed(Duration(seconds: 1), () {
+    await Future.delayed(Duration(seconds: 2), () {
       _mainController.setDropiMessage('Generando Token');
+    });
+
+    await Future.delayed(Duration(seconds: 4), () {
+      _mainController.setDropiMessage('Conectando con provider/create');
+    });
+
+    await Future.delayed(Duration(seconds: 4), () {
+      _mainController.setDropiMessage('Success!');
+    });
+
+    await Future.delayed(Duration(seconds: 2), () {
+      _mainController.setDropiDialog(false);
+      _mainController.setDropiMessage('Subiendo imagen');
+    });
+
+    await Future.delayed(Duration(seconds: 4), () {
+      _mainController.setDropiMessage('Guardando datos en firebase');
+    });
+
+    await Future.delayed(Duration(seconds: 4), () {
+      _mainController.setDropiMessage('Success!');
+    });
+
+    await Future.delayed(Duration(seconds: 2), () {
+      Get.back();
     });
     // String videoName = data[Fields.videoName.name].toString();
     // String uuid = const Uuid().v4();
