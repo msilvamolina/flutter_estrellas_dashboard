@@ -25,6 +25,7 @@ abstract class Routes {
   static const PRODUCT_VARIANTS = _Paths.PRODUCT_VARIANTS;
   static const PRODUCT_ADD_VARIANT = _Paths.PRODUCT_ADD_VARIANT;
   static const CREATE_PRODUCT = _Paths.CREATE_PRODUCT;
+  static const PROVIDERS_LIST = _Paths.PROVIDERS_LIST;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const PRODUCT_VARIANTS = '/product-variants';
   static const PRODUCT_ADD_VARIANT = '/product-add-variant';
   static const CREATE_PRODUCT = '/create-product';
+  static const PROVIDERS_LIST = '/providers-list';
 }

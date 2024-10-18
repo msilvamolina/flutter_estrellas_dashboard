@@ -6,10 +6,10 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/products/create_product/bindings/create_product_binding.dart';
-import '../modules/products/create_product/views/create_product_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/products/create_product/bindings/create_product_binding.dart';
+import '../modules/products/create_product/views/create_product_view.dart';
 import '../modules/products/product_add_image/bindings/product_add_image_binding.dart';
 import '../modules/products/product_add_image/views/product_add_image_view.dart';
 import '../modules/products/product_add_variant/bindings/product_add_variant_binding.dart';
@@ -24,6 +24,8 @@ import '../modules/products/product_variants/bindings/product_variants_binding.d
 import '../modules/products/product_variants/views/product_variants_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
 import '../modules/products/products/views/products_view.dart';
+import '../modules/providers/providers_list/bindings/providers_list_binding.dart';
+import '../modules/providers/providers_list/views/providers_list_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
@@ -132,6 +134,11 @@ class AppPages {
       name: _Paths.CREATE_PRODUCT,
       page: () => const CreateProductView(),
       binding: CreateProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROVIDERS_LIST,
+      page: () => const ProvidersListView(),
+      binding: ProvidersListBinding(),
     ),
   ];
 }
