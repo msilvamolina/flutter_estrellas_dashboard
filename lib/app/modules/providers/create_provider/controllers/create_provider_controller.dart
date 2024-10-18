@@ -72,25 +72,30 @@ class CreateProviderController extends GetxController {
     });
 
     await Future.delayed(Duration(seconds: 4), () {
-      _mainController.setDropiMessage('Success!');
+      _mainController.setDropiDialogError(
+          true, 'Este proveedor ya existe en la base de datos de dropi');
     });
 
-    await Future.delayed(Duration(seconds: 2), () {
-      _mainController.setDropiDialog(false);
-      _mainController.setDropiMessage('Subiendo imagen');
-    });
+    // await Future.delayed(Duration(seconds: 4), () {
+    //   _mainController.setDropiMessage('Success!');
+    // });
 
-    await Future.delayed(Duration(seconds: 4), () {
-      _mainController.setDropiMessage('Guardando datos en firebase');
-    });
+    // await Future.delayed(Duration(seconds: 2), () {
+    //   _mainController.setDropiDialog(false);
+    //   _mainController.setDropiMessage('Subiendo imagen');
+    // });
 
-    await Future.delayed(Duration(seconds: 4), () {
-      _mainController.setDropiMessage('Success!');
-    });
+    // await Future.delayed(Duration(seconds: 4), () {
+    //   _mainController.setDropiMessage('Guardando datos en firebase');
+    // });
 
-    await Future.delayed(Duration(seconds: 2), () {
-      Get.back();
-    });
+    // await Future.delayed(Duration(seconds: 4), () {
+    //   _mainController.setDropiMessage('Success!');
+    // });
+
+    // await Future.delayed(Duration(seconds: 2), () {
+    //   Get.back();
+    // });
     // String videoName = data[Fields.videoName.name].toString();
     // String uuid = const Uuid().v4();
     // String videoId = 'video-$uuid';

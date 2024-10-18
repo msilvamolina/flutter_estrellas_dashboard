@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/components/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,7 +19,7 @@ class LoaderDropiDialog extends StatelessWidget {
       color: Colors.transparent,
       child: Obx(
         () => AbsorbPointer(
-          absorbing: true,
+          absorbing: !mainController.dropiDialogIsError.value,
           child: Stack(
             children: [
               BackdropFilter(
@@ -29,7 +30,9 @@ class LoaderDropiDialog extends StatelessWidget {
                       ? CrossFadeState.showFirst
                       : CrossFadeState.showSecond,
                   firstChild: Container(
-                    color: Colors.orange[800]!.withOpacity(0.5),
+                    color: !mainController.dropiDialogIsError.value
+                        ? Colors.orange[800]!.withOpacity(0.5)
+                        : Colors.red[900]!.withOpacity(0.5),
                     width: double.infinity,
                     height: double.infinity,
                   ),
@@ -52,14 +55,23 @@ class LoaderDropiDialog extends StatelessWidget {
                           crossFadeState: mainController.dropiDialog.value
                               ? CrossFadeState.showFirst
                               : CrossFadeState.showSecond,
-                          firstChild: Shimmer.fromColors(
-                            baseColor: Colors.orange,
-                            highlightColor: Colors.yellowAccent,
-                            child: SvgPicture.asset(
-                              'assets/svg/dropi.svg',
-                              width: 140,
-                            ),
-                          ),
+                          firstChild: !mainController.dropiDialogIsError.value
+                              ? Shimmer.fromColors(
+                                  baseColor: Colors.orange,
+                                  highlightColor: Colors.yellowAccent,
+                                  child: SvgPicture.asset(
+                                    'assets/svg/dropi.svg',
+                                    width: 140,
+                                  ),
+                                )
+                              : SvgPicture.asset(
+                                  'assets/svg/dropi.svg',
+                                  width: 180,
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.red,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
                           secondChild: Shimmer.fromColors(
                             baseColor: Colors.green,
                             highlightColor: Colors.greenAccent,
@@ -108,6 +120,85 @@ class LoaderDropiDialog extends StatelessWidget {
                             style: TypographyStyle.bodyRegularMedium
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
+                        ),
+                        AnimatedCrossFade(
+                          duration: const Duration(milliseconds: 500),
+                          crossFadeState:
+                              mainController.dropiDialogIsError.value
+                                  ? CrossFadeState.showFirst
+                                  : CrossFadeState.showSecond,
+                          firstChild: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Ocurrió un error',
+                                  textAlign: TextAlign.center,
+                                  style: TypographyStyle.h4Mobile.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.redAccent[100]),
+                                ),
+                                SizedBox(height: 22),
+                                Text(
+                                  '¿Qué pasó?',
+                                  textAlign: TextAlign.center,
+                                  style: TypographyStyle.h4Mobile
+                                      .copyWith(fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 4),
+                                Card(
+                                  color: Colors.red[800],
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 16),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          mainController.dropiDialogError.value,
+                                          textAlign: TextAlign.center,
+                                          style: TypographyStyle
+                                              .bodyRegularMedium
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 26),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Colors.white, // Fondo blanco
+                                    foregroundColor: Colors.red, // Texto rojo
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          8), // Si deseas bordes redondeados
+                                    ),
+                                    padding: EdgeInsets.all(
+                                        8), // Padding para el botón
+                                  ),
+                                  child: Container(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'Salir',
+                                      textAlign: TextAlign.center,
+                                      style: TypographyStyle.bodyBlackLarge
+                                          .copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors
+                                            .red, // Texto rojo (si es necesario)
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          secondChild: const SizedBox.shrink(),
                         ),
                       ],
                     ),

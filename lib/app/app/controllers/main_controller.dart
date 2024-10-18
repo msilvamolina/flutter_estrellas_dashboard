@@ -50,6 +50,9 @@ class MainController extends GetxController {
   RxString dropiMessage = ''.obs;
   RxBool dropiDialog = true.obs;
 
+  RxString dropiDialogError = ''.obs;
+  RxBool dropiDialogIsError = false.obs;
+
   @override
   Future<void> onInit() async {
     _isWelcome = await localStorage.getWelcome();
@@ -74,6 +77,11 @@ class MainController extends GetxController {
 
   void setDropiDialog(bool value) {
     dropiDialog.value = value;
+  }
+
+  void setDropiDialogError(bool value, String message) {
+    dropiDialogIsError.value = value;
+    dropiDialogError.value = message;
   }
 
   void checkTheme() {
@@ -205,6 +213,7 @@ class MainController extends GetxController {
   }
 
   void showDropiLoader() {
+    setDropiDialogError(false, '');
     setDropiMessage('Espero un momento por favor');
     showDialog(
       barrierColor: Colors.transparent,
