@@ -37,7 +37,9 @@ class LoaderDropiDialog extends StatelessWidget {
                     height: double.infinity,
                   ),
                   secondChild: Container(
-                    color: Colors.green[800]!.withOpacity(0.5),
+                    color: !mainController.dropiDialogIsError.value
+                        ? Colors.green[800]!.withOpacity(0.5)
+                        : Colors.red[900]!.withOpacity(0.5),
                     width: double.infinity,
                     height: double.infinity,
                   ),
@@ -72,14 +74,23 @@ class LoaderDropiDialog extends StatelessWidget {
                                     BlendMode.srcIn,
                                   ),
                                 ),
-                          secondChild: Shimmer.fromColors(
-                            baseColor: Colors.green,
-                            highlightColor: Colors.greenAccent,
-                            child: SvgPicture.asset(
-                              'assets/svg/logo.svg',
-                              width: 180,
-                            ),
-                          ),
+                          secondChild: !mainController.dropiDialogIsError.value
+                              ? Shimmer.fromColors(
+                                  baseColor: Colors.green,
+                                  highlightColor: Colors.greenAccent,
+                                  child: SvgPicture.asset(
+                                    'assets/svg/logo.svg',
+                                    width: 180,
+                                  ),
+                                )
+                              : SvgPicture.asset(
+                                  'assets/svg/logo.svg',
+                                  width: 180,
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.red,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
                         ),
 
                         AnimatedCrossFade(
@@ -153,7 +164,7 @@ class LoaderDropiDialog extends StatelessWidget {
                                         horizontal: 12, vertical: 16),
                                     child: Column(
                                       children: [
-                                        Text(
+                                        SelectableText(
                                           mainController.dropiDialogError.value,
                                           textAlign: TextAlign.center,
                                           style: TypographyStyle

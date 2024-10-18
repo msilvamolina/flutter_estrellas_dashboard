@@ -72,22 +72,22 @@ class CreateProviderController extends GetxController {
     });
 
     await Future.delayed(Duration(seconds: 4), () {
-      _mainController.setDropiDialogError(
-          true, 'Este proveedor ya existe en la base de datos de dropi');
+      _mainController.setDropiMessage('Success!');
     });
 
-    // await Future.delayed(Duration(seconds: 4), () {
-    //   _mainController.setDropiMessage('Success!');
-    // });
+    await Future.delayed(Duration(seconds: 2), () {
+      _mainController.setDropiDialog(false);
+      _mainController.setDropiMessage('Subiendo imagen');
+    });
 
-    // await Future.delayed(Duration(seconds: 2), () {
-    //   _mainController.setDropiDialog(false);
-    //   _mainController.setDropiMessage('Subiendo imagen');
-    // });
+    await Future.delayed(Duration(seconds: 4), () {
+      _mainController.setDropiMessage('Guardando datos en firebase');
+    });
 
-    // await Future.delayed(Duration(seconds: 4), () {
-    //   _mainController.setDropiMessage('Guardando datos en firebase');
-    // });
+    await Future.delayed(Duration(seconds: 2), () {
+      _mainController.setDropiDialogError(true,
+          'Este proveedor ya existe en firebase, pero con otro nombre. El id del proveedor es: 67113828273871d1eaf51334');
+    });
 
     // await Future.delayed(Duration(seconds: 4), () {
     //   _mainController.setDropiMessage('Success!');
