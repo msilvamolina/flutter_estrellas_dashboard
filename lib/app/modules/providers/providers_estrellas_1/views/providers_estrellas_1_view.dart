@@ -42,101 +42,69 @@ class ProvidersEstrellas1View extends GetView<ProvidersEstrellas1Controller> {
             widget: TableRowText(text: controller.provider.id),
           ),
           TableRowModel(
-            label: 'externalId',
-            widget:
-                TableRowText(text: controller.provider.externalID.toString()),
-          ),
-
-          TableRowModel(
-            label: 'name',
-            widget: TableRowText(text: controller.provider.name.toString()),
+            label: 'avatarUrl',
+            widget: TableRowInsideColumn(
+              cellWidth: 70,
+              imageUrl: 'https://storage.googleapis.com/dev_bucket_estrellas/' +
+                  (controller.provider.avatarUrl ?? ''),
+              rows: [
+                TableRowStringsModel(
+                  label: 'url',
+                  text: controller.provider.avatarUrl ?? '',
+                ),
+              ],
+            ),
           ),
           TableRowModel(
             label: 'active',
             widget: TableRowText(text: controller.provider.isActive.toString()),
           ),
-          // TableRowModel(
-          //   label: 'suggestedPrice',
-          //   widget: TableRowText(
-          //       text: MoneyAmount.convertMoneyString(
-          //           controller.provider.suggestedPrice)),
-          // ),
-          // TableRowModel(
-          //   label: 'isPercentage',
-          //   widget:
-          //       TableRowText(text: controller.provider.isPercentage.toString()),
-          // ),
-          // TableRowModel(
-          //   label: 'type',
-          //   widget: TableRowText(text: controller.provider.type),
-          // ),
-          // TableRowModel(
-          //   label: 'sku',
-          //   widget: TableRowText(text: controller.provider.sku),
-          // ),
-          // TableRowModel(
-          //   label: 'category',
-          //   widget: TableRowInsideColumn(
-          //     cellWidth: 50,
-          //     rows: [
-          //       TableRowStringsModel(
-          //         label: 'id',
-          //         text: controller.provider.category.id,
-          //       ),
-          //       TableRowStringsModel(
-          //         label: 'name',
-          //         text: controller.provider.category.name,
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // TableRowModel(
-          //   label: 'provider',
-          //   widget: TableRowInsideColumn(
-          //     cellWidth: 70,
-          //     imageUrl: controller.provider.provider.avatarUrl,
-          //     rows: [
-          //       TableRowStringsModel(
-          //         label: 'id',
-          //         text: controller.provider.provider.id,
-          //       ),
-          //       TableRowStringsModel(
-          //         label: 'name',
-          //         text: controller.provider.provider.name,
-          //       ),
-          //       TableRowStringsModel(
-          //         label: 'avatarUrl',
-          //         text: controller.provider.provider.avatarUrl,
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // TableRowModel(
-          //   label: 'thumbnail',
-          //   widget: TableRowImage(url: controller.provider.thumbnail),
-          // ),
-          // TableRowModel(
-          //   label: 'createdAt',
-          //   widget: TableRowDate(date: controller.provider.createdAt),
-          // ),
-          // TableRowModel(
-          //   label: 'updatedAt',
-          //   widget: TableRowDate(date: controller.provider.updatedAt),
-          // ),
-          // TableRowModel(
-          //   label: 'uploadDate',
-          //   widget: TableRowDate(date: controller.provider.uploadDate),
-          // ),
-          // TableRowModel(
-          //   label: 'description',
-          //   widget: TableRowText(text: controller.provider.description),
-          // ),
-          // TableRowModel(
-          //   label: '',
-          //   widget: SizedBox(
-          //     height: 80,
-          //   ),
-          // ),
+          TableRowModel(
+            label: 'externalId',
+            widget:
+                TableRowText(text: controller.provider.externalID.toString()),
+          ),
+          TableRowModel(
+            label: 'name',
+            widget: TableRowText(text: controller.provider.name.toString()),
+          ),
+          TableRowModel(
+            label: 'email',
+            widget: TableRowText(text: controller.provider.email.toString()),
+          ),
+          TableRowModel(
+            label: 'document',
+            widget: TableRowText(text: controller.provider.document.toString()),
+          ),
+          TableRowModel(
+            label: 'phone',
+            widget: TableRowText(text: controller.provider.phone.toString()),
+          ),
+          TableRowModel(
+            label: 'porcentage',
+            widget:
+                TableRowText(text: controller.provider.porcentage.toString()),
+          ),
+          TableRowModel(
+            label: 'createdAt',
+            widget: TableRowDate(date: controller.provider.createdAt ?? ''),
+          ),
+          if (controller.provider.updatedAt != null)
+            TableRowModel(
+              label: 'updatedAt',
+              widget: TableRowDate(date: controller.provider.updatedAt ?? ''),
+            ),
+          if (controller.provider.uploadDate != null)
+            TableRowModel(
+              label: 'uploadDate',
+              widget: TableRowDate(date: controller.provider.uploadDate ?? ''),
+            ),
+          TableRowModel(
+            label: '',
+            widget: SizedBox(
+              height: 80,
+            ),
+          ),
         ],
       ),
     );
