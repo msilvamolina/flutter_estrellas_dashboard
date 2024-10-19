@@ -39,12 +39,13 @@ class CreateProviderView extends GetView<CreateProviderController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset(
-                                'assets/images/picture.png',
+                                controller.imagePath ??
+                                    'assets/images/picture.png',
                                 width: 80,
                               ),
                               const SizedBox(width: 12),
-                              Padding(
-                                padding: const EdgeInsets.all(4),
+                              // Elimina el Padding alrededor del Expanded
+                              Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.max,
@@ -55,15 +56,15 @@ class CreateProviderView extends GetView<CreateProviderController> {
                                       style: TypographyStyle.bodyBlackLarge
                                           .copyWith(color: primary),
                                     ),
-                                    SizedBox(height: 4),
+                                    const SizedBox(height: 4),
                                     Text(
-                                      '(Selecciona una foto)',
+                                      controller.imagePath ??
+                                          '(Selecciona una foto)',
                                       style: TypographyStyle.bodyRegularSmall,
                                     ),
                                   ],
                                 ),
                               ),
-                              const Spacer(),
                               Icon(
                                 Icons.chevron_right_rounded,
                                 color: primary,

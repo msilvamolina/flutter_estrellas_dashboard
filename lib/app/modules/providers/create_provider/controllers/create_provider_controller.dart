@@ -1,7 +1,10 @@
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/controllers/main_controller.dart';
+import '../../../../utils/utils_image.dart';
 
 enum Fields {
   name('name'),
@@ -28,8 +31,8 @@ class CreateProviderController extends GetxController {
   // String? _productSelected;
   // String? get productSelected => _productSelected;
 
-  // String? _productsError;
-  // String? get productsError => _productsError;
+  String? _imagePath;
+  String? get imagePath => _imagePath;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
@@ -96,10 +99,16 @@ class CreateProviderController extends GetxController {
   // ProductFirebaseModel? getProduct() => listProducts.firstWhereOrNull(
   //     (ProductFirebaseModel element) => element.id == _productSelected);
 
-  void pickImage() {
-    
+  Future<void> pickImage() async {
+    _imagePath = await UtilsImage.pickImage();
+    update(['view']);
   }
+
   Future<void> sendForm(Map<String, Object?> data) async {
+    if (_imagePath == null) {
+      Get.snackbar('Error', "Tienes que elegir una imagen");
+      return;
+    }
     String name = data[Fields.name.name].toString();
     String surname = data[Fields.surname.name].toString();
     String email = data[Fields.email.name].toString();

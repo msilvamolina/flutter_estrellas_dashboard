@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../app/controllers/main_controller.dart';
 import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
+import '../../../../utils/utils_image.dart';
 
 enum Fields {
   imageName('imageName');
@@ -42,63 +43,31 @@ class ProductAddImageController extends GetxController {
     super.onInit();
   }
 
-  Future<CroppedFile?> cropImage(String imagePath) async {
-    CroppedFile? croppedFile = await ImageCropper().cropImage(
-      sourcePath: imagePath,
-      aspectRatio: const CropAspectRatio(ratioX: 800, ratioY: 800),
-      uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: 'Cropper',
-          toolbarColor: Colors.deepOrange,
-          toolbarWidgetColor: Colors.white,
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-          ],
-        ),
-        IOSUiSettings(
-          rectWidth: 800,
-          rectHeight: 800,
-          title: 'Cropper',
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-          ],
-        ),
-        WebUiSettings(
-          context: Get.context!,
-        ),
-      ],
-    );
-
-    return croppedFile;
-  }
-
   Future<void> sendForm(Map<String, Object?> data) async {
     String name = data[Fields.imageName.name].toString();
     String uuid = const Uuid().v4();
     String imageId = 'image-$uuid';
 
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      CroppedFile? croppedFile = await cropImage(image.path);
-      if (croppedFile != null) {
-        _mainController.showLoader();
+    String? _imagePath = await UtilsImage.pickImage();
 
-        Either<String, Unit> response = await _repository.saveImage(
-          id: imageId,
-          name: name,
-          productId: product.id,
-          path: croppedFile.path,
-        );
+    if (_imagePath != null) {
+      _mainController.showLoader();
+
+      Either<String, Unit> response = await _repository.saveImage(
+        id: imageId,
+        name: name,
+        productId: product.id,
+        path: _imagePath,
+      );
+      Get.back();
+      response.fold((failure) {
+        Get.snackbar("Error", failure);
+        _loading = false;
+        update(['view']);
+      }, (_) {
         Get.back();
-        response.fold((failure) {
-          Get.snackbar("Error", failure);
-          _loading = false;
-          update(['view']);
-        }, (_) {
-          Get.back();
-          Get.snackbar(name, "Guardada exitosamente");
-        });
-      }
+        Get.snackbar(name, "Guardada exitosamente");
+      });
     }
   }
 }
