@@ -96,6 +96,9 @@ class CreateProviderController extends GetxController {
   // ProductFirebaseModel? getProduct() => listProducts.firstWhereOrNull(
   //     (ProductFirebaseModel element) => element.id == _productSelected);
 
+  void pickImage() {
+    
+  }
   Future<void> sendForm(Map<String, Object?> data) async {
     String name = data[Fields.name.name].toString();
     String surname = data[Fields.surname.name].toString();
