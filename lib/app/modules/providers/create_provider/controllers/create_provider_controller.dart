@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,16 +22,8 @@ enum Fields {
 }
 
 class CreateProviderController extends GetxController {
-  // final VideosRepository _repository = VideosRepository();
-  // final ProductsRepository _productsRepository = ProductsRepository();
+  final ProvidersRepository _repository = ProvidersRepository();
   final MainController _mainController = Get.find<MainController>();
-
-  // final RxList<ProductFirebaseModel> _listProducts =
-  //     <ProductFirebaseModel>[].obs;
-  // List<ProductFirebaseModel> get listProducts => _listProducts.toList();
-
-  // String? _productSelected;
-  // String? get productSelected => _productSelected;
 
   String? _imagePath;
   String? get imagePath => _imagePath;
@@ -77,27 +71,10 @@ class CreateProviderController extends GetxController {
         ),
       });
 
-  bool _loading = false;
-  bool get loading => _loading;
-
   @override
   Future<void> onInit() async {
-    // _listProducts.bindStream(_productsRepository.getProductsFromFirebase());
-
     super.onInit();
   }
-
-  // void onProductSelected(String? value) {
-  //   _productSelected = value;
-
-  //   if (value != null) {
-  //     _productsError = null;
-  //   }
-  //   update(['view']);
-  // }
-
-  // ProductFirebaseModel? getProduct() => listProducts.firstWhereOrNull(
-  //     (ProductFirebaseModel element) => element.id == _productSelected);
 
   Future<void> pickImage() async {
     _imagePath = await UtilsImage.pickImage();
@@ -116,88 +93,96 @@ class CreateProviderController extends GetxController {
     String document = data[Fields.document.name].toString();
     String porcentage = data[Fields.porcentage.name].toString();
 
-    print('name $name');
-    print('surname $surname');
-    print('email $email');
-    print('phone $phone');
-    print('document $document');
-    print('porcentage $porcentage');
-    // _mainController.setDropiDialog(true);
+    _mainController.setDropiDialog(true);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
 
-    // _mainController.showDropiLoader();
-
-    // _mainController.setDropiMessage('Iniciando conexión');
-
-    // await Future.delayed(Duration(seconds: 2), () {
-    //   _mainController.setDropiMessage('Generando Token');
-    // });
-
-    // await Future.delayed(Duration(seconds: 4), () {
-    //   _mainController.setDropiMessage('Conectando con provider/create');
-    // });
-
-    // await Future.delayed(Duration(seconds: 4), () {
-    //   _mainController.setDropiMessage('Success!');
-    // });
-
-    // await Future.delayed(Duration(seconds: 2), () {
-    //   _mainController.setDropiDialog(false);
-    //   _mainController.setDropiMessage('Subiendo imagen');
-    // });
-
-    // await Future.delayed(Duration(seconds: 4), () {
-    //   _mainController.setDropiMessage('Guardando datos en firebase');
-    // });
-
-    // await Future.delayed(Duration(seconds: 2), () {
-    //   _mainController.setDropiDialogError(true,
-    //       'Este proveedor ya existe en firebase, pero con otro nombre. El id del proveedor es: 67113828273871d1eaf51334');
-    // });
-
-    // await Future.delayed(Duration(seconds: 4), () {
-    //   _mainController.setDropiMessage('Success!');
-    // });
-
-    // await Future.delayed(Duration(seconds: 2), () {
-    //   Get.back();
-    // });
-    // String videoName = data[Fields.videoName.name].toString();
-    // String uuid = const Uuid().v4();
-    // String videoId = 'video-$uuid';
-
-    // if (_productSelected == null) {
-    //   _productsError = 'Selecciona un producto';
-    //   update(['view']);
-    //   return;
-    // }
-
-    // ProductFirebaseModel? _product = getProduct();
-
-    // if (_product == null) {
-    //   _productsError = 'Selecciona un producto válido';
-    //   update(['view']);
-    //   return;
-    // }
-
-    // final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
-    // if (video != null) {
-    //   _mainController.showLoader();
-
-    //   Either<String, Unit> response = await _repository.uploadVideo(
-    //     videoId: videoId,
-    //     name: videoName,
-    //     videoPath: video.path,
-    //     product: _product,
-    //   );
-    //   Get.back();
-    //   response.fold((failure) {
-    //     Get.snackbar("Error", failure);
-    //     _loading = false;
-    //     update(['view']);
-    //   }, (_) {
-    //     Get.back();
-    //     Get.snackbar(videoName, "Guardado exitosamente");
-    //   });
-    // }
+    Either<String, dynamic> response = await _repository.createProvider(
+      avatarURL: _imagePath!,
+      name: name,
+      surname: surname,
+      email: email,
+      phone: phone,
+      document: document,
+      porcentage: porcentage,
+    );
+    Get.back();
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (_) {
+      Get.back();
+      Get.snackbar('Bien hecho!', "Guardado exitosamente");
+    });
   }
+  // await Future.delayed(Duration(seconds: 2), () {
+  //   _mainController.setDropiMessage('Generando Token');
+  // });
+
+  // await Future.delayed(Duration(seconds: 4), () {
+  //   _mainController.setDropiMessage('Conectando con provider/create');
+  // });
+
+  // await Future.delayed(Duration(seconds: 4), () {
+  //   _mainController.setDropiMessage('Success!');
+  // });
+
+  // await Future.delayed(Duration(seconds: 2), () {
+  //   _mainController.setDropiDialog(false);
+  //   _mainController.setDropiMessage('Subiendo imagen');
+  // });
+
+  // await Future.delayed(Duration(seconds: 4), () {
+  //   _mainController.setDropiMessage('Guardando datos en firebase');
+  // });
+
+  // await Future.delayed(Duration(seconds: 2), () {
+  //   _mainController.setDropiDialogError(true,
+  //       'Este proveedor ya existe en firebase, pero con otro nombre. El id del proveedor es: 67113828273871d1eaf51334');
+  // });
+
+  // await Future.delayed(Duration(seconds: 4), () {
+  //   _mainController.setDropiMessage('Success!');
+  // });
+
+  // await Future.delayed(Duration(seconds: 2), () {
+  //   Get.back();
+  // });
+  // String videoName = data[Fields.videoName.name].toString();
+  // String uuid = const Uuid().v4();
+  // String videoId = 'video-$uuid';
+
+  // if (_productSelected == null) {
+  //   _productsError = 'Selecciona un producto';
+  //   update(['view']);
+  //   return;
+  // }
+
+  // ProductFirebaseModel? _product = getProduct();
+
+  // if (_product == null) {
+  //   _productsError = 'Selecciona un producto válido';
+  //   update(['view']);
+  //   return;
+  // }
+
+  // final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
+  // if (video != null) {
+  //   _mainController.showLoader();
+
+  //   Either<String, Unit> response = await _repository.uploadVideo(
+  //     videoId: videoId,
+  //     name: videoName,
+  //     videoPath: video.path,
+  //     product: _product,
+  //   );
+  //   Get.back();
+  //   response.fold((failure) {
+  //     Get.snackbar("Error", failure);
+  //     _loading = false;
+  //     update(['view']);
+  //   }, (_) {
+  //     Get.back();
+  //     Get.snackbar(videoName, "Guardado exitosamente");
+  //   });
+  // }
 }

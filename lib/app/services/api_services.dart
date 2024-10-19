@@ -6,6 +6,24 @@ import 'package:get/instance_manager.dart';
 import 'package:http/http.dart' as http;
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart';
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
+import 'package:estrellas_dashboard/app/data/models/product_image/product_image_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:get/instance_manager.dart';
+import 'package:http/http.dart';
+
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ApiServices {
   static var client = http.Client();
@@ -21,16 +39,23 @@ class ApiServices {
     return response;
   }
 
-  Future<Response> getWithToken({
-    required String url,
-  }) async {
+  Future<String?> getToken() async {
     MainController mainController = Get.find<MainController>();
+    mainController.setDropiMessage('getToken');
+
     String? token;
     if (mainController.token != null) {
       token = mainController.token;
     } else {
       token = await getTokenFromServer();
     }
+    return token;
+  }
+
+  Future<Response> getWithToken({
+    required String url,
+  }) async {
+    String? token = await getToken();
 
     Map<String, String>? headers = {'x-token': token ?? 'token'};
     var uri = Uri.https(baseUrl, url);
@@ -39,8 +64,50 @@ class ApiServices {
     return response;
   }
 
+  Future<dynamic> postWithFileAndToken({
+    required String url,
+    required Map<String, dynamic> fields,
+    required String fieldImageName,
+    required String fieldImagePath,
+  }) async {
+    MainController mainController = Get.find<MainController>();
+    File imageFile = File(fieldImagePath);
+    var stream = http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    // get file length
+    var length = await imageFile.length();
+    // string to uri
+    var uri = Uri.https(baseUrl, url);
+    // create multipart request
+    var request = http.MultipartRequest("POST", uri);
+
+    fields.forEach((key, value) {
+      request.fields[key] = value;
+    });
+
+    request.headers['x-token'] = await getToken() ?? '';
+
+    // multipart that takes file
+    var multipartFile = http.MultipartFile(fieldImageName, stream, length,
+        filename: basename(imageFile.path));
+
+    mainController.setDropiMessage('Conectando con $url');
+
+    // add file to multipart
+    request.files.add(multipartFile);
+
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
+  }
+
   Future<String?> getTokenFromServer() async {
     MainController mainController = Get.find<MainController>();
+    mainController.setDropiMessage('getTokenFromServer');
 
     try {
       Response response = await post(
