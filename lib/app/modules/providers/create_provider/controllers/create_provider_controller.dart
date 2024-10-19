@@ -4,10 +4,16 @@ import 'package:reactive_forms/reactive_forms.dart';
 import '../../../../app/controllers/main_controller.dart';
 
 enum Fields {
-  videoName('videoName');
+  name('name'),
+  email('email'),
+  surname('surname'),
+  phone('phone'),
+  document('document'),
+  porcentage('porcentage'),
+  ;
 
-  const Fields(this.name);
-  final String name;
+  const Fields(this.text);
+  final String text;
 }
 
 class CreateProviderController extends GetxController {
@@ -26,10 +32,44 @@ class CreateProviderController extends GetxController {
   // String? get productsError => _productsError;
 
   FormGroup buildForm() => fb.group(<String, Object>{
-        Fields.videoName.name: FormControl<String>(
+        Fields.name.name: FormControl<String>(
           validators: [
             Validators.required,
             Validators.minLength(4),
+          ],
+        ),
+        Fields.surname.name: FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.minLength(4),
+          ],
+        ),
+        Fields.email.name: FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.email,
+            Validators.minLength(4),
+          ],
+        ),
+        Fields.phone.name: FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.number(),
+            Validators.minLength(4),
+          ],
+        ),
+        Fields.document.name: FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.number(),
+            Validators.minLength(4),
+          ],
+        ),
+        Fields.porcentage.name: FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.number(),
+            Validators.minLength(1),
           ],
         ),
       });
@@ -57,37 +97,50 @@ class CreateProviderController extends GetxController {
   //     (ProductFirebaseModel element) => element.id == _productSelected);
 
   Future<void> sendForm(Map<String, Object?> data) async {
-    _mainController.setDropiDialog(true);
+    String name = data[Fields.name.name].toString();
+    String surname = data[Fields.surname.name].toString();
+    String email = data[Fields.email.name].toString();
+    String phone = data[Fields.phone.name].toString();
+    String document = data[Fields.document.name].toString();
+    String porcentage = data[Fields.porcentage.name].toString();
 
-    _mainController.showDropiLoader();
+    print('name $name');
+    print('surname $surname');
+    print('email $email');
+    print('phone $phone');
+    print('document $document');
+    print('porcentage $porcentage');
+    // _mainController.setDropiDialog(true);
 
-    _mainController.setDropiMessage('Iniciando conexión');
+    // _mainController.showDropiLoader();
 
-    await Future.delayed(Duration(seconds: 2), () {
-      _mainController.setDropiMessage('Generando Token');
-    });
+    // _mainController.setDropiMessage('Iniciando conexión');
 
-    await Future.delayed(Duration(seconds: 4), () {
-      _mainController.setDropiMessage('Conectando con provider/create');
-    });
+    // await Future.delayed(Duration(seconds: 2), () {
+    //   _mainController.setDropiMessage('Generando Token');
+    // });
 
-    await Future.delayed(Duration(seconds: 4), () {
-      _mainController.setDropiMessage('Success!');
-    });
+    // await Future.delayed(Duration(seconds: 4), () {
+    //   _mainController.setDropiMessage('Conectando con provider/create');
+    // });
 
-    await Future.delayed(Duration(seconds: 2), () {
-      _mainController.setDropiDialog(false);
-      _mainController.setDropiMessage('Subiendo imagen');
-    });
+    // await Future.delayed(Duration(seconds: 4), () {
+    //   _mainController.setDropiMessage('Success!');
+    // });
 
-    await Future.delayed(Duration(seconds: 4), () {
-      _mainController.setDropiMessage('Guardando datos en firebase');
-    });
+    // await Future.delayed(Duration(seconds: 2), () {
+    //   _mainController.setDropiDialog(false);
+    //   _mainController.setDropiMessage('Subiendo imagen');
+    // });
 
-    await Future.delayed(Duration(seconds: 2), () {
-      _mainController.setDropiDialogError(true,
-          'Este proveedor ya existe en firebase, pero con otro nombre. El id del proveedor es: 67113828273871d1eaf51334');
-    });
+    // await Future.delayed(Duration(seconds: 4), () {
+    //   _mainController.setDropiMessage('Guardando datos en firebase');
+    // });
+
+    // await Future.delayed(Duration(seconds: 2), () {
+    //   _mainController.setDropiDialogError(true,
+    //       'Este proveedor ya existe en firebase, pero con otro nombre. El id del proveedor es: 67113828273871d1eaf51334');
+    // });
 
     // await Future.delayed(Duration(seconds: 4), () {
     //   _mainController.setDropiMessage('Success!');

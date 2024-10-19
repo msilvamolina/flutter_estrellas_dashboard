@@ -28,10 +28,50 @@ class CreateProviderView extends GetView<CreateProviderController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ReactiveTextField(
-                      formControlName: Fields.videoName.name,
+                      formControlName: Fields.name.name,
                       keyboardType: TextInputType.text,
                       decoration: CustomInputDecoration.inputDecoration(
-                        text: "Nombre",
+                        text: "Name",
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ReactiveTextField(
+                      formControlName: Fields.surname.name,
+                      keyboardType: TextInputType.text,
+                      decoration: CustomInputDecoration.inputDecoration(
+                        text: "Surname",
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ReactiveTextField(
+                      formControlName: Fields.email.name,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: CustomInputDecoration.inputDecoration(
+                        text: "E-mail",
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ReactiveTextField(
+                      formControlName: Fields.phone.name,
+                      keyboardType: TextInputType.phone,
+                      decoration: CustomInputDecoration.inputDecoration(
+                        text: "Phone",
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ReactiveTextField(
+                      formControlName: Fields.document.name,
+                      keyboardType: TextInputType.number,
+                      decoration: CustomInputDecoration.inputDecoration(
+                        text: "Document",
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    ReactiveTextField(
+                      formControlName: Fields.porcentage.name,
+                      keyboardType: TextInputType.number,
+                      decoration: CustomInputDecoration.inputDecoration(
+                        text: "Porcentage",
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -53,7 +93,7 @@ class CreateProviderView extends GetView<CreateProviderController> {
                     const SizedBox(height: 26),
                     ReactiveFormConsumer(
                       builder: (context, form, child) => LoadingButton(
-                        label: 'Subir video',
+                        label: 'Crear',
                         // isLoading: controller.loading,
                         isLoading: false,
                         onPressed: (form.valid)
