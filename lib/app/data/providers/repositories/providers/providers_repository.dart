@@ -81,7 +81,7 @@ class ProvidersRepository {
       dynamic response = await services.postWithFileAndToken(
         url: url,
         fields: fields,
-        fieldImageName: 'avatarUrl',
+        fieldImageName: 'avatarURL',
         fieldImagePath: avatarURL,
       );
 

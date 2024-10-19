@@ -71,6 +71,7 @@ class ApiServices {
     required String fieldImagePath,
   }) async {
     MainController mainController = Get.find<MainController>();
+    print('fieldImagePath $fieldImagePath');
     File imageFile = File(fieldImagePath);
     var stream = http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     // get file length
@@ -97,11 +98,11 @@ class ApiServices {
 
     // send
     var response = await request.send();
-    print(response.statusCode);
+    print('response.statusCode ${response.statusCode}');
 
     // listen for response
     response.stream.transform(utf8.decoder).listen((value) {
-      print(value);
+      print('value $value');
     });
   }
 
