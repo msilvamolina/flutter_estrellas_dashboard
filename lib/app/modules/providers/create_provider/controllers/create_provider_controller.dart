@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -97,7 +98,7 @@ class CreateProviderController extends GetxController {
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Either<String, dynamic> response = await _repository.createProvider(
+    Either<String, ProviderModel> response = await _repository.createProvider(
       avatarURL: _imagePath!,
       name: name,
       surname: surname,
@@ -109,7 +110,8 @@ class CreateProviderController extends GetxController {
     Get.back();
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
-    }, (_) {
+    }, (provider) {
+      print('ok! $provider');
       Get.back();
       Get.snackbar('Bien hecho!', "Guardado exitosamente");
     });

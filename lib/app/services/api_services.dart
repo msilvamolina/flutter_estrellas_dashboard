@@ -64,14 +64,13 @@ class ApiServices {
     return response;
   }
 
-  Future<dynamic> postWithFileAndToken({
+  Future<StreamedResponse> postWithFileAndToken({
     required String url,
     required Map<String, dynamic> fields,
     required String fieldImageName,
     required String fieldImagePath,
   }) async {
     MainController mainController = Get.find<MainController>();
-    print('fieldImagePath $fieldImagePath');
     File imageFile = File(fieldImagePath);
     var stream = http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     // get file length
@@ -92,18 +91,10 @@ class ApiServices {
         filename: basename(imageFile.path));
 
     mainController.setDropiMessage('Conectando con $url');
-
-    // add file to multipart
     request.files.add(multipartFile);
 
-    // send
-    var response = await request.send();
-    print('response.statusCode ${response.statusCode}');
-
-    // listen for response
-    response.stream.transform(utf8.decoder).listen((value) {
-      print('value $value');
-    });
+    StreamedResponse response = await request.send();
+    return response;
   }
 
   Future<String?> getTokenFromServer() async {

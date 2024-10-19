@@ -54,7 +54,7 @@ class ProvidersRepository {
     }
   }
 
-  Future<Either<String, dynamic>> createProvider({
+  Future<Either<String, ProviderModel>> createProvider({
     required String avatarURL,
     required String name,
     required String surname,
@@ -78,38 +78,31 @@ class ProvidersRepository {
         'provider': jsonEncode(body),
       };
 
-      dynamic response = await services.postWithFileAndToken(
+      StreamedResponse response = await services.postWithFileAndToken(
         url: url,
         fields: fields,
         fieldImageName: 'avatarURL',
         fieldImagePath: avatarURL,
       );
 
-      // Response response = await services.post(
-      //   url: url,
-      //   headers: headers,
-      //   body: jsonEncode(body),
-      // );
+      if (response.statusCode != 200) {
+        return left('Error status code: ${response.statusCode}');
+      }
 
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      // dynamic json = jsonDecode(response.body);
+      String responseBody =
+          await response.stream.transform(utf8.decoder).join();
 
-      // List<dynamic> bodyList = json['data']['products'];
+      dynamic json = jsonDecode(responseBody);
+      bool ok = json['ok'] ?? false;
 
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
+      if (!ok) {
+        return left(json['data']);
+      }
 
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
+      ProviderModel providerModel = ProviderModel.fromJson(json['data']);
 
-      return right('list');
+      return right(providerModel);
     } catch (e) {
-      print('error $e');
       return left(e.toString());
     }
   }
