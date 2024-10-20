@@ -77,7 +77,52 @@ class CreateProductView extends GetView<CreateProductController> {
                       ),
                     ),
                     const SizedBox(height: 16),
-
+                    Card(
+                      child: InkWell(
+                        onTap: controller.pickImage,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                controller.imagePath ??
+                                    'assets/images/warehouse.png',
+                                width: 80,
+                              ),
+                              const SizedBox(width: 12),
+                              // Elimina el Padding alrededor del Expanded
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Bodega',
+                                      style: TypographyStyle.bodyBlackLarge
+                                          .copyWith(color: primary),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      controller.imagePath ??
+                                          '(Selecciona un proveedor)',
+                                      style: TypographyStyle.bodyRegularSmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color: primary,
+                                size: 48,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     ReactiveTextField(
                       formControlName: Fields.name.name,
                       keyboardType: TextInputType.text,
