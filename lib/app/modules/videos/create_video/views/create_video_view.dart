@@ -9,6 +9,7 @@ import '../../../../components/widgets/loadingButton.dart';
 import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/input_decoration.dart';
+import '../../../../themes/styles/typography.dart';
 import '../../../../utils/responsive.dart';
 import '../controllers/create_video_controller.dart';
 
@@ -17,6 +18,8 @@ class CreateVideoView extends GetView<CreateVideoController> {
 
   @override
   Widget build(BuildContext context) {
+    Color primary = Theme.of(context).colorScheme.primary;
+
     return ReactiveFormBuilder(
         form: controller.buildForm,
         builder: (context, form, child) {
@@ -38,25 +41,101 @@ class CreateVideoView extends GetView<CreateVideoController> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Obx(
-                      () => DropDown(
-                        error: controller.productsError,
-                        selectedValue: controller.productSelected,
-                        values: controller.listProducts
-                            .map(
-                              (ProductFirebaseModel value) => OptionDropDown(
-                                text: value.name ?? '',
-                                value: value.id,
+                    Card(
+                      child: InkWell(
+                        onTap: controller.pickVideo,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                controller.videoPath ??
+                                    'assets/images/video.png',
+                                width: 80,
                               ),
-                            )
-                            .toList(),
-                        onChanged: controller.onProductSelected,
+                              const SizedBox(width: 12),
+                              // Elimina el Padding alrededor del Expanded
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Video Url',
+                                      style: TypographyStyle.bodyBlackLarge
+                                          .copyWith(color: primary),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      controller.videoPath ??
+                                          '(Selecciona un video)',
+                                      style: TypographyStyle.bodyRegularSmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color: primary,
+                                size: 48,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Card(
+                      child: InkWell(
+                        onTap: controller.pickVideo,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                controller.videoPath ??
+                                    'assets/images/new-product.png',
+                                width: 80,
+                              ),
+                              const SizedBox(width: 12),
+                              // Elimina el Padding alrededor del Expanded
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Producto',
+                                      style: TypographyStyle.bodyBlackLarge
+                                          .copyWith(color: primary),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      controller.videoPath ??
+                                          '(Selecciona un producto)',
+                                      style: TypographyStyle.bodyRegularSmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Icon(
+                                Icons.chevron_right_rounded,
+                                color: primary,
+                                size: 48,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 26),
                     ReactiveFormConsumer(
                       builder: (context, form, child) => LoadingButton(
-                        label: 'Subir video',
+                        label: 'Guardar',
                         isLoading: controller.loading,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)

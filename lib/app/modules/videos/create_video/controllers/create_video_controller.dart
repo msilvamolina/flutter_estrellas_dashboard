@@ -31,6 +31,9 @@ class CreateVideoController extends GetxController {
   String? _productsError;
   String? get productsError => _productsError;
 
+  String? _videoPath;
+  String? get videoPath => _videoPath;
+
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.videoName.name: FormControl<String>(
           validators: [
@@ -50,6 +53,7 @@ class CreateVideoController extends GetxController {
     super.onInit();
   }
 
+  void pickVideo() {}
   void onProductSelected(String? value) {
     _productSelected = value;
 
