@@ -102,7 +102,7 @@ class CreateVideoController extends GetxController {
     Either<String, Unit> response = await _repository.uploadVideo(
       videoId: videoId,
       name: videoName,
-      videoPath: _videoImagePath!,
+      videoPath: _videoPath!,
       product: _productModel!,
     );
     Get.back();
