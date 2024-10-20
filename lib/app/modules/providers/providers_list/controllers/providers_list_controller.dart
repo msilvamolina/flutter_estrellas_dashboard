@@ -24,7 +24,14 @@ class ProvidersListController extends GetxController {
 
   @override
   void onInit() {
+    getDataVersion1();
+
     // _list.bindStream(_repository.getProductsFromFirebase());
+    super.onInit();
+  }
+
+  @override
+  void onReady() async {
     super.onInit();
   }
 
@@ -32,7 +39,7 @@ class ProvidersListController extends GetxController {
     _isLoading = true;
     _responseError = null;
     _data.clear();
-    update(['tab1View']);
+    update(['view']);
 
     Either<String, List<ProviderModel>> response =
         await _repository.getProvidersFromBackend();
@@ -43,6 +50,6 @@ class ProvidersListController extends GetxController {
     }, (list) {
       _data.addAll(list);
     });
-    update(['tab1View']);
+    update(['view']);
   }
 }

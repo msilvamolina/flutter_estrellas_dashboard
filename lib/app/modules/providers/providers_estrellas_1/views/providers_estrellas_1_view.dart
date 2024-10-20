@@ -35,14 +35,6 @@ class ProvidersEstrellas1View extends GetView<ProvidersEstrellas1Controller> {
               arguments: controller.provider,
             ),
           ),
-          const SizedBox(height: 16),
-          FloatingActionButton(
-            child: const Icon(Icons.compare_arrows_rounded),
-            onPressed: () => Get.toNamed(
-              Routes.PRODUCT_IMAGES,
-              arguments: controller.provider,
-            ),
-          ),
         ],
       ),
       maxWidth: double.infinity,
