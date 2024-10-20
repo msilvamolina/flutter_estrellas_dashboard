@@ -34,6 +34,10 @@ import '../modules/providers/providers_list/bindings/providers_list_binding.dart
 import '../modules/providers/providers_list/views/providers_list_view.dart';
 import '../modules/providers/providers_warehouses/bindings/providers_warehouses_binding.dart';
 import '../modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
+import '../modules/selects/select_provider/bindings/select_provider_binding.dart';
+import '../modules/selects/select_provider/views/select_provider_view.dart';
+import '../modules/selects/select_warehouse/bindings/select_warehouse_binding.dart';
+import '../modules/selects/select_warehouse/views/select_warehouse_view.dart';
 import '../modules/selects/select_city/bindings/select_city_binding.dart';
 import '../modules/selects/select_city/views/select_city_view.dart';
 import '../modules/selects/select_department/bindings/select_department_binding.dart';
@@ -181,6 +185,16 @@ class AppPages {
       name: _Paths.SELECT_CITY,
       page: () => const SelectCityView(),
       binding: SelectCityBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_PROVIDER,
+      page: () => const SelectProviderView(),
+      binding: SelectProviderBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_WAREHOUSE,
+      page: () => const SelectWarehouseView(),
+      binding: SelectWarehouseBinding(),
     ),
   ];
 }

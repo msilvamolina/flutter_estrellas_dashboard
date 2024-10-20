@@ -32,6 +32,8 @@ abstract class Routes {
   static const CREATE_WAREHOUSE = _Paths.CREATE_WAREHOUSE;
   static const SELECT_DEPARTMENT = _Paths.SELECT_DEPARTMENT;
   static const SELECT_CITY = _Paths.SELECT_CITY;
+  static const SELECT_PROVIDER = _Paths.SELECT_PROVIDER;
+  static const SELECT_WAREHOUSE = _Paths.SELECT_WAREHOUSE;
 }
 
 abstract class _Paths {
@@ -65,4 +67,6 @@ abstract class _Paths {
   static const CREATE_WAREHOUSE = '/create-warehouse';
   static const SELECT_DEPARTMENT = '/select-department';
   static const SELECT_CITY = '/select-city';
+  static const SELECT_PROVIDER = '/select-provider';
+  static const SELECT_WAREHOUSE = '/select-warehouse';
 }
