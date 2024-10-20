@@ -90,12 +90,14 @@ class CreateProductController extends GetxController {
 
   Future<void> saveInFirebase({
     required ProductLiteModel product,
+    required String imagePath,
   }) async {
     _mainController.setDropiDialog(false);
 
     _mainController.setDropiMessage('saveInFirebase');
     Either<String, Unit> response = await _repository.saveProductLiteInFirebase(
       product: product,
+      imagePath: imagePath,
     );
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
@@ -140,7 +142,7 @@ class CreateProductController extends GetxController {
       _mainController.setDropiDialogError(true, failure);
     }, (product) async {
       _mainController.setDropiMessage('Success!');
-      saveInFirebase(product: product);
+      saveInFirebase(product: product, imagePath: _imagePath!);
     });
   }
 }

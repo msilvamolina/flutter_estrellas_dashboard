@@ -4,12 +4,14 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/product_image/product_image_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/instance_manager.dart';
 import 'package:http/http.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../services/api_services.dart';
 import '../../../models/product/product_firebase/product_firebase_model.dart';
@@ -55,12 +57,22 @@ class ProductsRepository {
 
   Future<Either<String, Unit>> saveProductLiteInFirebase({
     required ProductLiteModel product,
+    required String imagePath,
   }) async {
     try {
+      MainController mainController = Get.find<MainController>();
+
+      String id = const Uuid().v4();
+
+      mainController.setDropiMessage('Subiendo imagen a firebase');
+      String? imageUrl =
+          await uploadImage(id: id, productId: product.id, path: imagePath);
+
+      mainController.setDropiMessage('Escribiendo en firebase');
       await _firebaseFirestore
           .collection('products')
           .doc(product.id)
-          .set(product.toDocument());
+          .set(product.toDocument(imageUrl));
       return right(unit);
     } on FirebaseException catch (e) {
       return left(e.code);

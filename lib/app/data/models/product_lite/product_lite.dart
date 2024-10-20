@@ -11,22 +11,34 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
 
   const factory ProductLiteModel({
     @JsonKey(name: '_id') required String id,
-    required String? provider,
-    required String? name,
-    required String? externalId,
-    required double? price,
-    required int? points,
-    required double? suggestedPrice,
-    required String? type,
-    required bool? isPercentage,
-    required bool? showInFeed,
-    required bool? active,
-    required String? createdAt,
-    required String? updatedAt,
+    String? provider,
+    String? name,
+    String? externalId,
+    double? price,
+    int? points,
+    double? suggestedPrice,
+    String? type,
+    bool? isPercentage,
+    bool? showInFeed,
+    bool? active,
+    String? thumbnail,
+    String? createdAt,
+    String? updatedAt,
   }) = _ProductLiteModel;
 
   factory ProductLiteModel.fromJson(Map<String, dynamic> json) =>
       _$ProductLiteModelFromJson(json);
 
-  Map<String, dynamic> toDocument() => ModelHelpers.toDocument(toJson());
+  Map<String, dynamic> toDocument(String? imageUrl) {
+    Map<String, dynamic> json = toJson();
+
+    if (imageUrl != null) {
+      json['thumbnail'] = imageUrl;
+    }
+
+    json['createdAt'] = ModelHelpers.dateToDocument(json['createdAt']);
+    json['updatedAt'] = ModelHelpers.dateToDocument(json['updatedAt']);
+
+    return json;
+  }
 }
