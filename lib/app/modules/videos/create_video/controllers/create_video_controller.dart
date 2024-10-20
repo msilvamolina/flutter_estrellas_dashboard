@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product_firebase/product_firebase_model.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
+import 'package:estrellas_dashboard/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -61,7 +62,11 @@ class CreateVideoController extends GetxController {
     super.onInit();
   }
 
-  Future<void> pickProduct() async {}
+  Future<void> pickProduct() async {
+    final result = await Get.toNamed(Routes.SELECT_PRODUCT);
+    _productModel = result;
+    update(['view']);
+  }
 
   Future<void> pickVideo() async {
     final video = await ImagePicker().pickVideo(source: ImageSource.gallery);

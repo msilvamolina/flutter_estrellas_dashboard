@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:estrellas_dashboard/app/components/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 
@@ -95,12 +96,19 @@ class CreateVideoView extends GetView<CreateVideoController> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/new-product.png',
-                                width: 80,
+                              CachedNetworkImage(
+                                width: 90,
+                                imageUrl:
+                                    (controller.productModel?.thumbnail ?? ''),
+                                placeholder: (context, url) => const Center(
+                                    child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    Image.asset(
+                                  'assets/images/new-product.png',
+                                  width: 80,
+                                ),
                               ),
                               const SizedBox(width: 12),
-                              // Elimina el Padding alrededor del Expanded
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,8 +123,7 @@ class CreateVideoView extends GetView<CreateVideoController> {
                                     const SizedBox(height: 4),
                                     Text(
                                       (controller.productModel != null
-                                              ? controller
-                                                  .productModel?.thumbnail
+                                              ? controller.productModel?.name
                                               : null) ??
                                           '(Selecciona un producto)',
                                       style: TypographyStyle.bodyRegularSmall,

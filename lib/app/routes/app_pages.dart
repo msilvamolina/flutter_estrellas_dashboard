@@ -34,14 +34,16 @@ import '../modules/providers/providers_list/bindings/providers_list_binding.dart
 import '../modules/providers/providers_list/views/providers_list_view.dart';
 import '../modules/providers/providers_warehouses/bindings/providers_warehouses_binding.dart';
 import '../modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
-import '../modules/selects/select_provider/bindings/select_provider_binding.dart';
-import '../modules/selects/select_provider/views/select_provider_view.dart';
-import '../modules/selects/select_warehouse/bindings/select_warehouse_binding.dart';
-import '../modules/selects/select_warehouse/views/select_warehouse_view.dart';
+import '../modules/selects/select_product/bindings/select_product_binding.dart';
+import '../modules/selects/select_product/views/select_product_view.dart';
 import '../modules/selects/select_city/bindings/select_city_binding.dart';
 import '../modules/selects/select_city/views/select_city_view.dart';
 import '../modules/selects/select_department/bindings/select_department_binding.dart';
 import '../modules/selects/select_department/views/select_department_view.dart';
+import '../modules/selects/select_provider/bindings/select_provider_binding.dart';
+import '../modules/selects/select_provider/views/select_provider_view.dart';
+import '../modules/selects/select_warehouse/bindings/select_warehouse_binding.dart';
+import '../modules/selects/select_warehouse/views/select_warehouse_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
@@ -195,6 +197,11 @@ class AppPages {
       name: _Paths.SELECT_WAREHOUSE,
       page: () => const SelectWarehouseView(),
       binding: SelectWarehouseBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_PRODUCT,
+      page: () => const SelectProductView(),
+      binding: SelectProductBinding(),
     ),
   ];
 }
