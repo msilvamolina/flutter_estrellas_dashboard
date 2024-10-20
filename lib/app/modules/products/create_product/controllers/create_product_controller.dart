@@ -1,12 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
+import 'package:estrellas_dashboard/app/modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/controllers/main_controller.dart';
+import '../../../../data/models/provider/warehouse/provider_warehouse_model.dart';
+import '../../../../routes/app_pages.dart';
 import '../../../../utils/utils_image.dart';
 
 enum Fields {
@@ -28,6 +31,12 @@ class CreateProductController extends GetxController {
 
   String? _imagePath;
   String? get imagePath => _imagePath;
+
+  ProviderModel? _providerModel;
+  ProviderModel? get providerModel => _providerModel;
+
+  ProviderWarehouseModel? _warehouseModel;
+  ProviderWarehouseModel? get warehouseModel => _warehouseModel;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
@@ -80,6 +89,15 @@ class CreateProductController extends GetxController {
   Future<void> pickImage() async {
     _imagePath = await UtilsImage.pickImage();
     update(['view']);
+  }
+
+  Future<void> pickWarehouse() async {
+    final result = await Get.toNamed(Routes.SELECT_PROVIDER);
+    if (result != null) {
+      _warehouseModel = result[0];
+      _providerModel = result[1];
+      update(['view']);
+    }
   }
 
   Future<void> saveInFirebase({

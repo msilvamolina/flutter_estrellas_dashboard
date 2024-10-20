@@ -1,23 +1,45 @@
+import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
 import 'package:get/get.dart';
 
 class SelectProviderController extends GetxController {
-  //TODO: Implement SelectProviderController
+  final ProvidersRepository _repository = ProvidersRepository();
+  final List<ProviderModel> _data = <ProviderModel>[];
+  List<ProviderModel> get data => _data;
 
-  final count = 0.obs;
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
+
+  String? _responseError;
+  String? get responseError => _responseError;
+
   @override
   void onInit() {
     super.onInit();
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
+    await getData();
     super.onReady();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void onTap(ProviderModel provider) {
+    // Get.back(result: city);
   }
 
-  void increment() => count.value++;
+  Future<void> getData() async {
+    Either<String, List<ProviderModel>> response =
+        await _repository.getProvidersFromBackend();
+    _isLoading = false;
+
+    response.fold((error) {
+      _responseError = error;
+    }, (list) {
+      _data.clear();
+      _data.addAll(list);
+    });
+    update(['view']);
+  }
 }

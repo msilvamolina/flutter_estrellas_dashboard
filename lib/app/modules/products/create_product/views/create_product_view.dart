@@ -79,15 +79,14 @@ class CreateProductView extends GetView<CreateProductController> {
                     const SizedBox(height: 16),
                     Card(
                       child: InkWell(
-                        onTap: controller.pickImage,
+                        onTap: controller.pickWarehouse,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset(
-                                controller.imagePath ??
-                                    'assets/images/warehouse.png',
+                                'assets/images/warehouse.png',
                                 width: 80,
                               ),
                               const SizedBox(width: 12),
@@ -105,7 +104,9 @@ class CreateProductView extends GetView<CreateProductController> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      controller.imagePath ??
+                                      (controller.warehouseModel != null
+                                              ? ('${controller.warehouseModel!.name}\n${controller.providerModel!.name!}')
+                                              : null) ??
                                           '(Selecciona un proveedor)',
                                       style: TypographyStyle.bodyRegularSmall,
                                     ),
