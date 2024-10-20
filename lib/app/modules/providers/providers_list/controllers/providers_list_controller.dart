@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../data/models/product/product/product.dart';
 import '../../../../data/providers/repositories/products/products_repository.dart';
 import '../../../../data/providers/repositories/providers/providers_repository.dart';
+import '../../../../routes/app_pages.dart';
 
 class ProvidersListController extends GetxController {
   final ProvidersRepository _repository = ProvidersRepository();
@@ -33,6 +34,13 @@ class ProvidersListController extends GetxController {
   @override
   void onReady() async {
     super.onInit();
+  }
+
+  Future<void> addProvider() async {
+    final result = await Get.toNamed(Routes.CREATE_PROVIDER);
+    if (result != null) {
+      _data.insert(0, result);
+    }
   }
 
   Future<void> getDataVersion1() async {

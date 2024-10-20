@@ -93,10 +93,11 @@ class CreateProviderController extends GetxController {
     );
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
-    }, (provider) async {
+    }, (_) async {
       _mainController.setDropiMessage('Success!');
       await Future.delayed(const Duration(seconds: 1), () {
         Get.back();
+        Get.back(result: provider);
       });
     });
   }

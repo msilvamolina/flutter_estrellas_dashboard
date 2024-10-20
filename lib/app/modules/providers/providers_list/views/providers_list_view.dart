@@ -18,7 +18,7 @@ class ProvidersListView extends GetView<ProvidersListController> {
       floatingActionButton: CustomFloatingActionButton(
         label: 'Agregar',
         icon: Icons.add,
-        onPressed: () => Get.toNamed(Routes.CREATE_PROVIDER),
+        onPressed: controller.addProvider,
       ),
       appBarTitle: 'Proveedores',
       maxWidth: double.infinity,
