@@ -95,6 +95,10 @@ class CreateVideoController extends GetxController {
       return;
     }
 
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
     Either<String, Unit> response = await _repository.uploadVideo(
       videoId: videoId,
       name: videoName,
@@ -103,12 +107,14 @@ class CreateVideoController extends GetxController {
     );
     Get.back();
     response.fold((failure) {
-      Get.snackbar("Error", failure);
+      _mainController.setDropiDialogError(true, failure);
+
       _loading = false;
       update(['view']);
     }, (_) {
+      _mainController.setDropiMessage('Success');
+
       Get.back();
-      Get.snackbar(videoName, "Guardado exitosamente");
     });
   }
 }

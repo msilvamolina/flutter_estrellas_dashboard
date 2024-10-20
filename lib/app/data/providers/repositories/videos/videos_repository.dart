@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
@@ -65,6 +66,9 @@ class VideosRepository {
   }
 
   Future<String> _uploadVideoToStorage(String id, String videoPath) async {
+    MainController mainController = Get.find<MainController>();
+    mainController.setDropiMessage('Subiendo Video');
+
     Reference ref = _firebaseStorage.ref().child('videos').child(id);
 
     UploadTask uploadTask = ref.putFile(await _compressVideo(videoPath));
@@ -74,6 +78,9 @@ class VideosRepository {
   }
 
   Future<String> _uploadImageToStorage(String id, String videoPath) async {
+    MainController mainController = Get.find<MainController>();
+    mainController.setDropiMessage('Subiendo imagen del video');
+
     Reference ref = _firebaseStorage.ref().child('thumbnails').child(id);
     UploadTask uploadTask = ref.putFile((await getThumbnail(videoPath)));
     TaskSnapshot snap = await uploadTask;
@@ -98,6 +105,9 @@ class VideosRepository {
 
       String videoUrl = await _uploadVideoToStorage(videoId, videoPath);
       String thumbnail = await _uploadImageToStorage(videoId, videoPath);
+
+      MainController mainController = Get.find<MainController>();
+      mainController.setDropiMessage('Escribiendo en firebase');
 
       await _firebaseFirestore.collection('videos').doc(videoId).set({
         'name': name,
