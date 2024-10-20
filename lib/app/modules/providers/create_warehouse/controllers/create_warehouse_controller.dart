@@ -66,18 +66,17 @@ class CreateWarehouseController extends GetxController {
     required ProviderModel provider,
   }) async {
     _mainController.setDropiDialog(false);
-    _mainController.showDropiLoader();
 
     _mainController.setDropiMessage('saveInFirebase');
     Either<String, Unit> response = await _repository.saveProviderInFirebase(
       provider: provider,
     );
-    Get.back();
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
-    }, (provider) async {
+    }, (_) async {
       _mainController.setDropiMessage('Success!');
       await Future.delayed(const Duration(seconds: 1), () {
+        Get.back();
         Get.back(result: provider);
       });
     });
