@@ -17,18 +17,20 @@ class ProductEstrellas1Controller extends GetxController {
   }
 
   Future<void> copyToFirebase() async {
-    _mainController.showLoader();
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Conectando con firebase');
 
     Either<String, Unit> response = await _repository.saveProductInFirebase(
       product: product,
     );
     Get.back();
     response.fold((failure) {
-      Get.snackbar("Error", failure);
+      _mainController.setDropiDialogError(true, failure);
       update(['view']);
     }, (_) {
+      _mainController.setDropiMessage('Success!');
       Get.back();
-      Get.snackbar(product.name ?? '', "Guardado exitosamente");
     });
   }
 }
