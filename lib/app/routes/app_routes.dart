@@ -29,6 +29,9 @@ abstract class Routes {
   static const PROVIDERS_ESTRELLAS_1 = _Paths.PROVIDERS_ESTRELLAS_1;
   static const PROVIDERS_WAREHOUSES = _Paths.PROVIDERS_WAREHOUSES;
   static const CREATE_PROVIDER = _Paths.CREATE_PROVIDER;
+  static const CREATE_WAREHOUSE = _Paths.CREATE_WAREHOUSE;
+  static const SELECT_DEPARTMENT = _Paths.SELECT_DEPARTMENT;
+  static const SELECT_CITY = _Paths.SELECT_CITY;
 }
 
 abstract class _Paths {
@@ -59,4 +62,7 @@ abstract class _Paths {
   static const PROVIDERS_ESTRELLAS_1 = '/providers-estrellas-1';
   static const PROVIDERS_WAREHOUSES = '/providers-warehouses';
   static const CREATE_PROVIDER = '/create-provider';
+  static const CREATE_WAREHOUSE = '/create-warehouse';
+  static const SELECT_DEPARTMENT = '/select-department';
+  static const SELECT_CITY = '/select-city';
 }

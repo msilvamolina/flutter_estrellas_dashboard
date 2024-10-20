@@ -120,4 +120,35 @@ class ProvidersRepository {
       return left(e.toString());
     }
   }
+
+  Future<Either<String, dynamic>> createWarehouse({
+    required String name,
+    required String phone,
+    required String city,
+    required String address,
+    required String provider,
+  }) async {
+    String url = 'api/provider/create-warehouse';
+    try {
+      Map<String, dynamic> body = {
+        "name": name,
+        "phone": phone,
+        "city": city,
+        "address": address,
+        "provider": provider
+      };
+      Response response = await services.postWithToken(url: url, body: body);
+
+      if (response.statusCode != 200) {
+        return left('Error status code: ${response.statusCode}');
+      }
+      dynamic json = jsonDecode(response.body);
+
+      print(json.toString());
+
+      return right(unit);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
 }

@@ -55,11 +55,30 @@ class ApiServices {
   Future<Response> getWithToken({
     required String url,
   }) async {
+    MainController mainController = Get.find<MainController>();
+
     String? token = await getToken();
 
     Map<String, String>? headers = {'x-token': token ?? 'token'};
     var uri = Uri.https(baseUrl, url);
+    mainController.setDropiMessage('Conectando con $url');
     Response response = await client.get(uri, headers: headers);
+    return response;
+  }
+
+  Future<Response> postWithToken({
+    required String url,
+    required Map<String, dynamic> body,
+  }) async {
+    MainController mainController = Get.find<MainController>();
+
+    String? token = await getToken();
+
+    Map<String, String>? headers = {'x-token': token ?? 'token'};
+    var uri = Uri.https(baseUrl, url);
+    mainController.setDropiMessage('Conectando con $url');
+
+    Response response = await client.post(uri, headers: headers, body: body);
 
     return response;
   }

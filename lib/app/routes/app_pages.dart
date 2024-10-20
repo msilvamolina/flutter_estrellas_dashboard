@@ -6,8 +6,6 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/providers/create_provider/bindings/create_provider_binding.dart';
-import '../modules/providers/create_provider/views/create_provider_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/products/create_product/bindings/create_product_binding.dart';
@@ -26,12 +24,20 @@ import '../modules/products/product_variants/bindings/product_variants_binding.d
 import '../modules/products/product_variants/views/product_variants_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
 import '../modules/products/products/views/products_view.dart';
+import '../modules/providers/create_provider/bindings/create_provider_binding.dart';
+import '../modules/providers/create_provider/views/create_provider_view.dart';
+import '../modules/providers/create_warehouse/bindings/create_warehouse_binding.dart';
+import '../modules/providers/create_warehouse/views/create_warehouse_view.dart';
 import '../modules/providers/providers_estrellas_1/bindings/providers_estrellas_1_binding.dart';
 import '../modules/providers/providers_estrellas_1/views/providers_estrellas_1_view.dart';
 import '../modules/providers/providers_list/bindings/providers_list_binding.dart';
 import '../modules/providers/providers_list/views/providers_list_view.dart';
 import '../modules/providers/providers_warehouses/bindings/providers_warehouses_binding.dart';
 import '../modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
+import '../modules/selects/select_city/bindings/select_city_binding.dart';
+import '../modules/selects/select_city/views/select_city_view.dart';
+import '../modules/selects/select_department/bindings/select_department_binding.dart';
+import '../modules/selects/select_department/views/select_department_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
@@ -160,6 +166,21 @@ class AppPages {
       name: _Paths.CREATE_PROVIDER,
       page: () => const CreateProviderView(),
       binding: CreateProviderBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_WAREHOUSE,
+      page: () => const CreateWarehouseView(),
+      binding: CreateWarehouseBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_DEPARTMENT,
+      page: () => const SelectDepartmentView(),
+      binding: SelectDepartmentBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_CITY,
+      page: () => const SelectCityView(),
+      binding: SelectCityBinding(),
     ),
   ];
 }
