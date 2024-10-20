@@ -118,8 +118,10 @@ class ProductsRepository {
 
   Stream<List<ProductFirebaseModel>> getProductsFromFirebase() async* {
     try {
-      Stream<QuerySnapshot> snapshots =
-          _firebaseFirestore.collection('products').snapshots();
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('products')
+          .orderBy('createdAt', descending: true)
+          .snapshots();
 
       yield* snapshots.map((snapshot) {
         return snapshot.docs

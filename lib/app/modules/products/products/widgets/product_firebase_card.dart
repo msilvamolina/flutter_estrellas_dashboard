@@ -59,7 +59,7 @@ class ProductFirebaseCard extends StatelessWidget {
                         ),
                         // const SizedBox(height: 8),
                         Text(
-                          product.category['name'],
+                          product.category?['name'] ?? '',
                           style: TypographyStyle.bodyRegularSmall,
                         ),
                         const SizedBox(height: 8),
