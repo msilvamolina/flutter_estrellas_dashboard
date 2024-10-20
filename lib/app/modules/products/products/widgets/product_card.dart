@@ -41,7 +41,7 @@ class ProductCard extends StatelessWidget {
                 children: [
                   CachedNetworkImage(
                     width: 90,
-                    imageUrl: product.thumbnail,
+                    imageUrl: product.thumbnail ?? '',
                     placeholder: (context, url) =>
                         const Center(child: CircularProgressIndicator()),
                     errorWidget: (context, url, error) =>
@@ -53,17 +53,17 @@ class ProductCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          product.name,
+                          product.name ?? '',
                           style: TypographyStyle.h4Mobile,
                         ),
                         // const SizedBox(height: 8),
-                        Text(
-                          product.category.name,
-                          style: TypographyStyle.bodyRegularSmall,
-                        ),
+                        // Text(
+                        //   product.category.name,
+                        //   style: TypographyStyle.bodyRegularSmall,
+                        // ),
                         const SizedBox(height: 8),
                         Text(
-                          product.description,
+                          product.description ?? '',
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: TypographyStyle.bodyBlackMedium,

@@ -28,7 +28,7 @@ class ProductEstrellas1Controller extends GetxController {
       update(['view']);
     }, (_) {
       Get.back();
-      Get.snackbar(product.name, "Guardado exitosamente");
+      Get.snackbar(product.name ?? '', "Guardado exitosamente");
     });
   }
 }

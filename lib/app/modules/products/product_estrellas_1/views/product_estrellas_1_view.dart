@@ -37,7 +37,7 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
       ),
       maxWidth: double.infinity,
       currentRoute: Routes.PRODUCT_ESTRELLAS_1,
-      appBarWidget: AppbarTitleWithBack(title: controller.product.name),
+      appBarWidget: AppbarTitleWithBack(title: controller.product.name ?? ''),
       child: TableWidget(
         border: border,
         rows: [
@@ -47,15 +47,15 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
           ),
           TableRowModel(
             label: 'externalId',
-            widget: TableRowText(text: controller.product.externalId),
+            widget: TableRowText(text: controller.product.externalId ?? ''),
           ),
           TableRowModel(
             label: 'usefulId',
-            widget: TableRowText(text: controller.product.usefulId),
+            widget: TableRowText(text: controller.product.usefulId ?? ''),
           ),
           TableRowModel(
             label: 'name',
-            widget: TableRowText(text: controller.product.name),
+            widget: TableRowText(text: controller.product.name ?? ''),
           ),
           TableRowModel(
             label: 'active',
@@ -68,13 +68,14 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
           TableRowModel(
             label: 'price',
             widget: TableRowText(
-                text: MoneyAmount.convertMoneyString(controller.product.price)),
+                text: MoneyAmount.convertMoneyString(
+                    controller.product.price ?? 0)),
           ),
           TableRowModel(
             label: 'suggestedPrice',
             widget: TableRowText(
                 text: MoneyAmount.convertMoneyString(
-                    controller.product.suggestedPrice)),
+                    controller.product.suggestedPrice ?? 0)),
           ),
           TableRowModel(
             label: 'isPercentage',
@@ -83,72 +84,72 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
           ),
           TableRowModel(
             label: 'type',
-            widget: TableRowText(text: controller.product.type),
+            widget: TableRowText(text: controller.product.type ?? ''),
           ),
           TableRowModel(
             label: 'sku',
-            widget: TableRowText(text: controller.product.sku),
+            widget: TableRowText(text: controller.product.sku ?? ''),
           ),
           TableRowModel(
             label: 'category',
             widget: TableRowInsideColumn(
               cellWidth: 50,
               rows: [
-                TableRowStringsModel(
-                  label: 'id',
-                  text: controller.product.category.id,
-                ),
-                TableRowStringsModel(
-                  label: 'name',
-                  text: controller.product.category.name,
-                ),
+                // TableRowStringsModel(
+                //   label: 'id',
+                //   text: controller.product.category.id ?? '',
+                // ),
+                // TableRowStringsModel(
+                //   label: 'name',
+                //   text: controller.product.category.name,
+                // ),
               ],
             ),
           ),
-          TableRowModel(
-            label: 'provider',
-            widget: TableRowInsideColumn(
-              cellWidth: 70,
-              imageUrl: controller.product.provider.avatarUrl,
-              rows: [
-                TableRowStringsModel(
-                  label: 'id',
-                  text: controller.product.provider.id,
-                ),
-                TableRowStringsModel(
-                  label: 'name',
-                  text: controller.product.provider.name,
-                ),
-                TableRowStringsModel(
-                  label: 'avatarUrl',
-                  text: controller.product.provider.avatarUrl,
-                ),
-              ],
-            ),
-          ),
+          // TableRowModel(
+          //   label: 'provider',
+          //   widget: TableRowInsideColumn(
+          //     cellWidth: 70,
+          //     imageUrl: controller.product.provider.avatarUrl,
+          //     rows: [
+          //       TableRowStringsModel(
+          //         label: 'id',
+          //         text: controller.product.provider.id,
+          //       ),
+          //       TableRowStringsModel(
+          //         label: 'name',
+          //         text: controller.product.provider.name,
+          //       ),
+          //       TableRowStringsModel(
+          //         label: 'avatarUrl',
+          //         text: controller.product.provider.avatarUrl,
+          //       ),
+          //     ],
+          //   ),
+          // ),
           TableRowModel(
             label: 'thumbnail',
-            widget: TableRowImage(url: controller.product.thumbnail),
+            widget: TableRowImage(url: controller.product.thumbnail ?? ''),
           ),
           TableRowModel(
             label: 'videoUrl',
-            widget: TableRowVideo(url: controller.product.videoUrl),
+            widget: TableRowVideo(url: controller.product.videoUrl ?? ''),
           ),
           TableRowModel(
             label: 'createdAt',
-            widget: TableRowDate(date: controller.product.createdAt),
+            widget: TableRowDate(date: controller.product.createdAt ?? ''),
           ),
-          TableRowModel(
-            label: 'updatedAt',
-            widget: TableRowDate(date: controller.product.updatedAt),
-          ),
+          // TableRowModel(
+          //   label: 'updatedAt',
+          //   widget: TableRowDate(date: controller.product.updatedAt ?? ''),
+          // ),
           TableRowModel(
             label: 'uploadDate',
-            widget: TableRowDate(date: controller.product.uploadDate),
+            widget: TableRowDate(date: controller.product.uploadDate ?? ''),
           ),
           TableRowModel(
             label: 'description',
-            widget: TableRowText(text: controller.product.description),
+            widget: TableRowText(text: controller.product.description ?? ''),
           ),
           TableRowModel(
             label: '',
