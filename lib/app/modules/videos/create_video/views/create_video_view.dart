@@ -89,15 +89,14 @@ class CreateVideoView extends GetView<CreateVideoController> {
                     const SizedBox(height: 16),
                     Card(
                       child: InkWell(
-                        onTap: controller.pickVideo,
+                        onTap: controller.pickProduct,
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset(
-                                controller.videoPath ??
-                                    'assets/images/new-product.png',
+                                'assets/images/new-product.png',
                                 width: 80,
                               ),
                               const SizedBox(width: 12),

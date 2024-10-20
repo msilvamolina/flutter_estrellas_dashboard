@@ -61,6 +61,8 @@ class CreateVideoController extends GetxController {
     super.onInit();
   }
 
+  Future<void> pickProduct() async {}
+
   Future<void> pickVideo() async {
     final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
     if (video != null) {
