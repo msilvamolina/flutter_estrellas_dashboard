@@ -45,7 +45,7 @@ class CreateVideoView extends GetView<CreateVideoController> {
                         values: controller.listProducts
                             .map(
                               (ProductFirebaseModel value) => OptionDropDown(
-                                text: value.name,
+                                text: value.name ?? '',
                                 value: value.id,
                               ),
                             )

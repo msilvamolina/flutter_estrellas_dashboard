@@ -12,23 +12,23 @@ abstract class ProductFirebaseModel implements _$ProductFirebaseModel {
   const ProductFirebaseModel._();
 
   const factory ProductFirebaseModel({
-    required String id,
-    required dynamic provider,
-    required dynamic category,
-    required String name,
-    required String externalId,
-    required String usefulId,
-    required String videoUrl,
-    required String description,
-    required String type,
-    required String sku,
-    required double price,
-    required bool active,
-    required bool isPercentage,
-    required int points,
-    required double suggestedPrice,
-    required String thumbnail,
-    required String createdAt,
+    @JsonKey(name: '_id') required String id,
+    dynamic provider,
+    dynamic category,
+    String? name,
+    String? externalId,
+    String? usefulId,
+    String? videoUrl,
+    String? description,
+    String? type,
+    String? sku,
+    double? price,
+    bool? active,
+    bool? isPercentage,
+    int? points,
+    double? suggestedPrice,
+    String? thumbnail,
+    String? createdAt,
     String? uploadDate,
     String? searchField,
     dynamic reference,
@@ -41,7 +41,7 @@ abstract class ProductFirebaseModel implements _$ProductFirebaseModel {
   factory ProductFirebaseModel.fromDocument(DocumentSnapshot doc) {
     ProductFirebaseModel data =
         ProductFirebaseModel.fromJson(ModelHelpers.fromDocument(doc.data()!));
-    String searchField = data.name;
+    String searchField = data.name ?? '';
 
     return data.copyWith(
       reference: doc.reference,

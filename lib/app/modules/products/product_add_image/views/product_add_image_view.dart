@@ -22,7 +22,8 @@ class ProductAddImageView extends GetView<ProductAddImageController> {
             showMenu: false,
             currentRoute: Routes.PRODUCT_ADD_IMAGE,
             appBarTitle: 'Añadir imagen',
-            appBarWidget: AppbarTitleWithBack(title: controller.product.name),
+            appBarWidget:
+                AppbarTitleWithBack(title: controller.product.name ?? ''),
             child: GetBuilder<ProductAddImageController>(
               id: 'view',
               builder: (_) {

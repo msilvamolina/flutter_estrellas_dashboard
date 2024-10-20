@@ -48,7 +48,7 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           ),
         ],
       ),
-      appBarWidget: AppbarTitleWithBack(title: controller.product.name),
+      appBarWidget: AppbarTitleWithBack(title: controller.product.name ?? ''),
       child: TableWidget(
         border: border,
         rows: [
@@ -58,15 +58,15 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           ),
           TableRowModel(
             label: 'externalId',
-            widget: TableRowText(text: controller.product.externalId),
+            widget: TableRowText(text: controller.product.externalId ?? ''),
           ),
           TableRowModel(
             label: 'usefulId',
-            widget: TableRowText(text: controller.product.usefulId),
+            widget: TableRowText(text: controller.product.usefulId ?? ''),
           ),
           TableRowModel(
             label: 'name',
-            widget: TableRowText(text: controller.product.name),
+            widget: TableRowText(text: controller.product.name ?? ''),
           ),
           TableRowModel(
             label: 'active',
@@ -79,13 +79,14 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           TableRowModel(
             label: 'price',
             widget: TableRowText(
-                text: MoneyAmount.convertMoneyString(controller.product.price)),
+                text: MoneyAmount.convertMoneyString(
+                    controller.product.price ?? 0)),
           ),
           TableRowModel(
             label: 'suggestedPrice',
             widget: TableRowText(
                 text: MoneyAmount.convertMoneyString(
-                    controller.product.suggestedPrice)),
+                    controller.product.suggestedPrice ?? 0)),
           ),
           TableRowModel(
             label: 'isPercentage',
@@ -94,11 +95,11 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           ),
           TableRowModel(
             label: 'type',
-            widget: TableRowText(text: controller.product.type),
+            widget: TableRowText(text: controller.product.type ?? ''),
           ),
           TableRowModel(
             label: 'sku',
-            widget: TableRowText(text: controller.product.sku),
+            widget: TableRowText(text: controller.product.sku ?? ''),
           ),
           TableRowModel(
             label: 'category',
@@ -139,15 +140,15 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           ),
           TableRowModel(
             label: 'thumbnail',
-            widget: TableRowImage(url: controller.product.thumbnail),
+            widget: TableRowImage(url: controller.product.thumbnail ?? ''),
           ),
           TableRowModel(
             label: 'videoUrl',
-            widget: TableRowVideo(url: controller.product.videoUrl),
+            widget: TableRowVideo(url: controller.product.videoUrl ?? ''),
           ),
           TableRowModel(
             label: 'createdAt',
-            widget: TableRowDate(date: controller.product.createdAt),
+            widget: TableRowDate(date: controller.product.createdAt ?? ''),
           ),
           TableRowModel(
             label: 'updatedAt',
@@ -159,7 +160,7 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           ),
           TableRowModel(
             label: 'description',
-            widget: TableRowText(text: controller.product.description),
+            widget: TableRowText(text: controller.product.description ?? ''),
           ),
           TableRowModel(
             label: '',

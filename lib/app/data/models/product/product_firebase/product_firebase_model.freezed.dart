@@ -20,23 +20,24 @@ ProductFirebaseModel _$ProductFirebaseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductFirebaseModel {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   dynamic get provider => throw _privateConstructorUsedError;
   dynamic get category => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get externalId => throw _privateConstructorUsedError;
-  String get usefulId => throw _privateConstructorUsedError;
-  String get videoUrl => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  String get sku => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
-  bool get active => throw _privateConstructorUsedError;
-  bool get isPercentage => throw _privateConstructorUsedError;
-  int get points => throw _privateConstructorUsedError;
-  double get suggestedPrice => throw _privateConstructorUsedError;
-  String get thumbnail => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get externalId => throw _privateConstructorUsedError;
+  String? get usefulId => throw _privateConstructorUsedError;
+  String? get videoUrl => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  String? get sku => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
+  bool? get active => throw _privateConstructorUsedError;
+  bool? get isPercentage => throw _privateConstructorUsedError;
+  int? get points => throw _privateConstructorUsedError;
+  double? get suggestedPrice => throw _privateConstructorUsedError;
+  String? get thumbnail => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
   String? get uploadDate => throw _privateConstructorUsedError;
   String? get searchField => throw _privateConstructorUsedError;
   dynamic get reference => throw _privateConstructorUsedError;
@@ -59,23 +60,23 @@ abstract class $ProductFirebaseModelCopyWith<$Res> {
       _$ProductFirebaseModelCopyWithImpl<$Res, ProductFirebaseModel>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       dynamic provider,
       dynamic category,
-      String name,
-      String externalId,
-      String usefulId,
-      String videoUrl,
-      String description,
-      String type,
-      String sku,
-      double price,
-      bool active,
-      bool isPercentage,
-      int points,
-      double suggestedPrice,
-      String thumbnail,
-      String createdAt,
+      String? name,
+      String? externalId,
+      String? usefulId,
+      String? videoUrl,
+      String? description,
+      String? type,
+      String? sku,
+      double? price,
+      bool? active,
+      bool? isPercentage,
+      int? points,
+      double? suggestedPrice,
+      String? thumbnail,
+      String? createdAt,
       String? uploadDate,
       String? searchField,
       dynamic reference,
@@ -101,20 +102,20 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
     Object? id = null,
     Object? provider = freezed,
     Object? category = freezed,
-    Object? name = null,
-    Object? externalId = null,
-    Object? usefulId = null,
-    Object? videoUrl = null,
-    Object? description = null,
-    Object? type = null,
-    Object? sku = null,
-    Object? price = null,
-    Object? active = null,
-    Object? isPercentage = null,
-    Object? points = null,
-    Object? suggestedPrice = null,
-    Object? thumbnail = null,
-    Object? createdAt = null,
+    Object? name = freezed,
+    Object? externalId = freezed,
+    Object? usefulId = freezed,
+    Object? videoUrl = freezed,
+    Object? description = freezed,
+    Object? type = freezed,
+    Object? sku = freezed,
+    Object? price = freezed,
+    Object? active = freezed,
+    Object? isPercentage = freezed,
+    Object? points = freezed,
+    Object? suggestedPrice = freezed,
+    Object? thumbnail = freezed,
+    Object? createdAt = freezed,
     Object? uploadDate = freezed,
     Object? searchField = freezed,
     Object? reference = freezed,
@@ -133,62 +134,62 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalId: null == externalId
+              as String?,
+      externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String,
-      usefulId: null == usefulId
+              as String?,
+      usefulId: freezed == usefulId
           ? _value.usefulId
           : usefulId // ignore: cast_nullable_to_non_nullable
-              as String,
-      videoUrl: null == videoUrl
+              as String?,
+      videoUrl: freezed == videoUrl
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
+              as String?,
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      sku: null == sku
+              as String?,
+      sku: freezed == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      active: null == active
+              as double?,
+      active: freezed == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPercentage: null == isPercentage
+              as bool?,
+      isPercentage: freezed == isPercentage
           ? _value.isPercentage
           : isPercentage // ignore: cast_nullable_to_non_nullable
-              as bool,
-      points: null == points
+              as bool?,
+      points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
-      suggestedPrice: null == suggestedPrice
+              as int?,
+      suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      thumbnail: null == thumbnail
+              as double?,
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       uploadDate: freezed == uploadDate
           ? _value.uploadDate
           : uploadDate // ignore: cast_nullable_to_non_nullable
@@ -218,23 +219,23 @@ abstract class _$$ProductFirebaseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       dynamic provider,
       dynamic category,
-      String name,
-      String externalId,
-      String usefulId,
-      String videoUrl,
-      String description,
-      String type,
-      String sku,
-      double price,
-      bool active,
-      bool isPercentage,
-      int points,
-      double suggestedPrice,
-      String thumbnail,
-      String createdAt,
+      String? name,
+      String? externalId,
+      String? usefulId,
+      String? videoUrl,
+      String? description,
+      String? type,
+      String? sku,
+      double? price,
+      bool? active,
+      bool? isPercentage,
+      int? points,
+      double? suggestedPrice,
+      String? thumbnail,
+      String? createdAt,
       String? uploadDate,
       String? searchField,
       dynamic reference,
@@ -257,20 +258,20 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? provider = freezed,
     Object? category = freezed,
-    Object? name = null,
-    Object? externalId = null,
-    Object? usefulId = null,
-    Object? videoUrl = null,
-    Object? description = null,
-    Object? type = null,
-    Object? sku = null,
-    Object? price = null,
-    Object? active = null,
-    Object? isPercentage = null,
-    Object? points = null,
-    Object? suggestedPrice = null,
-    Object? thumbnail = null,
-    Object? createdAt = null,
+    Object? name = freezed,
+    Object? externalId = freezed,
+    Object? usefulId = freezed,
+    Object? videoUrl = freezed,
+    Object? description = freezed,
+    Object? type = freezed,
+    Object? sku = freezed,
+    Object? price = freezed,
+    Object? active = freezed,
+    Object? isPercentage = freezed,
+    Object? points = freezed,
+    Object? suggestedPrice = freezed,
+    Object? thumbnail = freezed,
+    Object? createdAt = freezed,
     Object? uploadDate = freezed,
     Object? searchField = freezed,
     Object? reference = freezed,
@@ -289,62 +290,62 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      externalId: null == externalId
+              as String?,
+      externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String,
-      usefulId: null == usefulId
+              as String?,
+      usefulId: freezed == usefulId
           ? _value.usefulId
           : usefulId // ignore: cast_nullable_to_non_nullable
-              as String,
-      videoUrl: null == videoUrl
+              as String?,
+      videoUrl: freezed == videoUrl
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
+              as String?,
+      description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
+              as String?,
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      sku: null == sku
+              as String?,
+      sku: freezed == sku
           ? _value.sku
           : sku // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
+              as String?,
+      price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as double,
-      active: null == active
+              as double?,
+      active: freezed == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isPercentage: null == isPercentage
+              as bool?,
+      isPercentage: freezed == isPercentage
           ? _value.isPercentage
           : isPercentage // ignore: cast_nullable_to_non_nullable
-              as bool,
-      points: null == points
+              as bool?,
+      points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
-      suggestedPrice: null == suggestedPrice
+              as int?,
+      suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      thumbnail: null == thumbnail
+              as double?,
+      thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+              as String?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       uploadDate: freezed == uploadDate
           ? _value.uploadDate
           : uploadDate // ignore: cast_nullable_to_non_nullable
@@ -369,23 +370,23 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   const _$ProductFirebaseModelImpl(
-      {required this.id,
-      required this.provider,
-      required this.category,
-      required this.name,
-      required this.externalId,
-      required this.usefulId,
-      required this.videoUrl,
-      required this.description,
-      required this.type,
-      required this.sku,
-      required this.price,
-      required this.active,
-      required this.isPercentage,
-      required this.points,
-      required this.suggestedPrice,
-      required this.thumbnail,
-      required this.createdAt,
+      {@JsonKey(name: '_id') required this.id,
+      this.provider,
+      this.category,
+      this.name,
+      this.externalId,
+      this.usefulId,
+      this.videoUrl,
+      this.description,
+      this.type,
+      this.sku,
+      this.price,
+      this.active,
+      this.isPercentage,
+      this.points,
+      this.suggestedPrice,
+      this.thumbnail,
+      this.createdAt,
       this.uploadDate,
       this.searchField,
       this.reference,
@@ -396,39 +397,40 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
       _$$ProductFirebaseModelImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final dynamic provider;
   @override
   final dynamic category;
   @override
-  final String name;
+  final String? name;
   @override
-  final String externalId;
+  final String? externalId;
   @override
-  final String usefulId;
+  final String? usefulId;
   @override
-  final String videoUrl;
+  final String? videoUrl;
   @override
-  final String description;
+  final String? description;
   @override
-  final String type;
+  final String? type;
   @override
-  final String sku;
+  final String? sku;
   @override
-  final double price;
+  final double? price;
   @override
-  final bool active;
+  final bool? active;
   @override
-  final bool isPercentage;
+  final bool? isPercentage;
   @override
-  final int points;
+  final int? points;
   @override
-  final double suggestedPrice;
+  final double? suggestedPrice;
   @override
-  final String thumbnail;
+  final String? thumbnail;
   @override
-  final String createdAt;
+  final String? createdAt;
   @override
   final String? uploadDate;
   @override
@@ -529,23 +531,23 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
 abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   const factory _ProductFirebaseModel(
-      {required final String id,
-      required final dynamic provider,
-      required final dynamic category,
-      required final String name,
-      required final String externalId,
-      required final String usefulId,
-      required final String videoUrl,
-      required final String description,
-      required final String type,
-      required final String sku,
-      required final double price,
-      required final bool active,
-      required final bool isPercentage,
-      required final int points,
-      required final double suggestedPrice,
-      required final String thumbnail,
-      required final String createdAt,
+      {@JsonKey(name: '_id') required final String id,
+      final dynamic provider,
+      final dynamic category,
+      final String? name,
+      final String? externalId,
+      final String? usefulId,
+      final String? videoUrl,
+      final String? description,
+      final String? type,
+      final String? sku,
+      final double? price,
+      final bool? active,
+      final bool? isPercentage,
+      final int? points,
+      final double? suggestedPrice,
+      final String? thumbnail,
+      final String? createdAt,
       final String? uploadDate,
       final String? searchField,
       final dynamic reference,
@@ -556,39 +558,40 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
       _$ProductFirebaseModelImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   dynamic get provider;
   @override
   dynamic get category;
   @override
-  String get name;
+  String? get name;
   @override
-  String get externalId;
+  String? get externalId;
   @override
-  String get usefulId;
+  String? get usefulId;
   @override
-  String get videoUrl;
+  String? get videoUrl;
   @override
-  String get description;
+  String? get description;
   @override
-  String get type;
+  String? get type;
   @override
-  String get sku;
+  String? get sku;
   @override
-  double get price;
+  double? get price;
   @override
-  bool get active;
+  bool? get active;
   @override
-  bool get isPercentage;
+  bool? get isPercentage;
   @override
-  int get points;
+  int? get points;
   @override
-  double get suggestedPrice;
+  double? get suggestedPrice;
   @override
-  String get thumbnail;
+  String? get thumbnail;
   @override
-  String get createdAt;
+  String? get createdAt;
   @override
   String? get uploadDate;
   @override
