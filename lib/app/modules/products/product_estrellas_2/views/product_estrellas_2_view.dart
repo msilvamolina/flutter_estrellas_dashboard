@@ -108,11 +108,11 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
               rows: [
                 TableRowStringsModel(
                   label: 'id',
-                  text: controller.product.category['id'],
+                  text: controller.product.category?['_id'] ?? '',
                 ),
                 TableRowStringsModel(
                   label: 'name',
-                  text: controller.product.category['name'],
+                  text: controller.product.category?['name'] ?? '',
                 ),
               ],
             ),
@@ -125,15 +125,15 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
               rows: [
                 TableRowStringsModel(
                   label: 'id',
-                  text: controller.product.provider['id'],
+                  text: controller.product.provider?['_id'] ?? '',
                 ),
                 TableRowStringsModel(
                   label: 'name',
-                  text: controller.product.provider['name'],
+                  text: controller.product.provider?['name'] ?? '',
                 ),
                 TableRowStringsModel(
                   label: 'avatarUrl',
-                  text: controller.product.provider['avatarUrl'],
+                  text: controller.product.provider?['avatarUrl'] ?? '',
                 ),
               ],
             ),
