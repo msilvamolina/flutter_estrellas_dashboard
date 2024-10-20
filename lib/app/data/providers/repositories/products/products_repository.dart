@@ -26,156 +26,6 @@ class ProductsRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseStorage _firebaseStorage = Get.find<FirebaseStorage>();
 
-  Future<Either<String, Unit>> getCategories() async {
-    String url = 'api/products/categories';
-    try {
-      print('getCategories');
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
-      };
-      Response response = await services.get(url: url, headers: headers);
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-
-      log(json.toString());
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, Unit>> getDepartments() async {
-    String url = 'api/localities/departments';
-    try {
-      Response response = await services.get(url: url);
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-
-      log(json.toString());
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, Unit>> getCities(String departments) async {
-    String url = 'api/localities/cities-by-department/$departments';
-    try {
-      print('getCities $departments');
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
-      };
-      Response response = await services.get(url: url, headers: headers);
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-
-      log(json.toString());
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, Unit>> getOrders() async {
-    String url = 'api/orders/get-all';
-    try {
-      print('getOrdersAll');
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
-      };
-      Response response = await services.get(url: url, headers: headers);
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-
-      log(json.toString());
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, Unit>> getOrderById(String orderId) async {
-    String url = 'api/orders/?id=$orderId&user=6463b06a7420bf4da4c1ecef';
-    try {
-      print('getOrderById $orderId');
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
-      };
-      Response response = await services.get(url: url, headers: headers);
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-
-      log(json.toString());
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error $e');
-      return left(e.toString());
-    }
-  }
-
   Future<Either<String, List<ProductModel>>> getProductsFromBackend() async {
     String url = 'api/products/allProducts/?term=Protector';
     try {
@@ -202,485 +52,67 @@ class ProductsRepository {
     }
   }
 
-  Future<Either<String, dynamic>> getProviders() async {
-    String url = 'api/provider/get-all';
-    print('getProviders() ');
-    try {
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
-      };
-      Response response = await services.get(url: url, headers: headers);
+  // Future<Either<String, Unit>> saveProviderInFirebase({
+  //   required ProviderModel provider,
+  // }) async {
+  //   try {
+  //     await _firebaseFirestore
+  //         .collection('providers')
+  //         .doc(provider.id)
+  //         .set(provider.toDocument());
+  //     return right(unit);
+  //   } on FirebaseException catch (e) {
+  //     return left(e.code);
+  //   }
+  // }
 
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-      // List<dynamic> bodyList = json['data']['providers'];
-
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      print(json.toString());
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error: e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, dynamic>> getNewProducts() async {
-    String url = 'api/products/get-all';
-    print('getNewProducts() ');
-    try {
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
-      };
-      Response response = await services.get(url: url, headers: headers);
-
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-      // List<dynamic> bodyList = json['data']['providers'];
-
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      print(json.toString());
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error: e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, dynamic>> createOrder() async {
-    String url = 'api/orders/create-order';
-    print('createOrder() ');
-    try {
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkxODA5OTksImV4cCI6MTcyOTI2NzM5OX0.kpxDRxnFzpxFm60ypSpw70BRYgJpQV1rVGCDzzYNNDY",
-      };
-
-      Map<String, String> body = {
-        "city_id": "1222",
-        "client_direction": "Cra 01 #12-34 B/ San Vicente",
-        "client_email": "dianasierra@dropi.co",
-        "client_name": "Super Martin Silva",
-        "client_notes": "Holis",
-        "client_phone": "3127559567",
-        "client_quantity": '1',
-        "client_surname": "Diana Patricia",
-        "department_id": "81",
-        "product_id": "67118d2ed9b74b6beec0c64d",
-        "user_id": "6463b06a7420bf4da4c1ecef",
-        // "variation_id": null,
-      };
-      Response response =
-          await services.post(url: url, headers: headers, body: body);
-
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-      // List<dynamic> bodyList = json['data']['providers'];
-
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      print(json.toString());
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error: e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, dynamic>> createWarehouse() async {
-    String url = 'api/provider/create-warehouse';
-    print('createWarehouse() ');
-    try {
-      dynamic headers = {
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkxODA5OTksImV4cCI6MTcyOTI2NzM5OX0.kpxDRxnFzpxFm60ypSpw70BRYgJpQV1rVGCDzzYNNDY",
-      };
-
-      Map<String, String> body = {
-        "name": "Bodega de Martin",
-        "phone": "3213440349",
-        "city": "6569e63abcefff5266ac0778",
-        "address": "Direccion de Martin",
-        "provider": "67113828273871d1eaf51334"
-      };
-      Response response =
-          await services.post(url: url, headers: headers, body: body);
-
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      dynamic json = jsonDecode(response.body);
-      // List<dynamic> bodyList = json['data']['providers'];
-
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      print(json.toString());
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right(unit);
-    } catch (e) {
-      print('error: $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, dynamic>> createMultipleOrder() async {
-    String url = 'api/orders/create-order';
-    print('createMultipleOrder() ');
-    try {
-      dynamic headers = {
-        'Content-Type': 'application/json',
-        'x-token':
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc",
-      };
-
-      var products = [
-        {
-          "product_id": "66edec97326a2a22f473abbb",
-          "client_quantity": 2,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66fb2b12c05c9fb458e63a8b",
-          "client_quantity": 5,
-          "variation_id": 131961
-        },
-        {
-          "product_id": "66edec99326a2a22f473abbd",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edec9b326a2a22f473abc1",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edec9a326a2a22f473abbf",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edeca0326a2a22f473abc9",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edec9c326a2a22f473abc3",
-          "client_quantity": 1,
-          "variation_id": ""
-        }
-      ];
-
-      var catalogue = {
-        "id": "66f1e6f58b85f745c53f2fa1",
-        "products": products,
-      };
-
-      Map<String, dynamic> body = {
-        "city_id": "1222",
-        "client_direction": "Cra 01 #12-34 B/ San Vicente",
-        "client_email": "dianasierra@dropi.co",
-        "client_name": "Martin Silva",
-        "client_notes": "Holis",
-        "client_phone": "3127559567",
-        "client_surname": "Diana Patricia",
-        "department_id": "81",
-        "catalogue": catalogue,
-        "user_id": "6463b06a7420bf4da4c1ecef",
-      };
-
-      String bodyJson = jsonEncode(body);
-
-      Response response = await services.post(
-        url: url,
-        headers: headers,
-        body: bodyJson,
-      );
-
-      dynamic json = jsonDecode(response.body);
-      print(json.toString());
-
-      return right(unit);
-    } catch (e) {
-      print('error: $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, dynamic>> createMultipleOrders() async {
-    String baseUrl = "dev-api.estrellas.app";
-    // String baseUrl = "41e8-186-85-250-3.ngrok-free.app";
-
-    String url = 'api/orders/create-order';
-    try {
-      print('createMultipleOrders');
-
-      // string to uri
-      var uri = Uri.https(baseUrl, url);
-
-      var request = http.MultipartRequest("POST", uri);
-
-      var products = [
-        {
-          "product_id": "66edec97326a2a22f473abbb",
-          "client_quantity": 2,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66fb2b12c05c9fb458e63a8b",
-          "client_quantity": 5,
-          "variation_id": 131961
-        },
-        {
-          "product_id": "66edec99326a2a22f473abbd",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edec9b326a2a22f473abc1",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edec9a326a2a22f473abbf",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edeca0326a2a22f473abc9",
-          "client_quantity": 1,
-          "variation_id": ""
-        },
-        {
-          "product_id": "66edec9c326a2a22f473abc3",
-          "client_quantity": 1,
-          "variation_id": ""
-        }
-      ];
-
-      Map<String, dynamic> catalogue = {
-        "id": "66f1e6f58b85f745c53f2fa1",
-        "products": products,
-      };
-
-      request.fields['catalogue'] = jsonEncode(catalogue);
-      // request.fields['name'] = 'Provider Martin';
-      // request.fields['phone'] = '3155125062';
-
-      request.headers['x-token'] =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkwOTQ0NTcsImV4cCI6MTcyOTE4MDg1N30.p10lSMsSXAinWx1BqfFfPAeD_XS2RZL9NKoUQnrQBZc";
-
-      log(request.fields.toString());
-      // send
-      var response = await request.send();
-      print(response.statusCode);
-
-      // listen for response
-      response.stream.transform(utf8.decoder).listen((value) {
-        print(value);
-      });
-
-      return right('list');
-    } catch (e) {
-      print('error $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, dynamic>> createProduct() async {
-    String baseUrl = "dev-api.estrellas.app";
-
+  Future<Either<String, ProductModel>> createProduct({
+    required String name,
+    required String price,
+    required String suggestedPrice,
+    required String points,
+    required String warehouseID,
+    required String provider,
+    required String imagePath,
+  }) async {
     String url = 'api/products/create';
     try {
-      print('createProduct');
-      String imagePath =
-          '/Users/martin/Library/Developer/CoreSimulator/Devices/4A18C68A-D8DF-4E65-BBF8-2F43BF34682D/data/Containers/Data/Application/40A27E08-6987-4CC6-8AA1-CB983ED3DE73/tmp/image_cropper_F7AE5C8A-9A7C-41CC-BD16-5849FAE6BD7B-30840-000004B35CE6CE56.jpg';
-      File imageFile = File(imagePath);
-
-      // open a bytestream
-      var stream =
-          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-      // get file length
-      var length = await imageFile.length();
-
-      // string to uri
-      var uri = Uri.https(baseUrl, url);
-
-      // create multipart request
-      var request = new http.MultipartRequest("POST", uri);
-
-      request.fields['provider'] = '67113828273871d1eaf51334';
-      request.fields['name'] = 'Super Producto de Martin 22';
-      request.fields['price'] = '26150';
-      request.fields['suggestedPrice'] = '39990';
-      request.fields['points'] = '999';
-      request.fields['warehouseID'] = '67113882273871d1eaf51340';
-      // multipart that takes file
-      var multipartFile = new http.MultipartFile('image', stream, length,
-          filename: basename(imageFile.path));
-
-      // add file to multipart
-      request.files.add(multipartFile);
-
-      // send
-      var response = await request.send();
-      print(response.statusCode);
-
-      // listen for response
-      response.stream.transform(utf8.decoder).listen((value) {
-        print(value);
-      });
-
-      // Response response = await services.post(
-      //   url: url,
-      //   headers: headers,
-      //   body: jsonEncode(body),
-      // );
-
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      // dynamic json = jsonDecode(response.body);
-
-      log(json.toString());
-
-      // List<dynamic> bodyList = json['data']['products'];
-
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right('list');
-    } catch (e) {
-      print('error $e');
-      return left(e.toString());
-    }
-  }
-
-  Future<Either<String, dynamic>> createProvider() async {
-    String baseUrl = "dev-api.estrellas.app";
-    // String baseUrl = "41e8-186-85-250-3.ngrok-free.app";
-
-    String url = 'api/provider/create';
-    try {
-      print('createProvider');
-      String imagePath =
-          '/Users/martin/Library/Developer/CoreSimulator/Devices/4A18C68A-D8DF-4E65-BBF8-2F43BF34682D/data/Containers/Data/Application/40A27E08-6987-4CC6-8AA1-CB983ED3DE73/tmp/image_cropper_F7AE5C8A-9A7C-41CC-BD16-5849FAE6BD7B-30840-000004B35CE6CE56.jpg';
-      File imageFile = File(imagePath);
-
-      // open a bytestream
-      var stream =
-          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-      // get file length
-      var length = await imageFile.length();
-
-      // string to uri
-      var uri = Uri.https(baseUrl, url);
-
-      // create multipart request
-      var request = new http.MultipartRequest("POST", uri);
-
       Map<String, dynamic> body = {
-        'email': 'superproveedor@estrellas.app',
-        'name': 'Super Proveedor Martin',
-        'surname': 'Silva',
-        'phone': '123123123',
-        'document': '123123123',
-        'porcentage': '50',
+        'name': name,
+        'price': price,
+        'suggestedPrice': suggestedPrice,
+        'points': points,
+        'warehouseID': warehouseID,
+        'provider': provider,
       };
 
-      request.fields['provider'] = jsonEncode(body);
-      // request.fields['name'] = 'Provider Martin';
-      // request.fields['phone'] = '3155125062';
+      dynamic fields = jsonEncode(body);
 
-      request.headers['x-token'] =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDYzYjA2YTc0MjBiZjRkYTRjMWVjZWYiLCJpYXQiOjE3MjkxODA5OTksImV4cCI6MTcyOTI2NzM5OX0.kpxDRxnFzpxFm60ypSpw70BRYgJpQV1rVGCDzzYNNDY";
+      StreamedResponse response = await services.postWithFileAndToken(
+        url: url,
+        fields: fields,
+        fieldImageName: 'image',
+        fieldImagePath: imagePath,
+      );
 
-      // multipart that takes file
-      var multipartFile = new http.MultipartFile('avatarURL', stream, length,
-          filename: basename(imageFile.path));
+      if (response.statusCode != 200) {
+        return left('Error status code: ${response.statusCode}');
+      }
 
-      // add file to multipart
-      request.files.add(multipartFile);
+      String responseBody =
+          await response.stream.transform(utf8.decoder).join();
 
-      log(request.fields.toString());
-      // send
-      var response = await request.send();
-      print(response.statusCode);
+      dynamic json = jsonDecode(responseBody);
+      bool ok = json['ok'] ?? false;
 
-      // listen for response
-      response.stream.transform(utf8.decoder).listen((value) {
-        print(value);
-      });
+      if (!ok) {
+        return left(json['data']);
+      }
 
-      // Response response = await services.post(
-      //   url: url,
-      //   headers: headers,
-      //   body: jsonEncode(body),
-      // );
+      ProductModel productModel = ProductModel.fromJson(json['data']);
 
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
-      // dynamic json = jsonDecode(response.body);
-
-      log(json.toString());
-
-      // List<dynamic> bodyList = json['data']['products'];
-
-      // if (bodyList.isEmpty) {
-      //   return left('List Products is empty');
-      // }
-
-      // List<ProductModel> list = List<ProductModel>.generate(
-      //   bodyList.length,
-      //   (int index) => ProductModel.fromJson(bodyList[index]),
-      // );
-
-      return right('list');
+      return right(productModel);
     } catch (e) {
-      print('error $e');
       return left(e.toString());
     }
   }

@@ -133,44 +133,29 @@ class CreateProductView extends GetView<CreateProductController> {
                     ),
                     const SizedBox(height: 16),
                     ReactiveTextField(
-                      formControlName: Fields.surname.name,
-                      keyboardType: TextInputType.text,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "Surname",
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.email.name,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "E-mail",
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.phone.name,
-                      keyboardType: TextInputType.phone,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "Phone",
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.document.name,
+                      formControlName: Fields.price.name,
                       keyboardType: TextInputType.number,
                       decoration: CustomInputDecoration.inputDecoration(
-                        text: "Document",
+                        text: "Price",
                       ),
                     ),
                     const SizedBox(height: 16),
                     ReactiveTextField(
-                      formControlName: Fields.porcentage.name,
+                      formControlName: Fields.suggestedPrice.name,
                       keyboardType: TextInputType.number,
                       decoration: CustomInputDecoration.inputDecoration(
-                        text: "Porcentage",
+                        text: "Suggested Price",
                       ),
                     ),
+                    const SizedBox(height: 16),
+                    ReactiveTextField(
+                      formControlName: Fields.points.name,
+                      keyboardType: TextInputType.number,
+                      decoration: CustomInputDecoration.inputDecoration(
+                        text: "Points",
+                      ),
+                    ),
+
                     const SizedBox(height: 16),
                     // Obx(
                     //   () => DropDown(

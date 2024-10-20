@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
 import 'package:estrellas_dashboard/app/modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
 import 'package:get/get.dart';
@@ -14,11 +16,9 @@ import '../../../../utils/utils_image.dart';
 
 enum Fields {
   name('name'),
-  email('email'),
-  surname('surname'),
-  phone('phone'),
-  document('document'),
-  porcentage('porcentage'),
+  price('price'),
+  suggestedPrice('suggestedPrice'),
+  points('points'),
   ;
 
   const Fields(this.text);
@@ -26,7 +26,7 @@ enum Fields {
 }
 
 class CreateProductController extends GetxController {
-  final ProvidersRepository _repository = ProvidersRepository();
+  final ProductsRepository _repository = ProductsRepository();
   final MainController _mainController = Get.find<MainController>();
 
   String? _imagePath;
@@ -45,38 +45,25 @@ class CreateProductController extends GetxController {
             Validators.minLength(4),
           ],
         ),
-        Fields.surname.name: FormControl<String>(
-          validators: [
-            Validators.required,
-            Validators.minLength(4),
-          ],
-        ),
-        Fields.email.name: FormControl<String>(
-          validators: [
-            Validators.required,
-            Validators.email,
-            Validators.minLength(4),
-          ],
-        ),
-        Fields.phone.name: FormControl<String>(
+        Fields.price.name: FormControl<String>(
           validators: [
             Validators.required,
             Validators.number(),
             Validators.minLength(4),
           ],
         ),
-        Fields.document.name: FormControl<String>(
+        Fields.suggestedPrice.name: FormControl<String>(
           validators: [
             Validators.required,
             Validators.number(),
             Validators.minLength(4),
           ],
         ),
-        Fields.porcentage.name: FormControl<String>(
+        Fields.points.name: FormControl<String>(
           validators: [
             Validators.required,
             Validators.number(),
-            Validators.minLength(1),
+            Validators.minLength(4),
           ],
         ),
       });
@@ -101,23 +88,24 @@ class CreateProductController extends GetxController {
   }
 
   Future<void> saveInFirebase({
-    required ProviderModel provider,
+    required ProductModel product,
   }) async {
     _mainController.setDropiDialog(false);
 
-    _mainController.setDropiMessage('saveInFirebase');
-    Either<String, Unit> response = await _repository.saveProviderInFirebase(
-      provider: provider,
-    );
-    response.fold((failure) {
-      _mainController.setDropiDialogError(true, failure);
-    }, (_) async {
-      _mainController.setDropiMessage('Success!');
-      await Future.delayed(const Duration(seconds: 1), () {
-        Get.back();
-        Get.back(result: provider);
-      });
-    });
+    print('product $product');
+    // _mainController.setDropiMessage('saveInFirebase');
+    // Either<String, Unit> response = await _repository.saveProviderInFirebase(
+    //   provider: provider,
+    // );
+    // response.fold((failure) {
+    //   _mainController.setDropiDialogError(true, failure);
+    // }, (_) async {
+    //   _mainController.setDropiMessage('Success!');
+    //   await Future.delayed(const Duration(seconds: 1), () {
+    //     Get.back();
+    //     Get.back(result: provider);
+    //   });
+    // });
   }
 
   Future<void> sendForm(Map<String, Object?> data) async {
@@ -125,31 +113,34 @@ class CreateProductController extends GetxController {
       Get.snackbar('Error', "Tienes que elegir una imagen");
       return;
     }
+
+    if (_warehouseModel == null) {
+      Get.snackbar('Error', "Tienes que elegir una bodega");
+      return;
+    }
     String name = data[Fields.name.name].toString();
-    String surname = data[Fields.surname.name].toString();
-    String email = data[Fields.email.name].toString();
-    String phone = data[Fields.phone.name].toString();
-    String document = data[Fields.document.name].toString();
-    String porcentage = data[Fields.porcentage.name].toString();
+    String price = data[Fields.price.name].toString();
+    String suggestedPrice = data[Fields.suggestedPrice.name].toString();
+    String points = data[Fields.points.name].toString();
 
     _mainController.setDropiDialog(true);
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Either<String, ProviderModel> response = await _repository.createProvider(
-      avatarURL: _imagePath!,
+    Either<String, ProductModel> response = await _repository.createProduct(
+      imagePath: _imagePath!,
+      price: price,
+      suggestedPrice: suggestedPrice,
       name: name,
-      surname: surname,
-      email: email,
-      phone: phone,
-      document: document,
-      porcentage: porcentage,
+      points: points,
+      warehouseID: warehouseModel!.id,
+      provider: providerModel!.id,
     );
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
-    }, (provider) async {
+    }, (product) async {
       _mainController.setDropiMessage('Success!');
-      saveInFirebase(provider: provider);
+      saveInFirebase(product: product);
     });
   }
 }
