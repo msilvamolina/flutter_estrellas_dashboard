@@ -101,43 +101,60 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
             label: 'sku',
             widget: TableRowText(text: controller.product.sku ?? ''),
           ),
-          TableRowModel(
-            label: 'category',
-            widget: TableRowInsideColumn(
-              cellWidth: 50,
-              rows: [
-                TableRowStringsModel(
-                  label: 'id',
-                  text: controller.product.category?['_id'] ?? '',
-                ),
-                TableRowStringsModel(
-                  label: 'name',
-                  text: controller.product.category?['name'] ?? '',
-                ),
-              ],
+          if (controller.product.category != null)
+            TableRowModel(
+              label: 'category',
+              widget: TableRowInsideColumn(
+                cellWidth: 50,
+                rows: [
+                  TableRowStringsModel(
+                    label: 'id',
+                    text: controller.product.category?['_id'] ?? '',
+                  ),
+                  TableRowStringsModel(
+                    label: 'name',
+                    text: controller.product.category?['name'] ?? '',
+                  ),
+                ],
+              ),
             ),
-          ),
-          TableRowModel(
-            label: 'provider',
-            widget: TableRowInsideColumn(
-              cellWidth: 70,
-              imageUrl: controller.product.provider['avatarUrl'],
-              rows: [
-                TableRowStringsModel(
-                  label: 'id',
-                  text: controller.product.provider?['_id'] ?? '',
-                ),
-                TableRowStringsModel(
-                  label: 'name',
-                  text: controller.product.provider?['name'] ?? '',
-                ),
-                TableRowStringsModel(
-                  label: 'avatarUrl',
-                  text: controller.product.provider?['avatarUrl'] ?? '',
-                ),
-              ],
+          if (controller.product.provider != null &&
+              controller.product.provider is Map<String, dynamic>)
+            TableRowModel(
+              label: 'provider',
+              widget: TableRowInsideColumn(
+                cellWidth: 70,
+                imageUrl: controller.product.provider?['avatarUrl'] ?? '',
+                rows: [
+                  TableRowStringsModel(
+                    label: 'id',
+                    text: controller.product.provider?['_id'] ?? '',
+                  ),
+                  TableRowStringsModel(
+                    label: 'name',
+                    text: controller.product.provider?['name'] ?? '',
+                  ),
+                  TableRowStringsModel(
+                    label: 'avatarUrl',
+                    text: controller.product.provider?['avatarUrl'] ?? '',
+                  ),
+                ],
+              ),
             ),
-          ),
+          if (controller.product.provider != null &&
+              controller.product.provider is String)
+            TableRowModel(
+              label: 'provider',
+              widget: TableRowInsideColumn(
+                cellWidth: 70,
+                rows: [
+                  TableRowStringsModel(
+                    label: 'id',
+                    text: controller.product.provider ?? '',
+                  ),
+                ],
+              ),
+            ),
           TableRowModel(
             label: 'thumbnail',
             widget: TableRowImage(url: controller.product.thumbnail ?? ''),
@@ -153,10 +170,6 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           TableRowModel(
             label: 'updatedAt',
             widget: TableRowDate(date: controller.product.updatedAt ?? ''),
-          ),
-          TableRowModel(
-            label: 'uploadDate',
-            widget: TableRowDate(date: controller.product.uploadDate ?? ''),
           ),
           TableRowModel(
             label: 'description',
