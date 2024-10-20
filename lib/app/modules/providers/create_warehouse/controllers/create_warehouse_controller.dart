@@ -26,14 +26,13 @@ class CreateWarehouseController extends GetxController {
   final ProvidersRepository _repository = ProvidersRepository();
   final MainController _mainController = Get.find<MainController>();
 
-  String? _imagePath;
-  String? get imagePath => _imagePath;
-
   DepartmentModel? _departmentModel;
   DepartmentModel? get departmentModel => _departmentModel;
 
   CityModel? _cityModel;
   CityModel? get cityModel => _cityModel;
+
+  late ProviderModel providerModel;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
@@ -42,16 +41,9 @@ class CreateWarehouseController extends GetxController {
             Validators.minLength(4),
           ],
         ),
-        Fields.city.name: FormControl<String>(
-          validators: [
-            Validators.required,
-            Validators.minLength(4),
-          ],
-        ),
         Fields.address.name: FormControl<String>(
           validators: [
             Validators.required,
-            Validators.email,
             Validators.minLength(4),
           ],
         ),
@@ -66,12 +58,8 @@ class CreateWarehouseController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    providerModel = Get.arguments as ProviderModel;
     super.onInit();
-  }
-
-  Future<void> pickImage() async {
-    _imagePath = await UtilsImage.pickImage();
-    update(['view']);
   }
 
   Future<void> saveInFirebase({
@@ -90,8 +78,7 @@ class CreateWarehouseController extends GetxController {
     }, (provider) async {
       _mainController.setDropiMessage('Success!');
       await Future.delayed(const Duration(seconds: 1), () {
-        Get.back();
-        Get.back();
+        Get.back(result: provider);
       });
     });
   }
@@ -102,19 +89,16 @@ class CreateWarehouseController extends GetxController {
       _departmentModel = result[0];
       _cityModel = result[1];
 
-      print('_departmentModel $_departmentModel');
-      print('_cityModel $_cityModel');
       update(['view']);
     }
   }
 
   Future<void> sendForm(Map<String, Object?> data) async {
-    if (_imagePath == null) {
-      Get.snackbar('Error', "Tienes que elegir una imagen");
+    if (_cityModel == null) {
+      Get.snackbar('Error', "Tienes que elegir una ciudad");
       return;
     }
     String name = data[Fields.name.name].toString();
-    String city = data[Fields.city.name].toString();
     String address = data[Fields.address.name].toString();
     String phone = data[Fields.phone.name].toString();
 
@@ -122,14 +106,14 @@ class CreateWarehouseController extends GetxController {
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Either<String, dynamic> response = await _repository.createWarehouse(
+    Either<String, ProviderModel> response = await _repository.createWarehouse(
       name: name,
-      city: city,
+      city: _cityModel!.dropiId.toString(),
       address: address,
       phone: phone,
-      provider: 'sadadad',
+      provider: providerModel.id,
     );
-    Get.back();
+
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
     }, (provider) async {

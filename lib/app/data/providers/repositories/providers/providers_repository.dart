@@ -121,7 +121,7 @@ class ProvidersRepository {
     }
   }
 
-  Future<Either<String, dynamic>> createWarehouse({
+  Future<Either<String, ProviderModel>> createWarehouse({
     required String name,
     required String phone,
     required String city,
@@ -133,20 +133,22 @@ class ProvidersRepository {
       Map<String, dynamic> body = {
         "name": name,
         "phone": phone,
-        "city": city,
+        "city": '6569e63abcefff5266ac0778',
         "address": address,
         "provider": provider
       };
       Response response = await services.postWithToken(url: url, body: body);
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
       dynamic json = jsonDecode(response.body);
+      bool ok = json['ok'] ?? false;
 
-      print(json.toString());
+      if (!ok) {
+        return left(json['data']);
+      }
 
-      return right(unit);
+      ProviderModel providerModel = ProviderModel.fromJson(json['data']);
+
+      return right(providerModel);
     } catch (e) {
       return left(e.toString());
     }

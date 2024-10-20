@@ -129,7 +129,6 @@ class CreateProviderController extends GetxController {
       document: document,
       porcentage: porcentage,
     );
-    Get.back();
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
     }, (provider) async {

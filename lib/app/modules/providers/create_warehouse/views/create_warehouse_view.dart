@@ -39,12 +39,10 @@ class CreateWarehouseView extends GetView<CreateWarehouseController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset(
-                                controller.imagePath ??
-                                    'assets/images/picture.png',
+                                'assets/images/city.png',
                                 width: 80,
                               ),
                               const SizedBox(width: 12),
-                              // Elimina el Padding alrededor del Expanded
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,14 +50,17 @@ class CreateWarehouseView extends GetView<CreateWarehouseController> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Avatar Url',
+                                      'City',
                                       style: TypographyStyle.bodyBlackLarge
                                           .copyWith(color: primary),
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      controller.imagePath ??
-                                          '(Selecciona una foto)',
+                                      controller.cityModel != null
+                                          ? (controller.cityModel!.name +
+                                              '\n' +
+                                              controller.departmentModel!.name)
+                                          : null ?? '(Selecciona una ciudad)',
                                       style: TypographyStyle.bodyRegularSmall,
                                     ),
                                   ],
@@ -84,19 +85,12 @@ class CreateWarehouseView extends GetView<CreateWarehouseController> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.city.name,
-                      keyboardType: TextInputType.text,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "Surname",
-                      ),
-                    ),
-                    const SizedBox(height: 16),
+
                     ReactiveTextField(
                       formControlName: Fields.address.name,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       decoration: CustomInputDecoration.inputDecoration(
-                        text: "E-mail",
+                        text: "Address",
                       ),
                     ),
                     const SizedBox(height: 16),

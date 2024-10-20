@@ -20,22 +20,27 @@ class ProvidersWarehousesView extends GetView<ProvidersWarehousesController> {
       floatingActionButton: CustomFloatingActionButton(
         label: 'Agregar',
         icon: Icons.add,
-        onPressed: () => Get.toNamed(Routes.CREATE_WAREHOUSE),
+        onPressed: controller.addWarehouse,
       ),
       appBarWidget: const AppbarTitleWithBack(title: 'Bodegas'),
       maxWidth: double.infinity,
       currentRoute: Routes.PROVIDERS_WAREHOUSES,
-      child: Column(
-        children: [
-          if (controller.provider.warehouses != null &&
-              controller.provider.warehouses!.isNotEmpty)
-            for (ProviderWarehouseModel element
-                in controller.provider.warehouses!)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: WarehouseCard(warehouse: element),
-              ),
-        ],
+      child: GetBuilder<ProvidersWarehousesController>(
+        id: 'view',
+        builder: (_) {
+          return Column(
+            children: [
+              if (controller.provider.warehouses != null &&
+                  controller.provider.warehouses!.isNotEmpty)
+                for (ProviderWarehouseModel element
+                    in controller.provider.warehouses!)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: WarehouseCard(warehouse: element),
+                  ),
+            ],
+          );
+        },
       ),
     );
   }
