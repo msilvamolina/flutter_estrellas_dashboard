@@ -63,7 +63,7 @@ class CreateProductController extends GetxController {
           validators: [
             Validators.required,
             Validators.number(),
-            Validators.minLength(4),
+            Validators.minLength(3),
           ],
         ),
       });
@@ -88,7 +88,7 @@ class CreateProductController extends GetxController {
   }
 
   Future<void> saveInFirebase({
-    required ProductModel product,
+    required dynamic product,
   }) async {
     _mainController.setDropiDialog(false);
 
@@ -127,7 +127,7 @@ class CreateProductController extends GetxController {
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Either<String, ProductModel> response = await _repository.createProduct(
+    Either<String, dynamic> response = await _repository.createProduct(
       imagePath: _imagePath!,
       price: price,
       suggestedPrice: suggestedPrice,

@@ -66,7 +66,7 @@ class ProductsRepository {
   //   }
   // }
 
-  Future<Either<String, ProductModel>> createProduct({
+  Future<Either<String, dynamic>> createProduct({
     required String name,
     required String price,
     required String suggestedPrice,
@@ -86,11 +86,9 @@ class ProductsRepository {
         'provider': provider,
       };
 
-      dynamic fields = jsonEncode(body);
-
       StreamedResponse response = await services.postWithFileAndToken(
         url: url,
-        fields: fields,
+        fields: body,
         fieldImageName: 'image',
         fieldImagePath: imagePath,
       );
@@ -109,9 +107,9 @@ class ProductsRepository {
         return left(json['data']);
       }
 
-      ProductModel productModel = ProductModel.fromJson(json['data']);
+      // ProductModel productModel = ProductModel.fromJson(json['data']);
 
-      return right(productModel);
+      return right(json['data']);
     } catch (e) {
       return left(e.toString());
     }
