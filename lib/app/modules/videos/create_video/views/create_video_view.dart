@@ -50,7 +50,7 @@ class CreateVideoView extends GetView<CreateVideoController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset(
-                                controller.videoPath ??
+                                controller.videoImagePath ??
                                     'assets/images/video.png',
                                 width: 80,
                               ),
@@ -115,7 +115,10 @@ class CreateVideoView extends GetView<CreateVideoController> {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      controller.videoPath ??
+                                      (controller.productModel != null
+                                              ? controller
+                                                  .productModel?.thumbnail
+                                              : null) ??
                                           '(Selecciona un producto)',
                                       style: TypographyStyle.bodyRegularSmall,
                                     ),

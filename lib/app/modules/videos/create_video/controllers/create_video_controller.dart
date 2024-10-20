@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product_firebase/product_firebase_model.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
@@ -34,6 +36,12 @@ class CreateVideoController extends GetxController {
   String? _videoPath;
   String? get videoPath => _videoPath;
 
+  String? _videoImagePath;
+  String? get videoImagePath => _videoImagePath;
+
+  ProductFirebaseModel? _productModel;
+  ProductFirebaseModel? get productModel => _productModel;
+
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.videoName.name: FormControl<String>(
           validators: [
@@ -53,7 +61,16 @@ class CreateVideoController extends GetxController {
     super.onInit();
   }
 
-  void pickVideo() {}
+  Future<void> pickVideo() async {
+    final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    if (video != null) {
+      _videoPath = video.path;
+      File videoFile = await _repository.getThumbnail(_videoPath!);
+      _videoImagePath = videoFile.path;
+      update(['view']);
+    }
+  }
+
   void onProductSelected(String? value) {
     _productSelected = value;
 
