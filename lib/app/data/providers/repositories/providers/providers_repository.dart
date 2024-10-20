@@ -54,6 +54,20 @@ class ProvidersRepository {
     }
   }
 
+  Future<Either<String, Unit>> saveProviderInFirebase({
+    required ProviderModel provider,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('providers')
+          .doc(provider.id)
+          .set(provider.toDocument());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
   Future<Either<String, ProviderModel>> createProvider({
     required String avatarURL,
     required String name,

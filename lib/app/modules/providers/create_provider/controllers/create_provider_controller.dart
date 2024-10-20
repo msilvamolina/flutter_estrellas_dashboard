@@ -82,6 +82,28 @@ class CreateProviderController extends GetxController {
     update(['view']);
   }
 
+  Future<void> saveInFirebase({
+    required ProviderModel provider,
+  }) async {
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+
+    _mainController.setDropiMessage('saveInFirebase');
+    Either<String, Unit> response = await _repository.saveProviderInFirebase(
+      provider: provider,
+    );
+    Get.back();
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (provider) async {
+      _mainController.setDropiMessage('Success!');
+      await Future.delayed(const Duration(seconds: 1), () {
+        Get.back();
+        Get.back();
+      });
+    });
+  }
+
   Future<void> sendForm(Map<String, Object?> data) async {
     if (_imagePath == null) {
       Get.snackbar('Error', "Tienes que elegir una imagen");
@@ -110,81 +132,11 @@ class CreateProviderController extends GetxController {
     Get.back();
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
-    }, (provider) {
-      print('ok! $provider');
-      Get.back();
-      Get.snackbar('Bien hecho!', "Guardado exitosamente");
+    }, (provider) async {
+      _mainController.setDropiMessage('Success!');
+      await Future.delayed(const Duration(seconds: 1), () {
+        saveInFirebase(provider: provider);
+      });
     });
   }
-  // await Future.delayed(Duration(seconds: 2), () {
-  //   _mainController.setDropiMessage('Generando Token');
-  // });
-
-  // await Future.delayed(Duration(seconds: 4), () {
-  //   _mainController.setDropiMessage('Conectando con provider/create');
-  // });
-
-  // await Future.delayed(Duration(seconds: 4), () {
-  //   _mainController.setDropiMessage('Success!');
-  // });
-
-  // await Future.delayed(Duration(seconds: 2), () {
-  //   _mainController.setDropiDialog(false);
-  //   _mainController.setDropiMessage('Subiendo imagen');
-  // });
-
-  // await Future.delayed(Duration(seconds: 4), () {
-  //   _mainController.setDropiMessage('Guardando datos en firebase');
-  // });
-
-  // await Future.delayed(Duration(seconds: 2), () {
-  //   _mainController.setDropiDialogError(true,
-  //       'Este proveedor ya existe en firebase, pero con otro nombre. El id del proveedor es: 67113828273871d1eaf51334');
-  // });
-
-  // await Future.delayed(Duration(seconds: 4), () {
-  //   _mainController.setDropiMessage('Success!');
-  // });
-
-  // await Future.delayed(Duration(seconds: 2), () {
-  //   Get.back();
-  // });
-  // String videoName = data[Fields.videoName.name].toString();
-  // String uuid = const Uuid().v4();
-  // String videoId = 'video-$uuid';
-
-  // if (_productSelected == null) {
-  //   _productsError = 'Selecciona un producto';
-  //   update(['view']);
-  //   return;
-  // }
-
-  // ProductFirebaseModel? _product = getProduct();
-
-  // if (_product == null) {
-  //   _productsError = 'Selecciona un producto válido';
-  //   update(['view']);
-  //   return;
-  // }
-
-  // final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
-  // if (video != null) {
-  //   _mainController.showLoader();
-
-  //   Either<String, Unit> response = await _repository.uploadVideo(
-  //     videoId: videoId,
-  //     name: videoName,
-  //     videoPath: video.path,
-  //     product: _product,
-  //   );
-  //   Get.back();
-  //   response.fold((failure) {
-  //     Get.snackbar("Error", failure);
-  //     _loading = false;
-  //     update(['view']);
-  //   }, (_) {
-  //     Get.back();
-  //     Get.snackbar(videoName, "Guardado exitosamente");
-  //   });
-  // }
 }
