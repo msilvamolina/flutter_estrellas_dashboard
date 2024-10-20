@@ -13,6 +13,7 @@ import 'package:http/http.dart';
 
 import '../../../../services/api_services.dart';
 import '../../../models/product/product_firebase/product_firebase_model.dart';
+import '../../../models/product_lite/product_lite.dart';
 import '../../../models/product_variant/product_variant_model.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
@@ -52,21 +53,21 @@ class ProductsRepository {
     }
   }
 
-  // Future<Either<String, Unit>> saveProviderInFirebase({
-  //   required ProviderModel provider,
-  // }) async {
-  //   try {
-  //     await _firebaseFirestore
-  //         .collection('providers')
-  //         .doc(provider.id)
-  //         .set(provider.toDocument());
-  //     return right(unit);
-  //   } on FirebaseException catch (e) {
-  //     return left(e.code);
-  //   }
-  // }
+  Future<Either<String, Unit>> saveProductLiteInFirebase({
+    required ProductLiteModel product,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('products')
+          .doc(product.id)
+          .set(product.toDocument());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 
-  Future<Either<String, dynamic>> createProduct({
+  Future<Either<String, ProductLiteModel>> createProduct({
     required String name,
     required String price,
     required String suggestedPrice,
@@ -107,9 +108,9 @@ class ProductsRepository {
         return left(json['data']);
       }
 
-      // ProductModel productModel = ProductModel.fromJson(json['data']);
+      ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
 
-      return right(json['data']);
+      return right(productModel);
     } catch (e) {
       return left(e.toString());
     }

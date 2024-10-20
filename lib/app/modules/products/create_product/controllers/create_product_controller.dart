@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
+import 'package:estrellas_dashboard/app/data/models/product_lite/product_lite.dart';
 import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
@@ -88,24 +89,23 @@ class CreateProductController extends GetxController {
   }
 
   Future<void> saveInFirebase({
-    required dynamic product,
+    required ProductLiteModel product,
   }) async {
     _mainController.setDropiDialog(false);
 
-    print('product $product');
-    // _mainController.setDropiMessage('saveInFirebase');
-    // Either<String, Unit> response = await _repository.saveProviderInFirebase(
-    //   provider: provider,
-    // );
-    // response.fold((failure) {
-    //   _mainController.setDropiDialogError(true, failure);
-    // }, (_) async {
-    //   _mainController.setDropiMessage('Success!');
-    //   await Future.delayed(const Duration(seconds: 1), () {
-    //     Get.back();
-    //     Get.back(result: provider);
-    //   });
-    // });
+    _mainController.setDropiMessage('saveInFirebase');
+    Either<String, Unit> response = await _repository.saveProductLiteInFirebase(
+      product: product,
+    );
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (_) async {
+      _mainController.setDropiMessage('Success!');
+      await Future.delayed(const Duration(seconds: 1), () {
+        Get.back();
+        Get.back(result: product);
+      });
+    });
   }
 
   Future<void> sendForm(Map<String, Object?> data) async {
@@ -127,7 +127,7 @@ class CreateProductController extends GetxController {
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Either<String, dynamic> response = await _repository.createProduct(
+    Either<String, ProductLiteModel> response = await _repository.createProduct(
       imagePath: _imagePath!,
       price: price,
       suggestedPrice: suggestedPrice,
