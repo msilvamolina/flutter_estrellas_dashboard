@@ -7,7 +7,7 @@ part 'product_category.g.dart';
 abstract class ProductCategoryModel with _$ProductCategoryModel {
   const factory ProductCategoryModel({
     @JsonKey(name: '_id') required String id,
-    required String name,
+    String? name,
   }) = _ProductCategoryModel;
 
   factory ProductCategoryModel.fromJson(Map<String, dynamic> json) =>

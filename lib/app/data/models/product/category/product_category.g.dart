@@ -10,7 +10,7 @@ _$ProductCategoryModelImpl _$$ProductCategoryModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductCategoryModelImpl(
       id: json['_id'] as String,
-      name: json['name'] as String,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$$ProductCategoryModelImplToJson(

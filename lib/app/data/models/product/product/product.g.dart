@@ -9,6 +9,14 @@ part of 'product.dart';
 _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
     _$ProductModelImpl(
       id: json['_id'] as String,
+      provider: json['provider'] == null
+          ? null
+          : ProductProviderModel.fromJson(
+              json['provider'] as Map<String, dynamic>),
+      category: json['category'] == null
+          ? null
+          : ProductCategoryModel.fromJson(
+              json['category'] as Map<String, dynamic>),
       name: json['name'] as String?,
       externalId: json['externalId'] as String?,
       usefulId: json['usefulId'] as String?,
@@ -29,6 +37,8 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'provider': instance.provider,
+      'category': instance.category,
       'name': instance.name,
       'externalId': instance.externalId,
       'usefulId': instance.usefulId,

@@ -7,8 +7,8 @@ part 'product_provider.g.dart';
 abstract class ProductProviderModel with _$ProductProviderModel {
   const factory ProductProviderModel({
     @JsonKey(name: '_id') required String id,
-    required String name,
-    required String avatarUrl,
+    String? name,
+    String? avatarUrl,
   }) = _ProductProviderModel;
 
   factory ProductProviderModel.fromJson(Map<String, dynamic> json) =>

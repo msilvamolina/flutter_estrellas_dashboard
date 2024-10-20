@@ -13,8 +13,8 @@ abstract class ProductModel implements _$ProductModel {
 
   const factory ProductModel({
     @JsonKey(name: '_id') required String id,
-    // ProductProviderModel? provider,
-    // ProductCategoryModel? category,
+    ProductProviderModel? provider,
+    ProductCategoryModel? category,
     String? name,
     String? externalId,
     String? usefulId,

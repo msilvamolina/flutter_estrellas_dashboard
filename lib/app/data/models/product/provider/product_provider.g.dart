@@ -10,8 +10,8 @@ _$ProductProviderModelImpl _$$ProductProviderModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductProviderModelImpl(
       id: json['_id'] as String,
-      name: json['name'] as String,
-      avatarUrl: json['avatarUrl'] as String,
+      name: json['name'] as String?,
+      avatarUrl: json['avatarUrl'] as String?,
     );
 
 Map<String, dynamic> _$$ProductProviderModelImplToJson(

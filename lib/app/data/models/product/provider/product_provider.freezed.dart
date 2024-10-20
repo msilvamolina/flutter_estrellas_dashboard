@@ -22,8 +22,8 @@ ProductProviderModel _$ProductProviderModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductProviderModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get avatarUrl => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get avatarUrl => throw _privateConstructorUsedError;
 
   /// Serializes this ProductProviderModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $ProductProviderModelCopyWith<$Res> {
           $Res Function(ProductProviderModel) then) =
       _$ProductProviderModelCopyWithImpl<$Res, ProductProviderModel>;
   @useResult
-  $Res call({@JsonKey(name: '_id') String id, String name, String avatarUrl});
+  $Res call({@JsonKey(name: '_id') String id, String? name, String? avatarUrl});
 }
 
 /// @nodoc
@@ -61,22 +61,22 @@ class _$ProductProviderModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? avatarUrl = null,
+    Object? name = freezed,
+    Object? avatarUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: null == avatarUrl
+              as String?,
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -89,7 +89,7 @@ abstract class _$$ProductProviderModelImplCopyWith<$Res>
       __$$ProductProviderModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: '_id') String id, String name, String avatarUrl});
+  $Res call({@JsonKey(name: '_id') String id, String? name, String? avatarUrl});
 }
 
 /// @nodoc
@@ -106,22 +106,22 @@ class __$$ProductProviderModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? avatarUrl = null,
+    Object? name = freezed,
+    Object? avatarUrl = freezed,
   }) {
     return _then(_$ProductProviderModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatarUrl: null == avatarUrl
+              as String?,
+      avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -130,9 +130,7 @@ class __$$ProductProviderModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductProviderModelImpl implements _ProductProviderModel {
   const _$ProductProviderModelImpl(
-      {@JsonKey(name: '_id') required this.id,
-      required this.name,
-      required this.avatarUrl});
+      {@JsonKey(name: '_id') required this.id, this.name, this.avatarUrl});
 
   factory _$ProductProviderModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductProviderModelImplFromJson(json);
@@ -141,9 +139,9 @@ class _$ProductProviderModelImpl implements _ProductProviderModel {
   @JsonKey(name: '_id')
   final String id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String avatarUrl;
+  final String? avatarUrl;
 
   @override
   String toString() {
@@ -186,8 +184,8 @@ class _$ProductProviderModelImpl implements _ProductProviderModel {
 abstract class _ProductProviderModel implements ProductProviderModel {
   const factory _ProductProviderModel(
       {@JsonKey(name: '_id') required final String id,
-      required final String name,
-      required final String avatarUrl}) = _$ProductProviderModelImpl;
+      final String? name,
+      final String? avatarUrl}) = _$ProductProviderModelImpl;
 
   factory _ProductProviderModel.fromJson(Map<String, dynamic> json) =
       _$ProductProviderModelImpl.fromJson;
@@ -196,9 +194,9 @@ abstract class _ProductProviderModel implements ProductProviderModel {
   @JsonKey(name: '_id')
   String get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get avatarUrl;
+  String? get avatarUrl;
 
   /// Create a copy of ProductProviderModel
   /// with the given fields replaced by the non-null parameter values.

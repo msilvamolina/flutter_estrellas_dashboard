@@ -22,7 +22,7 @@ ProductCategoryModel _$ProductCategoryModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductCategoryModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
 
   /// Serializes this ProductCategoryModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $ProductCategoryModelCopyWith<$Res> {
           $Res Function(ProductCategoryModel) then) =
       _$ProductCategoryModelCopyWithImpl<$Res, ProductCategoryModel>;
   @useResult
-  $Res call({@JsonKey(name: '_id') String id, String name});
+  $Res call({@JsonKey(name: '_id') String id, String? name});
 }
 
 /// @nodoc
@@ -60,17 +60,17 @@ class _$ProductCategoryModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -83,7 +83,7 @@ abstract class _$$ProductCategoryModelImplCopyWith<$Res>
       __$$ProductCategoryModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: '_id') String id, String name});
+  $Res call({@JsonKey(name: '_id') String id, String? name});
 }
 
 /// @nodoc
@@ -100,17 +100,17 @@ class __$$ProductCategoryModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
+    Object? name = freezed,
   }) {
     return _then(_$ProductCategoryModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -119,7 +119,7 @@ class __$$ProductCategoryModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProductCategoryModelImpl implements _ProductCategoryModel {
   const _$ProductCategoryModelImpl(
-      {@JsonKey(name: '_id') required this.id, required this.name});
+      {@JsonKey(name: '_id') required this.id, this.name});
 
   factory _$ProductCategoryModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductCategoryModelImplFromJson(json);
@@ -128,7 +128,7 @@ class _$ProductCategoryModelImpl implements _ProductCategoryModel {
   @JsonKey(name: '_id')
   final String id;
   @override
-  final String name;
+  final String? name;
 
   @override
   String toString() {
@@ -169,7 +169,7 @@ class _$ProductCategoryModelImpl implements _ProductCategoryModel {
 abstract class _ProductCategoryModel implements ProductCategoryModel {
   const factory _ProductCategoryModel(
       {@JsonKey(name: '_id') required final String id,
-      required final String name}) = _$ProductCategoryModelImpl;
+      final String? name}) = _$ProductCategoryModelImpl;
 
   factory _ProductCategoryModel.fromJson(Map<String, dynamic> json) =
       _$ProductCategoryModelImpl.fromJson;
@@ -178,7 +178,7 @@ abstract class _ProductCategoryModel implements ProductCategoryModel {
   @JsonKey(name: '_id')
   String get id;
   @override
-  String get name;
+  String? get name;
 
   /// Create a copy of ProductCategoryModel
   /// with the given fields replaced by the non-null parameter values.
