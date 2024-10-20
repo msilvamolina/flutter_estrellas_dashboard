@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/city/city/city.dart';
+import 'package:estrellas_dashboard/app/data/models/city/department/department.dart';
 import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
 import 'package:get/get.dart';
@@ -26,6 +28,12 @@ class CreateWarehouseController extends GetxController {
 
   String? _imagePath;
   String? get imagePath => _imagePath;
+
+  DepartmentModel? _departmentModel;
+  DepartmentModel? get departmentModel => _departmentModel;
+
+  CityModel? _cityModel;
+  CityModel? get cityModel => _cityModel;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
@@ -90,6 +98,14 @@ class CreateWarehouseController extends GetxController {
 
   Future<void> pickCity() async {
     final result = await Get.toNamed(Routes.SELECT_DEPARTMENT);
+    if (result != null) {
+      _departmentModel = result[0];
+      _cityModel = result[1];
+
+      print('_departmentModel $_departmentModel');
+      print('_cityModel $_cityModel');
+      update(['view']);
+    }
   }
 
   Future<void> sendForm(Map<String, Object?> data) async {

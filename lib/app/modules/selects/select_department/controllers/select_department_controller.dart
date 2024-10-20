@@ -31,9 +31,9 @@ class SelectDepartmentController extends GetxController {
     super.onReady();
   }
 
-  void onTap(DepartmentModel department) {
-    final result = Get.toNamed(Routes.SELECT_CITY, arguments: department);
-    print('result $result');
+  Future<void> onTap(DepartmentModel department) async {
+    final result = await Get.toNamed(Routes.SELECT_CITY, arguments: department);
+    Get.back(result: [department, result]);
   }
 
   Future<void> getData() async {

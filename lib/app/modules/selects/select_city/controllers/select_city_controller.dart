@@ -32,7 +32,9 @@ class SelectCityController extends GetxController {
     super.onReady();
   }
 
-  void onTap(CityModel department) {}
+  void onTap(CityModel city) {
+    Get.back(result: city);
+  }
 
   Future<void> getData() async {
     print('getData');
