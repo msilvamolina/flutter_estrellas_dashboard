@@ -11,7 +11,7 @@ class SelectDepartmentView extends GetView<SelectDepartmentController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SelectDepartmentView'),
+        title: const Text('Elegí un departamento'),
         centerTitle: true,
       ),
       body: GetBuilder<SelectDepartmentController>(

@@ -21,9 +21,9 @@ CityModel _$CityModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CityModel {
   @JsonKey(name: 'dropi_id')
-  String get dropiId => throw _privateConstructorUsedError;
+  int get dropiId => throw _privateConstructorUsedError;
   @JsonKey(name: 'department_id')
-  String get departmenId => throw _privateConstructorUsedError;
+  int get departmenId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   /// Serializes this CityModel to a JSON map.
@@ -42,8 +42,8 @@ abstract class $CityModelCopyWith<$Res> {
       _$CityModelCopyWithImpl<$Res, CityModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'dropi_id') String dropiId,
-      @JsonKey(name: 'department_id') String departmenId,
+      {@JsonKey(name: 'dropi_id') int dropiId,
+      @JsonKey(name: 'department_id') int departmenId,
       String name});
 }
 
@@ -70,11 +70,11 @@ class _$CityModelCopyWithImpl<$Res, $Val extends CityModel>
       dropiId: null == dropiId
           ? _value.dropiId
           : dropiId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       departmenId: null == departmenId
           ? _value.departmenId
           : departmenId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -92,8 +92,8 @@ abstract class _$$CityModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'dropi_id') String dropiId,
-      @JsonKey(name: 'department_id') String departmenId,
+      {@JsonKey(name: 'dropi_id') int dropiId,
+      @JsonKey(name: 'department_id') int departmenId,
       String name});
 }
 
@@ -118,11 +118,11 @@ class __$$CityModelImplCopyWithImpl<$Res>
       dropiId: null == dropiId
           ? _value.dropiId
           : dropiId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       departmenId: null == departmenId
           ? _value.departmenId
           : departmenId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -144,10 +144,10 @@ class _$CityModelImpl implements _CityModel {
 
   @override
   @JsonKey(name: 'dropi_id')
-  final String dropiId;
+  final int dropiId;
   @override
   @JsonKey(name: 'department_id')
-  final String departmenId;
+  final int departmenId;
   @override
   final String name;
 
@@ -189,8 +189,8 @@ class _$CityModelImpl implements _CityModel {
 
 abstract class _CityModel implements CityModel {
   const factory _CityModel(
-      {@JsonKey(name: 'dropi_id') required final String dropiId,
-      @JsonKey(name: 'department_id') required final String departmenId,
+      {@JsonKey(name: 'dropi_id') required final int dropiId,
+      @JsonKey(name: 'department_id') required final int departmenId,
       required final String name}) = _$CityModelImpl;
 
   factory _CityModel.fromJson(Map<String, dynamic> json) =
@@ -198,10 +198,10 @@ abstract class _CityModel implements CityModel {
 
   @override
   @JsonKey(name: 'dropi_id')
-  String get dropiId;
+  int get dropiId;
   @override
   @JsonKey(name: 'department_id')
-  String get departmenId;
+  int get departmenId;
   @override
   String get name;
 

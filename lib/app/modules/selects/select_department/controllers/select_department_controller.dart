@@ -3,6 +3,7 @@ import 'package:estrellas_dashboard/app/data/providers/repositories/selects/sele
 import 'package:get/get.dart';
 
 import '../../../../data/models/city/department/department.dart';
+import '../../../../routes/app_pages.dart';
 
 class SelectDepartmentController extends GetxController {
   final SelectCityRepository _repository = SelectCityRepository();
@@ -30,7 +31,10 @@ class SelectDepartmentController extends GetxController {
     super.onReady();
   }
 
-  void onTap(DepartmentModel department) {}
+  void onTap(DepartmentModel department) {
+    final result = Get.toNamed(Routes.SELECT_CITY, arguments: department);
+    print('result $result');
+  }
 
   Future<void> getData() async {
     print('getData');
