@@ -78,56 +78,37 @@ class CreateVideoController extends GetxController {
     }
   }
 
-  void onProductSelected(String? value) {
-    _productSelected = value;
-
-    if (value != null) {
-      _productsError = null;
-    }
-    update(['view']);
-  }
-
-  ProductFirebaseModel? getProduct() => listProducts.firstWhereOrNull(
-      (ProductFirebaseModel element) => element.id == _productSelected);
-
   Future<void> sendForm(Map<String, Object?> data) async {
     String videoName = data[Fields.videoName.name].toString();
     String uuid = const Uuid().v4();
     String videoId = 'video-$uuid';
 
-    if (_productSelected == null) {
-      _productsError = 'Selecciona un producto';
+    if (_productModel == null) {
+      Get.snackbar("Error", 'Selecciona un producto');
       update(['view']);
       return;
     }
 
-    ProductFirebaseModel? _product = getProduct();
-
-    if (_product == null) {
-      _productsError = 'Selecciona un producto válido';
+    if (_videoImagePath == null) {
+      Get.snackbar("Error", 'Selecciona un video');
       update(['view']);
       return;
     }
 
-    final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
-    if (video != null) {
-      _mainController.showLoader();
-
-      Either<String, Unit> response = await _repository.uploadVideo(
-        videoId: videoId,
-        name: videoName,
-        videoPath: video.path,
-        product: _product,
-      );
+    Either<String, Unit> response = await _repository.uploadVideo(
+      videoId: videoId,
+      name: videoName,
+      videoPath: _videoImagePath!,
+      product: _productModel!,
+    );
+    Get.back();
+    response.fold((failure) {
+      Get.snackbar("Error", failure);
+      _loading = false;
+      update(['view']);
+    }, (_) {
       Get.back();
-      response.fold((failure) {
-        Get.snackbar("Error", failure);
-        _loading = false;
-        update(['view']);
-      }, (_) {
-        Get.back();
-        Get.snackbar(videoName, "Guardado exitosamente");
-      });
-    }
+      Get.snackbar(videoName, "Guardado exitosamente");
+    });
   }
 }
