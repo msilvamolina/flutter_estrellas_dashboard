@@ -35,5 +35,19 @@ abstract class ProductModel implements _$ProductModel {
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
 
-  Map<String, dynamic> toDocument() => ModelHelpers.toDocument(toJson());
+  Map<String, dynamic> toDocument() {
+    Map<String, dynamic> json = toJson();
+
+    if (provider != null) {
+      json['provider'] = provider!.toJson();
+    }
+    if (category != null) {
+      json['category'] = category!.toJson();
+    }
+
+    json['createdAt'] = ModelHelpers.dateToDocument(json['createdAt']);
+    json['updatedAt'] = ModelHelpers.dateToDocument(json['updatedAt']);
+
+    return json;
+  }
 }
