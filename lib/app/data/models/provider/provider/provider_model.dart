@@ -29,5 +29,17 @@ abstract class ProviderModel implements _$ProviderModel {
   factory ProviderModel.fromJson(Map<String, dynamic> json) =>
       _$ProviderModelFromJson(json);
 
-  Map<String, dynamic> toDocument() => ModelHelpers.toDocument(toJson());
+  Map<String, dynamic> toDocument() {
+    Map<String, dynamic> json = toJson();
+
+    if (warehouses != null) {
+      json['warehouses'] =
+          warehouses!.map((warehouse) => warehouse.toJson()).toList();
+    }
+
+    json['createdAt'] = ModelHelpers.dateToDocument(json['createdAt']);
+    json['updatedAt'] = ModelHelpers.dateToDocument(json['updatedAt']);
+
+    return json;
+  }
 }
