@@ -25,7 +25,7 @@ class ProvidersListController extends GetxController {
 
   @override
   void onInit() {
-    getDataVersion1();
+    getData();
 
     // _list.bindStream(_repository.getProductsFromFirebase());
     super.onInit();
@@ -37,18 +37,11 @@ class ProvidersListController extends GetxController {
   }
 
   Future<void> addProvider() async {
-    final result = await Get.toNamed(Routes.CREATE_PROVIDER);
-    if (result != null) {
-      _data.insert(0, result);
-    }
+    await Get.toNamed(Routes.CREATE_PROVIDER);
+    await getData();
   }
 
-  Future<void> getDataVersion1() async {
-    _isLoading = true;
-    _responseError = null;
-    _data.clear();
-    update(['view']);
-
+  Future<void> getData() async {
     Either<String, List<ProviderModel>> response =
         await _repository.getProvidersFromBackend();
     _isLoading = false;
@@ -56,6 +49,7 @@ class ProvidersListController extends GetxController {
     response.fold((error) {
       _responseError = error;
     }, (list) {
+      _data.clear();
       _data.addAll(list);
     });
     update(['view']);

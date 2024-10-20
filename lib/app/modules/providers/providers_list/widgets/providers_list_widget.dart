@@ -5,9 +5,12 @@ import '../../../../data/models/product/product/product.dart';
 import 'provider_card.dart';
 
 class ProvidersListWidget extends StatelessWidget {
-  const ProvidersListWidget({required this.list, super.key});
+  const ProvidersListWidget(
+      {required this.list, this.functionIsDone, super.key});
 
   final List<ProviderModel> list;
+  final Function()? functionIsDone;
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -20,6 +23,7 @@ class ProvidersListWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: ProviderCard(
+              functionIsDone: functionIsDone,
               provider: list[index],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:stylish_pull_to_refresh/stylish_pull_to_refresh.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/widgets/custom_floating_action_button.dart';
@@ -23,15 +24,24 @@ class ProvidersListView extends GetView<ProvidersListController> {
       appBarTitle: 'Proveedores',
       maxWidth: double.infinity,
       currentRoute: Routes.PROVIDERS_LIST,
-      child: GetBuilder<ProvidersListController>(
-        id: 'view',
-        builder: (_) {
-          return !controller.isLoading
-              ? controller.responseError != null
-                  ? ProvidersErrorWidget(error: controller.responseError!)
-                  : ProvidersListWidget(list: controller.data)
-              : const ProvidersLoadingWidget();
+      child: StylishPullToRefresh(
+        style: Style.handGesture,
+        onRefresh: () async {
+          await controller.getData();
         },
+        child: GetBuilder<ProvidersListController>(
+          id: 'view',
+          builder: (_) {
+            return !controller.isLoading
+                ? controller.responseError != null
+                    ? ProvidersErrorWidget(error: controller.responseError!)
+                    : ProvidersListWidget(
+                        list: controller.data,
+                        functionIsDone: controller.getData,
+                      )
+                : const ProvidersLoadingWidget();
+          },
+        ),
       ),
     );
   }

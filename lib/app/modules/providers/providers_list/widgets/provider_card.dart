@@ -8,15 +8,20 @@ import 'package:get/get.dart';
 import '../../../../data/models/product/product/product.dart';
 
 class ProviderCard extends StatelessWidget {
-  const ProviderCard({required this.provider, super.key});
-
+  const ProviderCard({required this.provider, this.functionIsDone, super.key});
   final ProviderModel provider;
+
+  final Function()? functionIsDone;
   @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
-        onTap: () =>
-            Get.toNamed(Routes.PROVIDERS_ESTRELLAS_1, arguments: provider),
+        onTap: () {
+          Get.toNamed(Routes.PROVIDERS_ESTRELLAS_1, arguments: provider);
+          if (functionIsDone != null) {
+            functionIsDone!();
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
