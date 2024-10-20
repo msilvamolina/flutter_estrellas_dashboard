@@ -95,38 +95,38 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
             widget: TableRowInsideColumn(
               cellWidth: 50,
               rows: [
-                // TableRowStringsModel(
-                //   label: 'id',
-                //   text: controller.product.category.id ?? '',
-                // ),
-                // TableRowStringsModel(
-                //   label: 'name',
-                //   text: controller.product.category.name,
-                // ),
+                TableRowStringsModel(
+                  label: 'id',
+                  text: controller.product.category?.id ?? '',
+                ),
+                TableRowStringsModel(
+                  label: 'name',
+                  text: controller.product.category?.name ?? '',
+                ),
               ],
             ),
           ),
-          // TableRowModel(
-          //   label: 'provider',
-          //   widget: TableRowInsideColumn(
-          //     cellWidth: 70,
-          //     imageUrl: controller.product.provider.avatarUrl,
-          //     rows: [
-          //       TableRowStringsModel(
-          //         label: 'id',
-          //         text: controller.product.provider.id,
-          //       ),
-          //       TableRowStringsModel(
-          //         label: 'name',
-          //         text: controller.product.provider.name,
-          //       ),
-          //       TableRowStringsModel(
-          //         label: 'avatarUrl',
-          //         text: controller.product.provider.avatarUrl,
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          TableRowModel(
+            label: 'provider',
+            widget: TableRowInsideColumn(
+              cellWidth: 70,
+              imageUrl: controller.product.provider?.avatarUrl ?? '',
+              rows: [
+                TableRowStringsModel(
+                  label: 'id',
+                  text: controller.product.provider?.id ?? '',
+                ),
+                TableRowStringsModel(
+                  label: 'name',
+                  text: controller.product.provider?.name ?? '',
+                ),
+                TableRowStringsModel(
+                  label: 'avatarUrl',
+                  text: controller.product.provider?.avatarUrl ?? '',
+                ),
+              ],
+            ),
+          ),
           TableRowModel(
             label: 'thumbnail',
             widget: TableRowImage(url: controller.product.thumbnail ?? ''),
@@ -139,10 +139,6 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
             label: 'createdAt',
             widget: TableRowDate(date: controller.product.createdAt ?? ''),
           ),
-          // TableRowModel(
-          //   label: 'updatedAt',
-          //   widget: TableRowDate(date: controller.product.updatedAt ?? ''),
-          // ),
           TableRowModel(
             label: 'uploadDate',
             widget: TableRowDate(date: controller.product.uploadDate ?? ''),
