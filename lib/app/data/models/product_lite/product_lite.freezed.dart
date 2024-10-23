@@ -22,7 +22,6 @@ ProductLiteModel _$ProductLiteModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductLiteModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  dynamic get provider => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get externalId => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
@@ -54,7 +53,6 @@ abstract class $ProductLiteModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      dynamic provider,
       String? name,
       String? externalId,
       double? price,
@@ -85,7 +83,6 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
   @override
   $Res call({
     Object? id = null,
-    Object? provider = freezed,
     Object? name = freezed,
     Object? externalId = freezed,
     Object? price = freezed,
@@ -104,10 +101,6 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      provider: freezed == provider
-          ? _value.provider
-          : provider // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -170,7 +163,6 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      dynamic provider,
       String? name,
       String? externalId,
       double? price,
@@ -199,7 +191,6 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? provider = freezed,
     Object? name = freezed,
     Object? externalId = freezed,
     Object? price = freezed,
@@ -218,10 +209,6 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      provider: freezed == provider
-          ? _value.provider
-          : provider // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -279,7 +266,6 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
 class _$ProductLiteModelImpl extends _ProductLiteModel {
   const _$ProductLiteModelImpl(
       {@JsonKey(name: '_id') required this.id,
-      this.provider,
       this.name,
       this.externalId,
       this.price,
@@ -300,8 +286,6 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   @JsonKey(name: '_id')
   final String id;
-  @override
-  final dynamic provider;
   @override
   final String? name;
   @override
@@ -329,7 +313,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, provider: $provider, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -338,7 +322,6 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
         (other.runtimeType == runtimeType &&
             other is _$ProductLiteModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality().equals(other.provider, provider) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.externalId, externalId) ||
                 other.externalId == externalId) &&
@@ -365,7 +348,6 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      const DeepCollectionEquality().hash(provider),
       name,
       externalId,
       price,
@@ -399,7 +381,6 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 abstract class _ProductLiteModel extends ProductLiteModel {
   const factory _ProductLiteModel(
       {@JsonKey(name: '_id') required final String id,
-      final dynamic provider,
       final String? name,
       final String? externalId,
       final double? price,
@@ -420,8 +401,6 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   @override
   @JsonKey(name: '_id')
   String get id;
-  @override
-  dynamic get provider;
   @override
   String? get name;
   @override

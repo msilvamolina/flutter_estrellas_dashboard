@@ -10,7 +10,6 @@ _$ProductLiteModelImpl _$$ProductLiteModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductLiteModelImpl(
       id: json['_id'] as String,
-      provider: json['provider'] as String?,
       name: json['name'] as String?,
       externalId: json['externalId'] as String?,
       price: (json['price'] as num?)?.toDouble(),
@@ -29,7 +28,6 @@ Map<String, dynamic> _$$ProductLiteModelImplToJson(
         _$ProductLiteModelImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'provider': instance.provider,
       'name': instance.name,
       'externalId': instance.externalId,
       'price': instance.price,
