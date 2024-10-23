@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../helpers/friendly_helpers.dart';
 import '../../../helpers/model_helpers.dart';
 import '../product_firebase/product_firebase_model.dart';
+import '../provider/product_provider.dart';
 
 part 'product_firebase_lite.freezed.dart';
 part 'product_firebase_lite.g.dart';
@@ -16,6 +17,7 @@ abstract class ProductFirebaseLiteModel implements _$ProductFirebaseLiteModel {
   const factory ProductFirebaseLiteModel({
     @JsonKey(name: '_id') required String id,
     String? name,
+    dynamic provider,
     String? externalId,
     String? type,
     double? price,

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:estrellas_dashboard/app/data/models/product/product_firebase_lite/product_firebase_lite.dart';
 import 'package:estrellas_dashboard/app/data/models/product_lite/product_lite.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,7 +21,7 @@ abstract class VideoPostModel implements _$VideoPostModel {
     required String videoUrl,
     required String createdByEmail,
     required String createdById,
-    ProductLiteModel? product,
+    ProductFirebaseLiteModel? product,
     String? searchField,
     dynamic reference,
     String? updatedAt,
