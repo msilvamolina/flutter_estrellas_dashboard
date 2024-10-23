@@ -4,7 +4,7 @@ import 'package:estrellas_dashboard/app/services/theme_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../themes/styles/typography.dart';
+import '../../../themes/styles/typography.dart';
 
 class VideoButtons extends StatefulWidget {
   VideoButtons({this.imageIsDark, super.key, this.buttonInsideVideo = false});

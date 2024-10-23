@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../routes/app_pages.dart';
-import '../../../../themes/styles/typography.dart';
+import '../../../routes/app_pages.dart';
+import '../../../themes/styles/typography.dart';
 
 class VideoLabel extends StatelessWidget {
   const VideoLabel({super.key});
