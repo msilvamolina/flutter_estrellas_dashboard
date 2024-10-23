@@ -10,6 +10,7 @@ import 'package:uuid/uuid.dart';
 import 'package:video_compress/video_compress.dart';
 
 import '../../../models/product/product_firebase/product_firebase_model.dart';
+import '../../../models/product/product_firebase_lite/product_firebase_lite.dart';
 import '../../../models/videos/video_post_model.dart';
 
 class VideosRepository {
@@ -109,6 +110,8 @@ class VideosRepository {
       MainController mainController = Get.find<MainController>();
       mainController.setDropiMessage('Escribiendo en firebase');
 
+      ProductFirebaseLiteModel? productFirebaseModel =
+          ProductFirebaseLiteModel.fromProduct(product);
       await _firebaseFirestore.collection('videos').doc(videoId).set({
         'name': name,
         'id': videoId,
@@ -117,12 +120,7 @@ class VideosRepository {
         'createdAt': DateTime.now(),
         'videoUrl': videoUrl,
         'thumbnail': thumbnail,
-        'product': {
-          'name': product.name,
-          'id': product.id,
-          'thumbnail': product.thumbnail,
-          'reference': product.reference,
-        }
+        'product': productFirebaseModel?.toJson(),
       });
 
       return right(unit);
