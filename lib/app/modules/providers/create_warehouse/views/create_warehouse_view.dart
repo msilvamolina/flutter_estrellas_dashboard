@@ -24,7 +24,8 @@ class CreateWarehouseView extends GetView<CreateWarehouseController> {
             showMenu: false,
             currentRoute: Routes.CREATE_WAREHOUSE,
             appBarTitle: 'Crear bodega',
-            child: GetBuilder<CreateWarehouseController>(
+            child: 
+            GetBuilder<CreateWarehouseController>(
               id: 'view',
               builder: (_) {
                 return Column(
