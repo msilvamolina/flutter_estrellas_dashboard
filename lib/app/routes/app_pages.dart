@@ -2,22 +2,58 @@ import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
-import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
-import '../modules/auth/forgot_password/views/forgot_password_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
-import '../modules/auth/register/bindings/register_binding.dart';
-import '../modules/auth/register/views/register_view.dart';
-import '../modules/auth/register_basic_data/bindings/register_basic_data_binding.dart';
-import '../modules/auth/register_basic_data/views/register_basic_data_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/auth/welcome/bindings/welcome_binding.dart';
-import '../modules/auth/welcome/views/welcome_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/product/bindings/product_binding.dart';
-import '../modules/product/views/product_view.dart';
+import '../modules/products/create_product/bindings/create_product_binding.dart';
+import '../modules/products/create_product/views/create_product_view.dart';
+import '../modules/products/product_add_image/bindings/product_add_image_binding.dart';
+import '../modules/products/product_add_image/views/product_add_image_view.dart';
+import '../modules/products/product_add_variant/bindings/product_add_variant_binding.dart';
+import '../modules/products/product_add_variant/views/product_add_variant_view.dart';
+import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
+import '../modules/products/product_estrellas_1/views/product_estrellas_1_view.dart';
+import '../modules/products/product_estrellas_2/bindings/product_estrellas_2_binding.dart';
+import '../modules/products/product_estrellas_2/views/product_estrellas_2_view.dart';
+import '../modules/products/product_images/bindings/product_images_binding.dart';
+import '../modules/products/product_images/views/product_images_view.dart';
+import '../modules/products/product_variants/bindings/product_variants_binding.dart';
+import '../modules/products/product_variants/views/product_variants_view.dart';
+import '../modules/products/products/bindings/products_binding.dart';
+import '../modules/products/products/views/products_view.dart';
+import '../modules/providers/create_provider/bindings/create_provider_binding.dart';
+import '../modules/providers/create_provider/views/create_provider_view.dart';
+import '../modules/providers/create_warehouse/bindings/create_warehouse_binding.dart';
+import '../modules/providers/create_warehouse/views/create_warehouse_view.dart';
+import '../modules/providers/providers_estrellas_1/bindings/providers_estrellas_1_binding.dart';
+import '../modules/providers/providers_estrellas_1/views/providers_estrellas_1_view.dart';
+import '../modules/providers/providers_list/bindings/providers_list_binding.dart';
+import '../modules/providers/providers_list/views/providers_list_view.dart';
+import '../modules/providers/providers_warehouses/bindings/providers_warehouses_binding.dart';
+import '../modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
+import '../modules/selects/select_product/bindings/select_product_binding.dart';
+import '../modules/selects/select_product/views/select_product_view.dart';
+import '../modules/selects/select_city/bindings/select_city_binding.dart';
+import '../modules/selects/select_city/views/select_city_view.dart';
+import '../modules/selects/select_department/bindings/select_department_binding.dart';
+import '../modules/selects/select_department/views/select_department_view.dart';
+import '../modules/selects/select_provider/bindings/select_provider_binding.dart';
+import '../modules/selects/select_provider/views/select_provider_view.dart';
+import '../modules/selects/select_warehouse/bindings/select_warehouse_binding.dart';
+import '../modules/selects/select_warehouse/views/select_warehouse_view.dart';
+import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
+import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
+import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
+import '../modules/test_endpoints/test_login_app_dropi/views/test_login_app_dropi_view.dart';
+import '../modules/videos/create_video/bindings/create_video_binding.dart';
+import '../modules/videos/create_video/views/create_video_view.dart';
+import '../modules/videos/videos_details/bindings/videos_details_binding.dart';
+import '../modules/videos/videos_details/views/videos_details_view.dart';
+import '../modules/videos/videos_list/bindings/videos_list_binding.dart';
+import '../modules/videos/videos_list/views/videos_list_view.dart';
 
 part 'app_routes.dart';
 
@@ -47,35 +83,125 @@ class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: _Paths.REGISTER,
-      page: () => const RegisterView(),
-      binding: RegisterBinding(),
+      name: _Paths.PRODUCTS,
+      page: () => const ProductsView(),
+      binding: ProductsBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: _Paths.REGISTER_BASIC_DATA,
-      page: () => const RegisterBasicDataView(),
-      binding: RegisterBasicDataBinding(),
+      name: _Paths.TEST_GET_PRODUCTS,
+      page: () => const TestGetProductsView(),
+      binding: TestGetProductsBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: _Paths.FORGOT_PASSWORD,
-      page: () => const ForgotPasswordView(),
-      binding: ForgotPasswordBinding(),
+      name: _Paths.TEST_LOGIN_APP_DROPI,
+      page: () => const TestLoginAppDropiView(),
+      binding: TestLoginAppDropiBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: _Paths.WELCOME,
-      page: () => const WelcomeView(),
-      binding: WelcomeBinding(),
+      name: _Paths.PRODUCT_ESTRELLAS_1,
+      page: () => const ProductEstrellas1View(),
+      binding: ProductEstrellas1Binding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: _Paths.PRODUCT,
-      page: () => const ProductView(),
-      binding: ProductBinding(),
-      transition: Transition.downToUp,
-      opaque: false,
+      name: _Paths.VIDEOS_LIST,
+      page: () => const VideosListView(),
+      binding: VideosListBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.CREATE_VIDEO,
+      page: () => CreateVideoView(),
+      binding: CreateVideoBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.VIDEOS_DETAILS,
+      page: () => const VideosDetailsView(),
+      binding: VideosDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_ESTRELLAS_2,
+      page: () => const ProductEstrellas2View(),
+      binding: ProductEstrellas2Binding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_IMAGES,
+      page: () => const ProductImagesView(),
+      binding: ProductImagesBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_ADD_IMAGE,
+      page: () => const ProductAddImageView(),
+      binding: ProductAddImageBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_VARIANTS,
+      page: () => const ProductVariantsView(),
+      binding: ProductVariantsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_ADD_VARIANT,
+      page: () => const ProductAddVariantView(),
+      binding: ProductAddVariantBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_PRODUCT,
+      page: () => const CreateProductView(),
+      binding: CreateProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROVIDERS_LIST,
+      page: () => const ProvidersListView(),
+      binding: ProvidersListBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROVIDERS_ESTRELLAS_1,
+      page: () => const ProvidersEstrellas1View(),
+      binding: ProvidersEstrellas1Binding(),
+    ),
+    GetPage(
+      name: _Paths.PROVIDERS_WAREHOUSES,
+      page: () => const ProvidersWarehousesView(),
+      binding: ProvidersWarehousesBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_PROVIDER,
+      page: () => const CreateProviderView(),
+      binding: CreateProviderBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_WAREHOUSE,
+      page: () => const CreateWarehouseView(),
+      binding: CreateWarehouseBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_DEPARTMENT,
+      page: () => const SelectDepartmentView(),
+      binding: SelectDepartmentBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_CITY,
+      page: () => const SelectCityView(),
+      binding: SelectCityBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_PROVIDER,
+      page: () => const SelectProviderView(),
+      binding: SelectProviderBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_WAREHOUSE,
+      page: () => const SelectWarehouseView(),
+      binding: SelectWarehouseBinding(),
+    ),
+    GetPage(
+      name: _Paths.SELECT_PRODUCT,
+      page: () => const SelectProductView(),
+      binding: SelectProductBinding(),
     ),
   ];
 }

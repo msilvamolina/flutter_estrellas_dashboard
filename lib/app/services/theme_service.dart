@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:the_mariscal/app/themes/themes.dart';
-import 'package:the_mariscal/app/themes/themes/black.dart';
-import 'package:the_mariscal/app/themes/themes/pink.dart';
-import 'package:the_mariscal/app/themes/themes/red.dart';
+import 'package:estrellas_dashboard/app/themes/themes.dart';
+import 'package:estrellas_dashboard/app/themes/themes/black.dart';
+import 'package:estrellas_dashboard/app/themes/themes/pink.dart';
+import 'package:estrellas_dashboard/app/themes/themes/red.dart';
 
 import '../data/models/theme_model.dart';
 
@@ -26,7 +26,7 @@ class ThemeService {
   }
 
   static String readSavedTheme() {
-    return _getStorage.read(colorKey) ?? 'black';
+    return _getStorage.read(colorKey) ?? 'green';
   }
 
   static void saveThemeMode(bool isDarkMode) {

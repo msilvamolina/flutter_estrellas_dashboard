@@ -1,21 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:the_mariscal/app/app/dialogs/register/register_dialog.dart';
-import 'package:the_mariscal/app/app/dialogs/register_basic_data/register_basic_data_dialog.dart';
-import 'package:the_mariscal/app/components/dialogs/loader_dialog.dart';
-import 'package:the_mariscal/app/data/providers/local/local_storage.dart';
-import 'package:the_mariscal/app/data/providers/repositories/auth/user_repository.dart';
-import 'package:the_mariscal/app/routes/app_pages.dart';
-import 'package:the_mariscal/app/themes/styles/typography.dart';
+import 'package:estrellas_dashboard/app/components/dialogs/loader_dialog.dart';
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
+import 'package:estrellas_dashboard/app/data/providers/repositories/auth/user_repository.dart';
+import 'package:estrellas_dashboard/app/routes/app_pages.dart';
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:get/get.dart';
-import 'package:the_mariscal/app/themes/themes/black.dart';
+import 'package:estrellas_dashboard/app/themes/themes/black.dart';
 
+import '../../components/dialogs/dropi_dialog.dart';
 import '../../components/snackbars/snackbars.dart';
 import '../../data/models/theme_model.dart';
 import '../../data/models/user_data/user_data.dart';
 import '../../services/theme_service.dart';
-import '../dialogs/app/change_color_dialog.dart';
-import '../dialogs/login/login_dialog.dart';
+import '../dialogs/change_color_dialog.dart';
 
 enum UserStatus {
   loading,
@@ -39,12 +37,21 @@ class MainController extends GetxController {
   bool _isWelcome = false;
   bool _isThemeModeDark = false;
 
+  String? _token;
+  String? get token => _token;
+
   bool get isThemeModeDark => _isThemeModeDark;
 
   RxBool isThemeModeDark2 = false.obs;
 
   dynamic _themeColor;
   dynamic get themeColor => _themeColor;
+
+  RxString dropiMessage = ''.obs;
+  RxBool dropiDialog = true.obs;
+
+  RxString dropiDialogError = ''.obs;
+  RxBool dropiDialogIsError = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -58,6 +65,23 @@ class MainController extends GetxController {
 
     checkUser();
     super.onReady();
+  }
+
+  void setToken(String value) {
+    _token = value;
+  }
+
+  void setDropiMessage(String message) {
+    dropiMessage.value = message;
+  }
+
+  void setDropiDialog(bool value) {
+    dropiDialog.value = value;
+  }
+
+  void setDropiDialogError(bool value, String message) {
+    dropiDialogIsError.value = value;
+    dropiDialogError.value = message;
   }
 
   void checkTheme() {
@@ -96,42 +120,19 @@ class MainController extends GetxController {
 
     if (isAuthenticated) {
       _userData = await userRepository.getUserDataFirebase();
-      if (userData != null) {
-        _userStatus = UserStatus.full;
-      } else {
-        _userStatus = UserStatus.needBasicData;
-      }
+      _userStatus = UserStatus.full;
     } else {
       _userStatus = UserStatus.notLogged;
     }
 
     update(['login']);
 
-    if (!kIsWeb) {
-      if (_userStatus == UserStatus.notLogged) {
-        Get.offAllNamed(Routes.LOGIN);
-        // if (!_isWelcome) {
-        //   Get.offAllNamed(Routes.WELCOME);
-        // } else {
-        //   Get.offAllNamed(Routes.LOGIN);
-        // }
-      }
-      if (_userStatus == UserStatus.needBasicData) {
-        Get.offAllNamed(Routes.REGISTER_BASIC_DATA);
-      }
-      if (_userStatus == UserStatus.full) {
-        Get.offAllNamed(Routes.HOME);
-      }
-    } else {
-      if (_userStatus == UserStatus.needBasicData) {
-        openRegisterBasicDataDialog();
-      }
-      if (_userStatus == UserStatus.full) {
-        if (login) {
-          String name = userData!.firstName;
-          Snackbars.success('Hola $name!');
-        }
-      }
+    if (_userStatus == UserStatus.notLogged) {
+      Get.offAllNamed(Routes.LOGIN);
+    }
+
+    if (_userStatus == UserStatus.full) {
+      Get.offAllNamed(Routes.HOME);
     }
   }
 
@@ -145,6 +146,7 @@ class MainController extends GetxController {
   }
 
   void signOut() {
+    String theme = ThemeService.readSavedTheme();
     _userStatus = UserStatus.loading;
     update(['login']);
     userRepository.signOut();
@@ -152,17 +154,9 @@ class MainController extends GetxController {
       _userStatus = UserStatus.notLogged;
       update(['login']);
       ThemeService.saveThemeMode(_isThemeModeDark);
+      ThemeService.saveThemeColor(theme);
       checkUser();
     });
-  }
-
-  void openLoginDialog() {
-    showDialog(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return LoginDialog();
-      },
-    );
   }
 
   void changeThemeColor() {
@@ -172,33 +166,6 @@ class MainController extends GetxController {
         return ChangeColorDialog();
       },
     );
-  }
-
-  void openRegisterDialog() {
-    if (kIsWeb) {
-      showDialog(
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return RegisterDialog();
-        },
-      );
-    } else {
-      Get.toNamed(Routes.REGISTER);
-    }
-  }
-
-  void openRegisterBasicDataDialog() {
-    if (kIsWeb) {
-      showDialog(
-        barrierDismissible: false,
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return RegisterBasicDataDialog();
-        },
-      );
-    } else {
-      Get.offAndToNamed(Routes.REGISTER_BASIC_DATA);
-    }
   }
 
   void openAlertHelpText() {
@@ -241,6 +208,18 @@ class MainController extends GetxController {
       context: Get.context!,
       builder: (BuildContext context) {
         return LoaderDialog(title: title, message: message);
+      },
+    );
+  }
+
+  void showDropiLoader() {
+    setDropiDialogError(false, '');
+    setDropiMessage('Espero un momento por favor');
+    showDialog(
+      barrierColor: Colors.transparent,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return const LoaderDropiDialog();
       },
     );
   }
