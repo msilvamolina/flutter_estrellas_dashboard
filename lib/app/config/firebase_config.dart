@@ -19,14 +19,14 @@ const Map<String, dynamic> firebaseConfigProdWeb = <String, dynamic>{
 };
 
 const Map<String, dynamic> firebaseConfigDevAndroid = <String, dynamic>{
-  'apiKey': 'AIzaSyD997XcnKb2uv5T5OhigAa6MfuehlMHKu4', // Clave API actualizada
-  'appId': '1:783982879638:android:1b15ab91ff6ce5ad13b3b7', // App ID
-  'messagingSenderId': '783982879638', // Project number
-  'projectId': 'estrellas-stg', // Project ID
-  'databaseURL':
-      '', // No se proporcionó una URL de base de datos en el archivo JSON
-  'measurementId': '', // Vacío, ya que no hay un measurementId en el archivo
-  'trackingId': '', // Vacío, ya que no hay un trackingId en el archivo
+  'apiKey': 'AIzaSyBAZAsBDxgIDbxa57os5XVi_q8qIDFpkXY',
+  'appId': '1:802823199567:android:83c9085a1ae419aa5e033a',
+  'messagingSenderId': '802823199567',
+  'projectId': 'estrellas-dev-ecd61',
+  'databaseURL': '',
+  'measurementId': '',
+  'trackingId': '',
+  'storageBucket': 'estrellas-dev-ecd61.appspot.com',
 };
 
 const Map<String, dynamic> firebaseConfigProdAndroid = <String, dynamic>{
