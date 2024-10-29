@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 import '../../../../app/controllers/main_controller.dart';
 import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../../data/providers/repositories/products/products_repository.dart';
+import '../../product_variant_for_type/controllers/product_variant_for_type_controller.dart';
 
 enum Fields {
   variantName('variantName');
@@ -19,6 +20,7 @@ class ProductAddVariantController extends GetxController {
   // final ProductsRepository _productsRepository = ProductsRepository();
   final MainController _mainController = Get.find<MainController>();
   late ProductFirebaseModel product;
+  late VariantsTypes typeSelected;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.variantName.name: FormControl<String>(
@@ -34,8 +36,8 @@ class ProductAddVariantController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    product = Get.arguments as ProductFirebaseModel;
-
+    product = Get.arguments[0] as ProductFirebaseModel;
+    typeSelected = Get.arguments[1] as VariantsTypes;
     super.onInit();
   }
 

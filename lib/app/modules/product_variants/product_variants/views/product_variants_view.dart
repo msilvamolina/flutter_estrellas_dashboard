@@ -19,14 +19,6 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
     Color primary = Theme.of(context).colorScheme.primary;
 
     return MainLayout(
-      // floatingActionButton: CustomFloatingActionButton(
-      //   label: 'Agregar',
-      //   icon: Icons.add,
-      //   onPressed: () => Get.toNamed(
-      //     Routes.PRODUCT_ADD_VARIANT,
-      //     arguments: controller.product,
-      //   ),
-      // ),
       showMenu: false,
       currentRoute: Routes.PRODUCT_VARIANTS,
       appBarTitle: 'Variaciones',
@@ -35,8 +27,10 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
         children: [
           Card(
             child: InkWell(
-              onTap: () => Get.toNamed(Routes.PRODUCT_VARIANT_FOR_TYPE,
-                  arguments: VariantsTypes.size),
+              onTap: () => Get.toNamed(
+                Routes.PRODUCT_VARIANT_FOR_TYPE,
+                arguments: [controller.product, VariantsTypes.size],
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
@@ -75,8 +69,10 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
           const SizedBox(height: 16),
           Card(
             child: InkWell(
-              onTap: () => Get.toNamed(Routes.PRODUCT_VARIANT_FOR_TYPE,
-                  arguments: VariantsTypes.color),
+              onTap: () => Get.toNamed(
+                Routes.PRODUCT_VARIANT_FOR_TYPE,
+                arguments: [controller.product, VariantsTypes.color],
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
