@@ -27,7 +27,11 @@ mixin _$ProductVariantCombinationModel {
   String get createdAt => throw _privateConstructorUsedError;
   String? get dropiId => throw _privateConstructorUsedError;
   String? get colorId => throw _privateConstructorUsedError;
+  String? get colorName => throw _privateConstructorUsedError;
+  String? get colorLabel => throw _privateConstructorUsedError;
   String? get sizeId => throw _privateConstructorUsedError;
+  String? get sizeName => throw _privateConstructorUsedError;
+  String? get sizeLabel => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
@@ -63,7 +67,11 @@ abstract class $ProductVariantCombinationModelCopyWith<$Res> {
       String createdAt,
       String? dropiId,
       String? colorId,
+      String? colorName,
+      String? colorLabel,
       String? sizeId,
+      String? sizeName,
+      String? sizeLabel,
       double? price,
       double? suggestedPrice,
       int? points,
@@ -97,7 +105,11 @@ class _$ProductVariantCombinationModelCopyWithImpl<$Res,
     Object? createdAt = null,
     Object? dropiId = freezed,
     Object? colorId = freezed,
+    Object? colorName = freezed,
+    Object? colorLabel = freezed,
     Object? sizeId = freezed,
+    Object? sizeName = freezed,
+    Object? sizeLabel = freezed,
     Object? price = freezed,
     Object? suggestedPrice = freezed,
     Object? points = freezed,
@@ -133,9 +145,25 @@ class _$ProductVariantCombinationModelCopyWithImpl<$Res,
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as String?,
+      colorName: freezed == colorName
+          ? _value.colorName
+          : colorName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      colorLabel: freezed == colorLabel
+          ? _value.colorLabel
+          : colorLabel // ignore: cast_nullable_to_non_nullable
+              as String?,
       sizeId: freezed == sizeId
           ? _value.sizeId
           : sizeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sizeName: freezed == sizeName
+          ? _value.sizeName
+          : sizeName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sizeLabel: freezed == sizeLabel
+          ? _value.sizeLabel
+          : sizeLabel // ignore: cast_nullable_to_non_nullable
               as String?,
       price: freezed == price
           ? _value.price
@@ -193,7 +221,11 @@ abstract class _$$ProductVariantCombinationModelImplCopyWith<$Res>
       String createdAt,
       String? dropiId,
       String? colorId,
+      String? colorName,
+      String? colorLabel,
       String? sizeId,
+      String? sizeName,
+      String? sizeLabel,
       double? price,
       double? suggestedPrice,
       int? points,
@@ -226,7 +258,11 @@ class __$$ProductVariantCombinationModelImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? dropiId = freezed,
     Object? colorId = freezed,
+    Object? colorName = freezed,
+    Object? colorLabel = freezed,
     Object? sizeId = freezed,
+    Object? sizeName = freezed,
+    Object? sizeLabel = freezed,
     Object? price = freezed,
     Object? suggestedPrice = freezed,
     Object? points = freezed,
@@ -262,9 +298,25 @@ class __$$ProductVariantCombinationModelImplCopyWithImpl<$Res>
           ? _value.colorId
           : colorId // ignore: cast_nullable_to_non_nullable
               as String?,
+      colorName: freezed == colorName
+          ? _value.colorName
+          : colorName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      colorLabel: freezed == colorLabel
+          ? _value.colorLabel
+          : colorLabel // ignore: cast_nullable_to_non_nullable
+              as String?,
       sizeId: freezed == sizeId
           ? _value.sizeId
           : sizeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sizeName: freezed == sizeName
+          ? _value.sizeName
+          : sizeName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sizeLabel: freezed == sizeLabel
+          ? _value.sizeLabel
+          : sizeLabel // ignore: cast_nullable_to_non_nullable
               as String?,
       price: freezed == price
           ? _value.price
@@ -317,7 +369,11 @@ class _$ProductVariantCombinationModelImpl
       required this.createdAt,
       this.dropiId,
       this.colorId,
+      this.colorName,
+      this.colorLabel,
       this.sizeId,
+      this.sizeName,
+      this.sizeLabel,
       this.price,
       this.suggestedPrice,
       this.points,
@@ -346,7 +402,15 @@ class _$ProductVariantCombinationModelImpl
   @override
   final String? colorId;
   @override
+  final String? colorName;
+  @override
+  final String? colorLabel;
+  @override
   final String? sizeId;
+  @override
+  final String? sizeName;
+  @override
+  final String? sizeLabel;
   @override
   final double? price;
   @override
@@ -368,7 +432,7 @@ class _$ProductVariantCombinationModelImpl
 
   @override
   String toString() {
-    return 'ProductVariantCombinationModel(id: $id, name: $name, label: $label, createdAt: $createdAt, dropiId: $dropiId, colorId: $colorId, sizeId: $sizeId, price: $price, suggestedPrice: $suggestedPrice, points: $points, stock: $stock, imageUrl: $imageUrl, color: $color, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'ProductVariantCombinationModel(id: $id, name: $name, label: $label, createdAt: $createdAt, dropiId: $dropiId, colorId: $colorId, colorName: $colorName, colorLabel: $colorLabel, sizeId: $sizeId, sizeName: $sizeName, sizeLabel: $sizeLabel, price: $price, suggestedPrice: $suggestedPrice, points: $points, stock: $stock, imageUrl: $imageUrl, color: $color, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
   }
 
   @override
@@ -383,7 +447,15 @@ class _$ProductVariantCombinationModelImpl
                 other.createdAt == createdAt) &&
             (identical(other.dropiId, dropiId) || other.dropiId == dropiId) &&
             (identical(other.colorId, colorId) || other.colorId == colorId) &&
+            (identical(other.colorName, colorName) ||
+                other.colorName == colorName) &&
+            (identical(other.colorLabel, colorLabel) ||
+                other.colorLabel == colorLabel) &&
             (identical(other.sizeId, sizeId) || other.sizeId == sizeId) &&
+            (identical(other.sizeName, sizeName) ||
+                other.sizeName == sizeName) &&
+            (identical(other.sizeLabel, sizeLabel) ||
+                other.sizeLabel == sizeLabel) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.suggestedPrice, suggestedPrice) ||
                 other.suggestedPrice == suggestedPrice) &&
@@ -401,24 +473,29 @@ class _$ProductVariantCombinationModelImpl
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      label,
-      createdAt,
-      dropiId,
-      colorId,
-      sizeId,
-      price,
-      suggestedPrice,
-      points,
-      stock,
-      imageUrl,
-      color,
-      searchField,
-      const DeepCollectionEquality().hash(reference),
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        name,
+        label,
+        createdAt,
+        dropiId,
+        colorId,
+        colorName,
+        colorLabel,
+        sizeId,
+        sizeName,
+        sizeLabel,
+        price,
+        suggestedPrice,
+        points,
+        stock,
+        imageUrl,
+        color,
+        searchField,
+        const DeepCollectionEquality().hash(reference),
+        updatedAt
+      ]);
 
   /// Create a copy of ProductVariantCombinationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -447,7 +524,11 @@ abstract class _ProductVariantCombinationModel
       required final String createdAt,
       final String? dropiId,
       final String? colorId,
+      final String? colorName,
+      final String? colorLabel,
       final String? sizeId,
+      final String? sizeName,
+      final String? sizeLabel,
       final double? price,
       final double? suggestedPrice,
       final int? points,
@@ -475,7 +556,15 @@ abstract class _ProductVariantCombinationModel
   @override
   String? get colorId;
   @override
+  String? get colorName;
+  @override
+  String? get colorLabel;
+  @override
   String? get sizeId;
+  @override
+  String? get sizeName;
+  @override
+  String? get sizeLabel;
   @override
   double? get price;
   @override
