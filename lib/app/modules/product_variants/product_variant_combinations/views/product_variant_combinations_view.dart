@@ -16,7 +16,7 @@ class ProductVariantCombinationsView
         child: Icon(Icons.build),
       ),
       appBar: AppBar(
-        title: const Text('ProductVariantCombinationsView'),
+        title: const Text('Combinaciones'),
         centerTitle: true,
       ),
       body: Obx(

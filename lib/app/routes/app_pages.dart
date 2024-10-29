@@ -6,12 +6,14 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
+import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
+import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/product_variants/product_variant_combinations/bindings/product_variant_combinations_binding.dart';
-import '../modules/product_variants/product_variant_combinations/views/product_variant_combinations_view.dart';
 import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
 import '../modules/product_variants/product_add_variant/views/product_add_variant_view.dart';
+import '../modules/product_variants/product_variant_combinations/bindings/product_variant_combinations_binding.dart';
+import '../modules/product_variants/product_variant_combinations/views/product_variant_combinations_view.dart';
 import '../modules/product_variants/product_variant_for_type/bindings/product_variant_for_type_binding.dart';
 import '../modules/product_variants/product_variant_for_type/views/product_variant_for_type_view.dart';
 import '../modules/product_variants/product_variants/bindings/product_variants_binding.dart';
@@ -216,6 +218,11 @@ class AppPages {
       name: _Paths.PRODUCT_VARIANT_COMBINATIONS,
       page: () => const ProductVariantCombinationsView(),
       binding: ProductVariantCombinationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PRODUCT_VARIANT_COMBINATION,
+      page: () => const EditProductVariantCombinationView(),
+      binding: EditProductVariantCombinationBinding(),
     ),
   ];
 }
