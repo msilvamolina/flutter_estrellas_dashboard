@@ -4,6 +4,11 @@ import 'package:timeago/timeago.dart' as timeago;
 class Utils {
   Utils._();
 
+  static String removeNull(String value) {
+    value = value.replaceAll(' - null', '');
+    return value.trim();
+  }
+
   static int colorToInt(Color color) {
     String colorString = color.toString(); // Color(0x12345678)
     String valueString =
@@ -12,7 +17,7 @@ class Utils {
 
     return value;
   }
-  
+
   static Color intToColor(int value) {
     Color color = Color(value);
     return color;

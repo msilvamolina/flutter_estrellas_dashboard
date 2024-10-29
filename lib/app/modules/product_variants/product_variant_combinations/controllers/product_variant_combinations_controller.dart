@@ -6,6 +6,7 @@ import '../../../../data/models/product/product_firebase/product_firebase_model.
 import '../../../../data/models/product_variant/product_variant_model.dart';
 import '../../../../data/models/product_variant_combination/product_variant_combination_model.dart';
 import '../../../../data/providers/repositories/products/products_repository.dart';
+import '../../../../utils/utils.dart';
 
 class ProductVariantCombinationsController extends GetxController {
   final MainController _mainController = Get.find<MainController>();
@@ -45,7 +46,7 @@ class ProductVariantCombinationsController extends GetxController {
   }
 
   ProductVariantCombinationModel? getBySizeAndColor(
-      String sizeId, String colorId) {
+      String? sizeId, String colorId) {
     ProductVariantCombinationModel? option = _listCombination.firstWhereOrNull(
         (element) => element.sizeId == sizeId && element.colorId == colorId);
 
@@ -68,17 +69,29 @@ class ProductVariantCombinationsController extends GetxController {
   }
 
   Future<void> createCombination(ProductVariantModel colorElement) async {
-    for (ProductVariantModel sizeElement in sizeList) {
-      if (getBySizeAndColor(sizeElement.id, colorElement.id) == null) {
-        await saveCombination(sizeElement, colorElement);
+    if (sizeList.isNotEmpty) {
+      for (ProductVariantModel sizeElement in sizeList) {
+        await saveSizeCombination(sizeElement, colorElement);
       }
+    } else {
+      await saveSizeCombination(null, colorElement);
     }
   }
 
-  Future<void> saveCombination(
-      ProductVariantModel sizeElement, ProductVariantModel colorElement) async {
-    String name = '${colorElement.name} - ${sizeElement.name}';
-    String label = '${colorElement.label} - ${sizeElement.label}';
+  Future<void> saveSizeCombination(ProductVariantModel? sizeElement,
+      ProductVariantModel colorElement) async {
+    if (getBySizeAndColor(sizeElement?.id, colorElement.id) == null) {
+      await saveCombination(sizeElement, colorElement);
+    }
+  }
+
+  Future<void> saveCombination(ProductVariantModel? sizeElement,
+      ProductVariantModel colorElement) async {
+    String name =
+        Utils.removeNull('${colorElement.name} - ${sizeElement?.name}');
+    String label =
+        Utils.removeNull('${colorElement.label} - ${sizeElement?.label}');
+
     _mainController.setDropiMessage('saving $name');
 
     Either<String, Unit> response = await _repository.saveVariantComination(
@@ -89,9 +102,9 @@ class ProductVariantCombinationsController extends GetxController {
       colorId: colorElement.id,
       colorName: colorElement.name,
       colorLabel: colorElement.label,
-      sizeId: sizeElement.id,
-      sizeName: sizeElement.name,
-      sizeLabel: sizeElement.label,
+      sizeId: sizeElement?.id,
+      sizeName: sizeElement?.name,
+      sizeLabel: sizeElement?.label,
       price: product.price,
       suggestedPrice: product.suggestedPrice,
       points: product.points,

@@ -76,6 +76,10 @@ class ProductAddVariantController extends GetxController {
 
     if (_selectedColor != null) {
       color = Utils.colorToInt(_selectedColor!);
+    } else {
+      if (typeSelected == VariantsTypes.color) {
+        color = Utils.colorToInt(Colors.red);
+      }
     }
 
     _mainController.setDropiDialog(false);
