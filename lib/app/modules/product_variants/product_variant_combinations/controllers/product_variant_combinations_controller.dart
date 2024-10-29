@@ -44,11 +44,15 @@ class ProductVariantCombinationsController extends GetxController {
     colorList.value = _list.where((item) => item.type == "color").toList();
   }
 
-  void buildCombinations() {
-    // buildFirstCombinations();
+  ProductVariantCombinationModel? getBySizeAndColor(
+      String sizeId, String colorId) {
+    ProductVariantCombinationModel? option = _listCombination.firstWhereOrNull(
+        (element) => element.sizeId == sizeId && element.colorId == colorId);
+
+    return option;
   }
 
-  Future<void> buildFirstCombinations() async {
+  Future<void> buildCombinations() async {
     filterLists();
 
     _mainController.setDropiDialog(false);
@@ -65,7 +69,9 @@ class ProductVariantCombinationsController extends GetxController {
 
   Future<void> createCombination(ProductVariantModel colorElement) async {
     for (ProductVariantModel sizeElement in sizeList) {
-      await saveCombination(sizeElement, colorElement);
+      if (getBySizeAndColor(sizeElement.id, colorElement.id) == null) {
+        await saveCombination(sizeElement, colorElement);
+      }
     }
   }
 
