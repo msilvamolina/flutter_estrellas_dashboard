@@ -11,6 +11,7 @@ import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../components/widgets/loadingButton.dart';
 import '../../../../data/models/product_variant/product_variant_model.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../utils/utils.dart';
 import '../controllers/product_variant_for_type_controller.dart';
 
 class ProductVariantForTypeView
@@ -89,9 +90,23 @@ Widget cardItem(ProductVariantModel item, String type) {
                 Image.asset('assets/images/variants/$type.png'),
           ),
           Spacer(),
-          Text(
-            item.label,
-            style: TypographyStyle.bodyRegularMedium,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (item.color != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: CircleAvatar(
+                    backgroundColor: Utils.intToColor(item.color!),
+                    radius: 8,
+                  ),
+                ),
+              Text(
+                item.label,
+                style: TypographyStyle.bodyRegularMedium,
+              ),
+            ],
           ),
           Text(
             item.name,
