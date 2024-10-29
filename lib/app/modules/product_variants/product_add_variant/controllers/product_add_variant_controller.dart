@@ -79,6 +79,10 @@ class ProductAddVariantController extends GetxController {
     }
 
     String id = const Uuid().v4();
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+
+    _mainController.setDropiMessage('saveInFirebase');
 
     Either<String, Unit> response = await _repository.saveVariant(
       id: id,
@@ -91,12 +95,16 @@ class ProductAddVariantController extends GetxController {
     );
     Get.back();
     response.fold((failure) {
-      Get.snackbar("Error", failure);
+      _mainController.setDropiDialogError(true, failure);
+
       _loading = false;
+
       update(['view']);
-    }, (_) {
-      Get.back();
-      Get.snackbar(name, "Guardada exitosamente");
+    }, (_) async {
+      _mainController.setDropiMessage('Success!');
+      await Future.delayed(const Duration(seconds: 1), () {
+        Get.back();
+      });
     });
   }
 }
