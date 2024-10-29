@@ -150,6 +150,7 @@ class ProductsRepository {
     try {
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
           .collection('products/$productId/images')
+          .orderBy('order', descending: false)
           .snapshots();
 
       yield* snapshots.map((snapshot) {
