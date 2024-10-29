@@ -18,7 +18,7 @@ abstract class ProductVariantModel implements _$ProductVariantModel {
     required String createdAt,
     required String type,
     String? imageUrl,
-    String? color,
+    int? color,
     String? searchField,
     dynamic reference,
     String? updatedAt,

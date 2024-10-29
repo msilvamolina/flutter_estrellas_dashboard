@@ -15,7 +15,7 @@ _$ProductVariantModelImpl _$$ProductVariantModelImplFromJson(
       createdAt: json['createdAt'] as String,
       type: json['type'] as String,
       imageUrl: json['imageUrl'] as String?,
-      color: json['color'] as String?,
+      color: (json['color'] as num?)?.toInt(),
       searchField: json['searchField'] as String?,
       reference: json['reference'],
       updatedAt: json['updatedAt'] as String?,

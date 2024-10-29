@@ -26,7 +26,7 @@ mixin _$ProductVariantModel {
   String get createdAt => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
-  String? get color => throw _privateConstructorUsedError;
+  int? get color => throw _privateConstructorUsedError;
   String? get searchField => throw _privateConstructorUsedError;
   dynamic get reference => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ abstract class $ProductVariantModelCopyWith<$Res> {
       String createdAt,
       String type,
       String? imageUrl,
-      String? color,
+      int? color,
       String? searchField,
       dynamic reference,
       String? updatedAt});
@@ -114,7 +114,7 @@ class _$ProductVariantModelCopyWithImpl<$Res, $Val extends ProductVariantModel>
       color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       searchField: freezed == searchField
           ? _value.searchField
           : searchField // ignore: cast_nullable_to_non_nullable
@@ -146,7 +146,7 @@ abstract class _$$ProductVariantModelImplCopyWith<$Res>
       String createdAt,
       String type,
       String? imageUrl,
-      String? color,
+      int? color,
       String? searchField,
       dynamic reference,
       String? updatedAt});
@@ -204,7 +204,7 @@ class __$$ProductVariantModelImplCopyWithImpl<$Res>
       color: freezed == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       searchField: freezed == searchField
           ? _value.searchField
           : searchField // ignore: cast_nullable_to_non_nullable
@@ -253,7 +253,7 @@ class _$ProductVariantModelImpl extends _ProductVariantModel {
   @override
   final String? imageUrl;
   @override
-  final String? color;
+  final int? color;
   @override
   final String? searchField;
   @override
@@ -327,7 +327,7 @@ abstract class _ProductVariantModel extends ProductVariantModel {
       required final String createdAt,
       required final String type,
       final String? imageUrl,
-      final String? color,
+      final int? color,
       final String? searchField,
       final dynamic reference,
       final String? updatedAt}) = _$ProductVariantModelImpl;
@@ -349,7 +349,7 @@ abstract class _ProductVariantModel extends ProductVariantModel {
   @override
   String? get imageUrl;
   @override
-  String? get color;
+  int? get color;
   @override
   String? get searchField;
   @override

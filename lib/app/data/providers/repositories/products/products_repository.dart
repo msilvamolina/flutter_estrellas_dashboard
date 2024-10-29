@@ -165,10 +165,12 @@ class ProductsRepository {
   }
 
   Stream<List<ProductVariantModel>> getProductVariants(
-      {required String productId}) async* {
+      {required String productId, required String type}) async* {
     try {
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
           .collection('products/$productId/variants')
+          .where('type', isEqualTo: type)
+          .orderBy('order', descending: false)
           .snapshots();
 
       yield* snapshots.map((snapshot) {

@@ -21,10 +21,12 @@ class ProductVariantForTypeView
         title: Text(controller.typeSelected.name.toString()),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'ProductVariantForTypeView is working',
-          style: TextStyle(fontSize: 20),
+      body: Center(
+        child: Obx(
+          () => Text(
+            controller.list.toString(),
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ),
     );
