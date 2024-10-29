@@ -12,7 +12,7 @@ class Utils {
 
     return value;
   }
-
+  
   static Color intToColor(int value) {
     Color color = Color(value);
     return color;
