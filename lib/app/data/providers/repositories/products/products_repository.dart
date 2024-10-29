@@ -210,6 +210,7 @@ class ProductsRepository {
             .collection('images')
             .doc(id)
             .set({
+          'order': 0,
           'id': id,
           'name': name,
           'imageUrl': imageUrl,
@@ -257,6 +258,26 @@ class ProductsRepository {
         'id': id,
         'name': name,
         'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateImageOrder({
+    required String productId,
+    required String imageId,
+    required int order,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('images')
+          .doc(imageId)
+          .update({
+        'order': order,
       });
       return right(unit);
     } on FirebaseException catch (e) {

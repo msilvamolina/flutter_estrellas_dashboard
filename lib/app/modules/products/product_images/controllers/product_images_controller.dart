@@ -16,6 +16,9 @@ class ProductImagesController extends GetxController {
   bool _listChanged = false;
   bool get listChanged => _listChanged;
 
+  bool _buttonSaveLoading = false;
+  bool get buttonSaveLoading => _buttonSaveLoading;
+
   List<String> _newOrderList = [];
   @override
   void onInit() {
@@ -39,15 +42,23 @@ class ProductImagesController extends GetxController {
     return option;
   }
 
-  void saveNewOrder() {
+  Future<void> saveNewOrder() async {
+    _buttonSaveLoading = true;
+    update(['list_changed']);
+
     for (int index = 0; index < _list.length; index++) {
       ProductImageModel? option = getProductByImage(_newOrderList[index]);
 
       if (option != null) {
-        String imageId = option.id;
-        print('imageId $imageId');
-        print('index $index');
+        await _repository.updateImageOrder(
+          productId: product.id,
+          imageId: option.id,
+          order: index,
+        );
       }
     }
+    _buttonSaveLoading = false;
+    update(['list_changed']);
+    Get.snackbar('Guardado', 'nuevo orden guardado correctamente');
   }
 }

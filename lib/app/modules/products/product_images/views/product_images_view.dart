@@ -33,10 +33,13 @@ class ProductImagesView extends GetView<ProductImagesController> {
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: LoadingButton(
-                  onPressed: controller.saveNewOrder,
-                  label: 'Guardar orden',
-                  isLoading: false,
+                child: SizedBox(
+                  height: 42,
+                  child: LoadingButton(
+                    onPressed: controller.saveNewOrder,
+                    label: 'Guardar orden',
+                    isLoading: controller.buttonSaveLoading,
+                  ),
                 ),
               ),
             );
