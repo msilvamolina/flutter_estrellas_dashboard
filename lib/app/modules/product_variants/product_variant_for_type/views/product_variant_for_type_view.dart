@@ -50,8 +50,8 @@ class ProductVariantForTypeView
       body: Obx(
         () => controller.list.isNotEmpty
             ? DragGrid<String>(
-                itemList:
-                    List.generate(controller.list.length, (index) => '$index'),
+                itemList: List.generate(controller.list.length,
+                    (index) => controller.list[index].id),
                 padding: const EdgeInsets.symmetric(
                     vertical: 20.0, horizontal: 24.0),
                 sliverGridDelegate:
@@ -64,7 +64,7 @@ class ProductVariantForTypeView
                 itemListChanger: controller.onListChanged,
                 itemBuilder: (context, item, index) {
                   return cardItem(
-                    controller.list[int.parse(item)],
+                    controller.getItemById(item)!,
                     controller.typeSelected.name,
                   );
                 },
