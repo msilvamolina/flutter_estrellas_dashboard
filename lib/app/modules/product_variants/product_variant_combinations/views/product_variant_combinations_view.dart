@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/product_variant_combinations_controller.dart';
+import '../widgets/combination_card.dart';
 
 class ProductVariantCombinationsView
     extends GetView<ProductVariantCombinationsController> {
@@ -19,12 +20,18 @@ class ProductVariantCombinationsView
         centerTitle: true,
       ),
       body: Obx(
-        () => Center(
-          child: Text(
-            controller.listCombination.toString(),
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
+        () => controller.listCombination.isNotEmpty
+            ? ListView.separated(
+                itemCount: controller.listCombination.length,
+                itemBuilder: (context, index) {
+                  return CombinationCard(
+                    combinationElement: controller.listCombination[index],
+                  );
+                },
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10),
+              )
+            : const Text('no data'),
       ),
     );
   }
