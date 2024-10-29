@@ -25,6 +25,7 @@ class ProductVariantCombinationsView
                 itemCount: controller.listCombination.length,
                 itemBuilder: (context, index) {
                   return CombinationCard(
+                    product: controller.product,
                     combinationElement: controller.listCombination[index],
                   );
                 },

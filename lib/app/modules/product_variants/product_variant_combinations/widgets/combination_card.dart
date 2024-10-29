@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:estrellas_dashboard/app/data/models/product/product_firebase/product_firebase_model.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +11,17 @@ import '../../../../routes/app_pages.dart';
 import '../../../../utils/money_amount.dart';
 
 class CombinationCard extends StatelessWidget {
-  const CombinationCard({required this.combinationElement, super.key});
+  const CombinationCard(
+      {required this.combinationElement, required this.product, super.key});
 
   final ProductVariantCombinationModel combinationElement;
+  final ProductFirebaseModel product;
   @override
   Widget build(BuildContext context) {
     return Card(
       child: InkWell(
         onTap: () => Get.toNamed(Routes.EDIT_PRODUCT_VARIANT_COMBINATION,
-            arguments: combinationElement),
+            arguments: [combinationElement, product]),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

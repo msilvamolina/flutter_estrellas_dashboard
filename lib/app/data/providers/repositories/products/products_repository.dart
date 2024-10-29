@@ -367,6 +367,38 @@ class ProductsRepository {
     }
   }
 
+  Future<Either<String, Unit>> updateVariantComination({
+    required String productId,
+    required String variationCombinationId,
+    double? price,
+    int? stock,
+    double? suggestedPrice,
+    int? points,
+    String? dropiId,
+  }) async {
+    try {
+      String id = const Uuid().v4();
+
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants_combinations')
+          .doc(variationCombinationId)
+          .update({
+        'id': id,
+        'price': price,
+        'suggestedPrice': suggestedPrice,
+        'points': points,
+        'stock': stock,
+        'dropiId': dropiId,
+        'updatedAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
   Future<Either<String, Unit>> updateImageOrder({
     required String productId,
     required String imageId,
