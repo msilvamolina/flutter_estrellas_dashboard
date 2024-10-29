@@ -309,4 +309,24 @@ class ProductsRepository {
       return left(e.code);
     }
   }
+
+  Future<Either<String, Unit>> updateVariantOrder({
+    required String productId,
+    required String variantId,
+    required int order,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants')
+          .doc(variantId)
+          .update({
+        'order': order,
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 }

@@ -62,19 +62,17 @@ class ProductVariantForTypeController extends GetxController {
     _buttonSaveLoading = true;
     update(['list_changed']);
 
-    print('list $_list');
-    print('_newOrderList $_newOrderList');
-    // for (int index = 0; index < _list.length; index++) {
-    //   // ProductVariantModel? option = getProductByImage(_newOrderList[index]);
+    for (int index = 0; index < _list.length; index++) {
+      ProductVariantModel? option = getItemById(_newOrderList[index]);
 
-    //   // if (option != null) {
-    //   //   await _repository.updateImageOrder(
-    //   //     productId: product.id,
-    //   //     imageId: option.id,
-    //   //     order: index,
-    //   //   );
-    //   // }
-    // }
+      if (option != null) {
+        await _repository.updateVariantOrder(
+          productId: product.id,
+          variantId: option.id,
+          order: index,
+        );
+      }
+    }
     _buttonSaveLoading = false;
     update(['list_changed']);
     Get.snackbar('Guardado', 'nuevo orden guardado correctamente');
