@@ -21,14 +21,19 @@ class CombinationCard extends StatelessWidget {
             cardVariable('id', combinationElement.id, context),
             cardVariable('dropiId', combinationElement.dropiId ?? '', context),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CachedNetworkImage(
-                  width: 90,
-                  imageUrl: combinationElement.imageUrl ?? '',
-                  placeholder: (context, url) =>
-                      Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                      Image.asset('assets/images/variants/combinations.png'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: CachedNetworkImage(
+                    width: 90,
+                    imageUrl: combinationElement.imageUrl ?? '',
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) =>
+                        Image.asset('assets/images/variants/combinations.png'),
+                  ),
                 ),
                 SizedBox(width: 8),
                 Expanded(
