@@ -9,6 +9,7 @@ import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../data/models/product_variant/product_variant_model.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/styles/typography.dart';
+import '../../product_variant_for_type/controllers/product_variant_for_type_controller.dart';
 import '../controllers/product_variants_controller.dart';
 
 class ProductVariantsView extends GetView<ProductVariantsController> {
@@ -34,7 +35,8 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
         children: [
           Card(
             child: InkWell(
-              onTap: () {},
+              onTap: () => Get.toNamed(Routes.PRODUCT_VARIANT_FOR_TYPE,
+                  arguments: VariantsTypes.size),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
@@ -73,7 +75,8 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
           const SizedBox(height: 16),
           Card(
             child: InkWell(
-              onTap: () {},
+              onTap: () => Get.toNamed(Routes.PRODUCT_VARIANT_FOR_TYPE,
+                  arguments: VariantsTypes.color),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(

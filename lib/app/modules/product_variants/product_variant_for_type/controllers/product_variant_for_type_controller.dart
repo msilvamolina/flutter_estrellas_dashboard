@@ -1,16 +1,18 @@
 import 'package:get/get.dart';
 
 enum VariantsTypes {
-  color,
-  size,
+  color('color'),
+  size('size');
+
+  const VariantsTypes(this.text);
+  final String text;
 }
 
 class ProductVariantForTypeController extends GetxController {
-  //TODO: Implement ProductVariantForTypeController
-
-  final count = 0.obs;
+  late VariantsTypes typeSelected;
   @override
   void onInit() {
+    typeSelected = Get.arguments as VariantsTypes;
     super.onInit();
   }
 
@@ -23,6 +25,4 @@ class ProductVariantForTypeController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

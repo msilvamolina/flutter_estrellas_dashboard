@@ -11,7 +11,7 @@ class ProductVariantForTypeView
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ProductVariantForTypeView'),
+        title: Text(controller.typeSelected.name.toString()),
         centerTitle: true,
       ),
       body: const Center(
