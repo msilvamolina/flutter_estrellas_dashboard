@@ -19,7 +19,13 @@ class ProductVariantForTypeController extends GetxController {
   late ProductFirebaseModel product;
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
+  bool _listChanged = false;
+  bool get listChanged => _listChanged;
 
+  bool _buttonSaveLoading = false;
+  bool get buttonSaveLoading => _buttonSaveLoading;
+
+  List<String> _newOrderList = [];
   @override
   void onInit() {
     product = Get.arguments[0] as ProductFirebaseModel;
@@ -28,7 +34,6 @@ class ProductVariantForTypeController extends GetxController {
       productId: product.id,
       type: typeSelected.name,
     ));
-    print('product $product');
     super.onInit();
   }
 
@@ -38,4 +43,13 @@ class ProductVariantForTypeController extends GetxController {
       arguments: [product, typeSelected],
     );
   }
+
+  void onListChanged(List<String> list) {
+    _listChanged = true;
+    _newOrderList.clear();
+    _newOrderList.addAll(list);
+    update(['list_changed']);
+  }
+
+  void saveNewOrder() {}
 }

@@ -37,7 +37,7 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/images/size-guide.png',
+                      'assets/images/variants/size.png',
                       width: 80,
                     ),
                     const SizedBox(width: 12),
@@ -79,7 +79,7 @@ class ProductVariantsView extends GetView<ProductVariantsController> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/images/color-palette.png',
+                      'assets/images/variants/color.png',
                       width: 80,
                     ),
                     const SizedBox(width: 12),
