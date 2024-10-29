@@ -114,7 +114,7 @@ class ProductAddVariantView extends GetView<ProductAddVariantController> {
                     ],
                     ReactiveFormConsumer(
                       builder: (context, form, child) => LoadingButton(
-                        label: 'Subir imagen',
+                        label: 'Guardar',
                         isLoading: controller.loading,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)

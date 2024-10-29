@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 import '../../../../app/controllers/main_controller.dart';
 import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../../data/providers/repositories/products/products_repository.dart';
+import '../../../../utils/utils.dart';
 import '../../../../utils/utils_image.dart';
 import '../../product_variant_for_type/controllers/product_variant_for_type_controller.dart';
 
@@ -47,8 +48,8 @@ class ProductAddVariantController extends GetxController {
   String? _imagePath;
   String? get imagePath => _imagePath;
 
-  Color _selectedColor = Colors.blue;
-  Color get selectedColor => _selectedColor;
+  Color? _selectedColor;
+  Color? get selectedColor => _selectedColor;
 
   @override
   Future<void> onInit() async {
@@ -69,13 +70,24 @@ class ProductAddVariantController extends GetxController {
 
   Future<void> sendForm(Map<String, Object?> data) async {
     String name = data[Fields.name.name].toString();
-    String uuid = const Uuid().v4();
-    String variantId = 'variant-$uuid';
+    String label = data[Fields.label.name].toString();
+    String type = typeSelected.name;
+    int? color;
+
+    if (_selectedColor != null) {
+      color = Utils.colorToInt(_selectedColor!);
+    }
+
+    String id = const Uuid().v4();
 
     Either<String, Unit> response = await _repository.saveVariant(
-      id: variantId,
+      id: id,
       name: name,
+      label: label,
+      type: type,
+      color: color,
       productId: product.id,
+      imageUrl: _imagePath,
     );
     Get.back();
     response.fold((failure) {

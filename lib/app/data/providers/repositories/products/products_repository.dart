@@ -69,6 +69,7 @@ class ProductsRepository {
           await uploadImage(id: id, productId: product.id, path: imagePath);
 
       mainController.setDropiMessage('Escribiendo en firebase');
+
       await _firebaseFirestore
           .collection('products')
           .doc(product.id)
@@ -245,11 +246,27 @@ class ProductsRepository {
   }
 
   Future<Either<String, Unit>> saveVariant({
+    required String productId,
     required String name,
     required String id,
-    required String productId,
+    required String label,
+    required String type,
+    int? color,
+    String? imageUrl,
   }) async {
     try {
+      MainController mainController = Get.find<MainController>();
+
+      String id = const Uuid().v4();
+      String? newImageUrl;
+      if (imageUrl != null) {
+        mainController.setDropiMessage('Subiendo imagen a firebase');
+        newImageUrl =
+            await uploadImage(id: id, productId: productId, path: imageUrl);
+      }
+
+      mainController.setDropiMessage('Escribiendo en firebase');
+
       await _firebaseFirestore
           .collection('products')
           .doc(productId)
@@ -258,6 +275,11 @@ class ProductsRepository {
           .set({
         'id': id,
         'name': name,
+        'label': label,
+        'type': type,
+        'color': color,
+        'imageUrl': newImageUrl,
+        'order': 0,
         'createdAt': DateTime.now(),
       });
       return right(unit);
