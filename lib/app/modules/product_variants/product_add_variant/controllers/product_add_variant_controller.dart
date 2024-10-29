@@ -78,14 +78,12 @@ class ProductAddVariantController extends GetxController {
       color = Utils.colorToInt(_selectedColor!);
     }
 
-    String id = const Uuid().v4();
     _mainController.setDropiDialog(false);
     _mainController.showDropiLoader();
 
     _mainController.setDropiMessage('saveInFirebase');
 
     Either<String, Unit> response = await _repository.saveVariant(
-      id: id,
       name: name,
       label: label,
       type: type,

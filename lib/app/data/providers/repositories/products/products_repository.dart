@@ -183,6 +183,23 @@ class ProductsRepository {
     }
   }
 
+  Stream<List<ProductVariantModel>> getAllProductVariants(
+      {required String productId}) async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('products/$productId/variants')
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => ProductVariantModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<Either<String, Unit>> saveProductInFirebase({
     required ProductModel product,
   }) async {
@@ -250,7 +267,6 @@ class ProductsRepository {
   Future<Either<String, Unit>> saveVariant({
     required String productId,
     required String name,
-    required String id,
     required String label,
     required String type,
     int? color,
@@ -282,6 +298,47 @@ class ProductsRepository {
         'color': color,
         'imageUrl': newImageUrl,
         'order': 0,
+        'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> saveVariantComination({
+    required String productId,
+    required String name,
+    required String label,
+    int? color,
+    String? imageUrl,
+    String? sizeId,
+    String? colorId,
+    double? price,
+    int? stock,
+    double? suggestedPrice,
+    int? points,
+  }) async {
+    try {
+      String id = const Uuid().v4();
+
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants_combinations')
+          .doc(id)
+          .set({
+        'id': id,
+        'name': name,
+        'label': label,
+        'color': color,
+        'imageUrl': imageUrl,
+        'sizeId': sizeId,
+        'colorId': colorId,
+        'price': price,
+        'suggestedPrice': suggestedPrice,
+        'points': points,
+        'stock': stock,
         'createdAt': DateTime.now(),
       });
       return right(unit);

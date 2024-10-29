@@ -36,6 +36,8 @@ abstract class Routes {
   static const SELECT_WAREHOUSE = _Paths.SELECT_WAREHOUSE;
   static const SELECT_PRODUCT = _Paths.SELECT_PRODUCT;
   static const PRODUCT_VARIANT_FOR_TYPE = _Paths.PRODUCT_VARIANT_FOR_TYPE;
+  static const PRODUCT_VARIANT_COMBINATIONS =
+      _Paths.PRODUCT_VARIANT_COMBINATIONS;
 }
 
 abstract class _Paths {
@@ -73,4 +75,5 @@ abstract class _Paths {
   static const SELECT_WAREHOUSE = '/select-warehouse';
   static const SELECT_PRODUCT = '/select-product';
   static const PRODUCT_VARIANT_FOR_TYPE = '/product-variant-for-type';
+  static const PRODUCT_VARIANT_COMBINATIONS = '/product-variant-combinations';
 }
