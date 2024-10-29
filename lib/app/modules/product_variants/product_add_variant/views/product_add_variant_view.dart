@@ -22,8 +22,8 @@ class ProductAddVariantView extends GetView<ProductAddVariantController> {
             showMenu: false,
             currentRoute: Routes.PRODUCT_ADD_VARIANT,
             appBarTitle: 'Añadir imagen',
-            appBarWidget:
-                AppbarTitleWithBack(title: controller.product.name ?? ''),
+            appBarWidget: AppbarTitleWithBack(
+                title: 'Nuevo ${controller.typeSelected.name}'),
             child: GetBuilder<ProductAddVariantController>(
               id: 'view',
               builder: (_) {
