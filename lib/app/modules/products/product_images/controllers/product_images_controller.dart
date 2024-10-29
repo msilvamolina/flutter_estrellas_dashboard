@@ -13,11 +13,41 @@ class ProductImagesController extends GetxController {
   final RxList<ProductImageModel> _list = <ProductImageModel>[].obs;
   List<ProductImageModel> get list => _list.toList();
 
+  bool _listChanged = false;
+  bool get listChanged => _listChanged;
+
+  List<String> _newOrderList = [];
   @override
   void onInit() {
     product = Get.arguments as ProductFirebaseModel;
     _list.bindStream(_repository.getProductImages(productId: product.id));
 
     super.onInit();
+  }
+
+  void onListChanged(List<String> list) {
+    _listChanged = true;
+    _newOrderList.clear();
+    _newOrderList.addAll(list);
+    update(['list_changed']);
+  }
+
+  ProductImageModel? getProductByImage(String imageUrl) {
+    ProductImageModel? option =
+        _list.firstWhereOrNull((element) => element.imageUrl == imageUrl);
+
+    return option;
+  }
+
+  void saveNewOrder() {
+    for (int index = 0; index < _list.length; index++) {
+      ProductImageModel? option = getProductByImage(_newOrderList[index]);
+
+      if (option != null) {
+        String imageId = option.id;
+        print('imageId $imageId');
+        print('index $index');
+      }
+    }
   }
 }
