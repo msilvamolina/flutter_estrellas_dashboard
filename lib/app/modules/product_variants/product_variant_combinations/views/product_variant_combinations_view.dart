@@ -18,10 +18,12 @@ class ProductVariantCombinationsView
         title: const Text('ProductVariantCombinationsView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'ProductVariantCombinationsView is working',
-          style: TextStyle(fontSize: 20),
+      body: Obx(
+        () => Center(
+          child: Text(
+            controller.listCombination.toString(),
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ),
     );

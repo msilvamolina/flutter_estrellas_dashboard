@@ -23,6 +23,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../../../models/product_variant_combination/product_variant_combination_model.dart';
+
 class ProductsRepository {
   ApiServices services = ApiServices();
   final FirebaseFirestore _firebaseFirestore = Get.find<FirebaseFirestore>();
@@ -176,6 +178,23 @@ class ProductsRepository {
       yield* snapshots.map((snapshot) {
         return snapshot.docs
             .map((doc) => ProductVariantModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Stream<List<ProductVariantCombinationModel>>
+      getAllProductVariantsCombinations({required String productId}) async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('products/$productId/variants_combinations')
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => ProductVariantCombinationModel.fromDocument(doc))
             .toList();
       });
     } catch (e) {

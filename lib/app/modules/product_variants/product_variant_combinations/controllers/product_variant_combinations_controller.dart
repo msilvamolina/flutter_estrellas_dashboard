@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../../app/controllers/main_controller.dart';
 import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../../data/models/product_variant/product_variant_model.dart';
+import '../../../../data/models/product_variant_combination/product_variant_combination_model.dart';
 import '../../../../data/providers/repositories/products/products_repository.dart';
 
 class ProductVariantCombinationsController extends GetxController {
@@ -13,6 +14,10 @@ class ProductVariantCombinationsController extends GetxController {
   late ProductFirebaseModel product;
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
+  final RxList<ProductVariantCombinationModel> _listCombination =
+      <ProductVariantCombinationModel>[].obs;
+  List<ProductVariantCombinationModel> get listCombination =>
+      _listCombination.toList();
   List<String> _newOrderList = [];
   final RxList<ProductVariantModel> sizeList = <ProductVariantModel>[].obs;
   final RxList<ProductVariantModel> colorList = <ProductVariantModel>[].obs;
@@ -21,6 +26,9 @@ class ProductVariantCombinationsController extends GetxController {
   void onInit() {
     product = Get.arguments[0] as ProductFirebaseModel;
     _list.bindStream(_repository.getAllProductVariants(
+      productId: product.id,
+    ));
+    _listCombination.bindStream(_repository.getAllProductVariantsCombinations(
       productId: product.id,
     ));
     super.onInit();
@@ -37,7 +45,7 @@ class ProductVariantCombinationsController extends GetxController {
   }
 
   void buildCombinations() {
-    buildFirstCombinations();
+    // buildFirstCombinations();
   }
 
   Future<void> buildFirstCombinations() async {
