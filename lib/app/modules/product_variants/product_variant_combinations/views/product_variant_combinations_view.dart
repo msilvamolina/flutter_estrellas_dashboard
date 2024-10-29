@@ -19,20 +19,23 @@ class ProductVariantCombinationsView
         title: const Text('Combinaciones'),
         centerTitle: true,
       ),
-      body: Obx(
-        () => controller.listCombination.isNotEmpty
-            ? ListView.separated(
-                itemCount: controller.listCombination.length,
-                itemBuilder: (context, index) {
-                  return CombinationCard(
-                    product: controller.product,
-                    combinationElement: controller.listCombination[index],
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-              )
-            : const Text('no data'),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Obx(
+          () => controller.listCombination.isNotEmpty
+              ? ListView.separated(
+                  itemCount: controller.listCombination.length,
+                  itemBuilder: (context, index) {
+                    return CombinationCard(
+                      product: controller.product,
+                      combinationElement: controller.listCombination[index],
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                )
+              : const Text('no data'),
+        ),
       ),
     );
   }

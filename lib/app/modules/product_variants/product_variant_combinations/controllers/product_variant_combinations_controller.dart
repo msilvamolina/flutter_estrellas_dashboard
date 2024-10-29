@@ -46,7 +46,7 @@ class ProductVariantCombinationsController extends GetxController {
   }
 
   ProductVariantCombinationModel? getBySizeAndColor(
-      String? sizeId, String colorId) {
+      String? sizeId, String? colorId) {
     ProductVariantCombinationModel? option = _listCombination.firstWhereOrNull(
         (element) => element.sizeId == sizeId && element.colorId == colorId);
 
@@ -56,19 +56,26 @@ class ProductVariantCombinationsController extends GetxController {
   Future<void> buildCombinations() async {
     filterLists();
 
-    _mainController.setDropiDialog(false);
-    _mainController.showDropiLoader();
+    if (colorList.isNotEmpty || sizeList.isNotEmpty) {
+      _mainController.setDropiDialog(false);
+      _mainController.showDropiLoader();
 
-    for (ProductVariantModel colorElement in colorList) {
-      await createCombination(colorElement);
+      if (colorList.isNotEmpty) {
+        for (ProductVariantModel colorElement in colorList) {
+          await createCombination(colorElement);
+        }
+      } else {
+        await createCombination(null);
+      }
+
+      _mainController.setDropiMessage('Success!');
+      Future<void>.delayed(Duration(seconds: 1), () {
+        Get.back();
+      });
     }
-    _mainController.setDropiMessage('Success!');
-    Future<void>.delayed(Duration(seconds: 1), () {
-      Get.back();
-    });
   }
 
-  Future<void> createCombination(ProductVariantModel colorElement) async {
+  Future<void> createCombination(ProductVariantModel? colorElement) async {
     if (sizeList.isNotEmpty) {
       for (ProductVariantModel sizeElement in sizeList) {
         await saveSizeCombination(sizeElement, colorElement);
@@ -79,29 +86,29 @@ class ProductVariantCombinationsController extends GetxController {
   }
 
   Future<void> saveSizeCombination(ProductVariantModel? sizeElement,
-      ProductVariantModel colorElement) async {
-    if (getBySizeAndColor(sizeElement?.id, colorElement.id) == null) {
+      ProductVariantModel? colorElement) async {
+    if (getBySizeAndColor(sizeElement?.id, colorElement?.id) == null) {
       await saveCombination(sizeElement, colorElement);
     }
   }
 
   Future<void> saveCombination(ProductVariantModel? sizeElement,
-      ProductVariantModel colorElement) async {
+      ProductVariantModel? colorElement) async {
     String name =
-        Utils.removeNull('${colorElement.name} - ${sizeElement?.name}');
+        Utils.removeNull('${colorElement?.name} - ${sizeElement?.name}');
     String label =
-        Utils.removeNull('${colorElement.label} - ${sizeElement?.label}');
+        Utils.removeNull('${colorElement?.label} - ${sizeElement?.label}');
 
     _mainController.setDropiMessage('saving $name');
 
     Either<String, Unit> response = await _repository.saveVariantComination(
       name: name,
       label: label,
-      color: colorElement.color,
-      imageUrl: colorElement.imageUrl,
-      colorId: colorElement.id,
-      colorName: colorElement.name,
-      colorLabel: colorElement.label,
+      color: colorElement?.color,
+      imageUrl: colorElement?.imageUrl,
+      colorId: colorElement?.id,
+      colorName: colorElement?.name,
+      colorLabel: colorElement?.label,
       sizeId: sizeElement?.id,
       sizeName: sizeElement?.name,
       sizeLabel: sizeElement?.label,

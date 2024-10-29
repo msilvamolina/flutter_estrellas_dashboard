@@ -6,6 +6,7 @@ class Utils {
 
   static String removeNull(String value) {
     value = value.replaceAll(' - null', '');
+    value = value.replaceAll('null - ', '');
     return value.trim();
   }
 
