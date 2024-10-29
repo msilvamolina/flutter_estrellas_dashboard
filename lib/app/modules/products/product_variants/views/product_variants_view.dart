@@ -8,45 +8,128 @@ import '../../../../components/appbars/appbar_title_with_back.dart';
 import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../data/models/product_variant/product_variant_model.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../themes/styles/typography.dart';
 import '../controllers/product_variants_controller.dart';
 
 class ProductVariantsView extends GetView<ProductVariantsController> {
   const ProductVariantsView({super.key});
   @override
   Widget build(BuildContext context) {
+    Color primary = Theme.of(context).colorScheme.primary;
+
     return MainLayout(
-      floatingActionButton: CustomFloatingActionButton(
-        label: 'Agregar',
-        icon: Icons.add,
-        onPressed: () => Get.toNamed(
-          Routes.PRODUCT_ADD_VARIANT,
-          arguments: controller.product,
-        ),
-      ),
+      // floatingActionButton: CustomFloatingActionButton(
+      //   label: 'Agregar',
+      //   icon: Icons.add,
+      //   onPressed: () => Get.toNamed(
+      //     Routes.PRODUCT_ADD_VARIANT,
+      //     arguments: controller.product,
+      //   ),
+      // ),
       showMenu: false,
       currentRoute: Routes.PRODUCT_VARIANTS,
       appBarTitle: 'Variaciones',
       appBarWidget: AppbarTitleWithBack(title: 'Variaciones'),
-      child: Obx(
-        () => controller.list.isNotEmpty
-            ? ListView.separated(
-                itemCount: controller.list.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onLongPressDown: (val) {},
-                    child: _listItem(
-                      context: context,
-                      variant: controller.list[index],
-                      index: index,
-                      resetSlide: false,
-                      // Reverse engineering the notion, meaning the Slidable widget will close all slid item, except one with false, i.e the currently slide item
+      child: Column(
+        children: [
+          Card(
+            child: InkWell(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/size-guide.png',
+                      width: 80,
                     ),
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-              )
-            : const Text('no data'),
+                    const SizedBox(width: 12),
+                    // Elimina el Padding alrededor del Expanded
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Tallas',
+                            style: TypographyStyle.bodyBlackLarge
+                                .copyWith(color: primary),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      color: primary,
+                      size: 48,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Card(
+            child: InkWell(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/color-palette.png',
+                      width: 80,
+                    ),
+                    const SizedBox(width: 12),
+                    // Elimina el Padding alrededor del Expanded
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Colores',
+                            style: TypographyStyle.bodyBlackLarge
+                                .copyWith(color: primary),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      color: primary,
+                      size: 48,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+        // child: Obx(
+        //   () => controller.list.isNotEmpty
+        //       ? ListView.separated(
+        //           itemCount: controller.list.length,
+        //           itemBuilder: (context, index) {
+        //             return GestureDetector(
+        //               onLongPressDown: (val) {},
+        //               child: _listItem(
+        //                 context: context,
+        //                 variant: controller.list[index],
+        //                 index: index,
+        //                 resetSlide: false,
+        //                 // Reverse engineering the notion, meaning the Slidable widget will close all slid item, except one with false, i.e the currently slide item
+        //               ),
+        //             );
+        //           },
+        //           separatorBuilder: (context, index) =>
+        //               const SizedBox(height: 10),
+        //         )
+        //       : const Text('no data'),
       ),
     );
   }
