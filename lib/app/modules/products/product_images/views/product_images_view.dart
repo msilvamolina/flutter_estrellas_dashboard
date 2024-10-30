@@ -1,3 +1,5 @@
+import 'package:drag_grid/drag_grid.dart';
+import 'package:estrellas_dashboard/app/components/widgets/loadingButton.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -24,25 +26,54 @@ class ProductImagesView extends GetView<ProductImagesController> {
         ),
       ),
       showMenu: false,
+      bottomNavigationBar: GetBuilder<ProductImagesController>(
+        id: 'list_changed',
+        builder: (_) {
+          if (controller.listChanged)
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: SizedBox(
+                  height: 42,
+                  child: LoadingButton(
+                    onPressed: controller.saveNewOrder,
+                    label: 'Guardar orden',
+                    isLoading: controller.buttonSaveLoading,
+                  ),
+                ),
+              ),
+            );
+          else
+            return SizedBox.shrink();
+        },
+      ),
       currentRoute: Routes.PRODUCT_ADD_IMAGE,
       appBarTitle: 'Añadir imagen',
       appBarWidget: AppbarTitleWithBack(title: 'Imágenes'),
       child: Obx(
         () => controller.list.isNotEmpty
-            ? GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            ? DragGrid<String>(
+                itemList: List.generate(controller.list.length,
+                    (index) => controller.list[index].imageUrl),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 20.0, horizontal: 24.0),
+                sliverGridDelegate:
+                    const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 10.0,
-                  childAspectRatio: 1.0,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 1,
                 ),
-                itemCount: controller.list.length,
-                itemBuilder: (context, index) {
-                  return _listItem(
-                    context: context,
-                    image: controller.list[index],
-                    index: index,
-                    resetSlide: false,
+                itemListChanger: controller.onListChanged,
+                itemBuilder: (context, item, index) {
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Image.network(
+                        item,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   );
                 },
               )
@@ -59,14 +90,11 @@ Widget _listItem({
   required bool resetSlide,
 }) {
   return Card(
-    child: InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Image.network(
-          image.imageUrl,
-          fit: BoxFit.cover,
-        ),
+    child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: Image.network(
+        image.imageUrl,
+        fit: BoxFit.cover,
       ),
     ),
   );

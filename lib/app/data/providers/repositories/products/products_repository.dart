@@ -23,6 +23,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../../../models/product_variant_combination/product_variant_combination_model.dart';
+
 class ProductsRepository {
   ApiServices services = ApiServices();
   final FirebaseFirestore _firebaseFirestore = Get.find<FirebaseFirestore>();
@@ -69,6 +71,7 @@ class ProductsRepository {
           await uploadImage(id: id, productId: product.id, path: imagePath);
 
       mainController.setDropiMessage('Escribiendo en firebase');
+
       await _firebaseFirestore
           .collection('products')
           .doc(product.id)
@@ -150,6 +153,7 @@ class ProductsRepository {
     try {
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
           .collection('products/$productId/images')
+          .orderBy('order', descending: false)
           .snapshots();
 
       yield* snapshots.map((snapshot) {
@@ -163,6 +167,43 @@ class ProductsRepository {
   }
 
   Stream<List<ProductVariantModel>> getProductVariants(
+      {required String productId, required String type}) async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('products/$productId/variants')
+          .where('type', isEqualTo: type)
+          .orderBy('order', descending: false)
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => ProductVariantModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Stream<List<ProductVariantCombinationModel>>
+      getAllProductVariantsCombinations({required String productId}) async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('products/$productId/variants_combinations')
+          .orderBy('name', descending: false)
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => ProductVariantCombinationModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Stream<List<ProductVariantModel>> getAllProductVariants(
       {required String productId}) async* {
     try {
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
@@ -210,6 +251,7 @@ class ProductsRepository {
             .collection('images')
             .doc(id)
             .set({
+          'order': 0,
           'id': id,
           'name': name,
           'imageUrl': imageUrl,
@@ -243,11 +285,26 @@ class ProductsRepository {
   }
 
   Future<Either<String, Unit>> saveVariant({
-    required String name,
-    required String id,
     required String productId,
+    required String name,
+    required String label,
+    required String type,
+    int? color,
+    String? imageUrl,
   }) async {
     try {
+      MainController mainController = Get.find<MainController>();
+
+      String id = const Uuid().v4();
+      String? newImageUrl;
+      if (imageUrl != null) {
+        mainController.setDropiMessage('Subiendo imagen a firebase');
+        newImageUrl =
+            await uploadImage(id: id, productId: productId, path: imageUrl);
+      }
+
+      mainController.setDropiMessage('Escribiendo en firebase');
+
       await _firebaseFirestore
           .collection('products')
           .doc(productId)
@@ -256,7 +313,133 @@ class ProductsRepository {
           .set({
         'id': id,
         'name': name,
+        'label': label,
+        'type': type,
+        'color': color,
+        'imageUrl': newImageUrl,
+        'order': 0,
         'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> saveVariantComination({
+    required String productId,
+    required String name,
+    required String label,
+    int? color,
+    String? imageUrl,
+    String? sizeId,
+    String? sizeName,
+    String? sizeLabel,
+    String? colorId,
+    String? colorName,
+    String? colorLabel,
+    double? price,
+    int? stock,
+    double? suggestedPrice,
+    int? points,
+  }) async {
+    try {
+      String id = const Uuid().v4();
+
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants_combinations')
+          .doc(id)
+          .set({
+        'id': id,
+        'name': name,
+        'label': label,
+        'color': color,
+        'imageUrl': imageUrl,
+        'sizeId': sizeId,
+        'sizeName': sizeName,
+        'sizeLabel': sizeLabel,
+        'colorId': colorId,
+        'colorName': colorName,
+        'colorLabel': colorLabel,
+        'price': price,
+        'suggestedPrice': suggestedPrice,
+        'points': points,
+        'stock': stock,
+        'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateVariantComination({
+    required String productId,
+    required String variationCombinationId,
+    double? price,
+    int? stock,
+    double? suggestedPrice,
+    int? points,
+    String? dropiId,
+  }) async {
+    try {
+      String id = const Uuid().v4();
+
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants_combinations')
+          .doc(variationCombinationId)
+          .update({
+        'id': id,
+        'price': price,
+        'suggestedPrice': suggestedPrice,
+        'points': points,
+        'stock': stock,
+        'dropiId': dropiId,
+        'updatedAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateImageOrder({
+    required String productId,
+    required String imageId,
+    required int order,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('images')
+          .doc(imageId)
+          .update({
+        'order': order,
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateVariantOrder({
+    required String productId,
+    required String variantId,
+    required int order,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants')
+          .doc(variantId)
+          .update({
+        'order': order,
       });
       return right(unit);
     } on FirebaseException catch (e) {
