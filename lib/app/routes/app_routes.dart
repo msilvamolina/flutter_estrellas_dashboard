@@ -40,6 +40,7 @@ abstract class Routes {
       _Paths.PRODUCT_VARIANT_COMBINATIONS;
   static const EDIT_PRODUCT_VARIANT_COMBINATION =
       _Paths.EDIT_PRODUCT_VARIANT_COMBINATION;
+  static const COPY_DEPARTMENTS = _Paths.COPY_DEPARTMENTS;
 }
 
 abstract class _Paths {
@@ -80,4 +81,5 @@ abstract class _Paths {
   static const PRODUCT_VARIANT_COMBINATIONS = '/product-variant-combinations';
   static const EDIT_PRODUCT_VARIANT_COMBINATION =
       '/edit-product-variant-combination';
+  static const COPY_DEPARTMENTS = '/copy-departments';
 }

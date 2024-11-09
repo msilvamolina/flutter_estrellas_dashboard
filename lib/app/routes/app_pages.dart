@@ -6,10 +6,12 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
-import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
+import '../modules/admin/copy_departments/bindings/copy_departments_binding.dart';
+import '../modules/admin/copy_departments/views/copy_departments_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
+import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
 import '../modules/product_variants/product_add_variant/views/product_add_variant_view.dart';
 import '../modules/product_variants/product_variant_combinations/bindings/product_variant_combinations_binding.dart';
@@ -223,6 +225,11 @@ class AppPages {
       name: _Paths.EDIT_PRODUCT_VARIANT_COMBINATION,
       page: () => const EditProductVariantCombinationView(),
       binding: EditProductVariantCombinationBinding(),
+    ),
+    GetPage(
+      name: _Paths.COPY_DEPARTMENTS,
+      page: () => const CopyDepartmentsView(),
+      binding: CopyDepartmentsBinding(),
     ),
   ];
 }
