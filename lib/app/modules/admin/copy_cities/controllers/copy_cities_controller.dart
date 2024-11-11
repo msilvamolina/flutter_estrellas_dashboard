@@ -1,11 +1,11 @@
+import 'package:estrellas_dashboard/app/data/models/city/department/department.dart';
 import 'package:get/get.dart';
 
 class CopyCitiesController extends GetxController {
-  //TODO: Implement CopyCitiesController
-
-  final count = 0.obs;
+  late DepartmentModel departmentModel;
   @override
   void onInit() {
+    departmentModel = Get.arguments as DepartmentModel;
     super.onInit();
   }
 
@@ -19,5 +19,5 @@ class CopyCitiesController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void copyToFirebase() {}
 }
