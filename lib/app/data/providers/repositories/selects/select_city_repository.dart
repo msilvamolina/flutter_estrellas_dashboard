@@ -26,6 +26,9 @@ import '../../../models/provider/provider/provider_model.dart';
 
 class SelectCityRepository {
   ApiServices services = ApiServices();
+  final FirebaseFirestore _firebaseFirestore = Get.find<FirebaseFirestore>();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseStorage _firebaseStorage = Get.find<FirebaseStorage>();
 
   Future<Either<String, List<DepartmentModel>>> getDepartments() async {
     String url = 'api/localities/departments';
@@ -76,6 +79,20 @@ class SelectCityRepository {
       return right(list);
     } catch (e) {
       return left(e.toString());
+    }
+  }
+
+  Future<Either<String, Unit>> saveDepartmentInFirebase({
+    required DepartmentModel department,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('departments')
+          .doc(department.dropiId.toString())
+          .set(department.toJson());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
     }
   }
 }

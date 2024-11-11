@@ -8,6 +8,8 @@ import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
+import '../modules/admin/copy_cities/bindings/copy_cities_binding.dart';
+import '../modules/admin/copy_cities/views/copy_cities_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
@@ -230,6 +232,11 @@ class AppPages {
       name: _Paths.COPY_DEPARTMENTS,
       page: () => const CopyDepartmentsView(),
       binding: CopyDepartmentsBinding(),
+    ),
+    GetPage(
+      name: _Paths.COPY_CITIES,
+      page: () => const CopyCitiesView(),
+      binding: CopyCitiesBinding(),
     ),
   ];
 }

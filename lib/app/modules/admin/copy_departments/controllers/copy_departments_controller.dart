@@ -23,6 +23,14 @@ class CopyDepartmentsController extends GetxController {
     super.onInit();
   }
 
+  Future<void> copyToFirebase() async {
+    // if (_data.isNotEmpty) {
+    //   for (DepartmentModel element in _data) {
+    //     await _repository.saveDepartmentInFirebase(department: element);
+    //   }
+    // }
+  }
+
   Future<void> getDataVersion1() async {
     _isLoading = true;
     _responseError = null;

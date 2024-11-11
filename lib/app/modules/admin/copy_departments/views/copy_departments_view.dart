@@ -21,9 +21,9 @@ class CopyDepartmentsView extends GetView<CopyDepartmentsController> {
         currentRoute: Routes.COPY_DEPARTMENTS,
         appBarTitle: 'Copy departments',
         floatingActionButton: CustomFloatingActionButton(
-          label: 'Agregar',
-          icon: Icons.add,
-          onPressed: () => Get.toNamed(Routes.CREATE_PRODUCT),
+          label: 'Copy to firebase',
+          icon: Icons.cloud_sync_sharp,
+          onPressed: controller.copyToFirebase,
         ),
         appBarWidget: const TabBar(
           tabs: [
