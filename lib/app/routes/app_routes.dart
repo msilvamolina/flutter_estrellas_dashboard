@@ -41,6 +41,7 @@ abstract class Routes {
   static const EDIT_PRODUCT_VARIANT_COMBINATION =
       _Paths.EDIT_PRODUCT_VARIANT_COMBINATION;
   static const COPY_DEPARTMENTS = _Paths.COPY_DEPARTMENTS;
+  static const ADMIN = _Paths.ADMIN;
 }
 
 abstract class _Paths {
@@ -82,4 +83,5 @@ abstract class _Paths {
   static const EDIT_PRODUCT_VARIANT_COMBINATION =
       '/edit-product-variant-combination';
   static const COPY_DEPARTMENTS = '/copy-departments';
+  static const ADMIN = '/admin';
 }

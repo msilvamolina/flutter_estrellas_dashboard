@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
+import '../modules/admin/copy_departments/bindings/copy_departments_binding.dart';
+import '../modules/admin/copy_departments/views/copy_departments_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/admin/copy_departments/bindings/copy_departments_binding.dart';
-import '../modules/admin/copy_departments/views/copy_departments_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';

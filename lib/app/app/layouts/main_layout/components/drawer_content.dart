@@ -87,6 +87,17 @@ class DrawerContent extends StatelessWidget {
             ),
           ],
         ),
+        menuOptionExpansion(
+          title: 'Admin',
+          route: Routes.ADMIN,
+          children: [
+            menuOptionChildren(
+              icon: Icons.http,
+              title: 'Copiar Departamentos desde DROPI',
+              route: Routes.COPY_DEPARTMENTS,
+            ),
+          ],
+        ),
         const SizedBox(height: 400),
         ListTile(
           title: const Text('Salir'),
