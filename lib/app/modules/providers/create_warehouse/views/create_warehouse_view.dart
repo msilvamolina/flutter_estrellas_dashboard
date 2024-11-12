@@ -24,8 +24,7 @@ class CreateWarehouseView extends GetView<CreateWarehouseController> {
             showMenu: false,
             currentRoute: Routes.CREATE_WAREHOUSE,
             appBarTitle: 'Crear bodega',
-            child: 
-            GetBuilder<CreateWarehouseController>(
+            child: GetBuilder<CreateWarehouseController>(
               id: 'view',
               builder: (_) {
                 return Column(
@@ -58,9 +57,11 @@ class CreateWarehouseView extends GetView<CreateWarehouseController> {
                                     const SizedBox(height: 4),
                                     Text(
                                       controller.cityModel != null
-                                          ? (controller.cityModel!.name +
-                                              '\n' +
-                                              controller.departmentModel!.name)
+                                          ? (controller.cityModel!.name ??
+                                              '' +
+                                                  '\n' +
+                                                  controller
+                                                      .departmentModel!.name)
                                           : null ?? '(Selecciona una ciudad)',
                                       style: TypographyStyle.bodyRegularSmall,
                                     ),
