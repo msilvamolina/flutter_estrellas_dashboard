@@ -27,11 +27,11 @@ class CopyCitiesController extends GetxController {
   }
 
   Future<void> copyToFirebase() async {
-    // if (_data.isNotEmpty) {
-    //   for (DepartmentModel element in _data) {
-    //     await _repository.saveDepartmentInFirebase(department: element);
-    //   }
-    // }
+    if (_data.isNotEmpty) {
+      for (CityModel element in _data) {
+        await _repository.saveCityInFirebase(city: element);
+      }
+    }
   }
 
   Future<void> getDataVersion1() async {
