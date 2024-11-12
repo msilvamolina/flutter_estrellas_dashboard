@@ -109,4 +109,20 @@ class SelectCityRepository {
       return left(e.code);
     }
   }
+
+  Future<Either<String, Unit>> saveCityInFirebaseDepartment({
+    required CityModel city,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('departments')
+          .doc(city.departmenId.toString())
+          .collection('cities')
+          .doc(city.id.toString())
+          .set(city.toJson());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 }

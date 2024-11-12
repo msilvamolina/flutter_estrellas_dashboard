@@ -30,6 +30,7 @@ class CopyCitiesController extends GetxController {
     if (_data.isNotEmpty) {
       for (CityModel element in _data) {
         await _repository.saveCityInFirebase(city: element);
+        await _repository.saveCityInFirebaseDepartment(city: element);
       }
     }
   }
