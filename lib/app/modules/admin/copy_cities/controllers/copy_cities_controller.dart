@@ -30,19 +30,19 @@ class CopyCitiesController extends GetxController {
   }
 
   Future<void> copyToFirebase() async {
-    if (_data.isNotEmpty) {
-      mainController.setDropiDialog(false);
-      mainController.showDropiLoader();
+    // if (_data.isNotEmpty) {
+    //   mainController.setDropiDialog(false);
+    //   mainController.showDropiLoader();
 
-      for (CityModel element in _data) {
-        await _repository.saveCityInFirebase(city: element);
-        await _repository.saveCityInFirebaseDepartment(city: element);
-      }
-      Get.back();
-      Get.back();
-      Snackbars.success(
-          '${departmentModel.name} (${departmentModel.dropiId}) Copiados');
-    }
+    //   for (CityModel element in _data) {
+    //     await _repository.saveCityInFirebase(city: element);
+    //     await _repository.saveCityInFirebaseDepartment(city: element);
+    //   }
+    //   Get.back();
+    //   Get.back();
+    //   Snackbars.success(
+    //       '${departmentModel.name} (${departmentModel.dropiId}) Copiados');
+    // }
   }
 
   Future<void> getDataVersion1() async {
