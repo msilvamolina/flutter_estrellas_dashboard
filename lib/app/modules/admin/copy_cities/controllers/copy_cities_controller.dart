@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/components/snackbars/snackbars.dart';
 import 'package:estrellas_dashboard/app/data/models/city/city/city.dart';
 import 'package:estrellas_dashboard/app/data/models/city/department/department.dart';
 import 'package:get/get.dart';
@@ -8,6 +10,7 @@ import '../../../../data/providers/repositories/selects/select_city_repository.d
 class CopyCitiesController extends GetxController {
   final SelectCityRepository _repository = SelectCityRepository();
   final List<CityModel> _data = <CityModel>[];
+  MainController mainController = Get.find<MainController>();
   List<CityModel> get data => _data;
 
   bool _isLoading = true;
@@ -28,10 +31,17 @@ class CopyCitiesController extends GetxController {
 
   Future<void> copyToFirebase() async {
     if (_data.isNotEmpty) {
+      mainController.setDropiDialog(false);
+      mainController.showDropiLoader();
+
       for (CityModel element in _data) {
         await _repository.saveCityInFirebase(city: element);
         await _repository.saveCityInFirebaseDepartment(city: element);
       }
+      Get.back();
+      Get.back();
+      Snackbars.success(
+          '${departmentModel.name} (${departmentModel.dropiId}) Copiados');
     }
   }
 

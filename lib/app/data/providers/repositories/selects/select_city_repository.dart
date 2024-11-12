@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/models/city/city/city.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/product_image/product_image_model.dart';
@@ -99,6 +100,9 @@ class SelectCityRepository {
   Future<Either<String, Unit>> saveCityInFirebase({
     required CityModel city,
   }) async {
+    MainController mainController = Get.find<MainController>();
+    mainController.setDropiMessage('Copiando ${city.name}');
+
     try {
       await _firebaseFirestore
           .collection('cities')
