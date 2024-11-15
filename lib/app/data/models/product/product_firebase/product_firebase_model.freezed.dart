@@ -25,7 +25,8 @@ mixin _$ProductFirebaseModel {
   dynamic get provider => throw _privateConstructorUsedError;
   dynamic get category => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get externalId => throw _privateConstructorUsedError;
+  int? get externalId => throw _privateConstructorUsedError;
+  int? get stock => throw _privateConstructorUsedError;
   String? get usefulId => throw _privateConstructorUsedError;
   String? get videoUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -64,7 +65,8 @@ abstract class $ProductFirebaseModelCopyWith<$Res> {
       dynamic provider,
       dynamic category,
       String? name,
-      String? externalId,
+      int? externalId,
+      int? stock,
       String? usefulId,
       String? videoUrl,
       String? description,
@@ -104,6 +106,7 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
     Object? category = freezed,
     Object? name = freezed,
     Object? externalId = freezed,
+    Object? stock = freezed,
     Object? usefulId = freezed,
     Object? videoUrl = freezed,
     Object? description = freezed,
@@ -141,7 +144,11 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
+      stock: freezed == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int?,
       usefulId: freezed == usefulId
           ? _value.usefulId
           : usefulId // ignore: cast_nullable_to_non_nullable
@@ -223,7 +230,8 @@ abstract class _$$ProductFirebaseModelImplCopyWith<$Res>
       dynamic provider,
       dynamic category,
       String? name,
-      String? externalId,
+      int? externalId,
+      int? stock,
       String? usefulId,
       String? videoUrl,
       String? description,
@@ -260,6 +268,7 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
     Object? category = freezed,
     Object? name = freezed,
     Object? externalId = freezed,
+    Object? stock = freezed,
     Object? usefulId = freezed,
     Object? videoUrl = freezed,
     Object? description = freezed,
@@ -297,7 +306,11 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
+      stock: freezed == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int?,
       usefulId: freezed == usefulId
           ? _value.usefulId
           : usefulId // ignore: cast_nullable_to_non_nullable
@@ -375,6 +388,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
       this.category,
       this.name,
       this.externalId,
+      this.stock,
       this.usefulId,
       this.videoUrl,
       this.description,
@@ -406,7 +420,9 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   @override
   final String? name;
   @override
-  final String? externalId;
+  final int? externalId;
+  @override
+  final int? stock;
   @override
   final String? usefulId;
   @override
@@ -442,7 +458,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
   }
 
   @override
@@ -456,6 +472,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.externalId, externalId) ||
                 other.externalId == externalId) &&
+            (identical(other.stock, stock) || other.stock == stock) &&
             (identical(other.usefulId, usefulId) ||
                 other.usefulId == usefulId) &&
             (identical(other.videoUrl, videoUrl) ||
@@ -493,6 +510,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
         const DeepCollectionEquality().hash(category),
         name,
         externalId,
+        stock,
         usefulId,
         videoUrl,
         description,
@@ -535,7 +553,8 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
       final dynamic provider,
       final dynamic category,
       final String? name,
-      final String? externalId,
+      final int? externalId,
+      final int? stock,
       final String? usefulId,
       final String? videoUrl,
       final String? description,
@@ -567,7 +586,9 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   @override
   String? get name;
   @override
-  String? get externalId;
+  int? get externalId;
+  @override
+  int? get stock;
   @override
   String? get usefulId;
   @override
