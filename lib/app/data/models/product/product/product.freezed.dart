@@ -25,7 +25,7 @@ mixin _$ProductModel {
   ProductProviderModel? get provider => throw _privateConstructorUsedError;
   ProductCategoryModel? get category => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get externalId => throw _privateConstructorUsedError;
+  int? get externalId => throw _privateConstructorUsedError;
   String? get usefulId => throw _privateConstructorUsedError;
   String? get videoUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $ProductModelCopyWith<$Res> {
       ProductProviderModel? provider,
       ProductCategoryModel? category,
       String? name,
-      String? externalId,
+      int? externalId,
       String? usefulId,
       String? videoUrl,
       String? description,
@@ -134,7 +134,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       usefulId: freezed == usefulId
           ? _value.usefulId
           : usefulId // ignore: cast_nullable_to_non_nullable
@@ -232,7 +232,7 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       ProductProviderModel? provider,
       ProductCategoryModel? category,
       String? name,
-      String? externalId,
+      int? externalId,
       String? usefulId,
       String? videoUrl,
       String? description,
@@ -305,7 +305,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       usefulId: freezed == usefulId
           ? _value.usefulId
           : usefulId // ignore: cast_nullable_to_non_nullable
@@ -399,7 +399,7 @@ class _$ProductModelImpl extends _ProductModel {
   @override
   final String? name;
   @override
-  final String? externalId;
+  final int? externalId;
   @override
   final String? usefulId;
   @override
@@ -513,7 +513,7 @@ abstract class _ProductModel extends ProductModel {
       final ProductProviderModel? provider,
       final ProductCategoryModel? category,
       final String? name,
-      final String? externalId,
+      final int? externalId,
       final String? usefulId,
       final String? videoUrl,
       final String? description,
@@ -542,7 +542,7 @@ abstract class _ProductModel extends ProductModel {
   @override
   String? get name;
   @override
-  String? get externalId;
+  int? get externalId;
   @override
   String? get usefulId;
   @override

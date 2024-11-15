@@ -40,6 +40,8 @@ class ProductsRepository {
         return left('Error status code: ${response.statusCode}');
       }
       dynamic json = jsonDecode(response.body);
+
+      log(json.toString());
       List<dynamic> bodyList = json['data']['products'];
 
       if (bodyList.isEmpty) {

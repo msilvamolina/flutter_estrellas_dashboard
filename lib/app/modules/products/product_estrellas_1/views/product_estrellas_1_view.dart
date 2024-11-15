@@ -47,7 +47,8 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
           ),
           TableRowModel(
             label: 'externalId',
-            widget: TableRowText(text: controller.product.externalId ?? ''),
+            widget: TableRowText(
+                text: (controller.product.externalId ?? '').toString()),
           ),
           TableRowModel(
             label: 'usefulId',
