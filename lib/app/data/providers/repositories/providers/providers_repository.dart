@@ -133,10 +133,11 @@ class ProvidersRepository {
       Map<String, dynamic> body = {
         "name": name,
         "phone": phone,
-        "city": '6569e63abcefff5266ac0778',
+        "city": city,
         "address": address,
         "provider": provider
       };
+
       Response response = await services.postWithToken(url: url, body: body);
 
       dynamic json = jsonDecode(response.body);

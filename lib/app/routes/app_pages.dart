@@ -2,16 +2,18 @@ import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
+import '../modules/admin/copy_cities/bindings/copy_cities_binding.dart';
+import '../modules/admin/copy_cities/views/copy_cities_view.dart';
 import '../modules/admin/copy_departments/bindings/copy_departments_binding.dart';
 import '../modules/admin/copy_departments/views/copy_departments_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/admin/copy_cities/bindings/copy_cities_binding.dart';
-import '../modules/admin/copy_cities/views/copy_cities_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/admin/permissions/bindings/permissions_binding.dart';
+import '../modules/admin/permissions/views/permissions_view.dart';
 import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
 import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
@@ -237,6 +239,12 @@ class AppPages {
       name: _Paths.COPY_CITIES,
       page: () => const CopyCitiesView(),
       binding: CopyCitiesBinding(),
+    ),
+    GetPage(
+      name: _Paths.PERMISSIONS,
+      page: () => const PermissionsView(),
+      binding: PermissionsBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

@@ -107,7 +107,7 @@ class CreateWarehouseController extends GetxController {
 
     Either<String, ProviderModel> response = await _repository.createWarehouse(
       name: name,
-      city: _cityModel!.dropiId.toString(),
+      city: _cityModel!.id.toString(),
       address: address,
       phone: phone,
       provider: providerModel.id,

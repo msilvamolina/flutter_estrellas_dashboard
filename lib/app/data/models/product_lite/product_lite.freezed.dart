@@ -23,7 +23,7 @@ mixin _$ProductLiteModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get externalId => throw _privateConstructorUsedError;
+  int? get externalId => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ abstract class $ProductLiteModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: '_id') String id,
       String? name,
-      String? externalId,
+      int? externalId,
       double? price,
       int? points,
       double? suggestedPrice,
@@ -108,7 +108,7 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: '_id') String id,
       String? name,
-      String? externalId,
+      int? externalId,
       double? price,
       int? points,
       double? suggestedPrice,
@@ -216,7 +216,7 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -289,7 +289,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final String? name;
   @override
-  final String? externalId;
+  final int? externalId;
   @override
   final double? price;
   @override
@@ -382,7 +382,7 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   const factory _ProductLiteModel(
       {@JsonKey(name: '_id') required final String id,
       final String? name,
-      final String? externalId,
+      final int? externalId,
       final double? price,
       final int? points,
       final double? suggestedPrice,
@@ -404,7 +404,7 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   @override
   String? get name;
   @override
-  String? get externalId;
+  int? get externalId;
   @override
   double? get price;
   @override

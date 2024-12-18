@@ -92,6 +92,11 @@ class DrawerContent extends StatelessWidget {
           route: Routes.ADMIN,
           children: [
             menuOptionChildren(
+              icon: Icons.verified_user_sharp,
+              title: 'Permisos de usuario',
+              route: Routes.PERMISSIONS,
+            ),
+            menuOptionChildren(
               icon: Icons.http,
               title: 'Copiar Departamentos desde DROPI',
               route: Routes.COPY_DEPARTMENTS,

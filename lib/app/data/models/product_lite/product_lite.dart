@@ -12,7 +12,7 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
   const factory ProductLiteModel({
     @JsonKey(name: '_id') required String id,
     String? name,
-    String? externalId,
+    int? externalId,
     double? price,
     int? points,
     double? suggestedPrice,

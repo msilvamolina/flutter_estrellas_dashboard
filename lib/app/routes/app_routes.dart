@@ -43,6 +43,7 @@ abstract class Routes {
   static const COPY_DEPARTMENTS = _Paths.COPY_DEPARTMENTS;
   static const ADMIN = _Paths.ADMIN;
   static const COPY_CITIES = _Paths.COPY_CITIES;
+  static const PERMISSIONS = _Paths.PERMISSIONS;
 }
 
 abstract class _Paths {
@@ -86,4 +87,5 @@ abstract class _Paths {
   static const COPY_DEPARTMENTS = '/copy-departments';
   static const ADMIN = '/admin';
   static const COPY_CITIES = '/copy-cities';
+  static const PERMISSIONS = '/permissions';
 }

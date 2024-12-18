@@ -11,7 +11,7 @@ _$ProductLiteModelImpl _$$ProductLiteModelImplFromJson(
     _$ProductLiteModelImpl(
       id: json['_id'] as String,
       name: json['name'] as String?,
-      externalId: json['externalId'] as String?,
+      externalId: (json['externalId'] as num?)?.toInt(),
       price: (json['price'] as num?)?.toDouble(),
       points: (json['points'] as num?)?.toInt(),
       suggestedPrice: (json['suggestedPrice'] as num?)?.toDouble(),
