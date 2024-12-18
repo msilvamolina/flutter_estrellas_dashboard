@@ -41,7 +41,7 @@ class DrawerContent extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text('martin@gmail.com'),
+                Text(mainController.userData?.email ?? ''),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
                   onTap: mainController.changeThemeColor,
