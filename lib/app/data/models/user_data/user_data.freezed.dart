@@ -22,11 +22,10 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) {
 mixin _$UserData {
   String get uid => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get createdBy => throw _privateConstructorUsedError;
+  String get fullName => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  String? get createdBy => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
   String? get searchField => throw _privateConstructorUsedError;
   dynamic get reference => throw _privateConstructorUsedError;
   String? get defaultCurrency => throw _privateConstructorUsedError;
@@ -52,11 +51,10 @@ abstract class $UserDataCopyWith<$Res> {
   $Res call(
       {String uid,
       String email,
-      String username,
-      String firstName,
-      String lastName,
-      String createdAt,
-      String createdBy,
+      String fullName,
+      String? createdAt,
+      String? createdBy,
+      String? username,
       String? searchField,
       dynamic reference,
       String? defaultCurrency,
@@ -82,11 +80,10 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   $Res call({
     Object? uid = null,
     Object? email = null,
-    Object? username = null,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? createdAt = null,
-    Object? createdBy = null,
+    Object? fullName = null,
+    Object? createdAt = freezed,
+    Object? createdBy = freezed,
+    Object? username = freezed,
     Object? searchField = freezed,
     Object? reference = freezed,
     Object? defaultCurrency = freezed,
@@ -103,26 +100,22 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdBy: null == createdBy
+              as String?,
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
       searchField: freezed == searchField
           ? _value.searchField
           : searchField // ignore: cast_nullable_to_non_nullable
@@ -162,11 +155,10 @@ abstract class _$$UserDataImplCopyWith<$Res>
   $Res call(
       {String uid,
       String email,
-      String username,
-      String firstName,
-      String lastName,
-      String createdAt,
-      String createdBy,
+      String fullName,
+      String? createdAt,
+      String? createdBy,
+      String? username,
       String? searchField,
       dynamic reference,
       String? defaultCurrency,
@@ -190,11 +182,10 @@ class __$$UserDataImplCopyWithImpl<$Res>
   $Res call({
     Object? uid = null,
     Object? email = null,
-    Object? username = null,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? createdAt = null,
-    Object? createdBy = null,
+    Object? fullName = null,
+    Object? createdAt = freezed,
+    Object? createdBy = freezed,
+    Object? username = freezed,
     Object? searchField = freezed,
     Object? reference = freezed,
     Object? defaultCurrency = freezed,
@@ -211,26 +202,22 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdBy: null == createdBy
+              as String?,
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
       searchField: freezed == searchField
           ? _value.searchField
           : searchField // ignore: cast_nullable_to_non_nullable
@@ -265,11 +252,10 @@ class _$UserDataImpl extends _UserData {
   const _$UserDataImpl(
       {required this.uid,
       required this.email,
-      required this.username,
-      required this.firstName,
-      required this.lastName,
-      required this.createdAt,
-      required this.createdBy,
+      required this.fullName,
+      this.createdAt,
+      this.createdBy,
+      this.username,
       this.searchField,
       this.reference,
       this.defaultCurrency,
@@ -287,15 +273,13 @@ class _$UserDataImpl extends _UserData {
   @override
   final String email;
   @override
-  final String username;
+  final String fullName;
   @override
-  final String firstName;
+  final String? createdAt;
   @override
-  final String lastName;
+  final String? createdBy;
   @override
-  final String createdAt;
-  @override
-  final String createdBy;
+  final String? username;
   @override
   final String? searchField;
   @override
@@ -320,7 +304,7 @@ class _$UserDataImpl extends _UserData {
 
   @override
   String toString() {
-    return 'UserData(uid: $uid, email: $email, username: $username, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, createdBy: $createdBy, searchField: $searchField, reference: $reference, defaultCurrency: $defaultCurrency, currencies: $currencies, isAnonymous: $isAnonymous, updatedAt: $updatedAt)';
+    return 'UserData(uid: $uid, email: $email, fullName: $fullName, createdAt: $createdAt, createdBy: $createdBy, username: $username, searchField: $searchField, reference: $reference, defaultCurrency: $defaultCurrency, currencies: $currencies, isAnonymous: $isAnonymous, updatedAt: $updatedAt)';
   }
 
   @override
@@ -330,16 +314,14 @@ class _$UserDataImpl extends _UserData {
             other is _$UserDataImpl &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.searchField, searchField) ||
                 other.searchField == searchField) &&
             const DeepCollectionEquality().equals(other.reference, reference) &&
@@ -359,11 +341,10 @@ class _$UserDataImpl extends _UserData {
       runtimeType,
       uid,
       email,
-      username,
-      firstName,
-      lastName,
+      fullName,
       createdAt,
       createdBy,
+      username,
       searchField,
       const DeepCollectionEquality().hash(reference),
       defaultCurrency,
@@ -391,11 +372,10 @@ abstract class _UserData extends UserData {
   const factory _UserData(
       {required final String uid,
       required final String email,
-      required final String username,
-      required final String firstName,
-      required final String lastName,
-      required final String createdAt,
-      required final String createdBy,
+      required final String fullName,
+      final String? createdAt,
+      final String? createdBy,
+      final String? username,
       final String? searchField,
       final dynamic reference,
       final String? defaultCurrency,
@@ -412,15 +392,13 @@ abstract class _UserData extends UserData {
   @override
   String get email;
   @override
-  String get username;
+  String get fullName;
   @override
-  String get firstName;
+  String? get createdAt;
   @override
-  String get lastName;
+  String? get createdBy;
   @override
-  String get createdAt;
-  @override
-  String get createdBy;
+  String? get username;
   @override
   String? get searchField;
   @override

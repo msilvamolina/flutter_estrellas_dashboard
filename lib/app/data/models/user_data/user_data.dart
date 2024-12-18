@@ -14,11 +14,10 @@ abstract class UserData implements _$UserData {
   const factory UserData({
     required String uid,
     required String email,
-    required String username,
-    required String firstName,
-    required String lastName,
-    required String createdAt,
-    required String createdBy,
+    required String fullName,
+    String? createdAt,
+    String? createdBy,
+    String? username,
     String? searchField,
     dynamic reference,
     String? defaultCurrency,
@@ -31,13 +30,7 @@ abstract class UserData implements _$UserData {
       _$UserDataFromJson(json);
 
   factory UserData.fromDocument(DocumentSnapshot doc) {
-    UserData data = UserData.fromJson(ModelHelpers.fromDocument(doc.data()!));
-    String searchField = '${data.firstName} ${data.lastName} ${data.username}';
-
-    return data.copyWith(
-      reference: doc.reference,
-      searchField: FriendlyHelpers.friendlySearchField(searchField),
-    );
+    return UserData.fromJson(ModelHelpers.fromDocument(doc.data()!));
   }
 
   Map<String, dynamic> toDocument() => ModelHelpers.toDocument(toJson());
