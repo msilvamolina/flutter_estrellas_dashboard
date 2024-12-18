@@ -142,7 +142,7 @@ class ProductEstrellas1View extends GetView<ProductEstrellas1Controller> {
           ),
           TableRowModel(
             label: 'uploadDate',
-            widget: TableRowDate(date: controller.product.uploadDate ?? ''),
+            widget: TableRowDate(date: controller.product.uploadDate),
           ),
           TableRowModel(
             label: 'description',
