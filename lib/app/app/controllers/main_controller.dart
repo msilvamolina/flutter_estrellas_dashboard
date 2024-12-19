@@ -129,10 +129,9 @@ class MainController extends GetxController {
 
     if (_userStatus == UserStatus.notLogged) {
       Get.offAllNamed(Routes.LOGIN);
-    }
-
-    if (_userStatus == UserStatus.full) {
-      Get.offAllNamed(Routes.HOME);
+    } else {
+      userRepository.signOut();
+      Get.offAllNamed(Routes.LOGIN);
     }
   }
 

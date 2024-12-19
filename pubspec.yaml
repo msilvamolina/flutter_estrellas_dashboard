@@ -50,6 +50,8 @@ dependencies:
   flutter_material_color_picker: ^1.2.0
   timeago: ^3.7.0
   flutter_native_splash: ^2.4.2
+  local_auth: ^2.3.0
+  encrypt: ^5.0.3
 
 dev_dependencies:
   build_runner: ^2.4.13
