@@ -118,8 +118,8 @@ class LoginController extends GetxController {
       String email = await _localStorage.getFaceEmail();
       String password = await _localStorage.getFaceP();
 
-      String _pass = Encrypt.decryptString(password);
-      login(email, _pass);
+      String pass = Encrypt.decryptString(password);
+      login(email, pass);
     }
   }
 
@@ -144,9 +144,9 @@ class LoginController extends GetxController {
         Snackbars.error(failure);
       },
       (_) async {
-        String _pass = Encrypt.encryptString(password);
+        String pass = Encrypt.encryptString(password);
         await _localStorage.setFaceEmail(email);
-        await _localStorage.saveFaceP(_pass);
+        await _localStorage.saveFaceP(pass);
 
         Get.offNamedUntil(Routes.HOME, (route) => false);
       },
