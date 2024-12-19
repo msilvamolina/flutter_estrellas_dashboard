@@ -8,6 +8,8 @@ import '../modules/admin/copy_departments/bindings/copy_departments_binding.dart
 import '../modules/admin/copy_departments/views/copy_departments_view.dart';
 import '../modules/admin/permissions/bindings/permissions_binding.dart';
 import '../modules/admin/permissions/views/permissions_view.dart';
+import '../modules/admin/set_permissions/bindings/set_permissions_binding.dart';
+import '../modules/admin/set_permissions/views/set_permissions_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
@@ -36,6 +38,8 @@ import '../modules/products/product_images/bindings/product_images_binding.dart'
 import '../modules/products/product_images/views/product_images_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
 import '../modules/products/products/views/products_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/providers/create_provider/bindings/create_provider_binding.dart';
 import '../modules/providers/create_provider/views/create_provider_view.dart';
 import '../modules/providers/create_warehouse/bindings/create_warehouse_binding.dart';
@@ -56,8 +60,6 @@ import '../modules/selects/select_provider/bindings/select_provider_binding.dart
 import '../modules/selects/select_provider/views/select_provider_view.dart';
 import '../modules/selects/select_warehouse/bindings/select_warehouse_binding.dart';
 import '../modules/selects/select_warehouse/views/select_warehouse_view.dart';
-import '../modules/admin/set_permissions/bindings/set_permissions_binding.dart';
-import '../modules/admin/set_permissions/views/set_permissions_view.dart';
 import '../modules/test_endpoints/test_get_products/bindings/test_get_products_binding.dart';
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
@@ -252,6 +254,11 @@ class AppPages {
       name: _Paths.SET_PERMISSIONS,
       page: () => const SetPermissionsView(),
       binding: SetPermissionsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

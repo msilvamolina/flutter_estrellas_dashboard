@@ -44,9 +44,9 @@ class DrawerContent extends StatelessWidget {
                 Text(mainController.userData?.email ?? ''),
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  onTap: mainController.changeThemeColor,
-                  leading: Icon(Icons.color_lens),
-                  title: Text('Cambiar tema'),
+                  onTap: () => Get.toNamed(Routes.PROFILE),
+                  leading: Icon(Icons.verified_user),
+                  title: Text('Mi cuenta'),
                   // selected: true,
                 ),
               ],

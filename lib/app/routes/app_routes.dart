@@ -45,6 +45,7 @@ abstract class Routes {
   static const COPY_CITIES = _Paths.COPY_CITIES;
   static const PERMISSIONS = _Paths.PERMISSIONS;
   static const SET_PERMISSIONS = _Paths.SET_PERMISSIONS;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -90,4 +91,5 @@ abstract class _Paths {
   static const COPY_CITIES = '/copy-cities';
   static const PERMISSIONS = '/permissions';
   static const SET_PERMISSIONS = '/set-permissions';
+  static const PROFILE = '/profile';
 }
