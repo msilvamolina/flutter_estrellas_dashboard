@@ -11,9 +11,20 @@ class ProductVariantCombinationsView
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: controller.buildCombinations,
-        child: Icon(Icons.build),
+      floatingActionButton: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: controller.sendVariations,
+            child: Icon(Icons.send),
+          ),
+          SizedBox(height: 16),
+          FloatingActionButton(
+            onPressed: controller.buildCombinations,
+            child: Icon(Icons.build),
+          ),
+        ],
       ),
       appBar: AppBar(
         title: const Text('Combinaciones'),

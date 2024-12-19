@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 
@@ -118,10 +120,87 @@ class ProductVariantCombinationsController extends GetxController {
       productId: product.id,
       stock: 1,
     );
+
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
 
       update(['view']);
     }, (_) async {});
+  }
+
+  void sendVariations() {
+    // Asegúrate de que las listas estén filtradas antes de usar
+    filterLists();
+
+    List<Map<String, dynamic>> attributes = [];
+    List<Map<String, dynamic>> variations = [];
+
+    // Construimos los atributos con comillas explícitas
+    if (colorList.isNotEmpty) {
+      attributes.add({
+        "description": "Color",
+        "values": colorList.map((color) => color.name).toList(),
+      });
+    }
+
+    if (sizeList.isNotEmpty) {
+      attributes.add({
+        "description": "Talla",
+        "values": sizeList.map((size) => size.name).toList(),
+      });
+    }
+
+    // Generamos las combinaciones con comillas explícitas
+    for (var color in colorList) {
+      for (var size in sizeList) {
+        variations.add({
+          "attributes": [color.name, size.name],
+          "cost": product.price,
+          "value": product.suggestedPrice,
+          "stock": 10, // Puedes modificar este valor según lo necesario
+          "points": product.points,
+        });
+      }
+    }
+
+    // Consolida la estructura
+    Map<String, dynamic> payload = {
+      "name": product.name,
+      "price": product.price,
+      "suggestedPrice": product.suggestedPrice,
+      "points": product.points,
+      "attributes": attributes,
+      "variations": variations,
+      // "warehouseID": product.warehouseId, // Ajusta según tu modelo
+    };
+
+    // Imprime el JSON formateado
+    String formattedPayload = formatJson(payload);
+
+  }
+
+  String formatJson(Map<String, dynamic> json) {
+    return json.entries.map((entry) {
+      if (entry.value is List) {
+        return '"${entry.key}": ${_formatList(entry.value)}';
+      } else if (entry.value is String) {
+        return '"${entry.key}": "${entry.value}"';
+      } else {
+        return '"${entry.key}": ${entry.value}';
+      }
+    }).join(", ");
+  }
+
+  String _formatList(List<dynamic> list) {
+    return '[${list.map((item) {
+      if (item is Map) {
+        // Cast explícito a Map<String, dynamic>
+        return '{${formatJson(item.cast<String, dynamic>())}}';
+      } else if (item is String) {
+        return '"$item"';
+      } else {
+        return item.toString();
+      }
+    }).join(", ")}]';
   }
 }

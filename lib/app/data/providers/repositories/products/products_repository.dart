@@ -448,4 +448,53 @@ class ProductsRepository {
       return left(e.code);
     }
   }
+
+  Future<Either<String, Unit>> updateProductVariations({
+    required String name,
+    required String price,
+    required String suggestedPrice,
+    required String points,
+    required String warehouseID,
+    required String provider,
+    required String imagePath,
+  }) async {
+    String url = 'api/products/create';
+    try {
+      Map<String, dynamic> body = {
+        'name': name,
+        'price': price,
+        'suggestedPrice': suggestedPrice,
+        'points': points,
+        'warehouseID': warehouseID,
+        'provider': provider,
+      };
+
+      // StreamedResponse response = await services.postWithFileAndToken(
+      //   url: url,
+      //   fields: body,
+      //   fieldImageName: 'image',
+      //   fieldImagePath: imagePath,
+      // );
+
+      // if (response.statusCode != 200) {
+      //   return left('Error status code: ${response.statusCode}');
+      // }
+
+      // String responseBody =
+      //     await response.stream.transform(utf8.decoder).join();
+
+      // dynamic json = jsonDecode(responseBody);
+      // bool ok = json['ok'] ?? false;
+
+      // if (!ok) {
+      //   return left(json['data']);
+      // }
+
+      // ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
+
+      return right(unit);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
 }
