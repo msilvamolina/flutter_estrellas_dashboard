@@ -12,30 +12,48 @@ class UserAdminCard extends StatelessWidget {
   final AdminUserModel user;
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = Theme.of(context).colorScheme.primaryFixed;
+    Color primaryColor = Theme.of(context).colorScheme.primaryFixedDim;
+    Color permissionsColor = Theme.of(context).colorScheme.primaryFixed;
 
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.SET_PERMISSIONS, arguments: user),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  user.uid,
-                  style: TypographyStyle.bodyBlackLarge
-                      .copyWith(color: primaryColor),
-                ),
-                Text(user.email ?? 'anonymus'),
-                Text(user.claims.toString()),
-              ],
-            ),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                user.uid,
+                style: TypographyStyle.bodyBlackLarge
+                    .copyWith(color: primaryColor),
+              ),
+              Text(user.email ?? 'anonymus'),
+              user.claims != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        textClamis(user.claims),
+                        style: TypographyStyle.bodyRegularSmall.copyWith(
+                            color: permissionsColor,
+                            fontStyle: FontStyle.italic),
+                      ),
+                    )
+                  : SizedBox.shrink(),
+            ],
           ),
         ),
       ),
     );
+  }
+
+  String textClamis(response) {
+    List<dynamic> filteredKeys = response.entries
+        .where((entry) => entry.value == true)
+        .map((entry) => entry.key)
+        .toList();
+    String result = filteredKeys.join(", ");
+
+    return result;
   }
 }

@@ -11,7 +11,7 @@ class SetPermissionsView extends GetView<SetPermissionsController> {
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = Theme.of(context).colorScheme.primaryFixed;
+    Color primaryColor = Theme.of(context).colorScheme.primaryFixedDim;
     return GetBuilder<SetPermissionsController>(
       id: 'view',
       builder: (_) {

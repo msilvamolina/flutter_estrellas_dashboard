@@ -57,7 +57,7 @@ class SetPermissionsController extends GetxController {
       response.fold((failure) {
         Get.snackbar('Error', failure);
       }, (provider) async {
-        Get.back();
+        Get.back(result: 'ok');
         Get.snackbar('Success!', "Los permisos se guardaron correctamente");
       });
     });

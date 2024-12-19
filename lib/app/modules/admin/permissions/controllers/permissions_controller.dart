@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../data/models/admin_user/admin_user_model.dart';
+import '../../../../routes/app_pages.dart';
 import '../../../../services/firebase_functions_services.dart';
 
 class PermissionsController extends GetxController {
@@ -24,6 +25,18 @@ class PermissionsController extends GetxController {
     _loading = false;
     update(['view']);
     super.onInit();
+  }
+
+  Future<void> resetList() async {
+    _loading = true;
+    update(['view']);
+    _listUsers.clear();
+    _filteredUsers.clear();
+
+    _listUsers = await _services.getAllUsers();
+    _filteredUsers = _listUsers;
+    _loading = false;
+    update(['view']);
   }
 
   // Filtro en tiempo real
@@ -51,5 +64,13 @@ class PermissionsController extends GetxController {
     textEditingController.text = '';
     _filteredUsers = _listUsers; // Restablece la lista completa
     update(['view']); // Actualiza la vista
+  }
+
+  Future<void> goToPermissions(user) async {
+    final result = await Get.toNamed(Routes.SET_PERMISSIONS, arguments: user);
+
+    if (result != null) {
+      resetList();
+    }
   }
 }

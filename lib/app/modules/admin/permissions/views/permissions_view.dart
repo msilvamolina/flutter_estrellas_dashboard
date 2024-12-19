@@ -42,8 +42,12 @@ class PermissionsView extends GetView<PermissionsController> {
               ? ListView.builder(
                   itemCount: controller.filteredUsers.length,
                   itemBuilder: (context, index) {
-                    return UserAdminCard(
-                      user: controller.filteredUsers[index],
+                    return GestureDetector(
+                      onTap: () => controller
+                          .goToPermissions(controller.filteredUsers[index]),
+                      child: UserAdminCard(
+                        user: controller.filteredUsers[index],
+                      ),
                     );
                   },
                 )
