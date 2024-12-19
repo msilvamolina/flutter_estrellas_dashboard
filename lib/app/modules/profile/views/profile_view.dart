@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../app/controllers/main_controller.dart';
+import '../../../services/user_permissions.dart';
 import '../../../themes/styles/typography.dart';
 import '../controllers/profile_controller.dart';
 
@@ -12,12 +13,14 @@ class ProfileView extends GetView<ProfileController> {
     return GetBuilder<MainController>(
       builder: (mainController) {
         return Scaffold(
+          appBar: AppBar(),
           body: SafeArea(
             child: SingleChildScrollView(
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -30,11 +33,11 @@ class ProfileView extends GetView<ProfileController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Harry Hernandez',
+                                'Hola Admin!',
                                 style: TypographyStyle.h3Mobile,
                               ),
                               Text(
-                                '@harryhernandez876',
+                                '@martin',
                               )
                             ],
                           ),
@@ -48,36 +51,7 @@ class ProfileView extends GetView<ProfileController> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 26),
-                    Card(
-                      child: Column(
-                        children: [
-                          ListTile(
-                            onTap: () {},
-                            leading: Icon(Icons.favorite),
-                            title: Text(
-                              'Invite friends',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Card(
-                      child: Column(
-                        children: [
-                          ListTile(
-                            onTap: () {},
-                            leading: Icon(Icons.help_rounded),
-                            title: Text(
-                              'Help',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     Card(
                       child: Column(
                         children: [
@@ -97,7 +71,7 @@ class ProfileView extends GetView<ProfileController> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     Card(
                       child: Column(
                         children: [
@@ -112,115 +86,51 @@ class ProfileView extends GetView<ProfileController> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
-                    Card(
-                      child: Column(
-                        children: [
-                          ListTile(
-                            onTap: () {},
-                            title: Text(
-                              'Account details',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                            trailing: Text(
-                              'See all',
-                              style: TypographyStyle.bodyRegularMedium,
-                            ),
-                          ),
-                          ListTile(
-                            title: Text(
-                              'Name',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                            trailing: Text(
-                              'Personal.SGD',
-                              style: TypographyStyle.bodyRegularMedium,
-                            ),
-                          ),
-                          ListTile(
-                            title: Text(
-                              'Account',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.copy,
-                                  size: 12,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  '876424432432422',
-                                  style: TypographyStyle.bodyRegularMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                          ListTile(
-                            title: Text(
-                              'Bank name',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.copy,
-                                  size: 12,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  'DBS Bank Ltd.',
-                                  style: TypographyStyle.bodyRegularMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     const SizedBox(height: 16),
                     Card(
                       child: Column(
                         children: [
                           ListTile(
-                            onTap: () {},
-                            leading: Icon(Icons.diamond_rounded),
+                            onTap: mainController.changeThemeColor,
                             title: Text(
-                              'Plan',
+                              'Cambiar de tema',
                               style: TypographyStyle.bodyBlackMedium,
                             ),
-                            subtitle: Text(
-                              'Gold',
-                              style: TypographyStyle.bodyRegularSmall,
-                            ),
-                          ),
-                          ListTile(
-                            onTap: () {},
-                            leading: Icon(Icons.person),
-                            title: Text(
-                              'Account',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                          ),
-                          ListTile(
-                            onTap: () {},
-                            leading: Icon(Icons.square_rounded),
-                            title: Text(
-                              'Spending Categories',
-                              style: TypographyStyle.bodyBlackMedium,
-                            ),
-                          ),
-                          ListTile(
-                            onTap: () {},
-                            leading: Icon(Icons.security_rounded),
-                            title: Text(
-                              'Security & privacy',
-                              style: TypographyStyle.bodyBlackMedium,
+                            trailing: Text(
+                              'Cambiar',
+                              style: TypographyStyle.bodyRegularMedium,
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(height: 36),
+                    Text(
+                      'Permisos que tienes:', // Convierte el nombre del enum en texto
+                      style: TypographyStyle.bodyBlackLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    Card(
+                      child: Column(
+                        children: Permissions.values.map((permission) {
+                          return SwitchListTile(
+                            value: true,
+                            onChanged: (_) {},
+                            title: Row(
+                              children: [
+                                Icon(permissionIcons[permission] ?? Icons.help),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  permission
+                                      .name, // Convierte el nombre del enum en texto
+                                  style: TypographyStyle.bodyBlackMedium,
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
                     const SizedBox(height: 16),

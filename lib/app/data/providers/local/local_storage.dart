@@ -10,8 +10,8 @@ class LocalStorage {
   static const faceidPkey = "faceidPkey";
 
   Future<void> cleanAll() async {
-    await _getStorage.remove(USERKEY);
-    await _getStorage.erase();
+    // await _getStorage.remove(USERKEY);
+    // await _getStorage.erase();
   }
 
   Future<bool> getWelcome() async {

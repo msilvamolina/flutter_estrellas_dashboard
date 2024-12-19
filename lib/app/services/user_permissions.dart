@@ -1,4 +1,5 @@
 import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 enum Permissions {
@@ -15,6 +16,21 @@ enum Permissions {
   createUser,
   setUserPermission,
 }
+
+final Map<Permissions, IconData> permissionIcons = {
+  Permissions.godMode: Icons.star,
+  Permissions.superAdmin: Icons.shield,
+  Permissions.createProduct: Icons.add_circle,
+  Permissions.editProduct: Icons.edit,
+  Permissions.createVideo: Icons.video_call,
+  Permissions.editVideo: Icons.edit_attributes,
+  Permissions.createWarehouse: Icons.warehouse,
+  Permissions.editWarehouse: Icons.edit_location,
+  Permissions.createProvider: Icons.person_add,
+  Permissions.editProdiver: Icons.person_pin,
+  Permissions.createUser: Icons.person_add_alt_1,
+  Permissions.setUserPermission: Icons.security,
+};
 
 Future<bool> checkUserPermission(Permissions name) async {
   LocalStorage localStorage = Get.find<LocalStorage>();

@@ -76,6 +76,7 @@ class MainController extends GetxController {
   @override
   void onReady() async {
     checkTheme();
+    _checkBiometrics();
 
     checkUser();
     super.onReady();
@@ -83,6 +84,8 @@ class MainController extends GetxController {
 
   Future<void> changeFaceId() async {
     if (_canCheckBiometrics ?? false) {
+      print('holis');
+
       _faceIdauthenticate();
     }
   }
