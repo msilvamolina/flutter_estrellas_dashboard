@@ -45,7 +45,7 @@ class SetPermissionsController extends GetxController {
     update(['view']);
   }
 
-  Future<void> saveNewOrder() async {
+  Future<void> savePermissions() async {
     _buttonSaveLoading = true;
     update(['view']);
     Either<String, Unit> response =

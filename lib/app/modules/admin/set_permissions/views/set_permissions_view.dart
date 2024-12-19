@@ -29,7 +29,7 @@ class SetPermissionsView extends GetView<SetPermissionsController> {
               child: SizedBox(
                 height: 42,
                 child: LoadingButton(
-                  onPressed: controller.saveNewOrder,
+                  onPressed: controller.savePermissions,
                   label: 'Guardar permisos',
                   isLoading: controller.buttonSaveLoading,
                 ),

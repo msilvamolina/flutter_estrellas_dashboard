@@ -19,7 +19,6 @@ class FirebaseFunctionsService {
         throw Exception('users empty');
       }
 
-      log(users.toString());
       List<AdminUserModel> list =
           users.map((dynamic val) => AdminUserModel.fromJson(val)).toList();
 
@@ -37,14 +36,20 @@ class FirebaseFunctionsService {
     String userUID,
     dynamic permissions,
   ) async {
-    HttpsCallable callable = _functions.httpsCallable('setUserPermission');
+    final HttpsCallable callable =
+        _functions.httpsCallable('setUserPermission');
     try {
-      await callable(<dynamic>[userUID, permissions]);
+      await callable.call({
+        'userId': userUID,
+        'permissions': permissions,
+      });
 
-      return right(unit);
+      return right(unit); // Devuelve éxito si todo va bien
     } on FirebaseFunctionsException catch (e) {
+      log('FirebaseFunctionsException: ${e.message}'); // Loguea el error para depuración
       return left(e.message ?? 'FirebaseFunctionsException');
     } on Exception catch (e) {
+      log('General Exception: ${e.toString()}'); // Loguea errores genéricos
       return left(e.toString());
     }
   }
