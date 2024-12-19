@@ -10,14 +10,21 @@ class PermissionsView extends GetView<PermissionsController> {
   const PermissionsView({super.key});
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      maxWidth: 900,
-      mainCurrentRoute: Routes.ADMIN,
-      currentRoute: Routes.PERMISSIONS,
-      appBarTitle: 'Permisos de usuario',
-      child: Container(
-        child: Text('holis'),
-      ),
+    return GetBuilder<PermissionsController>(
+      id: 'view',
+      builder: (_) {
+        return MainLayout(
+          maxWidth: 900,
+          mainCurrentRoute: Routes.ADMIN,
+          currentRoute: Routes.PERMISSIONS,
+          appBarTitle: 'Permisos de usuario',
+          child: SingleChildScrollView(
+            child: Container(
+              child: Text(controller.listUsers.toString()),
+            ),
+          ),
+        );
+      },
     );
   }
 }
