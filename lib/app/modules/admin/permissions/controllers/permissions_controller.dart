@@ -32,7 +32,7 @@ class PermissionsController extends GetxController {
       _filteredUsers = _listUsers.where((user) {
         final email = user.email?.toLowerCase() ?? '';
         final uid = user.uid.toLowerCase();
-        final claims = user.customClaims.toString().toLowerCase();
+        final claims = user.claims.toString().toLowerCase();
         // Verifica si la consulta coincide con uid, email o permisos
         return uid.contains(lowerQuery) ||
             email.contains(lowerQuery) ||

@@ -10,6 +10,8 @@ class UserAdminCard extends StatelessWidget {
   final AdminUserModel user;
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).colorScheme.primaryFixed;
+
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Card(
@@ -20,10 +22,11 @@ class UserAdminCard extends StatelessWidget {
             children: [
               Text(
                 user.uid,
-                style: TypographyStyle.bodyBlackLarge,
+                style: TypographyStyle.bodyBlackLarge
+                    .copyWith(color: primaryColor),
               ),
               Text(user.email ?? 'anonymus'),
-              Text(user.customClaims ?? ''),
+              Text(user.claims.toString()),
             ],
           ),
         ),

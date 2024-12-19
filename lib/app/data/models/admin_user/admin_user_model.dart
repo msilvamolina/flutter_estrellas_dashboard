@@ -1,21 +1,21 @@
 class AdminUserModel {
   AdminUserModel({
     required this.uid,
-    required this.customClaims,
+    required this.claims,
     this.email,
   });
 
   factory AdminUserModel.fromJson(Map<dynamic, dynamic> json) => AdminUserModel(
         uid: json['uid'],
         email: json['email'],
-        customClaims: json['customClaims'],
+        claims: json['claims'],
       );
 
   String uid;
   String? email;
-  dynamic customClaims;
+  dynamic claims;
 
   @override
   String toString() =>
-      'AdminUserModel(uid: $uid, email: $email, customClaims: $customClaims)';
+      'AdminUserModel(uid: $uid, email: $email, claims: $claims)';
 }

@@ -19,6 +19,7 @@ class FirebaseFunctionsService {
         throw Exception('users empty');
       }
 
+      log(users.toString());
       List<AdminUserModel> list =
           users.map((dynamic val) => AdminUserModel.fromJson(val)).toList();
 
