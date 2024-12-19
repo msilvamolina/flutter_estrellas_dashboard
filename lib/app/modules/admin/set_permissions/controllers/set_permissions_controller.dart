@@ -1,12 +1,15 @@
 import 'dart:collection';
 
+import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/admin_user/admin_user_model.dart';
 import 'package:get/get.dart';
 
+import '../../../../services/firebase_functions_services.dart';
 import '../../../../services/user_permissions.dart';
 
 class SetPermissionsController extends GetxController {
   late AdminUserModel user;
+  final FirebaseFunctionsService _services = FirebaseFunctionsService();
 
   final List<String> _listPermissions = <String>[];
   List<String> get listPermissions => _listPermissions;
@@ -43,17 +46,20 @@ class SetPermissionsController extends GetxController {
   }
 
   Future<void> saveNewOrder() async {
-    // _popupService.showPopup(popup: triiLoader, context: Amz.context());
-    // Either<String, Unit> result =
-    //     await _services.setUserClaims(user.uid, _mapPermissions);
-    // _popupService.closePopup();
-    // Future<void>.delayed(Duration(milliseconds: 100), () {
-    //   result.fold(
-    //     Amz.errorToast,
-    //     (_) => Amz.errorToast(
-    //       'Los permisos se guardaron correctamente',
-    //     ),
-    //   );
-    // });
+    _buttonSaveLoading = true;
+    update(['view']);
+    Either<String, Unit> response =
+        await _services.setUserClaims(user.uid, _mapPermissions);
+
+    _buttonSaveLoading = false;
+    update(['view']);
+    Future<void>.delayed(Duration(milliseconds: 100), () {
+      response.fold((failure) {
+        Get.snackbar('Error', failure);
+      }, (provider) async {
+        Get.back();
+        Get.snackbar('Success!', "Los permisos se guardaron correctamente");
+      });
+    });
   }
 }
