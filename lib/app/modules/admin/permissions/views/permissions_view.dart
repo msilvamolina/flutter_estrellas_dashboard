@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/permissions_controller.dart';
+import '../widgets/user_admin_card.dart';
 
 class PermissionsView extends GetView<PermissionsController> {
   const PermissionsView({super.key});
@@ -18,11 +19,16 @@ class PermissionsView extends GetView<PermissionsController> {
           mainCurrentRoute: Routes.ADMIN,
           currentRoute: Routes.PERMISSIONS,
           appBarTitle: 'Permisos de usuario',
-          child: SingleChildScrollView(
-            child: Container(
-              child: Text(controller.listUsers.toString()),
-            ),
-          ),
+          child: !controller.loading
+              ? ListView.builder(
+                  itemCount: controller.listUsers.length,
+                  itemBuilder: (context, index) {
+                    return UserAdminCard(
+                      user: controller.listUsers[index],
+                    );
+                  },
+                )
+              : Center(child: CircularProgressIndicator()),
         );
       },
     );

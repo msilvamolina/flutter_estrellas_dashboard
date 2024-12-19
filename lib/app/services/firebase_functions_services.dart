@@ -13,10 +13,7 @@ class FirebaseFunctionsService {
     try {
       HttpsCallableResult<dynamic> response = await callable.call();
 
-      if (response.data['users'] == null) {
-        throw Exception('users null');
-      }
-      List<dynamic> users = response.data['users'] as List<dynamic>;
+      List<dynamic> users = response.data as List<dynamic>;
 
       if (users.isEmpty) {
         throw Exception('users empty');

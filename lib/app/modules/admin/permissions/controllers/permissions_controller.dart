@@ -19,7 +19,7 @@ class PermissionsController extends GetxController {
   bool get loading => _loading;
   @override
   Future<void> onInit() async {
-    _listUsers = await getAllUsers();
+    _listUsers = await _services.getAllUsers();
     _loading = false;
     update(['view']);
     super.onInit();
@@ -31,43 +31,43 @@ class PermissionsController extends GetxController {
     super.onReady();
   }
 
-  Future<dynamic> getAllUsers() async {
-    final functions = FirebaseFunctions.instance;
+  // Future<dynamic> getAllUsers() async {
+  //   final functions = FirebaseFunctions.instance;
 
-    // Configura la región si tus funciones están en una región específica
-    // final functions = FirebaseFunctions.instanceFor(region: 'us-central1');
+  //   // Configura la región si tus funciones están en una región específica
+  //   // final functions = FirebaseFunctions.instanceFor(region: 'us-central1');
 
-    // Usa el emulador solo si estás en desarrollo
-    // functions.useFunctionsEmulator('127.0.0.1', 5001);
+  //   // Usa el emulador solo si estás en desarrollo
+  //   // functions.useFunctionsEmulator('127.0.0.1', 5001);
 
-    // Llama a la función `getUsers`
-    final HttpsCallable callable = functions.httpsCallable('getUsers');
-    try {
-      HttpsCallableResult<dynamic> response = await callable.call();
+  //   // Llama a la función `getUsers`
+  //   final HttpsCallable callable = functions.httpsCallable('getUsers');
+  //   try {
+  //     HttpsCallableResult<dynamic> response = await callable.call();
 
-      // Log de depuración para verificar la respuesta
-      log('Response data: ${response.data}');
+  //     // Log de depuración para verificar la respuesta
+  //     log('Response data: ${response.data}');
 
-      // Verifica si la respuesta contiene los usuarios
-      if (response.data == null || !(response.data is List)) {
-        throw Exception('Response does not contain a valid users list');
-      }
+  //     // Verifica si la respuesta contiene los usuarios
+  //     if (response.data == null || !(response.data is List)) {
+  //       throw Exception('Response does not contain a valid users list');
+  //     }
 
-      // Transforma los usuarios a tu modelo si es necesario
-      final List<dynamic> users = response.data as List<dynamic>;
+  //     // Transforma los usuarios a tu modelo si es necesario
+  //     final List<dynamic> users = response.data as List<dynamic>;
 
-      // Aquí puedes mapear los usuarios a tu modelo, si tienes uno
-      // final List<AdminUserModel> userList = users.map((user) => AdminUserModel.fromJson(user)).toList();
+  //     // Aquí puedes mapear los usuarios a tu modelo, si tienes uno
+  //     // final List<AdminUserModel> userList = users.map((user) => AdminUserModel.fromJson(user)).toList();
 
-      return users;
-    } on FirebaseFunctionsException catch (e) {
-      log('FirebaseFunctionsException: ${e.code} - ${e.message}');
-      rethrow;
-    } catch (e) {
-      log('General Exception: $e');
-      rethrow;
-    }
-  }
+  //     return users;
+  //   } on FirebaseFunctionsException catch (e) {
+  //     log('FirebaseFunctionsException: ${e.code} - ${e.message}');
+  //     rethrow;
+  //   } catch (e) {
+  //     log('General Exception: $e');
+  //     rethrow;
+  //   }
+  // }
 
   Future<void> callSetUserPermission() async {
     // Inicializa Firebase si no lo has hecho ya
