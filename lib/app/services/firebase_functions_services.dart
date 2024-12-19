@@ -8,7 +8,7 @@ import '../data/models/admin_user/admin_user_model.dart';
 class FirebaseFunctionsService {
   final FirebaseFunctions _functions = FirebaseFunctions.instance;
 
-  Future<List<AdminUserModel>?> getAllUsers() async {
+  Future<List<AdminUserModel>> getAllUsers() async {
     HttpsCallable callable = _functions.httpsCallable('getUsers');
     try {
       HttpsCallableResult<dynamic> response = await callable.call();

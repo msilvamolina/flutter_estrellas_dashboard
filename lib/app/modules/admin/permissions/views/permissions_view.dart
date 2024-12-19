@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
@@ -9,6 +8,7 @@ import '../widgets/user_admin_card.dart';
 
 class PermissionsView extends GetView<PermissionsController> {
   const PermissionsView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<PermissionsController>(
@@ -19,16 +19,34 @@ class PermissionsView extends GetView<PermissionsController> {
           mainCurrentRoute: Routes.ADMIN,
           currentRoute: Routes.PERMISSIONS,
           appBarTitle: 'Permisos de usuario',
+          appBarWidget: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: TextField(
+              onChanged: controller.filterUsers, // Filtro en tiempo real
+              decoration: InputDecoration(
+                hintText: 'Buscar por uid, email o permisos...',
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.cancel),
+                  onPressed: controller.resetFilter, // Reinicia el filtro
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                filled: true,
+              ),
+            ),
+          ),
           child: !controller.loading
               ? ListView.builder(
-                  itemCount: controller.listUsers.length,
+                  itemCount: controller.filteredUsers.length,
                   itemBuilder: (context, index) {
                     return UserAdminCard(
-                      user: controller.listUsers[index],
+                      user: controller.filteredUsers[index],
                     );
                   },
                 )
-              : Center(child: CircularProgressIndicator()),
+              : const Center(child: CircularProgressIndicator()),
         );
       },
     );
