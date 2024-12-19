@@ -32,6 +32,7 @@ mixin _$ProductLiteModel {
   bool? get showInFeed => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
+  String? get warehouseID => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
 
@@ -63,6 +64,7 @@ abstract class $ProductLiteModelCopyWith<$Res> {
       bool? showInFeed,
       bool? active,
       String? thumbnail,
+      String? warehouseID,
       String? createdAt,
       String? updatedAt});
 }
@@ -93,6 +95,7 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? showInFeed = freezed,
     Object? active = freezed,
     Object? thumbnail = freezed,
+    Object? warehouseID = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -141,6 +144,10 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      warehouseID: freezed == warehouseID
+          ? _value.warehouseID
+          : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -173,6 +180,7 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
       bool? showInFeed,
       bool? active,
       String? thumbnail,
+      String? warehouseID,
       String? createdAt,
       String? updatedAt});
 }
@@ -201,6 +209,7 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? showInFeed = freezed,
     Object? active = freezed,
     Object? thumbnail = freezed,
+    Object? warehouseID = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -249,6 +258,10 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      warehouseID: freezed == warehouseID
+          ? _value.warehouseID
+          : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -276,6 +289,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.showInFeed,
       this.active,
       this.thumbnail,
+      this.warehouseID,
       this.createdAt,
       this.updatedAt})
       : super._();
@@ -307,13 +321,15 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final String? thumbnail;
   @override
+  final String? warehouseID;
+  @override
   final String? createdAt;
   @override
   final String? updatedAt;
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -337,6 +353,8 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
             (identical(other.active, active) || other.active == active) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.warehouseID, warehouseID) ||
+                other.warehouseID == warehouseID) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -358,6 +376,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       showInFeed,
       active,
       thumbnail,
+      warehouseID,
       createdAt,
       updatedAt);
 
@@ -391,6 +410,7 @@ abstract class _ProductLiteModel extends ProductLiteModel {
       final bool? showInFeed,
       final bool? active,
       final String? thumbnail,
+      final String? warehouseID,
       final String? createdAt,
       final String? updatedAt}) = _$ProductLiteModelImpl;
   const _ProductLiteModel._() : super._();
@@ -421,6 +441,8 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   bool? get active;
   @override
   String? get thumbnail;
+  @override
+  String? get warehouseID;
   @override
   String? get createdAt;
   @override

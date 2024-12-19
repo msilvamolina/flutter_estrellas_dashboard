@@ -127,7 +127,7 @@ class ProductsRepository {
 
       ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
 
-      return right(productModel);
+      return right(productModel.copyWith(warehouseID: warehouseID));
     } catch (e) {
       return left(e.toString());
     }

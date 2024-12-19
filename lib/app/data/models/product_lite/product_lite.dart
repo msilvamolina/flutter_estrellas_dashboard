@@ -21,6 +21,7 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
     bool? showInFeed,
     bool? active,
     String? thumbnail,
+    String? warehouseID,
     String? createdAt,
     String? updatedAt,
   }) = _ProductLiteModel;
