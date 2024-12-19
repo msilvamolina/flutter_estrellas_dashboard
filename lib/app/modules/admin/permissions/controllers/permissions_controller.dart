@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../data/models/admin_user/admin_user_model.dart';
 import '../../../../services/firebase_functions_services.dart';
@@ -12,8 +13,11 @@ class PermissionsController extends GetxController {
   bool _loading = true;
   bool get loading => _loading;
 
+  late TextEditingController textEditingController;
+
   @override
   Future<void> onInit() async {
+    textEditingController = TextEditingController();
     // Obtiene directamente la lista de AdminUserModel
     _listUsers = await _services.getAllUsers();
     _filteredUsers = _listUsers; // Inicialmente, muestra toda la lista
@@ -44,6 +48,7 @@ class PermissionsController extends GetxController {
 
   // Reinicia el filtro
   void resetFilter() {
+    textEditingController.text = '';
     _filteredUsers = _listUsers; // Restablece la lista completa
     update(['view']); // Actualiza la vista
   }

@@ -22,6 +22,7 @@ class PermissionsView extends GetView<PermissionsController> {
           appBarWidget: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextField(
+              controller: controller.textEditingController,
               onChanged: controller.filterUsers, // Filtro en tiempo real
               decoration: InputDecoration(
                 hintText: 'Buscar por uid, email o permisos...',
