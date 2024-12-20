@@ -16,6 +16,8 @@ import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/new_variations/bindings/new_variations_binding.dart';
+import '../modules/new_variations/views/new_variations_view.dart';
 import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
 import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
@@ -259,6 +261,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_VARIATIONS,
+      page: () => const NewVariationsView(),
+      binding: NewVariationsBinding(),
     ),
   ];
 }

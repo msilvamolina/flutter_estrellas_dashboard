@@ -46,6 +46,7 @@ abstract class Routes {
   static const PERMISSIONS = _Paths.PERMISSIONS;
   static const SET_PERMISSIONS = _Paths.SET_PERMISSIONS;
   static const PROFILE = _Paths.PROFILE;
+  static const NEW_VARIATIONS = _Paths.NEW_VARIATIONS;
 }
 
 abstract class _Paths {
@@ -92,4 +93,5 @@ abstract class _Paths {
   static const PERMISSIONS = '/permissions';
   static const SET_PERMISSIONS = '/set-permissions';
   static const PROFILE = '/profile';
+  static const NEW_VARIATIONS = '/new-variations';
 }

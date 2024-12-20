@@ -34,7 +34,7 @@ class ProductEstrellas2View extends GetView<ProductEstrellas2Controller> {
           FloatingActionButton(
             child: const Icon(Icons.layers),
             onPressed: () => Get.toNamed(
-              Routes.PRODUCT_VARIANTS,
+              Routes.NEW_VARIATIONS,
               arguments: controller.product,
             ),
           ),
