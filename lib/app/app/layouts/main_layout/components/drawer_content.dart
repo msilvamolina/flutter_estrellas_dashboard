@@ -1,5 +1,6 @@
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/routes/app_pages.dart';
+import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -71,40 +72,42 @@ class DrawerContent extends StatelessWidget {
           route: Routes.PRODUCTS,
           backRoute: Routes.PRODUCT_ESTRELLAS_1,
         ),
-        menuOptionExpansion(
-          title: 'Test Endpoints',
-          route: Routes.TEST_ENDPOINTS,
-          children: [
-            menuOptionChildren(
-              icon: Icons.http,
-              title: 'Login App Dropi',
-              route: Routes.TEST_LOGIN_APP_DROPI,
-            ),
-            menuOptionChildren(
-              icon: Icons.http,
-              title: 'Get products',
-              route: Routes.TEST_GET_PRODUCTS,
-            ),
-          ],
-        ),
-        menuOptionExpansion(
-          title: 'Admin',
-          route: Routes.ADMIN,
-          children: [
-            menuOptionChildren(
-              icon: Icons.verified_user_sharp,
-              title: 'Permisos de usuario',
-              route: Routes.PERMISSIONS,
-            ),
-            menuOptionChildren(
-              icon: Icons.http,
-              title: 'Copiar Departamentos desde DROPI',
-              route: Routes.COPY_DEPARTMENTS,
-            ),
-          ],
-        ),
-        const SizedBox(height: 400),
+        if (mainController.checkUserPermission(Permissions.superAdmin))
+          menuOptionExpansion(
+            title: 'Test Endpoints',
+            route: Routes.TEST_ENDPOINTS,
+            children: [
+              menuOptionChildren(
+                icon: Icons.http,
+                title: 'Login App Dropi',
+                route: Routes.TEST_LOGIN_APP_DROPI,
+              ),
+              menuOptionChildren(
+                icon: Icons.http,
+                title: 'Get products',
+                route: Routes.TEST_GET_PRODUCTS,
+              ),
+            ],
+          ),
+        if (mainController.checkUserPermission(Permissions.superAdmin))
+          menuOptionExpansion(
+            title: 'Admin',
+            route: Routes.ADMIN,
+            children: [
+              menuOptionChildren(
+                icon: Icons.verified_user_sharp,
+                title: 'Permisos de usuario',
+                route: Routes.PERMISSIONS,
+              ),
+              menuOptionChildren(
+                icon: Icons.http,
+                title: 'Copiar Departamentos desde DROPI',
+                route: Routes.COPY_DEPARTMENTS,
+              ),
+            ],
+          ),
         ListTile(
+          leading: Icon(Icons.exit_to_app),
           title: const Text('Salir'),
           onTap: mainController.signOut,
         ),

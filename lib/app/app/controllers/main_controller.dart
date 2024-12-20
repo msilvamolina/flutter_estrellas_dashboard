@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:estrellas_dashboard/app/components/dialogs/loader_dialog.dart';
@@ -80,8 +81,8 @@ class MainController extends GetxController {
     _userPermissions.addAll(permissions);
   }
 
-  bool checkUserPermission(String check) {
-    return _userPermissions.contains(check);
+  bool checkUserPermission(Permissions check) {
+    return _userPermissions.contains(check.name);
   }
 
   @override

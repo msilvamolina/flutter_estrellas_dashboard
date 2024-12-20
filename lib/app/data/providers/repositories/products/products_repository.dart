@@ -111,15 +111,16 @@ class ProductsRepository {
         fieldImagePath: imagePath,
       );
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
-
       String responseBody =
           await response.stream.transform(utf8.decoder).join();
 
       dynamic json = jsonDecode(responseBody);
       bool ok = json['ok'] ?? false;
+
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
 
       if (!ok) {
         return left(json['data']);
