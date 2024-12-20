@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
 
-class NewVariationsController extends GetxController {
+class NewVariationsPickersController extends GetxController {
   late ProductFirebaseModel product;
 
   @override
