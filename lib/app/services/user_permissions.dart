@@ -7,6 +7,7 @@ enum Permissions {
   superAdmin,
   createProduct,
   editProduct,
+  productsV1V2,
   createVideo,
   editVideo,
   createWarehouse,

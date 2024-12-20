@@ -42,6 +42,7 @@ import '../modules/products/product_images/bindings/product_images_binding.dart'
 import '../modules/products/product_images/views/product_images_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
 import '../modules/products/products/views/products_view.dart';
+import '../modules/products/products/views/products_view2.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/providers/create_provider/bindings/create_provider_binding.dart';

@@ -268,7 +268,38 @@ class MainController extends GetxController {
     return isThemeModeDark ? Icons.light_mode : Icons.dark_mode;
   }
 
-  void signOut() {
+  Future<void> signOut() async {
+    final result = await showDialog<bool>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirmación'),
+          content: const Text('¿Estás seguro de que deseas salir?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false); // Cancelar
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // Confirmar
+              },
+              child: const Text('Salir'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (result == true) {
+      // Acción a realizar si el usuario confirma salir
+      signOutApp();
+    }
+  }
+
+  void signOutApp() {
     String theme = ThemeService.readSavedTheme();
     _userStatus = UserStatus.loading;
     update(['login']);

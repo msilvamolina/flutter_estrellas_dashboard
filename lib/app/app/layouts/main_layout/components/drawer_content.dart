@@ -106,6 +106,7 @@ class DrawerContent extends StatelessWidget {
               ),
             ],
           ),
+        Divider(),
         ListTile(
           leading: Icon(Icons.exit_to_app),
           title: const Text('Salir'),
