@@ -174,7 +174,7 @@ class LoginController extends GetxController {
         }
       });
     }
-    _localStorage.setAdminPermissions(_list);
+    mainController.onChangedUserPermissions(_list);
   }
 
   Future<Map<dynamic, dynamic>?> currentUserClaims() async {

@@ -114,7 +114,8 @@ class ProfileView extends GetView<ProfileController> {
                       child: Column(
                         children: Permissions.values.map((permission) {
                           return SwitchListTile(
-                            value: true,
+                            value: mainController
+                                .checkUserPermission(permission.name),
                             onChanged: (_) {},
                             title: Row(
                               children: [

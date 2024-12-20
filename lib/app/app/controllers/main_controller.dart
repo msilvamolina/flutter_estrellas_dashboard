@@ -65,12 +65,23 @@ class MainController extends GetxController {
   final LocalAuthentication auth = LocalAuthentication();
   bool? _canCheckBiometrics;
 
+  List<String> _userPermissions = [];
+  List<String> get userPermissions => _userPermissions;
+
   @override
   Future<void> onInit() async {
     _isWelcome = await localStorage.getWelcome();
     _isFaceIdEnabled = await localStorage.getFaceIdEnabled();
-
     super.onInit();
+  }
+
+  void onChangedUserPermissions(List<String> permissions) {
+    _userPermissions.clear();
+    _userPermissions.addAll(permissions);
+  }
+
+  bool checkUserPermission(String check) {
+    return _userPermissions.contains(check);
   }
 
   @override

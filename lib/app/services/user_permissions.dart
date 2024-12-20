@@ -12,7 +12,7 @@ enum Permissions {
   createWarehouse,
   editWarehouse,
   createProvider,
-  editProdiver,
+  editProvider,
   createUser,
   setUserPermission,
 }
@@ -27,7 +27,7 @@ final Map<Permissions, IconData> permissionIcons = {
   Permissions.createWarehouse: Icons.warehouse,
   Permissions.editWarehouse: Icons.edit_location,
   Permissions.createProvider: Icons.person_add,
-  Permissions.editProdiver: Icons.person_pin,
+  Permissions.editProvider: Icons.person_pin,
   Permissions.createUser: Icons.person_add_alt_1,
   Permissions.setUserPermission: Icons.security,
 };
