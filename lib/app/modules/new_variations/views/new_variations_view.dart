@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/new_variations_controller.dart';
+import '../widgets/variations_card.dart';
 
 class NewVariationsView extends GetView<NewVariationsController> {
   const NewVariationsView({super.key});
@@ -28,18 +29,9 @@ class NewVariationsView extends GetView<NewVariationsController> {
               ? ListView.separated(
                   itemCount: controller.list.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          controller.list[index].toString(),
-                        ),
-                      ),
+                    return VariationsCard(
+                      variation: controller.list[index],
                     );
-                    // return CombinationCard(
-                    //   product: controller.product,
-                    //   combinationElement: controller.list[index],
-                    // );
                   },
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 10),
