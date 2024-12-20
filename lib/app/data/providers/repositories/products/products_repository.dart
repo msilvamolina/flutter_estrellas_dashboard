@@ -36,12 +36,12 @@ class ProductsRepository {
     try {
       Response response = await services.get(url: url);
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
       dynamic json = jsonDecode(response.body);
 
-      log(json.toString());
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
       List<dynamic> bodyList = json['data']['products'];
 
       if (bodyList.isEmpty) {

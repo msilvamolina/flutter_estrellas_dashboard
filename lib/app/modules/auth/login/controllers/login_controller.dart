@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
@@ -9,6 +10,7 @@ import '../../../../components/snackbars/snackbars.dart';
 import '../../../../data/providers/local/local_storage.dart';
 import '../../../../data/providers/repositories/auth/auth_repository.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../services/user_permissions.dart';
 import '../../../../utils/encrypt.dart';
 
 enum Fields {
@@ -146,7 +148,7 @@ class LoginController extends GetxController {
       (_) async {
         String pass = Encrypt.encryptString(password);
         await _localStorage.setFaceEmail(email);
-        await _localStorage.saveFaceP(pass);
+        await saveClaims();
 
         Get.offNamedUntil(Routes.HOME, (route) => false);
       },
@@ -157,5 +159,32 @@ class LoginController extends GetxController {
     String email = data[Fields.email.name].toString();
     String password = data[Fields.password.name].toString();
     await login(email, password);
+  }
+
+  Future<void> saveClaims() async {
+    List<String> _list = <String>[];
+    Map<dynamic, dynamic>? _claims = await currentUserClaims();
+    if (_claims != null) {
+      Permissions.values.forEach((Permissions name) async {
+        String _permission = name.toString().split('.').elementAt(1);
+        if (_claims[_permission] != null) {
+          if (_claims[_permission]) {
+            _list.add(_permission);
+          }
+        }
+      });
+    }
+    _localStorage.setAdminPermissions(_list);
+  }
+
+  Future<Map<dynamic, dynamic>?> currentUserClaims() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    IdTokenResult? idTokenResult = await user?.getIdTokenResult(true);
+    if (idTokenResult != null) {
+      if (idTokenResult.claims != null) {
+        return idTokenResult.claims;
+      }
+    }
+    return null;
   }
 }

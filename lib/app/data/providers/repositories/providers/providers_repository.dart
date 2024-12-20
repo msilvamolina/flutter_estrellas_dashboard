@@ -33,11 +33,13 @@ class ProvidersRepository {
     try {
       Response response = await services.getWithToken(url: url);
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
       dynamic json = jsonDecode(response.body);
       List<dynamic> bodyList = json['data']['providers'];
+
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
 
       if (bodyList.isEmpty) {
         return left('List Products is empty');
@@ -99,15 +101,16 @@ class ProvidersRepository {
         fieldImagePath: avatarURL,
       );
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
-
       String responseBody =
           await response.stream.transform(utf8.decoder).join();
 
       dynamic json = jsonDecode(responseBody);
       bool ok = json['ok'] ?? false;
+
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
 
       if (!ok) {
         return left(json['data']);

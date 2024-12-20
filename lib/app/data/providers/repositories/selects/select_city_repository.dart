@@ -36,12 +36,13 @@ class SelectCityRepository {
     try {
       Response response = await services.getWithToken(url: url);
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
       dynamic json = jsonDecode(response.body);
       List<dynamic> bodyList = json['data'];
 
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
       if (bodyList.isEmpty) {
         return left('List Products is empty');
       }
@@ -62,12 +63,13 @@ class SelectCityRepository {
     try {
       Response response = await services.getWithToken(url: url);
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
       dynamic json = jsonDecode(response.body);
       List<dynamic> bodyList = json['data'];
 
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
       if (bodyList.isEmpty) {
         return left('List Products is empty');
       }
