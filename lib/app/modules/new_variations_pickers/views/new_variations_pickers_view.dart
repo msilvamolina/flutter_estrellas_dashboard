@@ -1,12 +1,10 @@
 import 'package:choice/choice.dart';
+import 'package:estrellas_dashboard/app/components/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../themes/styles/typography.dart';
 import '../controllers/new_variations_pickers_controller.dart';
-import '../widgets/color_inline_picker.dart';
 import '../widgets/custom_choice_item.dart';
-import '../widgets/tags_inline_picker.dart';
 
 class NewVariationsPickersView extends GetView<NewVariationsPickersController> {
   const NewVariationsPickersView({super.key});
@@ -19,44 +17,52 @@ class NewVariationsPickersView extends GetView<NewVariationsPickersController> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NewVariationsPickersView'),
+        title: const Text('Selecciona las variaciones'),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: MultipleInline(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            MultipleInline(
               key: tagsController,
             ),
-          ),
-          Expanded(
-            child: InlineGrid(
+            InlineGrid(
               key: colorsController,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(
-          onPressed: () {
-            // Recoger las selecciones de ambos widgets
-            final selectedTags =
-                tagsController.currentState?.multipleSelected ?? [];
-            final selectedColors =
-                colorsController.currentState?.selectedValue ?? [];
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: SafeArea(
+          child: Button(
+            onPressed: () {
+              // Recoger las selecciones de tallas y colores
+              final selectedTags =
+                  tagsController.currentState?.multipleSelected.map((tag) {
+                final sizeMap = tagsController.currentState!.sizeMap;
+                return {
+                  'name': tag,
+                  'abbreviation': sizeMap[tag]!,
+                };
+              }).toList();
 
-            // Pasar los valores al controlador
-            controller.saveSelections(selectedTags, selectedColors);
+              final selectedColors =
+                  colorsController.currentState?.selectedValue.map((name) {
+                final materialColor =
+                    colorsController.currentState!.materialColors[name]!;
+                return {
+                  'name': name,
+                  'hex':
+                      '#${materialColor[500]!.value.toRadixString(16).substring(2).toUpperCase()}',
+                };
+              }).toList();
 
-            // Opcional: mostrar mensaje de éxito
-            Get.snackbar(
-              'Guardado',
-              'Las selecciones han sido guardadas correctamente.',
-              snackPosition: SnackPosition.BOTTOM,
-            );
-          },
-          child: const Text('Guardar'),
+              // Pasar los valores al controlador
+              controller.saveSelections(selectedTags, selectedColors);
+            },
+            label: 'Guardar',
+          ),
         ),
       ),
     );
@@ -71,20 +77,17 @@ class MultipleInline extends StatefulWidget {
 }
 
 class _MultipleInlineState extends State<MultipleInline> {
-  List<String> choices = [
-    'News2',
-    'Entertainment',
-    'Politics',
-    'Automotive',
-    'Sports',
-    'Education',
-    'Fashion',
-    'Travel',
-    'Food',
-    'Tech',
-    'Science',
-    'Arts'
-  ];
+  // Mapa de tallas con sus abreviaturas
+  final Map<String, String> sizeMap = {
+    'Extra Extra Small': 'XXS',
+    'Extra Small': 'XS',
+    'Small': 'S',
+    'Medium': 'M',
+    'Large': 'L',
+    'Extra Large': 'XL',
+    'Extra Extra Large': 'XXL',
+  };
+
   List<String> multipleSelected = [];
 
   void setMultipleSelected(List<String> value) {
@@ -98,12 +101,13 @@ class _MultipleInlineState extends State<MultipleInline> {
       clearable: true,
       value: multipleSelected,
       onChanged: setMultipleSelected,
-      itemCount: choices.length,
+      itemCount: sizeMap.length,
       itemBuilder: (selection, i) {
+        final sizeName = sizeMap.keys.elementAt(i);
         return ChoiceChip(
-          selected: selection.selected(choices[i]),
-          onSelected: selection.onSelected(choices[i]),
-          label: Text(choices[i]),
+          selected: selection.selected(sizeName),
+          onSelected: selection.onSelected(sizeName),
+          label: Text(sizeName),
         );
       },
       listBuilder: ChoiceList.createWrapped(
