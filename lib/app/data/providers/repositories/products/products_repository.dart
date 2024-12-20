@@ -449,7 +449,7 @@ class ProductsRepository {
     }
   }
 
-  Future<Either<String, Unit>> updateProductVariations({
+  Future<Either<String, Map<String, dynamic>>> updateProductVariations({
     required String id,
     required Map<String, dynamic> requestBody,
   }) async {
@@ -473,10 +473,62 @@ class ProductsRepository {
         return left(json['data']);
       }
 
-      print('Variations updated successfully!');
-      log(json['data'].toString());
+      return right(json['data']);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  Future<Either<String, Unit>> saveCombinations({
+    required Map<String, dynamic> product,
+  }) async {
+    try {
+      // ID del producto
+      final productId = product['_id'] as String;
+
+      // Guardar las variaciones
+      final variations = product['variations'] as List<dynamic>;
+      for (var variation in variations) {
+        final variationId = variation['_id'] as String;
+
+        await _firebaseFirestore
+            .collection('products')
+            .doc(productId)
+            .collection('variants')
+            .doc(variationId)
+            .set({
+          'id': variationId,
+          'externalID': variation['externalID'],
+          'sale_price': variation['sale_price'],
+          'suggested_price': variation['suggested_price'],
+          'points': variation['points'],
+          'sku': variation['sku'],
+          'stock': variation['stock'],
+          'values': variation['values'],
+        });
+      }
+
+      // Guardar los atributos
+      final attributes = product['attributes'] as List<dynamic>;
+      for (var attribute in attributes) {
+        final attributeId = attribute['_id'] as String;
+
+        await _firebaseFirestore
+            .collection('products')
+            .doc(productId)
+            .collection('attributes')
+            .doc(attributeId)
+            .set({
+          'id': attributeId,
+          'description': attribute['description'],
+          'isVariation': attribute['isVariation'],
+          'values': attribute['values'],
+        });
+      }
 
       return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
     } catch (e) {
       return left(e.toString());
     }
