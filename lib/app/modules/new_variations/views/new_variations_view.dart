@@ -18,7 +18,7 @@ class NewVariationsView extends GetView<NewVariationsController> {
         ),
       ),
       appBar: AppBar(
-        title: const Text('NewVariationsView'),
+        title: const Text('Variaciones'),
         centerTitle: true,
       ),
       body: Padding(
@@ -28,7 +28,14 @@ class NewVariationsView extends GetView<NewVariationsController> {
               ? ListView.separated(
                   itemCount: controller.list.length,
                   itemBuilder: (context, index) {
-                    return Text(controller.list[index].toString());
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          controller.list[index].toString(),
+                        ),
+                      ),
+                    );
                     // return CombinationCard(
                     //   product: controller.product,
                     //   combinationElement: controller.list[index],
