@@ -223,16 +223,16 @@ class AppPages {
       page: () => const SelectProductView(),
       binding: SelectProductBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_VARIANT_FOR_TYPE,
-      page: () => const ProductVariantForTypeView(),
-      binding: ProductVariantForTypeBinding(),
-    ),
-    GetPage(
-      name: _Paths.PRODUCT_VARIANT_COMBINATIONS,
-      page: () => const ProductVariantCombinationsView(),
-      binding: ProductVariantCombinationsBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.PRODUCT_VARIANT_FOR_TYPE,
+    //   page: () => const ProductVariantForTypeView(),
+    //   binding: ProductVariantForTypeBinding(),
+    // ),
+    // GetPage(
+    //   name: _Paths.PRODUCT_VARIANT_COMBINATIONS,
+    //   page: () => const ProductVariantCombinationsView(),
+    //   binding: ProductVariantCombinationsBinding(),
+    // ),
     GetPage(
       name: _Paths.EDIT_PRODUCT_VARIANT_COMBINATION,
       page: () => const EditProductVariantCombinationView(),

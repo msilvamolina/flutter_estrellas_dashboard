@@ -21,15 +21,12 @@ ProductVariantModel _$ProductVariantModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductVariantModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get label => throw _privateConstructorUsedError;
-  String get createdAt => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
-  int? get color => throw _privateConstructorUsedError;
-  String? get searchField => throw _privateConstructorUsedError;
-  dynamic get reference => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
+  int get points => throw _privateConstructorUsedError;
+  double get sale_price => throw _privateConstructorUsedError;
+  String get sku => throw _privateConstructorUsedError;
+  int get stock => throw _privateConstructorUsedError;
+  double get suggested_price => throw _privateConstructorUsedError;
+  dynamic get values => throw _privateConstructorUsedError;
 
   /// Serializes this ProductVariantModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,15 +46,12 @@ abstract class $ProductVariantModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
-      String label,
-      String createdAt,
-      String type,
-      String? imageUrl,
-      int? color,
-      String? searchField,
-      dynamic reference,
-      String? updatedAt});
+      int points,
+      double sale_price,
+      String sku,
+      int stock,
+      double suggested_price,
+      dynamic values});
 }
 
 /// @nodoc
@@ -76,57 +70,42 @@ class _$ProductVariantModelCopyWithImpl<$Res, $Val extends ProductVariantModel>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? label = null,
-    Object? createdAt = null,
-    Object? type = null,
-    Object? imageUrl = freezed,
-    Object? color = freezed,
-    Object? searchField = freezed,
-    Object? reference = freezed,
-    Object? updatedAt = freezed,
+    Object? points = null,
+    Object? sale_price = null,
+    Object? sku = null,
+    Object? stock = null,
+    Object? suggested_price = null,
+    Object? values = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      sale_price: null == sale_price
+          ? _value.sale_price
+          : sale_price // ignore: cast_nullable_to_non_nullable
+              as double,
+      sku: null == sku
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as int?,
-      searchField: freezed == searchField
-          ? _value.searchField
-          : searchField // ignore: cast_nullable_to_non_nullable
-              as String?,
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
+      stock: null == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int,
+      suggested_price: null == suggested_price
+          ? _value.suggested_price
+          : suggested_price // ignore: cast_nullable_to_non_nullable
+              as double,
+      values: freezed == values
+          ? _value.values
+          : values // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -141,15 +120,12 @@ abstract class _$$ProductVariantModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String name,
-      String label,
-      String createdAt,
-      String type,
-      String? imageUrl,
-      int? color,
-      String? searchField,
-      dynamic reference,
-      String? updatedAt});
+      int points,
+      double sale_price,
+      String sku,
+      int stock,
+      double suggested_price,
+      dynamic values});
 }
 
 /// @nodoc
@@ -166,57 +142,42 @@ class __$$ProductVariantModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? label = null,
-    Object? createdAt = null,
-    Object? type = null,
-    Object? imageUrl = freezed,
-    Object? color = freezed,
-    Object? searchField = freezed,
-    Object? reference = freezed,
-    Object? updatedAt = freezed,
+    Object? points = null,
+    Object? sale_price = null,
+    Object? sku = null,
+    Object? stock = null,
+    Object? suggested_price = null,
+    Object? values = freezed,
   }) {
     return _then(_$ProductVariantModelImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      points: null == points
+          ? _value.points
+          : points // ignore: cast_nullable_to_non_nullable
+              as int,
+      sale_price: null == sale_price
+          ? _value.sale_price
+          : sale_price // ignore: cast_nullable_to_non_nullable
+              as double,
+      sku: null == sku
+          ? _value.sku
+          : sku // ignore: cast_nullable_to_non_nullable
               as String,
-      label: null == label
-          ? _value.label
-          : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as int?,
-      searchField: freezed == searchField
-          ? _value.searchField
-          : searchField // ignore: cast_nullable_to_non_nullable
-              as String?,
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
+      stock: null == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int,
+      suggested_price: null == suggested_price
+          ? _value.suggested_price
+          : suggested_price // ignore: cast_nullable_to_non_nullable
+              as double,
+      values: freezed == values
+          ? _value.values
+          : values // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -226,15 +187,12 @@ class __$$ProductVariantModelImplCopyWithImpl<$Res>
 class _$ProductVariantModelImpl extends _ProductVariantModel {
   const _$ProductVariantModelImpl(
       {required this.id,
-      required this.name,
-      required this.label,
-      required this.createdAt,
-      required this.type,
-      this.imageUrl,
-      this.color,
-      this.searchField,
-      this.reference,
-      this.updatedAt})
+      required this.points,
+      required this.sale_price,
+      required this.sku,
+      required this.stock,
+      required this.suggested_price,
+      this.values})
       : super._();
 
   factory _$ProductVariantModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -243,27 +201,21 @@ class _$ProductVariantModelImpl extends _ProductVariantModel {
   @override
   final String id;
   @override
-  final String name;
+  final int points;
   @override
-  final String label;
+  final double sale_price;
   @override
-  final String createdAt;
+  final String sku;
   @override
-  final String type;
+  final int stock;
   @override
-  final String? imageUrl;
+  final double suggested_price;
   @override
-  final int? color;
-  @override
-  final String? searchField;
-  @override
-  final dynamic reference;
-  @override
-  final String? updatedAt;
+  final dynamic values;
 
   @override
   String toString() {
-    return 'ProductVariantModel(id: $id, name: $name, label: $label, createdAt: $createdAt, type: $type, imageUrl: $imageUrl, color: $color, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'ProductVariantModel(id: $id, points: $points, sale_price: $sale_price, sku: $sku, stock: $stock, suggested_price: $suggested_price, values: $values)';
   }
 
   @override
@@ -272,35 +224,20 @@ class _$ProductVariantModelImpl extends _ProductVariantModel {
         (other.runtimeType == runtimeType &&
             other is _$ProductVariantModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.label, label) || other.label == label) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.searchField, searchField) ||
-                other.searchField == searchField) &&
-            const DeepCollectionEquality().equals(other.reference, reference) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+            (identical(other.points, points) || other.points == points) &&
+            (identical(other.sale_price, sale_price) ||
+                other.sale_price == sale_price) &&
+            (identical(other.sku, sku) || other.sku == sku) &&
+            (identical(other.stock, stock) || other.stock == stock) &&
+            (identical(other.suggested_price, suggested_price) ||
+                other.suggested_price == suggested_price) &&
+            const DeepCollectionEquality().equals(other.values, values));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      label,
-      createdAt,
-      type,
-      imageUrl,
-      color,
-      searchField,
-      const DeepCollectionEquality().hash(reference),
-      updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, points, sale_price, sku,
+      stock, suggested_price, const DeepCollectionEquality().hash(values));
 
   /// Create a copy of ProductVariantModel
   /// with the given fields replaced by the non-null parameter values.
@@ -322,15 +259,12 @@ class _$ProductVariantModelImpl extends _ProductVariantModel {
 abstract class _ProductVariantModel extends ProductVariantModel {
   const factory _ProductVariantModel(
       {required final String id,
-      required final String name,
-      required final String label,
-      required final String createdAt,
-      required final String type,
-      final String? imageUrl,
-      final int? color,
-      final String? searchField,
-      final dynamic reference,
-      final String? updatedAt}) = _$ProductVariantModelImpl;
+      required final int points,
+      required final double sale_price,
+      required final String sku,
+      required final int stock,
+      required final double suggested_price,
+      final dynamic values}) = _$ProductVariantModelImpl;
   const _ProductVariantModel._() : super._();
 
   factory _ProductVariantModel.fromJson(Map<String, dynamic> json) =
@@ -339,23 +273,17 @@ abstract class _ProductVariantModel extends ProductVariantModel {
   @override
   String get id;
   @override
-  String get name;
+  int get points;
   @override
-  String get label;
+  double get sale_price;
   @override
-  String get createdAt;
+  String get sku;
   @override
-  String get type;
+  int get stock;
   @override
-  String? get imageUrl;
+  double get suggested_price;
   @override
-  int? get color;
-  @override
-  String? get searchField;
-  @override
-  dynamic get reference;
-  @override
-  String? get updatedAt;
+  dynamic get values;
 
   /// Create a copy of ProductVariantModel
   /// with the given fields replaced by the non-null parameter values.

@@ -21,10 +21,23 @@ class NewVariationsView extends GetView<NewVariationsController> {
         title: const Text('NewVariationsView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'NewVariationsView is working',
-          style: TextStyle(fontSize: 20),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Obx(
+          () => controller.list.isNotEmpty
+              ? ListView.separated(
+                  itemCount: controller.list.length,
+                  itemBuilder: (context, index) {
+                    return Text(controller.list[index].toString());
+                    // return CombinationCard(
+                    //   product: controller.product,
+                    //   combinationElement: controller.list[index],
+                    // );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                )
+              : const Text('no data'),
         ),
       ),
     );
