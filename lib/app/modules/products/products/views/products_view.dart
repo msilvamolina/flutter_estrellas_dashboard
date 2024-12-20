@@ -1,4 +1,5 @@
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/components/adminscaffold/admin_scaffold.dart';
 import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,8 +29,19 @@ class ProductsView extends GetView<ProductsController> {
             ),
             maxWidth: double.infinity,
             currentRoute: Routes.PRODUCTS,
-            child: TabEstrellas2(controller: controller),
+            child: AdminScaffold(
+              permission: Permissions.productList,
+              child: TabEstrellas2(controller: controller),
+            ),
           )
-        : ProductsView2();
+        : Scaffold(
+            body: Container(
+              width: double.infinity,
+              child: AdminScaffold(
+                permission: Permissions.productList,
+                child: ProductsView2(),
+              ),
+            ),
+          );
   }
 }
