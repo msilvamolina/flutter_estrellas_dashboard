@@ -32,6 +32,9 @@ mixin _$ProductLiteModel {
   bool? get showInFeed => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
+  String? get defaultVariation => throw _privateConstructorUsedError;
+  dynamic get attributes => throw _privateConstructorUsedError;
+  dynamic get variations => throw _privateConstructorUsedError;
   String? get warehouseID => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
@@ -64,6 +67,9 @@ abstract class $ProductLiteModelCopyWith<$Res> {
       bool? showInFeed,
       bool? active,
       String? thumbnail,
+      String? defaultVariation,
+      dynamic attributes,
+      dynamic variations,
       String? warehouseID,
       String? createdAt,
       String? updatedAt});
@@ -95,6 +101,9 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? showInFeed = freezed,
     Object? active = freezed,
     Object? thumbnail = freezed,
+    Object? defaultVariation = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? warehouseID = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -144,6 +153,18 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      defaultVariation: freezed == defaultVariation
+          ? _value.defaultVariation
+          : defaultVariation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       warehouseID: freezed == warehouseID
           ? _value.warehouseID
           : warehouseID // ignore: cast_nullable_to_non_nullable
@@ -180,6 +201,9 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
       bool? showInFeed,
       bool? active,
       String? thumbnail,
+      String? defaultVariation,
+      dynamic attributes,
+      dynamic variations,
       String? warehouseID,
       String? createdAt,
       String? updatedAt});
@@ -209,6 +233,9 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? showInFeed = freezed,
     Object? active = freezed,
     Object? thumbnail = freezed,
+    Object? defaultVariation = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? warehouseID = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -258,6 +285,18 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      defaultVariation: freezed == defaultVariation
+          ? _value.defaultVariation
+          : defaultVariation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       warehouseID: freezed == warehouseID
           ? _value.warehouseID
           : warehouseID // ignore: cast_nullable_to_non_nullable
@@ -289,6 +328,9 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.showInFeed,
       this.active,
       this.thumbnail,
+      this.defaultVariation,
+      this.attributes,
+      this.variations,
       this.warehouseID,
       this.createdAt,
       this.updatedAt})
@@ -321,6 +363,12 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final String? thumbnail;
   @override
+  final String? defaultVariation;
+  @override
+  final dynamic attributes;
+  @override
+  final dynamic variations;
+  @override
   final String? warehouseID;
   @override
   final String? createdAt;
@@ -329,7 +377,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -353,6 +401,12 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
             (identical(other.active, active) || other.active == active) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.defaultVariation, defaultVariation) ||
+                other.defaultVariation == defaultVariation) &&
+            const DeepCollectionEquality()
+                .equals(other.attributes, attributes) &&
+            const DeepCollectionEquality()
+                .equals(other.variations, variations) &&
             (identical(other.warehouseID, warehouseID) ||
                 other.warehouseID == warehouseID) &&
             (identical(other.createdAt, createdAt) ||
@@ -376,6 +430,9 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       showInFeed,
       active,
       thumbnail,
+      defaultVariation,
+      const DeepCollectionEquality().hash(attributes),
+      const DeepCollectionEquality().hash(variations),
       warehouseID,
       createdAt,
       updatedAt);
@@ -410,6 +467,9 @@ abstract class _ProductLiteModel extends ProductLiteModel {
       final bool? showInFeed,
       final bool? active,
       final String? thumbnail,
+      final String? defaultVariation,
+      final dynamic attributes,
+      final dynamic variations,
       final String? warehouseID,
       final String? createdAt,
       final String? updatedAt}) = _$ProductLiteModelImpl;
@@ -441,6 +501,12 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   bool? get active;
   @override
   String? get thumbnail;
+  @override
+  String? get defaultVariation;
+  @override
+  dynamic get attributes;
+  @override
+  dynamic get variations;
   @override
   String? get warehouseID;
   @override

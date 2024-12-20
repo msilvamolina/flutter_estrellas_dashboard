@@ -128,14 +128,33 @@ class ProductVariantCombinationsController extends GetxController {
     }, (_) async {});
   }
 
-  void sendVariations() {
-    // Asegúrate de que las listas estén filtradas antes de usar
+  Future<void> sendVariations() async {
+    Map<String, dynamic> payload = buildPayloadVariations();
+
+    _mainController.setDropiDialog(true);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    // log(payload.toString());
+    Either<String, dynamic> response =
+        await _repository.updateProductVariations(
+      id: product.id,
+      requestBody: payload,
+    );
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (product) async {
+      _mainController.setDropiMessage('Success!');
+      // saveInFirebase(product: product, imagePath: _imagePath!);
+    });
+  }
+
+  Map<String, dynamic> buildPayloadVariations() {
     filterLists();
 
     List<Map<String, dynamic>> attributes = [];
     List<Map<String, dynamic>> variations = [];
 
-    // Construimos los atributos con comillas explícitas
     if (colorList.isNotEmpty) {
       attributes.add({
         "description": "Color",
@@ -150,20 +169,18 @@ class ProductVariantCombinationsController extends GetxController {
       });
     }
 
-    // Generamos las combinaciones con comillas explícitas
     for (var color in colorList) {
       for (var size in sizeList) {
         variations.add({
           "attributes": [color.name, size.name],
           "cost": product.price,
           "value": product.suggestedPrice,
-          "stock": 10, // Puedes modificar este valor según lo necesario
+          "stock": '10',
           "points": product.points,
         });
       }
     }
 
-    // Consolida la estructura
     Map<String, dynamic> payload = {
       "name": product.name,
       "price": product.price,
@@ -171,12 +188,10 @@ class ProductVariantCombinationsController extends GetxController {
       "points": product.points,
       "attributes": attributes,
       "variations": variations,
-      // "warehouseID": product.warehouseId, // Ajusta según tu modelo
+      "warehouseID": product.warehouseID,
     };
 
-    // Imprime el JSON formateado
-    String formattedPayload = formatJson(payload);
-
+    return payload;
   }
 
   String formatJson(Map<String, dynamic> json) {
@@ -194,7 +209,6 @@ class ProductVariantCombinationsController extends GetxController {
   String _formatList(List<dynamic> list) {
     return '[${list.map((item) {
       if (item is Map) {
-        // Cast explícito a Map<String, dynamic>
         return '{${formatJson(item.cast<String, dynamic>())}}';
       } else if (item is String) {
         return '"$item"';

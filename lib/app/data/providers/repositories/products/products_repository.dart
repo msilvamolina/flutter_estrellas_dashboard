@@ -125,6 +125,9 @@ class ProductsRepository {
         return left(json['data']);
       }
 
+      print('product created!');
+      log(json['data'].toString());
+      
       ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
 
       return right(productModel.copyWith(warehouseID: warehouseID));
@@ -450,47 +453,31 @@ class ProductsRepository {
   }
 
   Future<Either<String, Unit>> updateProductVariations({
-    required String name,
-    required String price,
-    required String suggestedPrice,
-    required String points,
-    required String warehouseID,
-    required String provider,
-    required String imagePath,
+    required String id,
+    required Map<String, dynamic> requestBody,
   }) async {
-    String url = 'api/products/create';
+    String url = 'api/products/$id';
+
     try {
-      Map<String, dynamic> body = {
-        'name': name,
-        'price': price,
-        'suggestedPrice': suggestedPrice,
-        'points': points,
-        'warehouseID': warehouseID,
-        'provider': provider,
-      };
+      // Serializamos el cuerpo a JSON
+      String bodyJson = jsonEncode(requestBody);
 
-      // StreamedResponse response = await services.postWithFileAndToken(
-      //   url: url,
-      //   fields: body,
-      //   fieldImageName: 'image',
-      //   fieldImagePath: imagePath,
-      // );
+      // Enviamos la solicitud PUT
+      Response response = await services.putWithToken(
+        url: url,
+        body: bodyJson, // Pasamos el cuerpo como JSON serializado
+      );
 
-      // if (response.statusCode != 200) {
-      //   return left('Error status code: ${response.statusCode}');
-      // }
+      // Parseamos la respuesta
+      dynamic json = jsonDecode(response.body);
+      bool ok = json['ok'] ?? false;
 
-      // String responseBody =
-      //     await response.stream.transform(utf8.decoder).join();
+      if (!ok) {
+        return left(json['data']);
+      }
 
-      // dynamic json = jsonDecode(responseBody);
-      // bool ok = json['ok'] ?? false;
-
-      // if (!ok) {
-      //   return left(json['data']);
-      // }
-
-      // ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
+      print('Variations updated successfully!');
+      log(json['data'].toString());
 
       return right(unit);
     } catch (e) {

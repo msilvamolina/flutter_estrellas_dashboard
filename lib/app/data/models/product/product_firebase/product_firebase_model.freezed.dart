@@ -38,6 +38,10 @@ mixin _$ProductFirebaseModel {
   int? get points => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
+  String? get warehouseID => throw _privateConstructorUsedError;
+  String? get defaultVariation => throw _privateConstructorUsedError;
+  dynamic get attributes => throw _privateConstructorUsedError;
+  dynamic get variations => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get uploadDate => throw _privateConstructorUsedError;
   String? get searchField => throw _privateConstructorUsedError;
@@ -78,6 +82,10 @@ abstract class $ProductFirebaseModelCopyWith<$Res> {
       int? points,
       double? suggestedPrice,
       String? thumbnail,
+      String? warehouseID,
+      String? defaultVariation,
+      dynamic attributes,
+      dynamic variations,
       String? createdAt,
       String? uploadDate,
       String? searchField,
@@ -118,6 +126,10 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
     Object? points = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
+    Object? warehouseID = freezed,
+    Object? defaultVariation = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? createdAt = freezed,
     Object? uploadDate = freezed,
     Object? searchField = freezed,
@@ -193,6 +205,22 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      warehouseID: freezed == warehouseID
+          ? _value.warehouseID
+          : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultVariation: freezed == defaultVariation
+          ? _value.defaultVariation
+          : defaultVariation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -243,6 +271,10 @@ abstract class _$$ProductFirebaseModelImplCopyWith<$Res>
       int? points,
       double? suggestedPrice,
       String? thumbnail,
+      String? warehouseID,
+      String? defaultVariation,
+      dynamic attributes,
+      dynamic variations,
       String? createdAt,
       String? uploadDate,
       String? searchField,
@@ -280,6 +312,10 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
     Object? points = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
+    Object? warehouseID = freezed,
+    Object? defaultVariation = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? createdAt = freezed,
     Object? uploadDate = freezed,
     Object? searchField = freezed,
@@ -355,6 +391,22 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      warehouseID: freezed == warehouseID
+          ? _value.warehouseID
+          : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultVariation: freezed == defaultVariation
+          ? _value.defaultVariation
+          : defaultVariation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -400,6 +452,10 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
       this.points,
       this.suggestedPrice,
       this.thumbnail,
+      this.warehouseID,
+      this.defaultVariation,
+      this.attributes,
+      this.variations,
       this.createdAt,
       this.uploadDate,
       this.searchField,
@@ -446,6 +502,14 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   @override
   final String? thumbnail;
   @override
+  final String? warehouseID;
+  @override
+  final String? defaultVariation;
+  @override
+  final dynamic attributes;
+  @override
+  final dynamic variations;
+  @override
   final String? createdAt;
   @override
   final String? uploadDate;
@@ -458,7 +522,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, warehouseID: $warehouseID, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
   }
 
   @override
@@ -490,6 +554,14 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
                 other.suggestedPrice == suggestedPrice) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.warehouseID, warehouseID) ||
+                other.warehouseID == warehouseID) &&
+            (identical(other.defaultVariation, defaultVariation) ||
+                other.defaultVariation == defaultVariation) &&
+            const DeepCollectionEquality()
+                .equals(other.attributes, attributes) &&
+            const DeepCollectionEquality()
+                .equals(other.variations, variations) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.uploadDate, uploadDate) ||
@@ -522,6 +594,10 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
         points,
         suggestedPrice,
         thumbnail,
+        warehouseID,
+        defaultVariation,
+        const DeepCollectionEquality().hash(attributes),
+        const DeepCollectionEquality().hash(variations),
         createdAt,
         uploadDate,
         searchField,
@@ -566,6 +642,10 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
       final int? points,
       final double? suggestedPrice,
       final String? thumbnail,
+      final String? warehouseID,
+      final String? defaultVariation,
+      final dynamic attributes,
+      final dynamic variations,
       final String? createdAt,
       final String? uploadDate,
       final String? searchField,
@@ -611,6 +691,14 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   double? get suggestedPrice;
   @override
   String? get thumbnail;
+  @override
+  String? get warehouseID;
+  @override
+  String? get defaultVariation;
+  @override
+  dynamic get attributes;
+  @override
+  dynamic get variations;
   @override
   String? get createdAt;
   @override
