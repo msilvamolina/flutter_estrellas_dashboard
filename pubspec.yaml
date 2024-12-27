@@ -2,7 +2,7 @@ name: estrellas_dashboard
 description: "Estrellas Dashboard"
 publish_to: "none"
 
-version: 1.0.14+14
+version: 1.0.15+15
 
 environment:
   sdk: ^3.5.3
@@ -25,6 +25,7 @@ dependencies:
   uuid: ^4.5.1
   freezed_annotation: ^2.4.4
   lottie: ^3.1.3
+  flutter_quill: ^10.8.5
   adaptive_dialog: ^2.2.1
   macos_window_utils: ^1.5.0
   universal_platform: ^1.1.0
