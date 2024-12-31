@@ -31,6 +31,10 @@ mixin _$ProductLiteModel {
   bool? get isPercentage => throw _privateConstructorUsedError;
   bool? get showInFeed => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
+  dynamic get categories => throw _privateConstructorUsedError;
+  String? get categoriesIds => throw _privateConstructorUsedError;
+  String? get categoriesNames => throw _privateConstructorUsedError;
+  dynamic get category => throw _privateConstructorUsedError;
   dynamic get descriptionFormatted => throw _privateConstructorUsedError;
   String? get descriptionPlainText => throw _privateConstructorUsedError;
   dynamic get detailsFormatted => throw _privateConstructorUsedError;
@@ -72,6 +76,10 @@ abstract class $ProductLiteModelCopyWith<$Res> {
       bool? isPercentage,
       bool? showInFeed,
       bool? active,
+      dynamic categories,
+      String? categoriesIds,
+      String? categoriesNames,
+      dynamic category,
       dynamic descriptionFormatted,
       String? descriptionPlainText,
       dynamic detailsFormatted,
@@ -112,6 +120,10 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? isPercentage = freezed,
     Object? showInFeed = freezed,
     Object? active = freezed,
+    Object? categories = freezed,
+    Object? categoriesIds = freezed,
+    Object? categoriesNames = freezed,
+    Object? category = freezed,
     Object? descriptionFormatted = freezed,
     Object? descriptionPlainText = freezed,
     Object? detailsFormatted = freezed,
@@ -167,6 +179,22 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      categoriesIds: freezed == categoriesIds
+          ? _value.categoriesIds
+          : categoriesIds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoriesNames: freezed == categoriesNames
+          ? _value.categoriesNames
+          : categoriesNames // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       descriptionFormatted: freezed == descriptionFormatted
           ? _value.descriptionFormatted
           : descriptionFormatted // ignore: cast_nullable_to_non_nullable
@@ -242,6 +270,10 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
       bool? isPercentage,
       bool? showInFeed,
       bool? active,
+      dynamic categories,
+      String? categoriesIds,
+      String? categoriesNames,
+      dynamic category,
       dynamic descriptionFormatted,
       String? descriptionPlainText,
       dynamic detailsFormatted,
@@ -280,6 +312,10 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? isPercentage = freezed,
     Object? showInFeed = freezed,
     Object? active = freezed,
+    Object? categories = freezed,
+    Object? categoriesIds = freezed,
+    Object? categoriesNames = freezed,
+    Object? category = freezed,
     Object? descriptionFormatted = freezed,
     Object? descriptionPlainText = freezed,
     Object? detailsFormatted = freezed,
@@ -335,6 +371,22 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      categoriesIds: freezed == categoriesIds
+          ? _value.categoriesIds
+          : categoriesIds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoriesNames: freezed == categoriesNames
+          ? _value.categoriesNames
+          : categoriesNames // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       descriptionFormatted: freezed == descriptionFormatted
           ? _value.descriptionFormatted
           : descriptionFormatted // ignore: cast_nullable_to_non_nullable
@@ -405,6 +457,10 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.isPercentage,
       this.showInFeed,
       this.active,
+      this.categories,
+      this.categoriesIds,
+      this.categoriesNames,
+      this.category,
       this.descriptionFormatted,
       this.descriptionPlainText,
       this.detailsFormatted,
@@ -445,6 +501,14 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final bool? active;
   @override
+  final dynamic categories;
+  @override
+  final String? categoriesIds;
+  @override
+  final String? categoriesNames;
+  @override
+  final dynamic category;
+  @override
   final dynamic descriptionFormatted;
   @override
   final String? descriptionPlainText;
@@ -473,7 +537,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -495,6 +559,13 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
             (identical(other.showInFeed, showInFeed) ||
                 other.showInFeed == showInFeed) &&
             (identical(other.active, active) || other.active == active) &&
+            const DeepCollectionEquality()
+                .equals(other.categories, categories) &&
+            (identical(other.categoriesIds, categoriesIds) ||
+                other.categoriesIds == categoriesIds) &&
+            (identical(other.categoriesNames, categoriesNames) ||
+                other.categoriesNames == categoriesNames) &&
+            const DeepCollectionEquality().equals(other.category, category) &&
             const DeepCollectionEquality()
                 .equals(other.descriptionFormatted, descriptionFormatted) &&
             (identical(other.descriptionPlainText, descriptionPlainText) ||
@@ -537,6 +608,10 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
         isPercentage,
         showInFeed,
         active,
+        const DeepCollectionEquality().hash(categories),
+        categoriesIds,
+        categoriesNames,
+        const DeepCollectionEquality().hash(category),
         const DeepCollectionEquality().hash(descriptionFormatted),
         descriptionPlainText,
         const DeepCollectionEquality().hash(detailsFormatted),
@@ -581,6 +656,10 @@ abstract class _ProductLiteModel extends ProductLiteModel {
       final bool? isPercentage,
       final bool? showInFeed,
       final bool? active,
+      final dynamic categories,
+      final String? categoriesIds,
+      final String? categoriesNames,
+      final dynamic category,
       final dynamic descriptionFormatted,
       final String? descriptionPlainText,
       final dynamic detailsFormatted,
@@ -620,6 +699,14 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   bool? get showInFeed;
   @override
   bool? get active;
+  @override
+  dynamic get categories;
+  @override
+  String? get categoriesIds;
+  @override
+  String? get categoriesNames;
+  @override
+  dynamic get category;
   @override
   dynamic get descriptionFormatted;
   @override

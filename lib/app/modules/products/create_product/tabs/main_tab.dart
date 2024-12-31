@@ -15,7 +15,6 @@ class ProductMainTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color primary = Theme.of(context).colorScheme.primary;
-    final tagsController = GlobalKey<_MultipleInlineState>();
 
     return GetBuilder<CreateProductController>(
       id: 'view',
@@ -153,7 +152,7 @@ class ProductMainTab extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               MultipleInline(
-                key: tagsController,
+                key: controller.tagsController,
                 categoryMap: controller.categoryMap,
               ),
               const SizedBox(height: 46),
@@ -174,10 +173,10 @@ class MultipleInline extends StatefulWidget {
   });
 
   @override
-  State<MultipleInline> createState() => _MultipleInlineState();
+  State<MultipleInline> createState() => MultipleInlineState();
 }
 
-class _MultipleInlineState extends State<MultipleInline> {
+class MultipleInlineState extends State<MultipleInline> {
   List<String> multipleSelected = [];
 
   void setMultipleSelected(List<String> value) {

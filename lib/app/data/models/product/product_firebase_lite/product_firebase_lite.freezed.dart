@@ -31,6 +31,10 @@ mixin _$ProductFirebaseLiteModel {
   double? get price => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
+  dynamic get categories => throw _privateConstructorUsedError;
+  String? get categoriesIds => throw _privateConstructorUsedError;
+  String? get categoriesNames => throw _privateConstructorUsedError;
+  dynamic get category => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
@@ -61,6 +65,10 @@ abstract class $ProductFirebaseLiteModelCopyWith<$Res> {
       double? price,
       bool? active,
       int? points,
+      dynamic categories,
+      String? categoriesIds,
+      String? categoriesNames,
+      dynamic category,
       double? suggestedPrice,
       String? thumbnail,
       String? createdAt});
@@ -91,6 +99,10 @@ class _$ProductFirebaseLiteModelCopyWithImpl<$Res,
     Object? price = freezed,
     Object? active = freezed,
     Object? points = freezed,
+    Object? categories = freezed,
+    Object? categoriesIds = freezed,
+    Object? categoriesNames = freezed,
+    Object? category = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
     Object? createdAt = freezed,
@@ -132,6 +144,22 @@ class _$ProductFirebaseLiteModelCopyWithImpl<$Res,
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int?,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      categoriesIds: freezed == categoriesIds
+          ? _value.categoriesIds
+          : categoriesIds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoriesNames: freezed == categoriesNames
+          ? _value.categoriesNames
+          : categoriesNames // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
@@ -167,6 +195,10 @@ abstract class _$$ProductFirebaseLiteModelImplCopyWith<$Res>
       double? price,
       bool? active,
       int? points,
+      dynamic categories,
+      String? categoriesIds,
+      String? categoriesNames,
+      dynamic category,
       double? suggestedPrice,
       String? thumbnail,
       String? createdAt});
@@ -196,6 +228,10 @@ class __$$ProductFirebaseLiteModelImplCopyWithImpl<$Res>
     Object? price = freezed,
     Object? active = freezed,
     Object? points = freezed,
+    Object? categories = freezed,
+    Object? categoriesIds = freezed,
+    Object? categoriesNames = freezed,
+    Object? category = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
     Object? createdAt = freezed,
@@ -237,6 +273,22 @@ class __$$ProductFirebaseLiteModelImplCopyWithImpl<$Res>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int?,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      categoriesIds: freezed == categoriesIds
+          ? _value.categoriesIds
+          : categoriesIds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoriesNames: freezed == categoriesNames
+          ? _value.categoriesNames
+          : categoriesNames // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
@@ -266,6 +318,10 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
       this.price,
       this.active,
       this.points,
+      this.categories,
+      this.categoriesIds,
+      this.categoriesNames,
+      this.category,
       this.suggestedPrice,
       this.thumbnail,
       this.createdAt})
@@ -294,6 +350,14 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
   @override
   final int? points;
   @override
+  final dynamic categories;
+  @override
+  final String? categoriesIds;
+  @override
+  final String? categoriesNames;
+  @override
+  final dynamic category;
+  @override
   final double? suggestedPrice;
   @override
   final String? thumbnail;
@@ -302,7 +366,7 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseLiteModel(id: $id, name: $name, provider: $provider, externalId: $externalId, stock: $stock, type: $type, price: $price, active: $active, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt)';
+    return 'ProductFirebaseLiteModel(id: $id, name: $name, provider: $provider, externalId: $externalId, stock: $stock, type: $type, price: $price, active: $active, points: $points, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt)';
   }
 
   @override
@@ -320,6 +384,13 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.active, active) || other.active == active) &&
             (identical(other.points, points) || other.points == points) &&
+            const DeepCollectionEquality()
+                .equals(other.categories, categories) &&
+            (identical(other.categoriesIds, categoriesIds) ||
+                other.categoriesIds == categoriesIds) &&
+            (identical(other.categoriesNames, categoriesNames) ||
+                other.categoriesNames == categoriesNames) &&
+            const DeepCollectionEquality().equals(other.category, category) &&
             (identical(other.suggestedPrice, suggestedPrice) ||
                 other.suggestedPrice == suggestedPrice) &&
             (identical(other.thumbnail, thumbnail) ||
@@ -341,6 +412,10 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
       price,
       active,
       points,
+      const DeepCollectionEquality().hash(categories),
+      categoriesIds,
+      categoriesNames,
+      const DeepCollectionEquality().hash(category),
       suggestedPrice,
       thumbnail,
       createdAt);
@@ -373,6 +448,10 @@ abstract class _ProductFirebaseLiteModel extends ProductFirebaseLiteModel {
       final double? price,
       final bool? active,
       final int? points,
+      final dynamic categories,
+      final String? categoriesIds,
+      final String? categoriesNames,
+      final dynamic category,
       final double? suggestedPrice,
       final String? thumbnail,
       final String? createdAt}) = _$ProductFirebaseLiteModelImpl;
@@ -400,6 +479,14 @@ abstract class _ProductFirebaseLiteModel extends ProductFirebaseLiteModel {
   bool? get active;
   @override
   int? get points;
+  @override
+  dynamic get categories;
+  @override
+  String? get categoriesIds;
+  @override
+  String? get categoriesNames;
+  @override
+  dynamic get category;
   @override
   double? get suggestedPrice;
   @override

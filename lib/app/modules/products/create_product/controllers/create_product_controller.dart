@@ -19,6 +19,7 @@ import '../../../../app/controllers/main_controller.dart';
 import '../../../../data/models/provider/warehouse/provider_warehouse_model.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/utils_image.dart';
+import '../tabs/main_tab.dart';
 
 enum Fields {
   name('name'),
@@ -43,6 +44,7 @@ class CreateProductController extends GetxController {
 
   ProviderWarehouseModel? _warehouseModel;
   ProviderWarehouseModel? get warehouseModel => _warehouseModel;
+  final tagsController = GlobalKey<MultipleInlineState>();
 
   final Map<String, int> categoryMap = {
     'Belleza': 1555,
@@ -98,6 +100,10 @@ class CreateProductController extends GetxController {
   final QuillController warrantyController = QuillController.basic();
   final FocusNode warrantyEditorFocusNode = FocusNode();
   final ScrollController warrantyEditorScrollController = ScrollController();
+
+  List<Map<String, Object>>? _categoriesJson;
+  String? _categoriesIds;
+  String? _categoriesNames;
 
   @override
   Future<void> onInit() async {
@@ -234,7 +240,37 @@ class CreateProductController extends GetxController {
         .toLowerCase(); // Convierte todo a minúsculas
   }
 
+  void buildCategories() {
+    // Asegurarse de que tagsController.currentState no sea nulo
+    if (tagsController.currentState != null) {
+      // Construir la lista de categorías seleccionadas como Map
+      _categoriesJson =
+          tagsController.currentState!.multipleSelected.map((tag) {
+        return {
+          'name': tag,
+          'id': categoryMap[tag]!,
+        };
+      }).toList();
+
+      // Construir el String de IDs separados por comas
+      _categoriesIds = tagsController.currentState!.multipleSelected
+          .map((tag) => categoryMap[tag]!)
+          .join(',');
+
+      // Construir el String de nombres separados por comas
+      _categoriesNames =
+          tagsController.currentState!.multipleSelected.join(', ');
+    } else {
+      // Si tagsController.currentState es nulo, asegurar valores predeterminados
+      _categoriesJson = [];
+      _categoriesIds = '';
+      _categoriesNames = '';
+    }
+  }
+
   Future<void> sendForm(Map<String, Object?> data) async {
+    buildCategories();
+
     if (_imagePath == null) {
       Get.snackbar('Error', "Tienes que elegir una imagen");
       return;
@@ -244,6 +280,12 @@ class CreateProductController extends GetxController {
       Get.snackbar('Error', "Tienes que elegir una bodega");
       return;
     }
+
+    if (_categoriesJson!.isEmpty) {
+      Get.snackbar('Error', "Tienes que elegir al menos una categoría");
+      return;
+    }
+
     String descriptionDefault = '';
     final descriptionPlainText = descriptionController.document.toPlainText();
 
@@ -305,6 +347,7 @@ class CreateProductController extends GetxController {
       warehouseID: warehouseModel!.id,
       provider: providerModel!.id,
       description: descriptionPlainText,
+      category: _categoriesIds ?? '',
     );
 
     response.fold((failure) {
@@ -317,6 +360,9 @@ class CreateProductController extends GetxController {
         warrantyFormatted: warrantyJson,
         descriptionFormatted: descriptionJson,
         descriptionPlainText: descriptionPlainText,
+        categories: _categoriesJson,
+        categoriesIds: _categoriesIds,
+        categoriesNames: _categoriesNames,
       );
       _mainController.setDropiMessage('Success!');
       saveInFirebase(

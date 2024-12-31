@@ -93,6 +93,7 @@ class ProductsRepository {
     required String provider,
     required String imagePath,
     required String description,
+    required String category,
   }) async {
     String url = 'api/products/create';
     try {
@@ -104,11 +105,7 @@ class ProductsRepository {
         'warehouseID': warehouseID,
         'provider': provider,
         'description': description,
-        'category': '1963, 1964',
-        // 'weight': '100',
-        // 'length': '321',
-        // 'width': '1231',
-        // 'height': '1231',
+        'category': category,
       };
 
       StreamedResponse response = await services.postWithFileAndToken(
