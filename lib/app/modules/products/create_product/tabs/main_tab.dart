@@ -160,15 +160,6 @@ class ProductMainTab extends StatelessWidget {
             //   ),
             // ),
             const SizedBox(height: 26),
-            ReactiveFormConsumer(
-              builder: (context, form, child) => LoadingButton(
-                label: 'Crear',
-                // isLoading: controller.loading,
-                isLoading: false,
-                onPressed:
-                    (form.valid) ? () => controller.sendForm(form.value) : null,
-              ),
-            ),
           ],
         );
       },

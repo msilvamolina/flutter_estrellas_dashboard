@@ -1,0 +1,57 @@
+{
+  "isSuccess": true,
+  "count": 10,
+  "status": 200,
+  "objects": [
+    {
+      "id": 1555,
+      "name": "Belleza",
+      "parent_category": 0
+    },
+    {
+      "id": 1958,
+      "name": "Moda",
+      "parent_category": 0
+    },
+    {
+      "id": 1995,
+      "name": "Electr\u00f3nicos",
+      "parent_category": 0
+    },
+    {
+      "id": 1959,
+      "name": "Belleza y Salud",
+      "parent_category": 0
+    },
+    {
+      "id": 1960,
+      "name": "Calzado",
+      "parent_category": 0
+    },
+    {
+      "id": 1961,
+      "name": "Cuidado Personal",
+      "parent_category": 0
+    },
+    {
+      "id": 1962,
+      "name": "Hogar",
+      "parent_category": 0
+    },
+    {
+      "id": 1963,
+      "name": "Cosm\u00e9ticos y Perfumer\u00eda",
+      "parent_category": 0
+    },
+    {
+      "id": 1964,
+      "name": "Accesorios",
+      "parent_category": 0
+    },
+    {
+      "id": 1965,
+      "name": "Aseo y Bienestar",
+      "parent_category": 0
+    }
+  ]
+}

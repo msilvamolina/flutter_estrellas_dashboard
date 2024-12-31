@@ -129,13 +129,24 @@ class CreateProductController extends GetxController {
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Either<String, ProductLiteModel> response = await _repository.createProduct(
+    // Either<String, ProductLiteModel> response = await _repository.createProduct(
+    //   imagePath: _imagePath!,
+    //   price: price,
+    //   suggestedPrice: suggestedPrice,
+    //   name: name,
+    //   points: points,
+    //   warehouseID: warehouseModel!.id,
+    //   provider: providerModel!.id,
+    // );
+
+    Either<String, ProductLiteModel> response = await _repository.updateProduct(
+      id: '6773dbbc0813456f97488cbd',
       imagePath: _imagePath!,
       price: price,
       suggestedPrice: suggestedPrice,
       name: name,
       points: points,
-      warehouseID: warehouseModel!.id,
+      warehouseID: '6772b36ce54f5e0233020bc8',
       provider: providerModel!.id,
     );
     response.fold((failure) {
