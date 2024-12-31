@@ -75,10 +75,19 @@ class CreateProductController extends GetxController {
   final FocusNode descriptionEditorFocusNode = FocusNode();
   final ScrollController descriptionEditorScrollController = ScrollController();
 
+  final QuillController detailsController = QuillController.basic();
+  final FocusNode detailsEditorFocusNode = FocusNode();
+  final ScrollController detailsEditorScrollController = ScrollController();
+
+  final QuillController warrantyController = QuillController.basic();
+  final FocusNode warrantyEditorFocusNode = FocusNode();
+  final ScrollController warrantyEditorScrollController = ScrollController();
+
   @override
   Future<void> onInit() async {
-    descriptionController.document = Document()
-      ..insert(0, ''); // Documento vacío para evitar errores iniciales
+    descriptionController.document = Document()..insert(0, '');
+    detailsController.document = Document()..insert(0, '');
+    warrantyController.document = Document()..insert(0, '');
     super.onInit();
   }
 
@@ -87,6 +96,14 @@ class CreateProductController extends GetxController {
     descriptionController.dispose();
     descriptionEditorScrollController.dispose();
     descriptionEditorFocusNode.dispose();
+
+    detailsController.dispose();
+    detailsEditorScrollController.dispose();
+    detailsEditorFocusNode.dispose();
+
+    warrantyController.dispose();
+    warrantyEditorScrollController.dispose();
+    warrantyEditorFocusNode.dispose();
     super.dispose();
   }
 

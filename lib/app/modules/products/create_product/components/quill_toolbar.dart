@@ -122,24 +122,24 @@ class CustomToolbar extends StatelessWidget {
             controller: controller,
             isBackground: true, // Color del fondo
           ),
-          const VerticalDivider(),
+          // const VerticalDivider(),
 
           // Medios (imágenes, videos, etc.)
-          QuillToolbarImageButton(
-            controller: controller, // Insertar imagen
-          ),
-          QuillToolbarCameraButton(
-            controller: controller, // Capturar desde la cámara
-          ),
-          QuillToolbarVideoButton(
-            controller: controller, // Insertar video
-          ),
-          const VerticalDivider(),
+          // QuillToolbarImageButton(
+          //   controller: controller, // Insertar imagen
+          // ),
+          // QuillToolbarCameraButton(
+          //   controller: controller, // Capturar desde la cámara
+          // ),
+          // QuillToolbarVideoButton(
+          //   controller: controller, // Insertar video
+          // ),
+          // const VerticalDivider(),
 
-          // Enlaces (añadir y eliminar)
-          QuillToolbarLinkStyleButton(
-            controller: controller, // Agregar enlace
-          ),
+          // // Enlaces (añadir y eliminar)
+          // QuillToolbarLinkStyleButton(
+          //   controller: controller, // Agregar enlace
+          // ),
         ],
       ),
     );
