@@ -44,6 +44,19 @@ class CreateProductController extends GetxController {
   ProviderWarehouseModel? _warehouseModel;
   ProviderWarehouseModel? get warehouseModel => _warehouseModel;
 
+  final Map<String, int> categoryMap = {
+    'Belleza': 1555,
+    'Moda': 1958,
+    'Electrónicos': 1995,
+    'Belleza y Salud': 1959,
+    'Calzado': 1960,
+    'Cuidado Personal': 1961,
+    'Hogar': 1962,
+    'Cosméticos y Perfumería': 1963,
+    'Accesorios': 1964,
+    'Aseo y Bienestar': 1965,
+  };
+
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
           validators: [
