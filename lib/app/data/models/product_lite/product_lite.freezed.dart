@@ -31,6 +31,12 @@ mixin _$ProductLiteModel {
   bool? get isPercentage => throw _privateConstructorUsedError;
   bool? get showInFeed => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
+  dynamic get descriptionFormatted => throw _privateConstructorUsedError;
+  String? get descriptionPlainText => throw _privateConstructorUsedError;
+  dynamic get detailsFormatted => throw _privateConstructorUsedError;
+  String? get detailsPlainText => throw _privateConstructorUsedError;
+  dynamic get warrantyFormatted => throw _privateConstructorUsedError;
+  String? get warrantyPlainText => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
   String? get defaultVariation => throw _privateConstructorUsedError;
   dynamic get attributes => throw _privateConstructorUsedError;
@@ -66,6 +72,12 @@ abstract class $ProductLiteModelCopyWith<$Res> {
       bool? isPercentage,
       bool? showInFeed,
       bool? active,
+      dynamic descriptionFormatted,
+      String? descriptionPlainText,
+      dynamic detailsFormatted,
+      String? detailsPlainText,
+      dynamic warrantyFormatted,
+      String? warrantyPlainText,
       String? thumbnail,
       String? defaultVariation,
       dynamic attributes,
@@ -100,6 +112,12 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? isPercentage = freezed,
     Object? showInFeed = freezed,
     Object? active = freezed,
+    Object? descriptionFormatted = freezed,
+    Object? descriptionPlainText = freezed,
+    Object? detailsFormatted = freezed,
+    Object? detailsPlainText = freezed,
+    Object? warrantyFormatted = freezed,
+    Object? warrantyPlainText = freezed,
     Object? thumbnail = freezed,
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
@@ -149,6 +167,30 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
+      descriptionFormatted: freezed == descriptionFormatted
+          ? _value.descriptionFormatted
+          : descriptionFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionPlainText: freezed == descriptionPlainText
+          ? _value.descriptionPlainText
+          : descriptionPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailsFormatted: freezed == detailsFormatted
+          ? _value.detailsFormatted
+          : detailsFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      detailsPlainText: freezed == detailsPlainText
+          ? _value.detailsPlainText
+          : detailsPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warrantyFormatted: freezed == warrantyFormatted
+          ? _value.warrantyFormatted
+          : warrantyFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      warrantyPlainText: freezed == warrantyPlainText
+          ? _value.warrantyPlainText
+          : warrantyPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
@@ -200,6 +242,12 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
       bool? isPercentage,
       bool? showInFeed,
       bool? active,
+      dynamic descriptionFormatted,
+      String? descriptionPlainText,
+      dynamic detailsFormatted,
+      String? detailsPlainText,
+      dynamic warrantyFormatted,
+      String? warrantyPlainText,
       String? thumbnail,
       String? defaultVariation,
       dynamic attributes,
@@ -232,6 +280,12 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? isPercentage = freezed,
     Object? showInFeed = freezed,
     Object? active = freezed,
+    Object? descriptionFormatted = freezed,
+    Object? descriptionPlainText = freezed,
+    Object? detailsFormatted = freezed,
+    Object? detailsPlainText = freezed,
+    Object? warrantyFormatted = freezed,
+    Object? warrantyPlainText = freezed,
     Object? thumbnail = freezed,
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
@@ -281,6 +335,30 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
+      descriptionFormatted: freezed == descriptionFormatted
+          ? _value.descriptionFormatted
+          : descriptionFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionPlainText: freezed == descriptionPlainText
+          ? _value.descriptionPlainText
+          : descriptionPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailsFormatted: freezed == detailsFormatted
+          ? _value.detailsFormatted
+          : detailsFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      detailsPlainText: freezed == detailsPlainText
+          ? _value.detailsPlainText
+          : detailsPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warrantyFormatted: freezed == warrantyFormatted
+          ? _value.warrantyFormatted
+          : warrantyFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      warrantyPlainText: freezed == warrantyPlainText
+          ? _value.warrantyPlainText
+          : warrantyPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
@@ -327,6 +405,12 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.isPercentage,
       this.showInFeed,
       this.active,
+      this.descriptionFormatted,
+      this.descriptionPlainText,
+      this.detailsFormatted,
+      this.detailsPlainText,
+      this.warrantyFormatted,
+      this.warrantyPlainText,
       this.thumbnail,
       this.defaultVariation,
       this.attributes,
@@ -361,6 +445,18 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final bool? active;
   @override
+  final dynamic descriptionFormatted;
+  @override
+  final String? descriptionPlainText;
+  @override
+  final dynamic detailsFormatted;
+  @override
+  final String? detailsPlainText;
+  @override
+  final dynamic warrantyFormatted;
+  @override
+  final String? warrantyPlainText;
+  @override
   final String? thumbnail;
   @override
   final String? defaultVariation;
@@ -377,7 +473,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -399,6 +495,18 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
             (identical(other.showInFeed, showInFeed) ||
                 other.showInFeed == showInFeed) &&
             (identical(other.active, active) || other.active == active) &&
+            const DeepCollectionEquality()
+                .equals(other.descriptionFormatted, descriptionFormatted) &&
+            (identical(other.descriptionPlainText, descriptionPlainText) ||
+                other.descriptionPlainText == descriptionPlainText) &&
+            const DeepCollectionEquality()
+                .equals(other.detailsFormatted, detailsFormatted) &&
+            (identical(other.detailsPlainText, detailsPlainText) ||
+                other.detailsPlainText == detailsPlainText) &&
+            const DeepCollectionEquality()
+                .equals(other.warrantyFormatted, warrantyFormatted) &&
+            (identical(other.warrantyPlainText, warrantyPlainText) ||
+                other.warrantyPlainText == warrantyPlainText) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.defaultVariation, defaultVariation) ||
@@ -417,25 +525,32 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      externalId,
-      price,
-      points,
-      suggestedPrice,
-      type,
-      isPercentage,
-      showInFeed,
-      active,
-      thumbnail,
-      defaultVariation,
-      const DeepCollectionEquality().hash(attributes),
-      const DeepCollectionEquality().hash(variations),
-      warehouseID,
-      createdAt,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        name,
+        externalId,
+        price,
+        points,
+        suggestedPrice,
+        type,
+        isPercentage,
+        showInFeed,
+        active,
+        const DeepCollectionEquality().hash(descriptionFormatted),
+        descriptionPlainText,
+        const DeepCollectionEquality().hash(detailsFormatted),
+        detailsPlainText,
+        const DeepCollectionEquality().hash(warrantyFormatted),
+        warrantyPlainText,
+        thumbnail,
+        defaultVariation,
+        const DeepCollectionEquality().hash(attributes),
+        const DeepCollectionEquality().hash(variations),
+        warehouseID,
+        createdAt,
+        updatedAt
+      ]);
 
   /// Create a copy of ProductLiteModel
   /// with the given fields replaced by the non-null parameter values.
@@ -466,6 +581,12 @@ abstract class _ProductLiteModel extends ProductLiteModel {
       final bool? isPercentage,
       final bool? showInFeed,
       final bool? active,
+      final dynamic descriptionFormatted,
+      final String? descriptionPlainText,
+      final dynamic detailsFormatted,
+      final String? detailsPlainText,
+      final dynamic warrantyFormatted,
+      final String? warrantyPlainText,
       final String? thumbnail,
       final String? defaultVariation,
       final dynamic attributes,
@@ -499,6 +620,18 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   bool? get showInFeed;
   @override
   bool? get active;
+  @override
+  dynamic get descriptionFormatted;
+  @override
+  String? get descriptionPlainText;
+  @override
+  dynamic get detailsFormatted;
+  @override
+  String? get detailsPlainText;
+  @override
+  dynamic get warrantyFormatted;
+  @override
+  String? get warrantyPlainText;
   @override
   String? get thumbnail;
   @override

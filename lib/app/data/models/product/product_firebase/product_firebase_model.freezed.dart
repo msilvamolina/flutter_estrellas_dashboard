@@ -36,6 +36,12 @@ mixin _$ProductFirebaseModel {
   bool? get active => throw _privateConstructorUsedError;
   bool? get isPercentage => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
+  dynamic get descriptionFormatted => throw _privateConstructorUsedError;
+  String? get descriptionPlainText => throw _privateConstructorUsedError;
+  dynamic get detailsFormatted => throw _privateConstructorUsedError;
+  String? get detailsPlainText => throw _privateConstructorUsedError;
+  dynamic get warrantyFormatted => throw _privateConstructorUsedError;
+  String? get warrantyPlainText => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
   String? get warehouseID => throw _privateConstructorUsedError;
@@ -80,6 +86,12 @@ abstract class $ProductFirebaseModelCopyWith<$Res> {
       bool? active,
       bool? isPercentage,
       int? points,
+      dynamic descriptionFormatted,
+      String? descriptionPlainText,
+      dynamic detailsFormatted,
+      String? detailsPlainText,
+      dynamic warrantyFormatted,
+      String? warrantyPlainText,
       double? suggestedPrice,
       String? thumbnail,
       String? warehouseID,
@@ -124,6 +136,12 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
     Object? active = freezed,
     Object? isPercentage = freezed,
     Object? points = freezed,
+    Object? descriptionFormatted = freezed,
+    Object? descriptionPlainText = freezed,
+    Object? detailsFormatted = freezed,
+    Object? detailsPlainText = freezed,
+    Object? warrantyFormatted = freezed,
+    Object? warrantyPlainText = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
     Object? warehouseID = freezed,
@@ -197,6 +215,30 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int?,
+      descriptionFormatted: freezed == descriptionFormatted
+          ? _value.descriptionFormatted
+          : descriptionFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionPlainText: freezed == descriptionPlainText
+          ? _value.descriptionPlainText
+          : descriptionPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailsFormatted: freezed == detailsFormatted
+          ? _value.detailsFormatted
+          : detailsFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      detailsPlainText: freezed == detailsPlainText
+          ? _value.detailsPlainText
+          : detailsPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warrantyFormatted: freezed == warrantyFormatted
+          ? _value.warrantyFormatted
+          : warrantyFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      warrantyPlainText: freezed == warrantyPlainText
+          ? _value.warrantyPlainText
+          : warrantyPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
@@ -269,6 +311,12 @@ abstract class _$$ProductFirebaseModelImplCopyWith<$Res>
       bool? active,
       bool? isPercentage,
       int? points,
+      dynamic descriptionFormatted,
+      String? descriptionPlainText,
+      dynamic detailsFormatted,
+      String? detailsPlainText,
+      dynamic warrantyFormatted,
+      String? warrantyPlainText,
       double? suggestedPrice,
       String? thumbnail,
       String? warehouseID,
@@ -310,6 +358,12 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
     Object? active = freezed,
     Object? isPercentage = freezed,
     Object? points = freezed,
+    Object? descriptionFormatted = freezed,
+    Object? descriptionPlainText = freezed,
+    Object? detailsFormatted = freezed,
+    Object? detailsPlainText = freezed,
+    Object? warrantyFormatted = freezed,
+    Object? warrantyPlainText = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
     Object? warehouseID = freezed,
@@ -383,6 +437,30 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int?,
+      descriptionFormatted: freezed == descriptionFormatted
+          ? _value.descriptionFormatted
+          : descriptionFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionPlainText: freezed == descriptionPlainText
+          ? _value.descriptionPlainText
+          : descriptionPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailsFormatted: freezed == detailsFormatted
+          ? _value.detailsFormatted
+          : detailsFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      detailsPlainText: freezed == detailsPlainText
+          ? _value.detailsPlainText
+          : detailsPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warrantyFormatted: freezed == warrantyFormatted
+          ? _value.warrantyFormatted
+          : warrantyFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      warrantyPlainText: freezed == warrantyPlainText
+          ? _value.warrantyPlainText
+          : warrantyPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
           : suggestedPrice // ignore: cast_nullable_to_non_nullable
@@ -450,6 +528,12 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
       this.active,
       this.isPercentage,
       this.points,
+      this.descriptionFormatted,
+      this.descriptionPlainText,
+      this.detailsFormatted,
+      this.detailsPlainText,
+      this.warrantyFormatted,
+      this.warrantyPlainText,
       this.suggestedPrice,
       this.thumbnail,
       this.warehouseID,
@@ -498,6 +582,18 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   @override
   final int? points;
   @override
+  final dynamic descriptionFormatted;
+  @override
+  final String? descriptionPlainText;
+  @override
+  final dynamic detailsFormatted;
+  @override
+  final String? detailsPlainText;
+  @override
+  final dynamic warrantyFormatted;
+  @override
+  final String? warrantyPlainText;
+  @override
   final double? suggestedPrice;
   @override
   final String? thumbnail;
@@ -522,7 +618,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, warehouseID: $warehouseID, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, warehouseID: $warehouseID, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
   }
 
   @override
@@ -550,6 +646,18 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
             (identical(other.isPercentage, isPercentage) ||
                 other.isPercentage == isPercentage) &&
             (identical(other.points, points) || other.points == points) &&
+            const DeepCollectionEquality()
+                .equals(other.descriptionFormatted, descriptionFormatted) &&
+            (identical(other.descriptionPlainText, descriptionPlainText) ||
+                other.descriptionPlainText == descriptionPlainText) &&
+            const DeepCollectionEquality()
+                .equals(other.detailsFormatted, detailsFormatted) &&
+            (identical(other.detailsPlainText, detailsPlainText) ||
+                other.detailsPlainText == detailsPlainText) &&
+            const DeepCollectionEquality()
+                .equals(other.warrantyFormatted, warrantyFormatted) &&
+            (identical(other.warrantyPlainText, warrantyPlainText) ||
+                other.warrantyPlainText == warrantyPlainText) &&
             (identical(other.suggestedPrice, suggestedPrice) ||
                 other.suggestedPrice == suggestedPrice) &&
             (identical(other.thumbnail, thumbnail) ||
@@ -592,6 +700,12 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
         active,
         isPercentage,
         points,
+        const DeepCollectionEquality().hash(descriptionFormatted),
+        descriptionPlainText,
+        const DeepCollectionEquality().hash(detailsFormatted),
+        detailsPlainText,
+        const DeepCollectionEquality().hash(warrantyFormatted),
+        warrantyPlainText,
         suggestedPrice,
         thumbnail,
         warehouseID,
@@ -640,6 +754,12 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
       final bool? active,
       final bool? isPercentage,
       final int? points,
+      final dynamic descriptionFormatted,
+      final String? descriptionPlainText,
+      final dynamic detailsFormatted,
+      final String? detailsPlainText,
+      final dynamic warrantyFormatted,
+      final String? warrantyPlainText,
       final double? suggestedPrice,
       final String? thumbnail,
       final String? warehouseID,
@@ -687,6 +807,18 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   bool? get isPercentage;
   @override
   int? get points;
+  @override
+  dynamic get descriptionFormatted;
+  @override
+  String? get descriptionPlainText;
+  @override
+  dynamic get detailsFormatted;
+  @override
+  String? get detailsPlainText;
+  @override
+  dynamic get warrantyFormatted;
+  @override
+  String? get warrantyPlainText;
   @override
   double? get suggestedPrice;
   @override

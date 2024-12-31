@@ -213,37 +213,103 @@ class CreateProductController extends GetxController {
     });
   }
 
+  String normalize(String text) {
+    return text
+        .replaceAll(RegExp(r'\s+'),
+            ' ') // Sustituye espacios múltiples por un solo espacio
+        .trim() // Elimina espacios al inicio y al final
+        .toLowerCase(); // Convierte todo a minúsculas
+  }
+
   Future<void> sendForm(Map<String, Object?> data) async {
-    final json = jsonEncode(descriptionController.document.toDelta().toJson());
+    if (_imagePath == null) {
+      Get.snackbar('Error', "Tienes que elegir una imagen");
+      return;
+    }
 
-    log(json.toString());
-    // if (_imagePath == null) {
-    //   Get.snackbar('Error', "Tienes que elegir una imagen");
-    //   return;
-    // }
+    if (_warehouseModel == null) {
+      Get.snackbar('Error', "Tienes que elegir una bodega");
+      return;
+    }
+    String descriptionDefault = '';
+    final descriptionPlainText = descriptionController.document.toPlainText();
 
-    // if (_warehouseModel == null) {
-    //   Get.snackbar('Error', "Tienes que elegir una bodega");
-    //   return;
-    // }
-    // String name = data[Fields.name.name].toString();
-    // String price = data[Fields.price.name].toString();
-    // String suggestedPrice = data[Fields.suggestedPrice.name].toString();
-    // String points = data[Fields.points.name].toString();
+    bool descriptionNotModified =
+        normalize(descriptionPlainText) == normalize(descriptionDefault);
 
-    // _mainController.setDropiDialog(true);
-    // _mainController.showDropiLoader();
-    // _mainController.setDropiMessage('Iniciando conexión');
+    if (descriptionNotModified) {
+      Get.snackbar('Error', "Revisa la descripción, no puede estar vacía");
+      return;
+    }
+    String detailsDefault =
+        'Marca: Tesslux\nCapacidad: 1 Litro\nColor: Plateado (silver)\nDimensiones del producto: 12"prof. x 8"an. x 11,8"al. pulgadas\nCaracterísticas especiales: Apagado automático, Programable, Función de limpieza automática, Espumador\nTipo de cafetera: Cafetera de espresso\nDescripción adicional: Control de un botón: haz fácilmente espresso, capuchino o café con leche con solo presionar un botón.';
+    final detailsPlainText = detailsController.document.toPlainText();
 
-    // Either<String, ProductLiteModel> response = await _repository.createProduct(
-    //   imagePath: _imagePath!,
-    //   price: price,
-    //   suggestedPrice: suggestedPrice,
-    //   name: name,
-    //   points: points,
-    //   warehouseID: warehouseModel!.id,
-    //   provider: providerModel!.id,
-    // );
+    bool detailsNotModified =
+        normalize(detailsPlainText) == normalize(detailsDefault);
+
+    if (detailsNotModified) {
+      Get.snackbar('Error', "Revisa los detalles, todavía tiene texto mockup");
+      return;
+    }
+
+    String warrantyDefault =
+        'Duración de la Garantía: Este producto cuenta con una garantía limitada de 12 meses desde la fecha de compra.\nCobertura: La garantía cubre defectos de fabricación en materiales y mano de obra bajo condiciones normales de uso.\nExclusiones: No se cubren daños causados por mal uso, accidentes, desgaste natural, manipulación indebida o reparaciones no autorizadas.';
+    final warrantyPlainText = warrantyController.document.toPlainText();
+
+    bool warrantyNotModified =
+        normalize(warrantyPlainText) == normalize(warrantyDefault);
+
+    if (warrantyNotModified) {
+      Get.snackbar('Error', "Revisa las garantías, todavía tiene texto mockup");
+      return;
+    }
+
+    final detailsJson =
+        jsonEncode(detailsController.document.toDelta().toJson());
+
+    final warrantyJson =
+        jsonEncode(warrantyController.document.toDelta().toJson());
+
+    final descriptionJson =
+        jsonEncode(descriptionController.document.toDelta().toJson());
+
+    String name = data[Fields.name.name].toString();
+    String price = data[Fields.price.name].toString();
+    String suggestedPrice = data[Fields.suggestedPrice.name].toString();
+    String points = data[Fields.points.name].toString();
+
+    _mainController.setDropiDialog(true);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, ProductLiteModel> response = await _repository.createProduct(
+      imagePath: _imagePath!,
+      price: price,
+      suggestedPrice: suggestedPrice,
+      name: name,
+      points: points,
+      warehouseID: warehouseModel!.id,
+      provider: providerModel!.id,
+    );
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (product) async {
+      ProductLiteModel newProduct = product.copyWith(
+        detailsPlainText: detailsPlainText.toString(),
+        detailsFormatted: detailsJson,
+        warrantyPlainText: warrantyPlainText.toString(),
+        warrantyFormatted: warrantyJson,
+        descriptionFormatted: descriptionJson,
+        descriptionPlainText: descriptionPlainText,
+      );
+      _mainController.setDropiMessage('Success!');
+      saveInFirebase(
+        product: newProduct,
+        imagePath: _imagePath!,
+      );
+    });
 
     // Either<String, ProductLiteModel> response = await _repository.updateProduct(
     //   id: '6773dbbc0813456f97488cbd',
@@ -255,12 +321,6 @@ class CreateProductController extends GetxController {
     //   warehouseID: '6772b36ce54f5e0233020bc8',
     //   provider: providerModel!.id,
     // );
-    // response.fold((failure) {
-    //   _mainController.setDropiDialogError(true, failure);
-    // }, (product) async {
-    //   _mainController.setDropiMessage('Success!');
-    //   saveInFirebase(product: product, imagePath: _imagePath!);
-    // });
 
     // Either<String, Unit> response = await _repository.deleteProduct(
     //   externalId: '1425674',
