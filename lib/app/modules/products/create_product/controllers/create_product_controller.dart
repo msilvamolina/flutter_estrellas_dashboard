@@ -5,6 +5,8 @@ import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_m
 import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
 import 'package:estrellas_dashboard/app/modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -69,9 +71,23 @@ class CreateProductController extends GetxController {
         ),
       });
 
+  final QuillController descriptionController = QuillController.basic();
+  final FocusNode descriptionEditorFocusNode = FocusNode();
+  final ScrollController descriptionEditorScrollController = ScrollController();
+
   @override
   Future<void> onInit() async {
+    descriptionController.document = Document()
+      ..insert(0, ''); // Documento vacío para evitar errores iniciales
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    descriptionController.dispose();
+    descriptionEditorScrollController.dispose();
+    descriptionEditorFocusNode.dispose();
+    super.dispose();
   }
 
   Future<void> pickImage() async {
