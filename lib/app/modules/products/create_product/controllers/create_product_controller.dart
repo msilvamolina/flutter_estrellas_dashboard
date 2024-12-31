@@ -291,6 +291,7 @@ class CreateProductController extends GetxController {
       points: points,
       warehouseID: warehouseModel!.id,
       provider: providerModel!.id,
+      description: descriptionPlainText,
     );
 
     response.fold((failure) {
