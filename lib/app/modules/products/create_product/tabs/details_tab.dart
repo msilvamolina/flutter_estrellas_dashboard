@@ -4,6 +4,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 
 import '../components/quill_toolbar.dart';
+import '../components/warranty_toolbar.dart';
 
 class ProductDetailsTab extends StatelessWidget {
   const ProductDetailsTab({super.key});
@@ -15,7 +16,7 @@ class ProductDetailsTab extends StatelessWidget {
         return SafeArea(
           child: Column(
             children: [
-              CustomToolbar(controller: controller.detailsController),
+              SimpleCustomToolbar(controller: controller.detailsController),
               Expanded(
                 child: QuillEditor(
                   controller: controller.detailsController,

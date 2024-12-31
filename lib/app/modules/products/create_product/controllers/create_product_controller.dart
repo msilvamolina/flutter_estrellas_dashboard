@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/product_lite/product_lite.dart';
@@ -86,8 +89,75 @@ class CreateProductController extends GetxController {
   @override
   Future<void> onInit() async {
     descriptionController.document = Document()..insert(0, '');
-    detailsController.document = Document()..insert(0, '');
-    warrantyController.document = Document()..insert(0, '');
+    detailsController.document = Document.fromJson([
+      {
+        "insert": "Marca: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "Tesslux\n\n"},
+      {
+        "insert": "Capacidad: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "1 Litro\n\n"},
+      {
+        "insert": "Color: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "Plateado (silver)\n\n"},
+      {
+        "insert": "Dimensiones del producto: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "12\"prof. x 8\"an. x 11,8\"al. pulgadas\n\n"},
+      {
+        "insert": "Características especiales: ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert":
+            "Apagado automático, Programable, Función de limpieza automática, Espumador\n\n"
+      },
+      {
+        "insert": "Tipo de cafetera: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "Cafetera de espresso\n\n"},
+      {
+        "insert": "Descripción adicional: ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert":
+            "Control de un botón: haz fácilmente espresso, capuchino o café con leche con solo presionar un botón.\n\n"
+      }
+    ]);
+    warrantyController.document = Document.fromJson([
+      {
+        "insert": "Duración de la Garantía: ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert":
+            "Este producto cuenta con una garantía limitada de 12 meses desde la fecha de compra.\n\n"
+      },
+      {
+        "insert": "Cobertura: ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert":
+            "La garantía cubre defectos de fabricación en materiales y mano de obra bajo condiciones normales de uso.\n\n"
+      },
+      {
+        "insert": "Exclusiones: ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert":
+            "No se cubren daños causados por mal uso, accidentes, desgaste natural, manipulación indebida o reparaciones no autorizadas.\n"
+      }
+    ]);
     super.onInit();
   }
 
@@ -144,23 +214,26 @@ class CreateProductController extends GetxController {
   }
 
   Future<void> sendForm(Map<String, Object?> data) async {
-    if (_imagePath == null) {
-      Get.snackbar('Error', "Tienes que elegir una imagen");
-      return;
-    }
+    final json = jsonEncode(descriptionController.document.toDelta().toJson());
 
-    if (_warehouseModel == null) {
-      Get.snackbar('Error', "Tienes que elegir una bodega");
-      return;
-    }
-    String name = data[Fields.name.name].toString();
-    String price = data[Fields.price.name].toString();
-    String suggestedPrice = data[Fields.suggestedPrice.name].toString();
-    String points = data[Fields.points.name].toString();
+    log(json.toString());
+    // if (_imagePath == null) {
+    //   Get.snackbar('Error', "Tienes que elegir una imagen");
+    //   return;
+    // }
 
-    _mainController.setDropiDialog(true);
-    _mainController.showDropiLoader();
-    _mainController.setDropiMessage('Iniciando conexión');
+    // if (_warehouseModel == null) {
+    //   Get.snackbar('Error', "Tienes que elegir una bodega");
+    //   return;
+    // }
+    // String name = data[Fields.name.name].toString();
+    // String price = data[Fields.price.name].toString();
+    // String suggestedPrice = data[Fields.suggestedPrice.name].toString();
+    // String points = data[Fields.points.name].toString();
+
+    // _mainController.setDropiDialog(true);
+    // _mainController.showDropiLoader();
+    // _mainController.setDropiMessage('Iniciando conexión');
 
     // Either<String, ProductLiteModel> response = await _repository.createProduct(
     //   imagePath: _imagePath!,
@@ -189,8 +262,8 @@ class CreateProductController extends GetxController {
     //   saveInFirebase(product: product, imagePath: _imagePath!);
     // });
 
-    Either<String, Unit> response = await _repository.deleteProduct(
-      externalId: '1425674',
-    );
+    // Either<String, Unit> response = await _repository.deleteProduct(
+    //   externalId: '1425674',
+    // );
   }
 }
