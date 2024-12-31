@@ -124,6 +124,97 @@ class ProvidersRepository {
     }
   }
 
+  Future<Either<String, ProviderModel>> updateProvider({
+    required String externalId,
+    required String avatarURL,
+    required String name,
+    required String surname,
+    required String email,
+    required String phone,
+    required String document,
+    required String porcentage,
+  }) async {
+    String url = 'api/provider/updateProvider';
+    try {
+      Map<String, dynamic> body = {
+        'externalID': externalId,
+        'email': email,
+        'name': name,
+        'surname': surname,
+        'phone': phone,
+        'document': document,
+        'porcentage': porcentage,
+      };
+
+      Map<String, dynamic> fields = {
+        'provider': jsonEncode(body),
+      };
+
+      StreamedResponse response = await services.postWithFileAndToken(
+        url: url,
+        fields: fields,
+        fieldImageName: 'avatarURL',
+        fieldImagePath: avatarURL,
+      );
+
+      String responseBody =
+          await response.stream.transform(utf8.decoder).join();
+
+      dynamic json = jsonDecode(responseBody);
+
+      log(json['data'].toString());
+      bool ok = json['ok'] ?? false;
+
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
+
+      if (!ok) {
+        return left(json['data']);
+      }
+
+      ProviderModel providerModel = ProviderModel.fromJson(json['data']);
+
+      return right(providerModel);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  Future<Either<String, Unit>> deleteProvider({
+    required String id,
+  }) async {
+    String url = 'api/provider/deleteProvider';
+    try {
+      Map<String, dynamic> body = {
+        "providerID": id,
+        "motiveBan": "4",
+        "reasonBan": "Ya no existe el proveedor"
+      };
+
+      Response response = await services.postWithToken(url: url, body: body);
+      dynamic json = jsonDecode(response.body);
+
+      log(json.toString());
+
+      bool ok = json['ok'] ?? false;
+
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
+
+      if (!ok) {
+        return left(json['data']);
+      }
+
+      return right(unit);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
   Future<Either<String, ProviderModel>> createWarehouse({
     required String name,
     required String phone,

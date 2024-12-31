@@ -118,20 +118,36 @@ class CreateProviderController extends GetxController {
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
-    Either<String, ProviderModel> response = await _repository.createProvider(
-      avatarURL: _imagePath!,
-      name: name,
-      surname: surname,
-      email: email,
-      phone: phone,
-      document: document,
-      porcentage: porcentage,
+    // Either<String, ProviderModel> response = await _repository.createProvider(
+    //   avatarURL: _imagePath!,
+    //   name: name,
+    //   surname: surname,
+    //   email: email,
+    //   phone: phone,
+    //   document: document,
+    //   porcentage: porcentage,
+    // );
+
+    // Either<String, ProviderModel> response = await _repository.updateProvider(
+    //   externalId: '369908',
+    //   avatarURL: _imagePath!,
+    //   name: name,
+    //   surname: surname,
+    //   email: email,
+    //   phone: phone,
+    //   document: document,
+    //   porcentage: porcentage,
+    // );
+
+    // response.fold((failure) {
+    //   _mainController.setDropiDialogError(true, failure);
+    // }, (provider) async {
+    //   _mainController.setDropiMessage('Success!');
+    //   saveInFirebase(provider: provider);
+    // });
+
+    Either<String, Unit> response = await _repository.deleteProvider(
+      id: '676d9230218dd3004b4b1f5f',
     );
-    response.fold((failure) {
-      _mainController.setDropiDialogError(true, failure);
-    }, (provider) async {
-      _mainController.setDropiMessage('Success!');
-      saveInFirebase(provider: provider);
-    });
   }
 }
