@@ -6,20 +6,15 @@ import 'package:estrellas_dashboard/app/data/models/product/product/product.dart
 import 'package:estrellas_dashboard/app/data/models/product_lite/product_lite.dart';
 import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_model.dart';
 import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
-import 'package:estrellas_dashboard/app/data/providers/repositories/providers/providers_repository.dart';
-import 'package:estrellas_dashboard/app/modules/providers/providers_warehouses/views/providers_warehouses_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/controllers/main_controller.dart';
 import '../../../../data/models/provider/warehouse/provider_warehouse_model.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../utils/utils_image.dart';
-import '../tabs/main_tab.dart';
 
 enum Fields {
   name('name'),
@@ -44,8 +39,11 @@ class CreateProductController extends GetxController {
 
   ProviderWarehouseModel? _warehouseModel;
   ProviderWarehouseModel? get warehouseModel => _warehouseModel;
-  final tagsController = GlobalKey<MultipleInlineState>();
 
+  // Estado de las categorías seleccionadas
+  final RxList<String> multipleSelected = <String>[].obs;
+
+  // Mapa de categorías
   final Map<String, int> categoryMap = {
     'Belleza': 1555,
     'Moda': 1958,
@@ -58,6 +56,23 @@ class CreateProductController extends GetxController {
     'Accesorios': 1964,
     'Aseo y Bienestar': 1965,
   };
+
+  // Datos generados de las categorías
+  List<Map<String, Object>>? _categoriesJson;
+  String? _categoriesIds;
+  String? _categoriesNames;
+
+  final QuillController descriptionController = QuillController.basic();
+  final FocusNode descriptionEditorFocusNode = FocusNode();
+  final ScrollController descriptionEditorScrollController = ScrollController();
+
+  final QuillController detailsController = QuillController.basic();
+  final FocusNode detailsEditorFocusNode = FocusNode();
+  final ScrollController detailsEditorScrollController = ScrollController();
+
+  final QuillController warrantyController = QuillController.basic();
+  final FocusNode warrantyEditorFocusNode = FocusNode();
+  final ScrollController warrantyEditorScrollController = ScrollController();
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
@@ -89,24 +104,10 @@ class CreateProductController extends GetxController {
         ),
       });
 
-  final QuillController descriptionController = QuillController.basic();
-  final FocusNode descriptionEditorFocusNode = FocusNode();
-  final ScrollController descriptionEditorScrollController = ScrollController();
-
-  final QuillController detailsController = QuillController.basic();
-  final FocusNode detailsEditorFocusNode = FocusNode();
-  final ScrollController detailsEditorScrollController = ScrollController();
-
-  final QuillController warrantyController = QuillController.basic();
-  final FocusNode warrantyEditorFocusNode = FocusNode();
-  final ScrollController warrantyEditorScrollController = ScrollController();
-
-  List<Map<String, Object>>? _categoriesJson;
-  String? _categoriesIds;
-  String? _categoriesNames;
-
   @override
   Future<void> onInit() async {
+    super.onInit();
+
     descriptionController.document = Document()..insert(0, '');
     detailsController.document = Document.fromJson([
       {
@@ -177,7 +178,6 @@ class CreateProductController extends GetxController {
             "No se cubren daños causados por mal uso, accidentes, desgaste natural, manipulación indebida o reparaciones no autorizadas.\n"
       }
     ]);
-    super.onInit();
   }
 
   @override
@@ -194,6 +194,22 @@ class CreateProductController extends GetxController {
     warrantyEditorScrollController.dispose();
     warrantyEditorFocusNode.dispose();
     super.dispose();
+  }
+
+  void updateMultipleSelected(List<String> selected) {
+    multipleSelected.assignAll(selected);
+    update(
+        ['categories']); // Actualiza las vistas relacionadas con las categorías
+  }
+
+  void buildCategories() {
+    _categoriesJson = multipleSelected
+        .map((name) => {'name': name, 'id': categoryMap[name]!})
+        .toList();
+
+    _categoriesIds =
+        multipleSelected.map((name) => categoryMap[name]!).join(',');
+    _categoriesNames = multipleSelected.join(', ');
   }
 
   Future<void> pickImage() async {
@@ -238,34 +254,6 @@ class CreateProductController extends GetxController {
             ' ') // Sustituye espacios múltiples por un solo espacio
         .trim() // Elimina espacios al inicio y al final
         .toLowerCase(); // Convierte todo a minúsculas
-  }
-
-  void buildCategories() {
-    // Asegurarse de que tagsController.currentState no sea nulo
-    if (tagsController.currentState != null) {
-      // Construir la lista de categorías seleccionadas como Map
-      _categoriesJson =
-          tagsController.currentState!.multipleSelected.map((tag) {
-        return {
-          'name': tag,
-          'id': categoryMap[tag]!,
-        };
-      }).toList();
-
-      // Construir el String de IDs separados por comas
-      _categoriesIds = tagsController.currentState!.multipleSelected
-          .map((tag) => categoryMap[tag]!)
-          .join(',');
-
-      // Construir el String de nombres separados por comas
-      _categoriesNames =
-          tagsController.currentState!.multipleSelected.join(', ');
-    } else {
-      // Si tagsController.currentState es nulo, asegurar valores predeterminados
-      _categoriesJson = [];
-      _categoriesIds = '';
-      _categoriesNames = '';
-    }
   }
 
   Future<void> sendForm(Map<String, Object?> data) async {

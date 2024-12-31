@@ -1,10 +1,8 @@
-import 'package:choice/choice.dart';
-import 'package:estrellas_dashboard/app/modules/new_variations_pickers/views/new_variations_pickers_view.dart';
+import 'package:estrellas_dashboard/app/modules/products/create_product/components/categories_tags.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../../components/widgets/loadingButton.dart';
 import '../../../../themes/input_decoration.dart';
 import '../../../../themes/styles/typography.dart';
 import '../controllers/create_product_controller.dart';
@@ -14,8 +12,6 @@ class ProductMainTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color primary = Theme.of(context).colorScheme.primary;
-
     return GetBuilder<CreateProductController>(
       id: 'view',
       builder: (controller) {
@@ -23,6 +19,7 @@ class ProductMainTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Imagen del producto
               Card(
                 child: InkWell(
                   onTap: controller.pickImage,
@@ -36,7 +33,6 @@ class ProductMainTab extends StatelessWidget {
                           width: 80,
                         ),
                         const SizedBox(width: 12),
-                        // Elimina el Padding alrededor del Expanded
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,8 +41,9 @@ class ProductMainTab extends StatelessWidget {
                             children: [
                               Text(
                                 'Avatar Url',
-                                style: TypographyStyle.bodyBlackLarge
-                                    .copyWith(color: primary),
+                                style: TypographyStyle.bodyBlackLarge.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -58,7 +55,7 @@ class ProductMainTab extends StatelessWidget {
                         ),
                         Icon(
                           Icons.chevron_right_rounded,
-                          color: primary,
+                          color: Theme.of(context).colorScheme.primary,
                           size: 48,
                         ),
                       ],
@@ -67,6 +64,8 @@ class ProductMainTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
+              // Selección de bodega
               Card(
                 child: InkWell(
                   onTap: controller.pickWarehouse,
@@ -80,7 +79,6 @@ class ProductMainTab extends StatelessWidget {
                           width: 80,
                         ),
                         const SizedBox(width: 12),
-                        // Elimina el Padding alrededor del Expanded
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,15 +87,15 @@ class ProductMainTab extends StatelessWidget {
                             children: [
                               Text(
                                 'Bodega',
-                                style: TypographyStyle.bodyBlackLarge
-                                    .copyWith(color: primary),
+                                style: TypographyStyle.bodyBlackLarge.copyWith(
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                (controller.warehouseModel != null
-                                        ? ('${controller.warehouseModel!.name}\n${controller.providerModel!.name!}')
-                                        : null) ??
-                                    '(Selecciona un proveedor)',
+                                controller.warehouseModel != null
+                                    ? ('${controller.warehouseModel!.name}\n${controller.providerModel!.name!}')
+                                    : '(Selecciona un proveedor)',
                                 style: TypographyStyle.bodyRegularSmall,
                               ),
                             ],
@@ -105,7 +103,7 @@ class ProductMainTab extends StatelessWidget {
                         ),
                         Icon(
                           Icons.chevron_right_rounded,
-                          color: primary,
+                          color: Theme.of(context).colorScheme.primary,
                           size: 48,
                         ),
                       ],
@@ -114,6 +112,8 @@ class ProductMainTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
+              // Campos de texto
               ReactiveTextField(
                 formControlName: Fields.name.name,
                 keyboardType: TextInputType.text,
@@ -122,6 +122,7 @@ class ProductMainTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
               ReactiveTextField(
                 formControlName: Fields.price.name,
                 keyboardType: TextInputType.number,
@@ -130,6 +131,7 @@ class ProductMainTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
               ReactiveTextField(
                 formControlName: Fields.suggestedPrice.name,
                 keyboardType: TextInputType.number,
@@ -138,6 +140,7 @@ class ProductMainTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
               ReactiveTextField(
                 formControlName: Fields.points.name,
                 keyboardType: TextInputType.number,
@@ -146,67 +149,22 @@ class ProductMainTab extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 26),
+
+              // Sección de Categorías
               Text(
                 'Categorías:',
                 style: TypographyStyle.bodyBlackLarge,
               ),
               const SizedBox(height: 8),
-              MultipleInline(
-                key: controller.tagsController,
-                categoryMap: controller.categoryMap,
-              ),
+
+              // Componente de selección múltiple
+              const CategoriesTags(),
+
               const SizedBox(height: 46),
             ],
           ),
         );
       },
-    );
-  }
-}
-
-class MultipleInline extends StatefulWidget {
-  final Map<String, int> categoryMap;
-
-  const MultipleInline({
-    super.key,
-    required this.categoryMap,
-  });
-
-  @override
-  State<MultipleInline> createState() => MultipleInlineState();
-}
-
-class MultipleInlineState extends State<MultipleInline> {
-  List<String> multipleSelected = [];
-
-  void setMultipleSelected(List<String> value) {
-    setState(() => multipleSelected = value);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return InlineChoice<String>(
-      multiple: true,
-      clearable: true,
-      value: multipleSelected,
-      onChanged: setMultipleSelected,
-      itemCount: widget.categoryMap.length,
-      itemBuilder: (selection, i) {
-        final categoryName = widget.categoryMap.keys.elementAt(i);
-        return ChoiceChip(
-          selected: selection.selected(categoryName),
-          onSelected: selection.onSelected(categoryName),
-          label: Text(categoryName),
-        );
-      },
-      listBuilder: ChoiceList.createWrapped(
-        spacing: 10,
-        runSpacing: 10,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 0,
-          vertical: 0,
-        ),
-      ),
     );
   }
 }
