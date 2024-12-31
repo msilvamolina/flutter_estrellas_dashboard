@@ -219,6 +219,8 @@ class ProductsRepository {
       dynamic json = jsonDecode(response.body);
       bool ok = json['ok'] ?? false;
 
+      log(json.toString());
+
       if (response.statusCode != 200) {
         String? data = json['data'];
         return left('Error status code: ${response.statusCode}.\n$data');
@@ -227,8 +229,6 @@ class ProductsRepository {
       if (!ok) {
         return left(json['data']);
       }
-
-      log(json['data'].toString());
 
       return right(unit);
     } catch (e) {

@@ -157,7 +157,7 @@ class CreateProductController extends GetxController {
     // });
 
     Either<String, Unit> response = await _repository.deleteProduct(
-      externalId: '1425678',
+      externalId: '1425674',
     );
   }
 }
