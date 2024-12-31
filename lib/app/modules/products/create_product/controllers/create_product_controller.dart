@@ -139,21 +139,25 @@ class CreateProductController extends GetxController {
     //   provider: providerModel!.id,
     // );
 
-    Either<String, ProductLiteModel> response = await _repository.updateProduct(
-      id: '6773dbbc0813456f97488cbd',
-      imagePath: _imagePath!,
-      price: price,
-      suggestedPrice: suggestedPrice,
-      name: name,
-      points: points,
-      warehouseID: '6772b36ce54f5e0233020bc8',
-      provider: providerModel!.id,
+    // Either<String, ProductLiteModel> response = await _repository.updateProduct(
+    //   id: '6773dbbc0813456f97488cbd',
+    //   imagePath: _imagePath!,
+    //   price: price,
+    //   suggestedPrice: suggestedPrice,
+    //   name: name,
+    //   points: points,
+    //   warehouseID: '6772b36ce54f5e0233020bc8',
+    //   provider: providerModel!.id,
+    // );
+    // response.fold((failure) {
+    //   _mainController.setDropiDialogError(true, failure);
+    // }, (product) async {
+    //   _mainController.setDropiMessage('Success!');
+    //   saveInFirebase(product: product, imagePath: _imagePath!);
+    // });
+
+    Either<String, Unit> response = await _repository.deleteProduct(
+      externalId: '1425678',
     );
-    response.fold((failure) {
-      _mainController.setDropiDialogError(true, failure);
-    }, (product) async {
-      _mainController.setDropiMessage('Success!');
-      saveInFirebase(product: product, imagePath: _imagePath!);
-    });
   }
 }

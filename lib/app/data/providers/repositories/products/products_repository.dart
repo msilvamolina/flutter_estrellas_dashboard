@@ -206,6 +206,36 @@ class ProductsRepository {
     }
   }
 
+  Future<Either<String, Unit>> deleteProduct({
+    required String externalId,
+  }) async {
+    String url = 'api/products/deleteProduct';
+    try {
+      Map<String, dynamic> body = {
+        'externalId': externalId,
+      };
+
+      Response response = await services.postWithToken(url: url, body: body);
+      dynamic json = jsonDecode(response.body);
+      bool ok = json['ok'] ?? false;
+
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
+
+      if (!ok) {
+        return left(json['data']);
+      }
+
+      log(json['data'].toString());
+
+      return right(unit);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
   Stream<List<ProductFirebaseModel>> getProductsFromFirebase() async* {
     try {
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
