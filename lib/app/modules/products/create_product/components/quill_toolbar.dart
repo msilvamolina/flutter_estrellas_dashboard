@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 
-/// Custom toolbar that uses the buttons of [`flutter_quill`](https://pub.dev/packages/flutter_quill).
-///
-/// See also: [Custom toolbar](https://github.com/singerdmx/flutter-quill/blob/master/doc/custom_toolbar.md).
 class CustomToolbar extends StatelessWidget {
   const CustomToolbar({super.key, required this.controller});
 
@@ -16,88 +13,133 @@ class CustomToolbar extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Wrap(
         children: [
+          // Historial (Deshacer y Rehacer)
           QuillToolbarHistoryButton(
-            isUndo: true,
+            isUndo: true, // Botón para deshacer
             controller: controller,
           ),
           QuillToolbarHistoryButton(
-            isUndo: false,
+            isUndo: false, // Botón para rehacer
             controller: controller,
           ),
+          const VerticalDivider(),
+
+          // Estilos de texto (negrita, cursiva, subrayado, tachado)
           QuillToolbarToggleStyleButton(
-            options: const QuillToolbarToggleStyleButtonOptions(),
             controller: controller,
-            attribute: Attribute.bold,
-          ),
-          QuillToolbarToggleStyleButton(
-            options: const QuillToolbarToggleStyleButtonOptions(),
-            controller: controller,
-            attribute: Attribute.italic,
+            attribute: Attribute.bold, // Negrita
           ),
           QuillToolbarToggleStyleButton(
             controller: controller,
-            attribute: Attribute.underline,
+            attribute: Attribute.italic, // Cursiva
+          ),
+          QuillToolbarToggleStyleButton(
+            controller: controller,
+            attribute: Attribute.underline, // Subrayado
+          ),
+          QuillToolbarToggleStyleButton(
+            controller: controller,
+            attribute: Attribute.strikeThrough, // Tachado
           ),
           QuillToolbarClearFormatButton(
-            controller: controller,
+            controller: controller, // Limpiar formato
           ),
           const VerticalDivider(),
-          QuillToolbarImageButton(
+
+          // Encabezados (tamaño del texto)
+          QuillToolbarSelectHeaderStyleDropdownButton(
+            controller: controller, // Dropdown para elegir encabezados
+          ),
+          const VerticalDivider(),
+
+          // Estilo de altura de línea
+          QuillToolbarSelectLineHeightStyleDropdownButton(
+            controller: controller, // Dropdown para ajustar interlineado
+          ),
+          const VerticalDivider(),
+
+          // // Alineación de texto (izquierda, centro, derecha, justificado)
+          // QuillToolbarAlignmentButton(
+          //   controller: controller,
+          //   alignment: TextAlign.left, // Alineado a la izquierda
+          // ),
+          // QuillToolbarAlignmentButton(
+          //   controller: controller,
+          //   alignment: TextAlign.center, // Centrado
+          // ),
+          // QuillToolbarAlignmentButton(
+          //   controller: controller,
+          //   alignment: TextAlign.right, // Alineado a la derecha
+          // ),
+          // QuillToolbarAlignmentButton(
+          //   controller: controller,
+          //   alignment: TextAlign.justify, // Justificado
+          // ),
+          const VerticalDivider(),
+
+          // Listas y viñetas
+          QuillToolbarToggleStyleButton(
             controller: controller,
+            attribute: Attribute.ol, // Lista ordenada (numerada)
+          ),
+          QuillToolbarToggleStyleButton(
+            controller: controller,
+            attribute: Attribute.ul, // Lista desordenada (viñetas)
+          ),
+          QuillToolbarToggleCheckListButton(
+            controller: controller, // Lista de tareas
+          ),
+          const VerticalDivider(),
+
+          // Indentación (aumentar/disminuir sangría)
+          QuillToolbarIndentButton(
+            controller: controller,
+            isIncrease: true, // Aumentar sangría
+          ),
+          QuillToolbarIndentButton(
+            controller: controller,
+            isIncrease: false, // Disminuir sangría
+          ),
+          const VerticalDivider(),
+
+          // Bloques de código y citas
+          QuillToolbarToggleStyleButton(
+            controller: controller,
+            attribute: Attribute.inlineCode, // Código en línea
+          ),
+          QuillToolbarToggleStyleButton(
+            controller: controller,
+            attribute: Attribute.blockQuote, // Cita
+          ),
+          const VerticalDivider(),
+
+          // Colores (texto y fondo)
+          QuillToolbarColorButton(
+            controller: controller,
+            isBackground: false, // Color del texto
+          ),
+          QuillToolbarColorButton(
+            controller: controller,
+            isBackground: true, // Color del fondo
+          ),
+          const VerticalDivider(),
+
+          // Medios (imágenes, videos, etc.)
+          QuillToolbarImageButton(
+            controller: controller, // Insertar imagen
           ),
           QuillToolbarCameraButton(
-            controller: controller,
+            controller: controller, // Capturar desde la cámara
           ),
           QuillToolbarVideoButton(
-            controller: controller,
+            controller: controller, // Insertar video
           ),
           const VerticalDivider(),
-          QuillToolbarColorButton(
-            controller: controller,
-            isBackground: false,
+
+          // Enlaces (añadir y eliminar)
+          QuillToolbarLinkStyleButton(
+            controller: controller, // Agregar enlace
           ),
-          QuillToolbarColorButton(
-            controller: controller,
-            isBackground: true,
-          ),
-          const VerticalDivider(),
-          QuillToolbarSelectHeaderStyleDropdownButton(
-            controller: controller,
-          ),
-          const VerticalDivider(),
-          QuillToolbarSelectLineHeightStyleDropdownButton(
-            controller: controller,
-          ),
-          const VerticalDivider(),
-          QuillToolbarToggleCheckListButton(
-            controller: controller,
-          ),
-          QuillToolbarToggleStyleButton(
-            controller: controller,
-            attribute: Attribute.ol,
-          ),
-          QuillToolbarToggleStyleButton(
-            controller: controller,
-            attribute: Attribute.ul,
-          ),
-          QuillToolbarToggleStyleButton(
-            controller: controller,
-            attribute: Attribute.inlineCode,
-          ),
-          QuillToolbarToggleStyleButton(
-            controller: controller,
-            attribute: Attribute.blockQuote,
-          ),
-          QuillToolbarIndentButton(
-            controller: controller,
-            isIncrease: true,
-          ),
-          QuillToolbarIndentButton(
-            controller: controller,
-            isIncrease: false,
-          ),
-          const VerticalDivider(),
-          QuillToolbarLinkStyleButton(controller: controller),
         ],
       ),
     );

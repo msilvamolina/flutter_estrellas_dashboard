@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:path/path.dart' as path;
-import 'dart:io' as io show Directory, File;
+import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 
-import '../components/quill_data_sample.dart';
 import '../components/quill_toolbar.dart';
 
 class ProductDescriptionTab extends StatefulWidget {
@@ -15,17 +12,16 @@ class ProductDescriptionTab extends StatefulWidget {
 }
 
 class _ProductDescriptionTabState extends State<ProductDescriptionTab> {
-  final QuillController _controller = () {
-    return QuillController.basic();
-  }();
+  final QuillController _controller = QuillController.basic();
   final FocusNode _editorFocusNode = FocusNode();
   final ScrollController _editorScrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    // Cargar documento inicial
-    _controller.document = Document.fromJson(kQuillDefaultSample);
+    // Documento inicial vacío
+    _controller.document = Document()
+      ..insert(0, ''); // Documento vacío para evitar errores iniciales
   }
 
   @override
@@ -36,13 +32,9 @@ class _ProductDescriptionTabState extends State<ProductDescriptionTab> {
           CustomToolbar(controller: _controller),
           Expanded(
             child: QuillEditor(
-              focusNode: _editorFocusNode,
-              scrollController: _editorScrollController,
               controller: _controller,
-              config: QuillEditorConfig(
-                placeholder: 'Empieza a escribir aquí...',
-                padding: const EdgeInsets.all(16),
-              ),
+              scrollController: _editorScrollController,
+              focusNode: _editorFocusNode,
             ),
           ),
         ],
