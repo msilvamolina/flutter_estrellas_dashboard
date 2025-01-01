@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,6 +16,7 @@ class MainLayout extends StatelessWidget {
     this.appBarTitle,
     this.appBarWidget,
     this.floatingActionButton,
+    this.appBarActions,
     this.mainCurrentRoute,
     this.maxWidth,
     this.bottomNavigationBar,
@@ -30,6 +32,7 @@ class MainLayout extends StatelessWidget {
   final String? mainCurrentRoute;
   final double? maxWidth;
   final bool showMenu;
+  final List<Widget>? appBarActions;
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -85,7 +88,10 @@ class MainLayout extends StatelessWidget {
                       )
                     else if (appBarTitle != null) ...[
                       Spacer(),
-                      Text(appBarTitle!),
+                      Text(
+                        appBarTitle!,
+                        style: TypographyStyle.bodyBlackLarge,
+                      ),
                       Spacer(),
                     ],
                   ],
@@ -96,7 +102,10 @@ class MainLayout extends StatelessWidget {
               title: appBarWidget != null
                   ? appBarWidget!
                   : appBarTitle != null
-                      ? Text(appBarTitle!)
+                      ? Text(
+                          appBarTitle!,
+                          style: TypographyStyle.bodyBlackLarge,
+                        )
                       : SvgPicture.asset(
                           'assets/svg/fulllogo.svg',
                           height: 30,
@@ -105,6 +114,7 @@ class MainLayout extends StatelessWidget {
                             BlendMode.srcIn,
                           ),
                         ),
+              actions: appBarActions,
             ),
       body: Row(
         children: [

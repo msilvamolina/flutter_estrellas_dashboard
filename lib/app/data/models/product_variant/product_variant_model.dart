@@ -13,6 +13,12 @@ abstract class ProductVariantModel implements _$ProductVariantModel {
 
   const factory ProductVariantModel({
     required String id,
+    required String name,
+    required String label,
+    required String type,
+    String? imageUrl,
+    int? color,
+    String? searchField,
     required int points,
     required double sale_price,
     required String sku,

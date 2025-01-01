@@ -20,6 +20,8 @@ import '../modules/new_variations/bindings/new_variations_binding.dart';
 import '../modules/new_variations/views/new_variations_view.dart';
 import '../modules/new_variations_pickers/bindings/new_variations_pickers_binding.dart';
 import '../modules/new_variations_pickers/views/new_variations_pickers_view.dart';
+import '../modules/product_details/bindings/product_details_binding.dart';
+import '../modules/product_details/views/product_details_view.dart';
 import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
 import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
@@ -36,8 +38,6 @@ import '../modules/products/product_add_image/bindings/product_add_image_binding
 import '../modules/products/product_add_image/views/product_add_image_view.dart';
 import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
 import '../modules/products/product_estrellas_1/views/product_estrellas_1_view.dart';
-import '../modules/products/product_estrellas_2/bindings/product_estrellas_2_binding.dart';
-import '../modules/products/product_estrellas_2/views/product_estrellas_2_view.dart';
 import '../modules/products/product_images/bindings/product_images_binding.dart';
 import '../modules/products/product_images/views/product_images_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
@@ -144,11 +144,7 @@ class AppPages {
       page: () => const VideosDetailsView(),
       binding: VideosDetailsBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_ESTRELLAS_2,
-      page: () => const ProductEstrellas2View(),
-      binding: ProductEstrellas2Binding(),
-    ),
+
     GetPage(
       name: _Paths.PRODUCT_IMAGES,
       page: () => const ProductImagesView(),
@@ -274,6 +270,11 @@ class AppPages {
       name: _Paths.NEW_VARIATIONS_PICKERS,
       page: () => const NewVariationsPickersView(),
       binding: NewVariationsPickersBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_DETAILS,
+      page: () => const ProductDetailsView(),
+      binding: ProductDetailsBinding(),
     ),
   ];
 }
