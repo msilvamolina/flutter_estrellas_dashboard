@@ -25,10 +25,12 @@ class EstrellasAppbar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: withBackButton,
       title: Text(
         title,
-        style: TypographyStyle.bodyBlackLarge,
+        style: TypographyStyle.bodyBlackLarge.copyWith(color: neutral900),
       ),
       centerTitle: true,
       actions: actions,
+      iconTheme:
+          IconThemeData(color: neutral900), // Aplica el color a los íconos
     );
   }
 

@@ -56,10 +56,14 @@ class ProductMainHeader extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(EstrellasIcons.medal),
+                            Icon(
+                              EstrellasIcons.medal,
+                              color: neutral900,
+                            ),
                             Text(
                               '${controller.product.points} puntos',
-                              style: TypographyStyle.bodyBlackMedium,
+                              style: TypographyStyle.bodyBlackMedium
+                                  .copyWith(color: neutral900),
                             ),
                           ],
                         ),

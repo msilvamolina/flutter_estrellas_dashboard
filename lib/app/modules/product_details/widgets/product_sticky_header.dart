@@ -22,6 +22,8 @@ class ProductStickyHeader extends StatelessWidget {
           labelStyle: TypographyStyle.bodyBlackLarge,
           indicatorColor: primaryBase,
           labelColor: secondaryBase,
+          unselectedLabelColor: neutral700,
+          dividerColor: neutral400,
           tabs: [
             Tab(text: "Descripción"),
             Tab(text: "Detalles"),

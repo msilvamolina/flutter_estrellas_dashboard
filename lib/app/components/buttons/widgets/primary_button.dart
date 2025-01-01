@@ -21,15 +21,10 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MainController mainController = Get.find<MainController>();
-    Color backgroundColor =
-        mainController.isThemeModeDark ? primaryDark : primaryBase;
-    Color foregroundColor =
-        mainController.isThemeModeDark ? Colors.white : neutral950;
-    Color loaderColor =
-        mainController.isThemeModeDark ? primaryLight : primaryDark;
-    Color border =
-        mainController.isThemeModeDark ? backgroundColor : neutral950;
+    Color backgroundColor = primaryBase;
+    Color foregroundColor = neutral950;
+    Color loaderColor = primaryDark;
+    Color border = neutral950;
 
     return ElevatedButton(
       onPressed: !(isLoaderButton && isLoading != null && isLoading!)
