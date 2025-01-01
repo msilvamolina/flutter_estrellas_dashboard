@@ -1,5 +1,6 @@
 import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 
 import 'package:get/get.dart';
 
@@ -58,6 +59,18 @@ class ProductDetailsController extends GetxController {
   int _points = 0;
   int get points => _points;
 
+  final QuillController descriptionController = QuillController.basic();
+  final FocusNode descriptionEditorFocusNode = FocusNode();
+  final ScrollController descriptionEditorScrollController = ScrollController();
+
+  final QuillController detailsController = QuillController.basic();
+  final FocusNode detailsEditorFocusNode = FocusNode();
+  final ScrollController detailsEditorScrollController = ScrollController();
+
+  final QuillController warrantyController = QuillController.basic();
+  final FocusNode warrantyEditorFocusNode = FocusNode();
+  final ScrollController warrantyEditorScrollController = ScrollController();
+
   @override
   void onInit() {
     product = Get.arguments as ProductFirebaseModel;
@@ -69,6 +82,49 @@ class ProductDetailsController extends GetxController {
       productId: product.id,
     ));
 
+    descriptionController.document = Document.fromJson([
+      {
+        "insert": "Marca: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "Tesslux\n\n"},
+      {
+        "insert": "Capacidad: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "1 Litro\n\n"},
+      {
+        "insert": "Color: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "Plateado (silver)\n\n"},
+      {
+        "insert": "Dimensiones del producto: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "12\"prof. x 8\"an. x 11,8\"al. pulgadas\n\n"},
+      {
+        "insert": "Características especiales: ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert":
+            "Apagado automático, Programable, Función de limpieza automática, Espumador\n\n"
+      },
+      {
+        "insert": "Tipo de cafetera: ",
+        "attributes": {"bold": true}
+      },
+      {"insert": "Cafetera de espresso\n\n"},
+      {
+        "insert": "Descripción adicional: ",
+        "attributes": {"bold": true}
+      },
+      {
+        "insert":
+            "Control de un botón: haz fácilmente espresso, capuchino o café con leche con solo presionar un botón.\n\n"
+      }
+    ]);
     resetPrice();
     super.onInit();
   }

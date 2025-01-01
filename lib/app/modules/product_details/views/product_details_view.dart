@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../components/appbars/estrellas_appbar.dart';
 import '../../../components/buttons/buttons.dart';
 import '../../../themes/styles/colors.dart';
+import '../../../themes/themes/green.dart';
 import '../controllers/product_details_controller.dart';
 import '../widgets/product_main_header.dart';
 import '../widgets/product_sticky_content.dart';
@@ -25,50 +26,72 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
       isIos = Platform.isIOS;
       isAndroid = Platform.isAndroid;
     }
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        backgroundColor: white,
-        bottomNavigationBar: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 16, vertical: isIos ? 0 : (isAndroid ? 8 : 16)),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Button(
-                    style: ButtonStyles.secondary,
-                    onPressed: () {},
-                    label: 'Vender',
+    ThemeData adminLightTheme = ThemeData(
+      colorScheme: ColorScheme(
+        primary: Colors.blue.shade700, // Color primario más intenso
+        primaryContainer: Colors.blue.shade400, // Color de contenedor primario
+        secondary: Colors.blue.shade600, // Color secundario
+        secondaryContainer:
+            Colors.blue.shade300, // Color de contenedor secundario
+        surface: Colors.blue[50]!, // Superficie
+
+        error: Colors.red, // Color de error
+        onPrimary: Colors.white, // Color sobre primario
+        onSecondary: Colors.white, // Color sobre secundario
+        onSurface: Colors.black, // Color sobre superficie
+
+        onError: Colors.white, // Color sobre error
+        brightness: Brightness.light, // Brillo
+      ),
+      useMaterial3: true,
+    );
+    return Theme(
+      data: adminLightTheme,
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          backgroundColor: white,
+          bottomNavigationBar: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: 16, vertical: isIos ? 0 : (isAndroid ? 8 : 16)),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Button(
+                      style: ButtonStyles.secondary,
+                      onPressed: () {},
+                      label: 'Vender',
+                    ),
                   ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Button(
-                    style: ButtonStyles.primary,
-                    onPressed: () {},
-                    label: 'Comprar',
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Button(
+                      style: ButtonStyles.primary,
+                      onPressed: () {},
+                      label: 'Comprar',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        appBar: EstrellasAppbar(
-          title: 'Vista previa',
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert),
-            )
-          ],
-        ),
-        body: CustomScrollView(
-          shrinkWrap: true,
-          slivers: <Widget>[
-            ProductMainHeader(),
-            ProductStickyContent(),
-          ],
+          appBar: EstrellasAppbar(
+            title: 'Vista previa',
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_vert),
+              )
+            ],
+          ),
+          body: CustomScrollView(
+            shrinkWrap: true,
+            slivers: <Widget>[
+              ProductMainHeader(),
+              ProductStickyContent(),
+            ],
+          ),
         ),
       ),
     );
