@@ -35,8 +35,7 @@ class ProductMainHeader extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                     image: DecorationImage(
-                      image:
-                          NetworkImage(controller.productLite.thumbnail ?? ''),
+                      image: NetworkImage(controller.product.thumbnail ?? ''),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -59,7 +58,7 @@ class ProductMainHeader extends StatelessWidget {
                           children: [
                             Icon(EstrellasIcons.medal),
                             Text(
-                              '${controller.productLite.points} puntos',
+                              '${controller.product.points} puntos',
                               style: TypographyStyle.bodyBlackMedium,
                             ),
                           ],

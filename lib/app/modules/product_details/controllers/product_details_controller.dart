@@ -16,8 +16,7 @@ class ProductDetailsController extends GetxController {
   MainController mainController = Get.find<MainController>();
   final ProductsRepository _repository = ProductsRepository();
   late VideoPostModel videoPostModel;
-  late ProductFirebaseLiteModel productLite;
-  ProductFirebaseModel? product;
+  late ProductFirebaseModel product;
 
   final RxList<ProductImageModel> _listImages = <ProductImageModel>[].obs;
   List<ProductImageModel> get listImages => _listImages.toList();
@@ -61,15 +60,13 @@ class ProductDetailsController extends GetxController {
 
   @override
   void onInit() {
-    videoPostModel = Get.arguments as VideoPostModel;
-    productLite = videoPostModel.product!;
-    _listImages
-        .bindStream(_repository.getProductImages(productId: productLite.id));
+    product = Get.arguments as ProductFirebaseModel;
+    _listImages.bindStream(_repository.getProductImages(productId: product.id));
     _listVariants.bindStream(_repository.getAllProductVariants(
-      productId: productLite.id,
+      productId: product.id,
     ));
     _listCombination.bindStream(_repository.getAllProductVariantsCombinations(
-      productId: productLite.id,
+      productId: product.id,
     ));
 
     resetPrice();
@@ -84,10 +81,10 @@ class ProductDetailsController extends GetxController {
   }
 
   void resetPrice() {
-    _price = productLite.price ?? 0;
-    _suggestedPrice = productLite.suggestedPrice ?? 0;
-    _points = productLite.points ?? 0;
-    _stock = productLite.stock ?? 1;
+    _price = product.price ?? 0;
+    _suggestedPrice = product.suggestedPrice ?? 0;
+    _points = product.points ?? 0;
+    _stock = product.stock ?? 1;
     _quantity = 1;
     update(['product_price', 'content_product', 'product_quantity']);
   }
@@ -170,7 +167,7 @@ class ProductDetailsController extends GetxController {
 
   void openPhotoView() {
     MultiImageProvider multiImageProvider = MultiImageProvider([
-      NetworkImage(productLite.thumbnail ?? ''),
+      NetworkImage(product.thumbnail ?? ''),
       if (_listImages.isNotEmpty)
         for (ProductImageModel image in _listImages)
           NetworkImage(image.imageUrl),

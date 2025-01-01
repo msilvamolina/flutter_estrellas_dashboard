@@ -78,6 +78,9 @@ flutter:
     - assets/lotties/
 
   fonts:
+    - family: EstrellasIcons
+      fonts:
+        - asset: assets/fonts/icons/estrellas_font.otf
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf

@@ -22,7 +22,7 @@ class ProductContentProduct extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                controller.productLite.name ?? '',
+                controller.product.name ?? '',
                 style: TypographyStyle.bodyBlackLarge.copyWith(
                   color: neutral900,
                   fontWeight: FontWeight.w700,
