@@ -1,3 +1,5 @@
+import 'package:estrellas_dashboard/app/modules/product_details/tabs_views/details_view.dart';
+import 'package:estrellas_dashboard/app/modules/product_details/tabs_views/warranty_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
@@ -20,8 +22,8 @@ class ProductStickyContent extends StatelessWidget {
             child: TabBarView(
               children: [
                 DescriptionView(), // Contenido de la pestaña "Inicio"
-                Center(child: Text('Detalles')),
-                Center(child: Text('Garantía')),
+                DetailsView(),
+                WarrantyView(),
               ],
             ),
           ),

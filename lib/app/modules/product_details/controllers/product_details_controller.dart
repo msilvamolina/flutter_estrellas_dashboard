@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 
 import 'package:get/get.dart';
 
@@ -59,15 +62,27 @@ class ProductDetailsController extends GetxController {
   int _points = 0;
   int get points => _points;
 
-  final QuillController descriptionController = QuillController.basic();
+  final QuillController descriptionController = QuillController(
+    document: Document(),
+    readOnly: true,
+    selection: const TextSelection.collapsed(offset: 0),
+  );
   final FocusNode descriptionEditorFocusNode = FocusNode();
   final ScrollController descriptionEditorScrollController = ScrollController();
 
-  final QuillController detailsController = QuillController.basic();
+  final QuillController detailsController = QuillController(
+    document: Document(),
+    readOnly: true,
+    selection: const TextSelection.collapsed(offset: 0),
+  );
   final FocusNode detailsEditorFocusNode = FocusNode();
   final ScrollController detailsEditorScrollController = ScrollController();
 
-  final QuillController warrantyController = QuillController.basic();
+  final QuillController warrantyController = QuillController(
+    document: Document(),
+    readOnly: true,
+    selection: const TextSelection.collapsed(offset: 0),
+  );
   final FocusNode warrantyEditorFocusNode = FocusNode();
   final ScrollController warrantyEditorScrollController = ScrollController();
 
@@ -82,49 +97,23 @@ class ProductDetailsController extends GetxController {
       productId: product.id,
     ));
 
-    descriptionController.document = Document.fromJson([
-      {
-        "insert": "Marca: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "Tesslux\n\n"},
-      {
-        "insert": "Capacidad: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "1 Litro\n\n"},
-      {
-        "insert": "Color: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "Plateado (silver)\n\n"},
-      {
-        "insert": "Dimensiones del producto: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "12\"prof. x 8\"an. x 11,8\"al. pulgadas\n\n"},
-      {
-        "insert": "Características especiales: ",
-        "attributes": {"bold": true}
-      },
-      {
-        "insert":
-            "Apagado automático, Programable, Función de limpieza automática, Espumador\n\n"
-      },
-      {
-        "insert": "Tipo de cafetera: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "Cafetera de espresso\n\n"},
-      {
-        "insert": "Descripción adicional: ",
-        "attributes": {"bold": true}
-      },
-      {
-        "insert":
-            "Control de un botón: haz fácilmente espresso, capuchino o café con leche con solo presionar un botón.\n\n"
-      }
-    ]);
+    if (product.descriptionFormatted != null) {
+      final descriptionDelta =
+          Delta.fromJson(jsonDecode(product.descriptionFormatted));
+      descriptionController.document = Document.fromDelta(descriptionDelta);
+    }
+
+    if (product.detailsFormatted != null) {
+      final detailsDelta = Delta.fromJson(jsonDecode(product.detailsFormatted));
+      detailsController.document = Document.fromDelta(detailsDelta);
+    }
+
+    if (product.warrantyFormatted != null) {
+      final warrantyDelta =
+          Delta.fromJson(jsonDecode(product.warrantyFormatted));
+      warrantyController.document = Document.fromDelta(warrantyDelta);
+    }
+
     resetPrice();
     super.onInit();
   }
