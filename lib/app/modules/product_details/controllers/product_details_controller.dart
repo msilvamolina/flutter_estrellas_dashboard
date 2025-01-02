@@ -228,7 +228,7 @@ class ProductDetailsController extends GetxController {
   }
 
   Future<void> moreOptions() async {
-    final result = await showDialog<String>(
+    await showDialog<String>(
       context: Get.context!,
       builder: (BuildContext context) {
         return AlertDialog(
