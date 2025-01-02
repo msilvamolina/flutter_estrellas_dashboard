@@ -85,64 +85,97 @@ class NewVariationsCustomPickersController extends GetxController {
     await showDialog<String>(
       context: Get.context!,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Nuevo atributo'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Nombre',
-                    hintText: 'Ingrese el nombre',
-                  ),
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: valueController,
-                  decoration: InputDecoration(
-                    labelText: 'Valor',
-                    hintText: '#RRGGBB',
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.color_lens),
-                      onPressed: () async {
-                        // Si hay un valor inicial en el campo, úsalo, sino usa un color por defecto
-                        final initialColor = valueController.text.isNotEmpty &&
-                                valueController.text.startsWith('#') &&
-                                valueController.text.length == 7
-                            ? Color(int.parse(valueController.text.substring(1),
-                                    radix: 16) +
-                                0xFF000000)
-                            : Colors.red;
+        return StatefulBuilder(builder: (context, setState) {
+          Color? getColorFromHex(String hex) {
+            try {
+              if (hex.startsWith('#') && hex.length == 7) {
+                return Color(
+                    int.parse(hex.substring(1), radix: 16) + 0xFF000000);
+              }
+            } catch (_) {
+              return null; // Retornar null si el Hex no es válido
+            }
+            return null;
+          }
 
-                        final selectedColor =
-                            await pickColor(context, initialColor);
-                        if (selectedColor != null) {
-                          valueController.text =
-                              selectedColor; // Actualizar el valor con el Hex seleccionado
-                        }
-                      },
+          void openColorPicker() async {
+            final initialColor =
+                getColorFromHex(valueController.text) ?? Colors.red;
+            final selectedColor = await pickColor(context, initialColor);
+            if (selectedColor != null) {
+              setState(() {
+                valueController.text = selectedColor;
+              });
+            }
+          }
+
+          return AlertDialog(
+            title: const Text('Nuevo atributo'),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextFormField(
+                    controller: nameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Nombre',
+                      hintText: 'Ingrese el nombre',
                     ),
                   ),
-                ),
-                const SizedBox(height: 16),
-              ],
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: valueController,
+                    decoration: InputDecoration(
+                      labelText: 'Valor',
+                      suffixIcon: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Verificar si el valor ingresado es un color válido
+                          if (getColorFromHex(valueController.text) != null)
+                            Padding(
+                              padding: const EdgeInsets.only(right: 16),
+                              child: GestureDetector(
+                                onTap: openColorPicker,
+                                child: CircleAvatar(
+                                  radius: 10,
+                                  backgroundColor:
+                                      getColorFromHex(valueController.text),
+                                ),
+                              ),
+                            )
+                          else
+                            IconButton(
+                              icon: const Icon(Icons.color_lens),
+                              onPressed: openColorPicker,
+                            ),
+                        ],
+                      ),
+                    ),
+                    onChanged: (value) {
+                      // Actualizar la UI dinámicamente si cambia el valor
+                      setState(() {});
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                ],
+              ),
             ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                final String name = nameController.text;
-                final String value = valueController.text;
+            actions: [
+              TextButton(
+                onPressed: () {
+                  final String name = nameController.text;
+                  final String value = valueController.text;
 
-                print('Nombre: $name, Valor: $value');
-                Get.back();
-              },
-              child: const Text('GUARDAR'),
-            ),
-          ],
-        );
+                  print('Nombre: $name, Valor: $value');
+                  Get.back();
+                },
+                child: const Text('GUARDAR'),
+              ),
+            ],
+          );
+        });
       },
     );
   }
