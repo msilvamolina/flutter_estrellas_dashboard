@@ -144,6 +144,11 @@ class CreateProductController extends GetxController {
 
     if (product != null) {
       productId = product!.id;
+      if (product!.categoriesNames != null) {
+        multipleSelected.assignAll(
+          product!.categoriesNames!.split(', ').toList(),
+        );
+      }
       if (product!.descriptionFormatted != null) {
         final descriptionDelta =
             Delta.fromJson(jsonDecode(product!.descriptionFormatted));
