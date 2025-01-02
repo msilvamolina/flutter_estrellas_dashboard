@@ -16,7 +16,7 @@ class ProductDetailsTab extends StatelessWidget {
         return SafeArea(
           child: Column(
             children: [
-              SimpleCustomToolbar(controller: controller.detailsController),
+              CustomToolbar(controller: controller.detailsController),
               Expanded(
                 child: QuillEditor(
                   controller: controller.detailsController,

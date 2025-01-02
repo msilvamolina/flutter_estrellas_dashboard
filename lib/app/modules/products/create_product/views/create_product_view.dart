@@ -39,11 +39,14 @@ class CreateProductView extends GetView<CreateProductController> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: ReactiveFormConsumer(
                       builder: (context, form, child) => Button(
-                        style: ButtonStyles.primary,
+                        style: controller.editMode.value
+                            ? ButtonStyles.secondary
+                            : ButtonStyles.primary,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)
                             : null,
-                        label: 'Crear',
+                        label:
+                            controller.editMode.value ? 'Actualizar' : 'Crear',
                       ),
                     ),
                   ),

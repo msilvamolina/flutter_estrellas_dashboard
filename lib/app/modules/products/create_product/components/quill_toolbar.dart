@@ -37,6 +37,16 @@ class CustomToolbar extends StatelessWidget {
             controller: controller,
             attribute: Attribute.underline, // Subrayado
           ),
+
+          QuillToolbarColorButton(
+            controller: controller,
+            isBackground: false, // Color del texto
+          ),
+          QuillToolbarColorButton(
+            controller: controller,
+            isBackground: true, // Color del fondo
+          ),
+
           QuillToolbarToggleStyleButton(
             controller: controller,
             attribute: Attribute.strikeThrough, // Tachado
@@ -44,19 +54,16 @@ class CustomToolbar extends StatelessWidget {
           QuillToolbarClearFormatButton(
             controller: controller, // Limpiar formato
           ),
-          const VerticalDivider(),
 
           // Encabezados (tamaño del texto)
           QuillToolbarSelectHeaderStyleDropdownButton(
             controller: controller, // Dropdown para elegir encabezados
           ),
-          const VerticalDivider(),
 
           // Estilo de altura de línea
           QuillToolbarSelectLineHeightStyleDropdownButton(
             controller: controller, // Dropdown para ajustar interlineado
           ),
-          const VerticalDivider(),
 
           // // Alineación de texto (izquierda, centro, derecha, justificado)
           // QuillToolbarAlignmentButton(
@@ -75,7 +82,6 @@ class CustomToolbar extends StatelessWidget {
           //   controller: controller,
           //   alignment: TextAlign.justify, // Justificado
           // ),
-          const VerticalDivider(),
 
           // Listas y viñetas
           QuillToolbarToggleStyleButton(
@@ -89,7 +95,6 @@ class CustomToolbar extends StatelessWidget {
           QuillToolbarToggleCheckListButton(
             controller: controller, // Lista de tareas
           ),
-          const VerticalDivider(),
 
           // Indentación (aumentar/disminuir sangría)
           QuillToolbarIndentButton(
@@ -100,7 +105,6 @@ class CustomToolbar extends StatelessWidget {
             controller: controller,
             isIncrease: false, // Disminuir sangría
           ),
-          const VerticalDivider(),
 
           // Bloques de código y citas
           QuillToolbarToggleStyleButton(
@@ -111,17 +115,7 @@ class CustomToolbar extends StatelessWidget {
             controller: controller,
             attribute: Attribute.blockQuote, // Cita
           ),
-          const VerticalDivider(),
 
-          // Colores (texto y fondo)
-          QuillToolbarColorButton(
-            controller: controller,
-            isBackground: false, // Color del texto
-          ),
-          QuillToolbarColorButton(
-            controller: controller,
-            isBackground: true, // Color del fondo
-          ),
           // const VerticalDivider(),
 
           // Medios (imágenes, videos, etc.)

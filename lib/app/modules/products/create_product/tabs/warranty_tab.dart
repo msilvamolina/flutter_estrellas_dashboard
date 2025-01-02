@@ -16,7 +16,7 @@ class ProductWarrantyTab extends StatelessWidget {
         return SafeArea(
           child: Column(
             children: [
-              SimpleCustomToolbar(controller: controller.warrantyController),
+              CustomToolbar(controller: controller.warrantyController),
               Expanded(
                 child: QuillEditor(
                   controller: controller.warrantyController,

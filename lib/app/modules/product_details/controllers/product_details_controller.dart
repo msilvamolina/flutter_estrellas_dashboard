@@ -237,6 +237,18 @@ class ProductDetailsController extends GetxController {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
+                leading: const Icon(Icons.edit),
+                title: const Text('Editar'),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(
+                    Routes.CREATE_PRODUCT,
+                    arguments: product,
+                  );
+                },
+              ),
+              Divider(),
+              ListTile(
                 leading: const Icon(Icons.info),
                 title: const Text('Ver información'),
                 onTap: () {
@@ -265,18 +277,6 @@ class ProductDetailsController extends GetxController {
                   Get.back();
                   Get.toNamed(
                     Routes.NEW_VARIATIONS,
-                    arguments: product,
-                  );
-                },
-              ),
-              Divider(),
-              ListTile(
-                leading: const Icon(Icons.edit),
-                title: const Text('Editar'),
-                onTap: () {
-                  Get.back();
-                  Get.toNamed(
-                    Routes.CREATE_PRODUCT,
                     arguments: product,
                   );
                 },

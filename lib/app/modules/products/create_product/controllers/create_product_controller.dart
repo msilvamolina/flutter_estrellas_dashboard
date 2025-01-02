@@ -12,8 +12,10 @@ import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/controllers/main_controller.dart';
+import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../../data/models/provider/warehouse/provider_warehouse_model.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../utils/utils.dart';
 import '../../../../utils/utils_image.dart';
 
 enum Fields {
@@ -75,12 +77,18 @@ class CreateProductController extends GetxController {
   final FocusNode warrantyEditorFocusNode = FocusNode();
   final ScrollController warrantyEditorScrollController = ScrollController();
 
+  ProductFirebaseModel? product = Get.arguments as ProductFirebaseModel;
+
+  String productId = '';
+  RxBool editMode = false.obs;
+
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
           validators: [
             Validators.required,
             Validators.minLength(4),
           ],
+          value: product?.name,
         ),
         Fields.price.name: FormControl<String>(
           validators: [
@@ -88,6 +96,7 @@ class CreateProductController extends GetxController {
             Validators.number(),
             Validators.minLength(4),
           ],
+          value: Utils.doubleToString(product?.price),
         ),
         Fields.suggestedPrice.name: FormControl<String>(
           validators: [
@@ -95,6 +104,7 @@ class CreateProductController extends GetxController {
             Validators.number(),
             Validators.minLength(4),
           ],
+          value: Utils.doubleToString(product?.suggestedPrice),
         ),
         Fields.points.name: FormControl<String>(
           validators: [
@@ -102,6 +112,7 @@ class CreateProductController extends GetxController {
             Validators.number(),
             Validators.minLength(2),
           ],
+          value: Utils.doubleToString(product?.points),
         ),
         Fields.stock.name: FormControl<String>(
           validators: [
@@ -109,83 +120,91 @@ class CreateProductController extends GetxController {
             Validators.number(),
             Validators.minLength(1),
           ],
+          value: Utils.doubleToString(product?.stock ?? 1),
         ),
       });
 
   @override
   Future<void> onInit() async {
-    super.onInit();
+    product = Get.arguments as ProductFirebaseModel;
+    editMode.value = product != null;
 
-    descriptionController.document = Document()..insert(0, '');
-    detailsController.document = Document.fromJson([
-      {
-        "insert": "Marca: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "Tesslux\n\n"},
-      {
-        "insert": "Capacidad: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "1 Litro\n\n"},
-      {
-        "insert": "Color: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "Plateado (silver)\n\n"},
-      {
-        "insert": "Dimensiones del producto: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "12\"prof. x 8\"an. x 11,8\"al. pulgadas\n\n"},
-      {
-        "insert": "Características especiales: ",
-        "attributes": {"bold": true}
-      },
-      {
-        "insert":
-            "Apagado automático, Programable, Función de limpieza automática, Espumador\n\n"
-      },
-      {
-        "insert": "Tipo de cafetera: ",
-        "attributes": {"bold": true}
-      },
-      {"insert": "Cafetera de espresso\n\n"},
-      {
-        "insert": "Descripción adicional: ",
-        "attributes": {"bold": true}
-      },
-      {
-        "insert":
-            "Control de un botón: haz fácilmente espresso, capuchino o café con leche con solo presionar un botón.\n\n"
-      }
-    ]);
-    warrantyController.document = Document.fromJson([
-      {
-        "insert": "Duración de la Garantía: ",
-        "attributes": {"bold": true}
-      },
-      {
-        "insert":
-            "Este producto cuenta con una garantía limitada de 12 meses desde la fecha de compra.\n\n"
-      },
-      {
-        "insert": "Cobertura: ",
-        "attributes": {"bold": true}
-      },
-      {
-        "insert":
-            "La garantía cubre defectos de fabricación en materiales y mano de obra bajo condiciones normales de uso.\n\n"
-      },
-      {
-        "insert": "Exclusiones: ",
-        "attributes": {"bold": true}
-      },
-      {
-        "insert":
-            "No se cubren daños causados por mal uso, accidentes, desgaste natural, manipulación indebida o reparaciones no autorizadas.\n"
-      }
-    ]);
+    if (product != null) {
+      productId = product!.id;
+    } else {
+      descriptionController.document = Document()..insert(0, '');
+      detailsController.document = Document.fromJson([
+        {
+          "insert": "Marca: ",
+          "attributes": {"bold": true}
+        },
+        {"insert": "Tesslux\n\n"},
+        {
+          "insert": "Capacidad: ",
+          "attributes": {"bold": true}
+        },
+        {"insert": "1 Litro\n\n"},
+        {
+          "insert": "Color: ",
+          "attributes": {"bold": true}
+        },
+        {"insert": "Plateado (silver)\n\n"},
+        {
+          "insert": "Dimensiones del producto: ",
+          "attributes": {"bold": true}
+        },
+        {"insert": "12\"prof. x 8\"an. x 11,8\"al. pulgadas\n\n"},
+        {
+          "insert": "Características especiales: ",
+          "attributes": {"bold": true}
+        },
+        {
+          "insert":
+              "Apagado automático, Programable, Función de limpieza automática, Espumador\n\n"
+        },
+        {
+          "insert": "Tipo de cafetera: ",
+          "attributes": {"bold": true}
+        },
+        {"insert": "Cafetera de espresso\n\n"},
+        {
+          "insert": "Descripción adicional: ",
+          "attributes": {"bold": true}
+        },
+        {
+          "insert":
+              "Control de un botón: haz fácilmente espresso, capuchino o café con leche con solo presionar un botón.\n\n"
+        }
+      ]);
+      warrantyController.document = Document.fromJson([
+        {
+          "insert": "Duración de la Garantía: ",
+          "attributes": {"bold": true}
+        },
+        {
+          "insert":
+              "Este producto cuenta con una garantía limitada de 12 meses desde la fecha de compra.\n\n"
+        },
+        {
+          "insert": "Cobertura: ",
+          "attributes": {"bold": true}
+        },
+        {
+          "insert":
+              "La garantía cubre defectos de fabricación en materiales y mano de obra bajo condiciones normales de uso.\n\n"
+        },
+        {
+          "insert": "Exclusiones: ",
+          "attributes": {"bold": true}
+        },
+        {
+          "insert":
+              "No se cubren daños causados por mal uso, accidentes, desgaste natural, manipulación indebida o reparaciones no autorizadas.\n"
+        }
+      ]);
+    }
+
+    super.onInit();
   }
 
   @override

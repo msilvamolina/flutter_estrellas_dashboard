@@ -44,7 +44,7 @@ class Utils {
     }
   }
 
-  String doubleToString(dynamic numero) {
+  static String doubleToString(dynamic numero) {
     try {
       String variable = numero.toString();
       variable = variable.replaceAll('.0', '');
