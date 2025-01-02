@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+
+import '../../../utils/utils_image.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
   late Map<String, bool> attributes;
@@ -18,6 +22,8 @@ class NewVariationsCustomPickersController extends GetxController {
 
   Future<void> selectAttributes() async {
     List<String> list = await moreOptionsWithCheckboxes();
+    // openGuideTour();
+
     print('list $list');
   }
 
@@ -85,6 +91,8 @@ class NewVariationsCustomPickersController extends GetxController {
     await showDialog<String>(
       context: Get.context!,
       builder: (BuildContext context) {
+        bool isImageValid = false;
+
         return StatefulBuilder(builder: (context, setState) {
           Color? getColorFromHex(String hex) {
             try {
@@ -104,9 +112,24 @@ class NewVariationsCustomPickersController extends GetxController {
             final selectedColor = await pickColor(context, initialColor);
             if (selectedColor != null) {
               setState(() {
+                isImageValid = false;
                 valueController.text = selectedColor;
               });
             }
+          }
+
+          Future<bool> isValidImage(String path) async {
+            try {
+              final file = File(path);
+              if (await file.exists()) {
+                final fileExtension = file.path.split('.').last.toLowerCase();
+                return ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'webp']
+                    .contains(fileExtension);
+              }
+            } catch (e) {
+              // Handle errors if necessary
+            }
+            return false;
           }
 
           return AlertDialog(
@@ -132,6 +155,59 @@ class NewVariationsCustomPickersController extends GetxController {
                         mainAxisAlignment: MainAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          if (isImageValid)
+                            GestureDetector(
+                              onTap: () async {
+                                String? _imagePath =
+                                    await UtilsImage.pickImage();
+                                if (_imagePath != null) {
+                                  bool valid = await isValidImage(_imagePath);
+                                  setState(() {
+                                    isImageValid = valid;
+                                    if (valid) {
+                                      valueController.text = _imagePath;
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'La imagen seleccionada no es válida.'),
+                                        ),
+                                      );
+                                    }
+                                  });
+                                }
+                              },
+                              child: Image.file(
+                                File(valueController.text),
+                                width: 22,
+                              ),
+                            )
+                          else
+                            IconButton(
+                              icon: const Icon(Icons.image_rounded),
+                              onPressed: () async {
+                                String? _imagePath =
+                                    await UtilsImage.pickImage();
+                                if (_imagePath != null) {
+                                  bool valid = await isValidImage(_imagePath);
+                                  setState(() {
+                                    isImageValid = valid;
+                                    if (valid) {
+                                      valueController.text = _imagePath;
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'La imagen seleccionada no es válida.'),
+                                        ),
+                                      );
+                                    }
+                                  });
+                                }
+                              },
+                            ),
                           // Verificar si el valor ingresado es un color válido
                           if (getColorFromHex(valueController.text) != null)
                             Padding(
@@ -169,7 +245,8 @@ class NewVariationsCustomPickersController extends GetxController {
                   final String value = valueController.text;
                   final bool isColor =
                       getColorFromHex(valueController.text) != null;
-                  print('Nombre: $name, Valor: $value, isColor: $isColor');
+                  print(
+                      'Nombre: $name, Valor: $value, isColor: $isColor, isImage: $isImageValid');
                   Get.back();
                 },
                 child: const Text('GUARDAR'),
