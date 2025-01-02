@@ -281,6 +281,7 @@ class ProductDetailsController extends GetxController {
                   );
                 },
               ),
+              Divider(),
               ListTile(
                 leading: const Icon(Icons.delete),
                 title: const Text('Eliminar'),
