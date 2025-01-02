@@ -76,7 +76,7 @@ class ProductImagesCard extends StatelessWidget {
               CachedNetworkImage(
                 imageUrl: imageUrl,
               ),
-              if (imageCount != null)
+              if (imageCount != null && imageCount > 0)
                 Center(
                   child: Text(
                     '+$imageCount',

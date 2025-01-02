@@ -15,6 +15,7 @@ import '../../../data/models/product_variant/product_variant_model.dart';
 import '../../../data/models/product_variant_combination/product_variant_combination_model.dart';
 import '../../../data/models/videos/video_post_model.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
+import '../../../routes/app_pages.dart';
 
 class ProductDetailsController extends GetxController {
   MainController mainController = Get.find<MainController>();
@@ -226,7 +227,67 @@ class ProductDetailsController extends GetxController {
     });
   }
 
-  void moreOptions() {
-    print('moreOptions');
+  Future<void> moreOptions() async {
+    final result = await showDialog<String>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Opciones'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.info),
+                title: const Text('Ver información'),
+                onTap: () {
+                  Navigator.of(context).pop('info'); // Opción Ver Información
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.image_rounded),
+                title: const Text('Imágenes'),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(
+                    Routes.PRODUCT_IMAGES,
+                    arguments: product,
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.layers),
+                title: const Text('Variaciones'),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(
+                    Routes.NEW_VARIATIONS,
+                    arguments: product,
+                  );
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: const Icon(Icons.edit),
+                title: const Text('Editar'),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(
+                    Routes.CREATE_PRODUCT,
+                    arguments: product,
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.delete),
+                title: const Text('Eliminar'),
+                onTap: () {
+                  Navigator.of(context).pop('delete'); // Opción Eliminar
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
