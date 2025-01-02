@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
-  //TODO: Implement NewVariationsCustomPickersController
-
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> selectAttributes() async {
+    print('selectAttributes');
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> openGuideTour() async {
+    await FeatureDiscovery.clearPreferences(Get.context!, [
+      'feature_icon_button',
+      'feature_floating_action',
+    ]);
+    FeatureDiscovery.discoverFeatures(
+      Get.context!,
+      ['feature_icon_button', 'feature_floating_action'],
+    );
   }
-
-  void increment() => count.value++;
 }
