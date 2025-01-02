@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:feature_discovery/feature_discovery.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -83,21 +84,23 @@ class MyApp extends StatelessWidget {
     var theme = ThemeService.getTheme();
     bool isDark = ThemeService.isSavedDarkMode();
 
-    return GetMaterialApp(
-      initialBinding: MainBinding(),
-      title: "Estrellas Dashboard",
-      locale: const Locale('es'),
-      fallbackLocale: const Locale('es'),
-      debugShowCheckedModeBanner: false,
-      theme: isDark ? theme.theme.dark(context) : theme.theme.light(context),
-      initialRoute: AppPages.INITIAL,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        FlutterQuillLocalizations.delegate,
-      ],
-      getPages: AppPages.routes,
+    return FeatureDiscovery(
+      child: GetMaterialApp(
+        initialBinding: MainBinding(),
+        title: "Estrellas Dashboard",
+        locale: const Locale('es'),
+        fallbackLocale: const Locale('es'),
+        debugShowCheckedModeBanner: false,
+        theme: isDark ? theme.theme.dark(context) : theme.theme.light(context),
+        initialRoute: AppPages.INITIAL,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          FlutterQuillLocalizations.delegate,
+        ],
+        getPages: AppPages.routes,
+      ),
     );
   }
 }
