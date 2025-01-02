@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
+  late Map<String, bool> attributes;
   @override
   void onInit() {
+    attributes = {
+      'pepis2': false,
+      'Nombre2': false,
+      'Nombre3': false,
+      'Nombre4': false,
+    };
     super.onInit();
   }
 
@@ -14,14 +21,6 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<List<String>> moreOptionsWithCheckboxes() async {
-    // Estado inicial de los checkboxes
-    final Map<String, bool> attributes = {
-      'Nombre1': false,
-      'Nombre2': false,
-      'Nombre3': false,
-      'Nombre4': false,
-    };
-
     List<String> selectedAttributes = [];
 
     await showDialog<void>(
@@ -33,45 +32,40 @@ class NewVariationsCustomPickersController extends GetxController {
               title: const Text('Selecciona atributos'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: attributes.keys.map((String name) {
-                  return ListTile(
-                    leading: Checkbox(
-                      value: attributes[name],
-                      onChanged: (bool? value) {
-                        setState(() {
-                          attributes[name] = value ?? false;
-                        });
-                      },
-                    ),
-                    title: Text(name),
-                    onTap: () {
-                      // Cambiar el estado del checkbox al hacer clic en el nombre
-                      setState(() {
-                        attributes[name] = !(attributes[name] ?? false);
-                      });
-                    },
-                    contentPadding: EdgeInsets.zero,
-                  );
-                }).toList(),
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: attributes.keys.map((String name) {
+                      return ListTile(
+                        leading: Checkbox(
+                          value: attributes[name],
+                          onChanged: (bool? value) {
+                            setState(() {
+                              attributes[name] = value ?? false;
+                            });
+                          },
+                        ),
+                        title: Text(name),
+                        onTap: () {
+                          // Cambiar el estado del checkbox al hacer clic en el nombre
+                          setState(() {
+                            attributes[name] = !(attributes[name] ?? false);
+                          });
+                        },
+                        contentPadding: EdgeInsets.zero,
+                      );
+                    }).toList(),
+                  ),
+                ],
               ),
               actions: [
-                TextButton(
-                  onPressed: () {
-                    Get.back(); // Cerrar el diálogo sin guardar
+                ListTile(
+                  onTap: () {
+                    Get.back();
+                    addAttribute();
                   },
-                  child: const Text('Cancelar'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Guardar los atributos seleccionados
-                    selectedAttributes = attributes.entries
-                        .where((entry) => entry.value)
-                        .map((entry) => entry.key)
-                        .toList();
-
-                    Get.back(); // Cerrar el diálogo
-                  },
-                  child: const Text('Guardar'),
+                  leading: Icon(Icons.add_circle),
+                  title: Text('Nuevo atributo'),
                 ),
               ],
             );
