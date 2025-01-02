@@ -167,8 +167,9 @@ class NewVariationsCustomPickersController extends GetxController {
                 onPressed: () {
                   final String name = nameController.text;
                   final String value = valueController.text;
-
-                  print('Nombre: $name, Valor: $value');
+                  final bool isColor =
+                      getColorFromHex(valueController.text) != null;
+                  print('Nombre: $name, Valor: $value, isColor: $isColor');
                   Get.back();
                 },
                 child: const Text('GUARDAR'),
