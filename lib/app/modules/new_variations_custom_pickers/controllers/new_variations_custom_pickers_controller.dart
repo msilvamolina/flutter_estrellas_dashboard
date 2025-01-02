@@ -135,11 +135,11 @@ class NewVariationsCustomPickersController extends GetxController {
                           // Verificar si el valor ingresado es un color válido
                           if (getColorFromHex(valueController.text) != null)
                             Padding(
-                              padding: const EdgeInsets.only(right: 16),
+                              padding: const EdgeInsets.only(right: 10),
                               child: GestureDetector(
                                 onTap: openColorPicker,
                                 child: CircleAvatar(
-                                  radius: 10,
+                                  radius: 14,
                                   backgroundColor:
                                       getColorFromHex(valueController.text),
                                 ),
