@@ -26,6 +26,7 @@ mixin _$ProductLiteModel {
   int? get externalId => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
+  int? get stock => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   bool? get isPercentage => throw _privateConstructorUsedError;
@@ -71,6 +72,7 @@ abstract class $ProductLiteModelCopyWith<$Res> {
       int? externalId,
       double? price,
       int? points,
+      int? stock,
       double? suggestedPrice,
       String? type,
       bool? isPercentage,
@@ -115,6 +117,7 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? externalId = freezed,
     Object? price = freezed,
     Object? points = freezed,
+    Object? stock = freezed,
     Object? suggestedPrice = freezed,
     Object? type = freezed,
     Object? isPercentage = freezed,
@@ -158,6 +161,10 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stock: freezed == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
               as int?,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
@@ -265,6 +272,7 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
       int? externalId,
       double? price,
       int? points,
+      int? stock,
       double? suggestedPrice,
       String? type,
       bool? isPercentage,
@@ -307,6 +315,7 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? externalId = freezed,
     Object? price = freezed,
     Object? points = freezed,
+    Object? stock = freezed,
     Object? suggestedPrice = freezed,
     Object? type = freezed,
     Object? isPercentage = freezed,
@@ -350,6 +359,10 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stock: freezed == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
               as int?,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
@@ -452,6 +465,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.externalId,
       this.price,
       this.points,
+      this.stock,
       this.suggestedPrice,
       this.type,
       this.isPercentage,
@@ -490,6 +504,8 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   final double? price;
   @override
   final int? points;
+  @override
+  final int? stock;
   @override
   final double? suggestedPrice;
   @override
@@ -537,7 +553,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, stock: $stock, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -551,6 +567,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
                 other.externalId == externalId) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.points, points) || other.points == points) &&
+            (identical(other.stock, stock) || other.stock == stock) &&
             (identical(other.suggestedPrice, suggestedPrice) ||
                 other.suggestedPrice == suggestedPrice) &&
             (identical(other.type, type) || other.type == type) &&
@@ -603,6 +620,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
         externalId,
         price,
         points,
+        stock,
         suggestedPrice,
         type,
         isPercentage,
@@ -651,6 +669,7 @@ abstract class _ProductLiteModel extends ProductLiteModel {
       final int? externalId,
       final double? price,
       final int? points,
+      final int? stock,
       final double? suggestedPrice,
       final String? type,
       final bool? isPercentage,
@@ -689,6 +708,8 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   double? get price;
   @override
   int? get points;
+  @override
+  int? get stock;
   @override
   double? get suggestedPrice;
   @override

@@ -15,6 +15,7 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
     int? externalId,
     double? price,
     int? points,
+    int? stock,
     double? suggestedPrice,
     String? type,
     bool? isPercentage,

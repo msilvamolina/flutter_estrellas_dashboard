@@ -18,7 +18,7 @@ class DetailsView extends StatelessWidget {
           child: QuillEditor(
             config: QuillEditorConfig(
               showCursor: false,
-              checkBoxReadOnly: true,
+              scrollPhysics: NeverScrollableScrollPhysics(),
             ),
             controller: controller.detailsController,
             scrollController: controller.detailsEditorScrollController,

@@ -225,4 +225,8 @@ class ProductDetailsController extends GetxController {
       // print("dismissed while on page $page");
     });
   }
+
+  void moreOptions() {
+    print('moreOptions');
+  }
 }

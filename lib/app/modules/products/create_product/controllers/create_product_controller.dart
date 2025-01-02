@@ -21,6 +21,7 @@ enum Fields {
   price('price'),
   suggestedPrice('suggestedPrice'),
   points('points'),
+  stock('stock'),
   ;
 
   const Fields(this.text);
@@ -99,7 +100,14 @@ class CreateProductController extends GetxController {
           validators: [
             Validators.required,
             Validators.number(),
-            Validators.minLength(3),
+            Validators.minLength(2),
+          ],
+        ),
+        Fields.stock.name: FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.number(),
+            Validators.minLength(1),
           ],
         ),
       });
@@ -321,13 +329,16 @@ class CreateProductController extends GetxController {
     String price = data[Fields.price.name].toString();
     String suggestedPrice = data[Fields.suggestedPrice.name].toString();
     String points = data[Fields.points.name].toString();
+    String stock = data[Fields.stock.name].toString();
 
+    int _stock = int.tryParse(stock) ?? 1;
     _mainController.setDropiDialog(true);
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
     Either<String, ProductLiteModel> response = await _repository.createProduct(
       imagePath: _imagePath!,
+      stock: stock,
       price: price,
       suggestedPrice: suggestedPrice,
       name: name,
@@ -351,6 +362,7 @@ class CreateProductController extends GetxController {
         categories: _categoriesJson,
         categoriesIds: _categoriesIds,
         categoriesNames: _categoriesNames,
+        stock: _stock,
       );
       _mainController.setDropiMessage('Success!');
       saveInFirebase(

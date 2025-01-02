@@ -18,7 +18,7 @@ class WarrantyView extends StatelessWidget {
           child: QuillEditor(
             config: QuillEditorConfig(
               showCursor: false,
-              checkBoxReadOnly: true,
+              scrollPhysics: NeverScrollableScrollPhysics(),
             ),
             controller: controller.warrantyController,
             scrollController: controller.warrantyEditorScrollController,

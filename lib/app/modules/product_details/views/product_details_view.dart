@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../components/appbars/estrellas_appbar.dart';
 import '../../../components/buttons/buttons.dart';
 import '../../../themes/styles/colors.dart';
+import '../../../themes/themes/default_light_theme.dart';
 import '../../../themes/themes/green.dart';
 import '../controllers/product_details_controller.dart';
 import '../widgets/product_main_header.dart';
@@ -26,27 +27,9 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
       isIos = Platform.isIOS;
       isAndroid = Platform.isAndroid;
     }
-    ThemeData adminLightTheme = ThemeData(
-      colorScheme: ColorScheme(
-        primary: Colors.blue.shade700, // Color primario más intenso
-        primaryContainer: Colors.blue.shade400, // Color de contenedor primario
-        secondary: Colors.blue.shade600, // Color secundario
-        secondaryContainer:
-            Colors.blue.shade300, // Color de contenedor secundario
-        surface: Colors.blue[50]!, // Superficie
 
-        error: Colors.red, // Color de error
-        onPrimary: Colors.white, // Color sobre primario
-        onSecondary: Colors.white, // Color sobre secundario
-        onSurface: Colors.black, // Color sobre superficie
-
-        onError: Colors.white, // Color sobre error
-        brightness: Brightness.light, // Brillo
-      ),
-      useMaterial3: true,
-    );
     return Theme(
-      data: adminLightTheme,
+      data: defaultLightTheme,
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -80,7 +63,7 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
             title: 'Vista previa',
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: controller.moreOptions,
                 icon: Icon(Icons.more_vert),
               )
             ],

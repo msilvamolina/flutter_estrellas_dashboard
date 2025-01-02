@@ -1,4 +1,5 @@
 import 'package:estrellas_dashboard/app/modules/products/create_product/components/categories_tags.dart';
+import 'package:estrellas_dashboard/app/themes/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -148,14 +149,24 @@ class ProductMainTab extends StatelessWidget {
                   text: "Points",
                 ),
               ),
-              const SizedBox(height: 26),
+              const SizedBox(height: 16),
+
+              ReactiveTextField(
+                formControlName: Fields.stock.name,
+                keyboardType: TextInputType.number,
+                decoration: CustomInputDecoration.inputDecoration(
+                  text: "Stock",
+                ),
+              ),
+              const SizedBox(height: 36),
 
               // Sección de Categorías
               Text(
                 'Categorías:',
-                style: TypographyStyle.bodyBlackLarge,
+                style: TypographyStyle.bodyBlackLarge
+                    .copyWith(color: secondaryBase),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
 
               // Componente de selección múltiple
               const CategoriesTags(),

@@ -89,6 +89,7 @@ class ProductsRepository {
     required String price,
     required String suggestedPrice,
     required String points,
+    required String stock,
     required String warehouseID,
     required String provider,
     required String imagePath,
@@ -106,6 +107,7 @@ class ProductsRepository {
         'provider': provider,
         'description': description,
         'category': category,
+        'stock': stock,
       };
 
       StreamedResponse response = await services.postWithFileAndToken(
