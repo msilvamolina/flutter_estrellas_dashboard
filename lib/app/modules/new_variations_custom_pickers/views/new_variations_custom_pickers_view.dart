@@ -35,10 +35,15 @@ class NewVariationsCustomPickersView
               child: Icon(Icons.attribution_outlined, size: 32),
             ),
             title: const Text('Información importante'),
-            description: const Text(
-              'Toca este botón para descubrir más sobre esta funcionalidad.',
+            description: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                    'Tap the magnifying glass to quickly scan your compounds'),
+              ],
             ),
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: Colors.purple,
+            backgroundOpacity: 0.9,
             targetColor: Colors.red,
             textColor: Colors.white,
             overflowMode: OverflowMode.clipContent,
@@ -59,10 +64,15 @@ class NewVariationsCustomPickersView
           child: Icon(Icons.attribution_outlined, size: 32),
         ),
         title: const Text('Información importante'),
-        description: const Text(
-          'Toca este botón para descubrir más sobre esta funcionalidad.',
+        description: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const Text(
+                'Tap the magnifying glass to quickly scan your compounds'),
+          ],
         ),
         backgroundColor: Colors.blueAccent,
+        backgroundOpacity: 0.9,
         targetColor: Colors.red,
         textColor: Colors.white,
         overflowMode: OverflowMode.clipContent,
@@ -71,19 +81,26 @@ class NewVariationsCustomPickersView
           child: Icon(Icons.abc),
         ),
       ),
-      body: Center(
-        child: Button(
-          onPressed: () async {
-            print('Botón "Descubrir" presionado');
-            await FeatureDiscovery.clearPreferences(
-                context, ['feature_icon_button', 'feature_floating_action']);
-            FeatureDiscovery.discoverFeatures(
-              context,
-              ['feature_icon_button', 'feature_floating_action'],
-            );
-          },
-          label: 'Descubrir',
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Button(
+            onPressed: () async {
+              print('Botón "Descubrir" presionado');
+              await FeatureDiscovery.clearPreferences(context, [
+                'feature_icon_button',
+                'feature_floating_action',
+              ]);
+              FeatureDiscovery.discoverFeatures(
+                context,
+                ['feature_icon_button', 'feature_floating_action'],
+              );
+            },
+            label: 'Descubrir',
+          ),
+        ],
       ),
     );
   }
