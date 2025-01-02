@@ -281,7 +281,8 @@ class ProductDetailsController extends GetxController {
                 leading: const Icon(Icons.delete),
                 title: const Text('Eliminar'),
                 onTap: () {
-                  Navigator.of(context).pop('delete'); // Opción Eliminar
+                  Get.back();
+                  deleteProduct();
                 },
               ),
             ],
@@ -289,5 +290,34 @@ class ProductDetailsController extends GetxController {
         );
       },
     );
+  }
+
+  Future<void> deleteProduct() async {
+    final result = await showDialog<bool>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirmación'),
+          content:
+              const Text('¿Estás seguro de que deseas eliminar este producto?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false); // Cancelar
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // Confirmar
+              },
+              child: const Text('Eliminar'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (result == true) {}
   }
 }
