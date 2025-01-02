@@ -103,13 +103,24 @@ class NewVariationsCustomPickersController extends GetxController {
                   controller: valueController,
                   decoration: InputDecoration(
                     labelText: 'Valor',
-                    hintText: 'Ingrese el valor',
+                    hintText: '#RRGGBB',
                     suffixIcon: IconButton(
                       icon: const Icon(Icons.color_lens),
                       onPressed: () async {
-                        final selectedColor = await pickColor(context);
+                        // Si hay un valor inicial en el campo, úsalo, sino usa un color por defecto
+                        final initialColor = valueController.text.isNotEmpty &&
+                                valueController.text.startsWith('#') &&
+                                valueController.text.length == 7
+                            ? Color(int.parse(valueController.text.substring(1),
+                                    radix: 16) +
+                                0xFF000000)
+                            : Colors.red;
+
+                        final selectedColor =
+                            await pickColor(context, initialColor);
                         if (selectedColor != null) {
-                          valueController.text = selectedColor;
+                          valueController.text =
+                              selectedColor; // Actualizar el valor con el Hex seleccionado
                         }
                       },
                     ),
@@ -136,40 +147,100 @@ class NewVariationsCustomPickersController extends GetxController {
     );
   }
 
-  Future<String?> pickColor(BuildContext context) async {
-    Color currentColor = Colors.red; // Color inicial por defecto
+  Future<String?> pickColor(BuildContext context, Color initialColor) async {
+    Color currentColor = initialColor;
+    TextEditingController hexController = TextEditingController(
+      text:
+          '#${currentColor.value.toRadixString(16).substring(2).toUpperCase()}',
+    );
+
     String? selectedColorHex;
 
     await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Selecciona un color'),
-          content: SingleChildScrollView(
-            child: ColorPicker(
-              pickerColor: currentColor,
-              onColorChanged: (Color color) {
-                currentColor = color; // Actualiza el color seleccionado
-              },
-              showLabel: true, // Muestra el valor del color (Hex, RGB, etc.)
-              pickerAreaHeightPercent: 0.8, // Ajusta el área del selector
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () =>
-                  Navigator.of(context).pop(), // Cierra sin seleccionar
-              child: const Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                selectedColorHex =
-                    '#${currentColor.value.toRadixString(16).substring(2).toUpperCase()}';
-                Navigator.of(context).pop(); // Cierra con el color seleccionado
-              },
-              child: const Text('Aceptar'),
-            ),
-          ],
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text('Selecciona un color'),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ColorPicker(
+                      pickerColor: currentColor,
+                      onColorChanged: (Color color) {
+                        setState(() {
+                          currentColor = color;
+                          hexController.text =
+                              '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+                        });
+                      },
+                      enableAlpha: false,
+                      showLabel: true,
+                      pickerAreaHeightPercent: 0.8,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: hexController,
+                      decoration: InputDecoration(
+                        labelText: 'Código Hex',
+                        hintText: '#RRGGBB',
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.color_lens),
+                          onPressed: () {
+                            try {
+                              if (hexController.text.startsWith('#') &&
+                                  hexController.text.length == 7) {
+                                final newColor = Color(
+                                  int.parse(hexController.text.substring(1),
+                                          radix: 16) +
+                                      0xFF000000,
+                                );
+                                setState(() {
+                                  currentColor = newColor;
+                                });
+                              }
+                            } catch (_) {
+                              // Manejo de errores para códigos inválidos
+                            }
+                          },
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        if (value.startsWith('#') && value.length == 7) {
+                          try {
+                            final newColor = Color(
+                              int.parse(value.substring(1), radix: 16) +
+                                  0xFF000000,
+                            );
+                            setState(() {
+                              currentColor = newColor;
+                            });
+                          } catch (_) {
+                            // Manejo de errores
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Cancelar'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    selectedColorHex =
+                        '#${currentColor.value.toRadixString(16).substring(2).toUpperCase()}';
+                    Navigator.of(context).pop(); // Cierra el diálogo
+                  },
+                  child: const Text('Aceptar'),
+                ),
+              ],
+            );
+          },
         );
       },
     );
