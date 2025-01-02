@@ -68,7 +68,7 @@ class CreateProductController extends GetxController {
 
   final QuillController descriptionController = QuillController(
     document: Document(),
-    readOnly: true,
+    readOnly: false,
     selection: const TextSelection.collapsed(offset: 0),
   );
   final FocusNode descriptionEditorFocusNode = FocusNode();
@@ -76,7 +76,7 @@ class CreateProductController extends GetxController {
 
   final QuillController detailsController = QuillController(
     document: Document(),
-    readOnly: true,
+    readOnly: false,
     selection: const TextSelection.collapsed(offset: 0),
   );
   final FocusNode detailsEditorFocusNode = FocusNode();
@@ -84,7 +84,7 @@ class CreateProductController extends GetxController {
 
   final QuillController warrantyController = QuillController(
     document: Document(),
-    readOnly: true,
+    readOnly: false,
     selection: const TextSelection.collapsed(offset: 0),
   );
   final FocusNode warrantyEditorFocusNode = FocusNode();

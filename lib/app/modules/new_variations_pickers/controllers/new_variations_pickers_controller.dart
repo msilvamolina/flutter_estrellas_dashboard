@@ -34,15 +34,14 @@ class NewVariationsPickersController extends GetxController {
   }
 
   Future<void> sendVariations() async {
-    Map<String, dynamic> payload = buildPayloadVariations();
-
     _mainController.setDropiDialog(true);
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');
 
+    Map<String, dynamic> payload = buildPayloadVariations();
+
     Either<String, dynamic> response =
         await _repository.updateProductVariations(
-      id: product.id,
       requestBody: payload,
     );
 
@@ -89,17 +88,14 @@ class NewVariationsPickersController extends GetxController {
           "attributes": [color, size],
           "cost": product.price,
           "value": product.suggestedPrice,
-          "stock": '10', // Stock predeterminado
+          "stock": 1,
           "points": product.points,
         });
       }
     }
 
     Map<String, dynamic> payload = {
-      "name": product.name,
-      "price": product.price,
-      "suggestedPrice": product.suggestedPrice,
-      "points": product.points,
+      "id": product.id,
       "attributes": attributes,
       "variations": variations,
       "warehouseID": product.warehouseID,

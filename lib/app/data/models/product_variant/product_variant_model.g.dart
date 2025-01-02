@@ -10,9 +10,9 @@ _$ProductVariantModelImpl _$$ProductVariantModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductVariantModelImpl(
       id: json['id'] as String,
-      name: json['name'] as String,
-      label: json['label'] as String,
-      type: json['type'] as String,
+      name: json['name'] as String?,
+      label: json['label'] as String?,
+      type: json['type'] as String?,
       imageUrl: json['imageUrl'] as String?,
       color: (json['color'] as num?)?.toInt(),
       searchField: json['searchField'] as String?,

@@ -49,6 +49,8 @@ abstract class Routes {
   static const NEW_VARIATIONS_PICKERS = _Paths.NEW_VARIATIONS_PICKERS;
   static const PRODUCTS_DETAILS = _Paths.PRODUCT_DETAILS;
   static const PRODUCT_INFO = _Paths.PRODUCT_INFO;
+  static const NEW_VARIATIONS_CUSTOM_PICKERS =
+      _Paths.NEW_VARIATIONS_CUSTOM_PICKERS;
 }
 
 abstract class _Paths {
@@ -98,4 +100,5 @@ abstract class _Paths {
   static const NEW_VARIATIONS_PICKERS = '/new-variations-pickers';
   static const PRODUCT_DETAILS = '/product-details';
   static const PRODUCT_INFO = '/product-info';
+  static const NEW_VARIATIONS_CUSTOM_PICKERS = '/new-variations-custom-pickers';
 }

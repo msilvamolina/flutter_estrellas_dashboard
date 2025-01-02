@@ -21,9 +21,9 @@ ProductVariantModel _$ProductVariantModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProductVariantModel {
   String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get label => throw _privateConstructorUsedError;
-  String get type => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get label => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
   int? get color => throw _privateConstructorUsedError;
   String? get searchField => throw _privateConstructorUsedError;
@@ -52,9 +52,9 @@ abstract class $ProductVariantModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String name,
-      String label,
-      String type,
+      String? name,
+      String? label,
+      String? type,
       String? imageUrl,
       int? color,
       String? searchField,
@@ -82,9 +82,9 @@ class _$ProductVariantModelCopyWithImpl<$Res, $Val extends ProductVariantModel>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? label = null,
-    Object? type = null,
+    Object? name = freezed,
+    Object? label = freezed,
+    Object? type = freezed,
     Object? imageUrl = freezed,
     Object? color = freezed,
     Object? searchField = freezed,
@@ -100,18 +100,18 @@ class _$ProductVariantModelCopyWithImpl<$Res, $Val extends ProductVariantModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      label: null == label
+              as String?,
+      label: freezed == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
+              as String?,
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -162,9 +162,9 @@ abstract class _$$ProductVariantModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String name,
-      String label,
-      String type,
+      String? name,
+      String? label,
+      String? type,
       String? imageUrl,
       int? color,
       String? searchField,
@@ -190,9 +190,9 @@ class __$$ProductVariantModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = null,
-    Object? label = null,
-    Object? type = null,
+    Object? name = freezed,
+    Object? label = freezed,
+    Object? type = freezed,
     Object? imageUrl = freezed,
     Object? color = freezed,
     Object? searchField = freezed,
@@ -208,18 +208,18 @@ class __$$ProductVariantModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      label: null == label
+              as String?,
+      label: freezed == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
-              as String,
-      type: null == type
+              as String?,
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -265,9 +265,9 @@ class __$$ProductVariantModelImplCopyWithImpl<$Res>
 class _$ProductVariantModelImpl extends _ProductVariantModel {
   const _$ProductVariantModelImpl(
       {required this.id,
-      required this.name,
-      required this.label,
-      required this.type,
+      this.name,
+      this.label,
+      this.type,
       this.imageUrl,
       this.color,
       this.searchField,
@@ -285,11 +285,11 @@ class _$ProductVariantModelImpl extends _ProductVariantModel {
   @override
   final String id;
   @override
-  final String name;
+  final String? name;
   @override
-  final String label;
+  final String? label;
   @override
-  final String type;
+  final String? type;
   @override
   final String? imageUrl;
   @override
@@ -376,9 +376,9 @@ class _$ProductVariantModelImpl extends _ProductVariantModel {
 abstract class _ProductVariantModel extends ProductVariantModel {
   const factory _ProductVariantModel(
       {required final String id,
-      required final String name,
-      required final String label,
-      required final String type,
+      final String? name,
+      final String? label,
+      final String? type,
       final String? imageUrl,
       final int? color,
       final String? searchField,
@@ -396,11 +396,11 @@ abstract class _ProductVariantModel extends ProductVariantModel {
   @override
   String get id;
   @override
-  String get name;
+  String? get name;
   @override
-  String get label;
+  String? get label;
   @override
-  String get type;
+  String? get type;
   @override
   String? get imageUrl;
   @override

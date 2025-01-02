@@ -232,7 +232,6 @@ class ProductDetailsController extends GetxController {
       context: Get.context!,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Opciones'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

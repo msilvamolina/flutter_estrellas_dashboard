@@ -552,17 +552,17 @@ class ProductsRepository {
   }
 
   Future<Either<String, Map<String, dynamic>>> updateProductVariations({
-    required String id,
     required Map<String, dynamic> requestBody,
   }) async {
-    String url = 'api/products/$id';
+    String url = 'api/products/updateProduct';
 
     try {
       // Serializamos el cuerpo a JSON
       String bodyJson = jsonEncode(requestBody);
 
+      log(bodyJson.toString());
       // Enviamos la solicitud PUT
-      Response response = await services.putWithToken(
+      Response response = await services.postJsonWithToken(
         url: url,
         body: bodyJson, // Pasamos el cuerpo como JSON serializado
       );
