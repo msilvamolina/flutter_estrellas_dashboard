@@ -40,7 +40,7 @@ class CreateProductView extends GetView<CreateProductController> {
                     child: ReactiveFormConsumer(
                       builder: (context, form, child) => Button(
                         style: controller.editMode.value
-                            ? ButtonStyles.secondary
+                            ? ButtonStyles.primarySecondary
                             : ButtonStyles.primary,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)

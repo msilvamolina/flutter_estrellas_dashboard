@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'widgets/destructive_button.dart';
 import 'widgets/primary_button.dart';
+import 'widgets/primary_secondary_button.dart';
 import 'widgets/secondary_button.dart';
 import 'widgets/secondary_circle_button.dart';
 import 'widgets/secondary_link.dart';
@@ -9,6 +10,7 @@ import 'widgets/secondary_textbutton.dart';
 
 enum ButtonStyles {
   primary,
+  primarySecondary,
   secondary,
   secondaryText,
   secondaryLink,
@@ -37,6 +39,12 @@ class Button extends StatelessWidget {
     switch (style) {
       case ButtonStyles.primary:
         return PrimaryButton(
+          onPressed: onPressed,
+          label: label!,
+          isLoaderButton: false,
+        );
+      case ButtonStyles.primarySecondary:
+        return PrimarySecondaryButton(
           onPressed: onPressed,
           label: label!,
           isLoaderButton: false,
@@ -97,6 +105,13 @@ class LoadingButton extends StatelessWidget {
           onPressed: onPressed,
           label: label,
           isLoaderButton: true,
+          isLoading: isLoading,
+        );
+      case ButtonStyles.primarySecondary:
+        return PrimarySecondaryButton(
+          onPressed: onPressed,
+          label: label,
+          isLoaderButton: false,
           isLoading: isLoading,
         );
       default:

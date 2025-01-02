@@ -130,7 +130,6 @@ class InlineGrid extends StatefulWidget {
 }
 
 class _InlineGridState extends State<InlineGrid> {
-  // Lista de colores Material Design
   final Map<String, MaterialColor> materialColors = {
     'Rojo': Colors.red,
     'Rosa': Colors.pink,
@@ -147,6 +146,18 @@ class _InlineGridState extends State<InlineGrid> {
     'Marrón': Colors.brown,
     'Gris': Colors.grey,
     'Azul Gris': Colors.blueGrey,
+    'Negro': MaterialColor(0xFF000000, {
+      50: Color(0xFF000000),
+      100: Color(0xFF000000),
+      200: Color(0xFF000000),
+      300: Color(0xFF000000),
+      400: Color(0xFF000000),
+      500: Color(0xFF000000), // Color principal
+      600: Color(0xFF000000),
+      700: Color(0xFF000000),
+      800: Color(0xFF000000),
+      900: Color(0xFF000000),
+    }),
   };
 
   List<String> selectedValue = [];
