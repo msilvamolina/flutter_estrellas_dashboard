@@ -11,7 +11,7 @@ class NewVariationsCustomPickersFeatureView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FeatureDiscovery(
-      child: NewVariationsCustomPickersView(),
+      child: SafeArea(child: NewVariationsCustomPickersView()),
     );
   }
 }
@@ -28,15 +28,20 @@ class NewVariationsCustomPickersView
         centerTitle: true,
         actions: [
           DescribedFeatureOverlay(
+            contentLocation: ContentLocation.below,
             featureId: 'feature_icon_button',
-            tapTarget: const Icon(Icons.attribution_outlined),
+            tapTarget: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.attribution_outlined, size: 32),
+            ),
             title: const Text('Información importante'),
             description: const Text(
               'Toca este botón para descubrir más sobre esta funcionalidad.',
             ),
             backgroundColor: Colors.blueAccent,
-            targetColor: Colors.white,
+            targetColor: Colors.red,
             textColor: Colors.white,
+            overflowMode: OverflowMode.clipContent,
             child: IconButton(
               onPressed: () {
                 print('IconButton presionado');
@@ -46,16 +51,35 @@ class NewVariationsCustomPickersView
           ),
         ],
       ),
+      floatingActionButton: DescribedFeatureOverlay(
+        contentLocation: ContentLocation.above,
+        featureId: 'feature_floating_action',
+        tapTarget: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(Icons.attribution_outlined, size: 32),
+        ),
+        title: const Text('Información importante'),
+        description: const Text(
+          'Toca este botón para descubrir más sobre esta funcionalidad.',
+        ),
+        backgroundColor: Colors.blueAccent,
+        targetColor: Colors.red,
+        textColor: Colors.white,
+        overflowMode: OverflowMode.clipContent,
+        child: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.abc),
+        ),
+      ),
       body: Center(
         child: Button(
           onPressed: () async {
             print('Botón "Descubrir" presionado');
-            // Reinicia el estado de FeatureDiscovery antes de activarlo
             await FeatureDiscovery.clearPreferences(
-                context, ['feature_icon_button']);
+                context, ['feature_icon_button', 'feature_floating_action']);
             FeatureDiscovery.discoverFeatures(
               context,
-              ['feature_icon_button'], // IDs de las features a mostrar
+              ['feature_icon_button', 'feature_floating_action'],
             );
           },
           label: 'Descubrir',
