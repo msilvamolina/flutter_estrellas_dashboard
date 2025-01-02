@@ -1,6 +1,7 @@
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
   late Map<String, bool> attributes;
@@ -100,10 +101,18 @@ class NewVariationsCustomPickersController extends GetxController {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: valueController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Valor',
                     hintText: 'Ingrese el valor',
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.color_lens),
+                      onPressed: () async {
+                        final selectedColor = await pickColor(context);
+                        if (selectedColor != null) {
+                          valueController.text = selectedColor;
+                        }
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -113,11 +122,9 @@ class NewVariationsCustomPickersController extends GetxController {
           actions: [
             TextButton(
               onPressed: () {
-                // Aquí puedes manejar los valores ingresados
                 final String name = nameController.text;
                 final String value = valueController.text;
 
-                // Realiza acciones con los valores, como enviarlos a un servidor o guardarlos
                 print('Nombre: $name, Valor: $value');
                 Get.back();
               },
@@ -127,6 +134,44 @@ class NewVariationsCustomPickersController extends GetxController {
         );
       },
     );
+  }
+
+  Future<String?> pickColor(BuildContext context) async {
+    Color currentColor = Colors.red; // Color inicial
+    String? selectedColorHex;
+
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Selecciona un color'),
+          content: SingleChildScrollView(
+            child: BlockPicker(
+              pickerColor: currentColor,
+              onColorChanged: (Color color) {
+                currentColor = color;
+              },
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                selectedColorHex =
+                    '#${currentColor.value.toRadixString(16).substring(2).toUpperCase()}';
+                Navigator.of(context).pop();
+              },
+              child: const Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
+
+    return selectedColorHex;
   }
 
   Future<void> openGuideTour() async {
