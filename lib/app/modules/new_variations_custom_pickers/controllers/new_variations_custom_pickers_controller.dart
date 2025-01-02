@@ -210,14 +210,13 @@ class NewVariationsCustomPickersController extends GetxController {
                         });
                       },
                       enableAlpha: false,
-                      showLabel: true,
+                      showLabel: false,
                       pickerAreaHeightPercent: 0.8,
                     ),
-                    const SizedBox(height: 16),
                     TextFormField(
                       controller: hexController,
                       decoration: InputDecoration(
-                        labelText: 'Código Hex',
+                        labelText: 'Código Hexadecimal',
                         hintText: '#RRGGBB',
                       ),
                       onChanged: (String value) {
