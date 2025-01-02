@@ -92,6 +92,8 @@ class NewVariationsCustomPickersController extends GetxController {
       context: Get.context!,
       builder: (BuildContext context) {
         bool isImageValid = false;
+        String? nameError;
+        String? valueError;
 
         return StatefulBuilder(builder: (context, setState) {
           Color? getColorFromHex(String hex) {
@@ -113,6 +115,8 @@ class NewVariationsCustomPickersController extends GetxController {
             if (selectedColor != null) {
               setState(() {
                 isImageValid = false;
+                valueError =
+                    null; // Limpiar error cuando se selecciona un color válido
                 valueController.text = selectedColor;
               });
             }
@@ -132,6 +136,17 @@ class NewVariationsCustomPickersController extends GetxController {
             return false;
           }
 
+          void validateInputs() {
+            setState(() {
+              nameError = nameController.text.isEmpty
+                  ? 'El campo nombre no puede estar vacío'
+                  : null;
+              valueError = valueController.text.isEmpty
+                  ? 'El campo valor no puede estar vacío'
+                  : null;
+            });
+          }
+
           return AlertDialog(
             title: const Text('Nuevo atributo'),
             content: SingleChildScrollView(
@@ -140,16 +155,23 @@ class NewVariationsCustomPickersController extends GetxController {
                 children: [
                   TextFormField(
                     controller: nameController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Nombre',
                       hintText: 'Ingrese el nombre',
+                      errorText: nameError, // Mostrar error si aplica
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        nameError = null; // Limpiar error al escribir
+                      });
+                    },
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
                     controller: valueController,
                     decoration: InputDecoration(
                       labelText: 'Valor',
+                      errorText: valueError, // Mostrar error si aplica
                       suffixIcon: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -165,6 +187,8 @@ class NewVariationsCustomPickersController extends GetxController {
                                   setState(() {
                                     isImageValid = valid;
                                     if (valid) {
+                                      valueError =
+                                          null; // Limpiar error cuando se selecciona una imagen válida
                                       valueController.text = _imagePath;
                                     } else {
                                       ScaffoldMessenger.of(context)
@@ -194,6 +218,8 @@ class NewVariationsCustomPickersController extends GetxController {
                                   setState(() {
                                     isImageValid = valid;
                                     if (valid) {
+                                      valueError =
+                                          null; // Limpiar error cuando se selecciona una imagen válida
                                       valueController.text = _imagePath;
                                     } else {
                                       ScaffoldMessenger.of(context)
@@ -208,7 +234,6 @@ class NewVariationsCustomPickersController extends GetxController {
                                 }
                               },
                             ),
-                          // Verificar si el valor ingresado es un color válido
                           if (getColorFromHex(valueController.text) != null)
                             Padding(
                               padding: const EdgeInsets.only(right: 10),
@@ -230,8 +255,9 @@ class NewVariationsCustomPickersController extends GetxController {
                       ),
                     ),
                     onChanged: (value) {
-                      // Actualizar la UI dinámicamente si cambia el valor
-                      setState(() {});
+                      setState(() {
+                        valueError = null; // Limpiar error al escribir
+                      });
                     },
                   ),
                   const SizedBox(height: 16),
@@ -241,13 +267,16 @@ class NewVariationsCustomPickersController extends GetxController {
             actions: [
               TextButton(
                 onPressed: () {
-                  final String name = nameController.text;
-                  final String value = valueController.text;
-                  final bool isColor =
-                      getColorFromHex(valueController.text) != null;
-                  print(
-                      'Nombre: $name, Valor: $value, isColor: $isColor, isImage: $isImageValid');
-                  Get.back();
+                  validateInputs();
+                  if (nameError == null && valueError == null) {
+                    final String name = nameController.text;
+                    final String value = valueController.text;
+                    final bool isColor =
+                        getColorFromHex(valueController.text) != null;
+                    print(
+                        'Nombre: $name, Valor: $value, isColor: $isColor, isImage: $isImageValid');
+                    Get.back();
+                  }
                 },
                 child: const Text('GUARDAR'),
               ),
