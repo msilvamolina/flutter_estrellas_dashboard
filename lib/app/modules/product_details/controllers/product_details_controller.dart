@@ -240,7 +240,11 @@ class ProductDetailsController extends GetxController {
                 leading: const Icon(Icons.info),
                 title: const Text('Ver información'),
                 onTap: () {
-                  Navigator.of(context).pop('info'); // Opción Ver Información
+                  Get.back();
+                  Get.toNamed(
+                    Routes.PRODUCT_INFO,
+                    arguments: product,
+                  );
                 },
               ),
               ListTile(

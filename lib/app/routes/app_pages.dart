@@ -22,6 +22,8 @@ import '../modules/new_variations_pickers/bindings/new_variations_pickers_bindin
 import '../modules/new_variations_pickers/views/new_variations_pickers_view.dart';
 import '../modules/product_details/bindings/product_details_binding.dart';
 import '../modules/product_details/views/product_details_view.dart';
+import '../modules/product_info/bindings/product_info_binding.dart';
+import '../modules/product_info/views/product_info_view.dart';
 import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
 import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
@@ -275,6 +277,12 @@ class AppPages {
       name: _Paths.PRODUCT_DETAILS,
       page: () => const ProductDetailsView(),
       binding: ProductDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_INFO,
+      page: () => const ProductInfoView(),
+      binding: ProductInfoBinding(),
+      transition: Transition.downToUp,
     ),
   ];
 }
