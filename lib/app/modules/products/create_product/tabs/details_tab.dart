@@ -1,4 +1,5 @@
 import 'package:estrellas_dashboard/app/modules/products/create_product/controllers/create_product_controller.dart';
+import 'package:estrellas_dashboard/app/themes/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,14 @@ class ProductDetailsTab extends StatelessWidget {
         return SafeArea(
           child: Column(
             children: [
-              CustomToolbar(controller: controller.detailsController),
+              Hero(
+                tag: 'customToolbar',
+                child: CustomToolbar(controller: controller.detailsController),
+              ),
+              Divider(
+                color: neutral400,
+              ),
+              SizedBox(height: 16),
               Expanded(
                 child: QuillEditor(
                   controller: controller.detailsController,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 
+import '../../../../themes/styles/colors.dart';
 import '../components/quill_toolbar.dart';
 import '../components/warranty_toolbar.dart';
 
@@ -16,7 +17,14 @@ class ProductWarrantyTab extends StatelessWidget {
         return SafeArea(
           child: Column(
             children: [
-              CustomToolbar(controller: controller.warrantyController),
+              Hero(
+                tag: 'customToolbar',
+                child: CustomToolbar(controller: controller.warrantyController),
+              ),
+              Divider(
+                color: neutral400,
+              ),
+              SizedBox(height: 16),
               Expanded(
                 child: QuillEditor(
                   controller: controller.warrantyController,

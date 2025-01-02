@@ -8,6 +8,7 @@ import 'package:estrellas_dashboard/app/data/models/provider/provider/provider_m
 import 'package:estrellas_dashboard/app/data/providers/repositories/products/products_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -65,19 +66,31 @@ class CreateProductController extends GetxController {
   String? _categoriesIds;
   String? _categoriesNames;
 
-  final QuillController descriptionController = QuillController.basic();
+  final QuillController descriptionController = QuillController(
+    document: Document(),
+    readOnly: true,
+    selection: const TextSelection.collapsed(offset: 0),
+  );
   final FocusNode descriptionEditorFocusNode = FocusNode();
   final ScrollController descriptionEditorScrollController = ScrollController();
 
-  final QuillController detailsController = QuillController.basic();
+  final QuillController detailsController = QuillController(
+    document: Document(),
+    readOnly: true,
+    selection: const TextSelection.collapsed(offset: 0),
+  );
   final FocusNode detailsEditorFocusNode = FocusNode();
   final ScrollController detailsEditorScrollController = ScrollController();
 
-  final QuillController warrantyController = QuillController.basic();
+  final QuillController warrantyController = QuillController(
+    document: Document(),
+    readOnly: true,
+    selection: const TextSelection.collapsed(offset: 0),
+  );
   final FocusNode warrantyEditorFocusNode = FocusNode();
   final ScrollController warrantyEditorScrollController = ScrollController();
 
-  ProductFirebaseModel? product = Get.arguments as ProductFirebaseModel;
+  ProductFirebaseModel? product = Get.arguments;
 
   String productId = '';
   RxBool editMode = false.obs;
@@ -131,6 +144,23 @@ class CreateProductController extends GetxController {
 
     if (product != null) {
       productId = product!.id;
+      if (product!.descriptionFormatted != null) {
+        final descriptionDelta =
+            Delta.fromJson(jsonDecode(product!.descriptionFormatted));
+        descriptionController.document = Document.fromDelta(descriptionDelta);
+      }
+
+      if (product!.detailsFormatted != null) {
+        final detailsDelta =
+            Delta.fromJson(jsonDecode(product!.detailsFormatted));
+        detailsController.document = Document.fromDelta(detailsDelta);
+      }
+
+      if (product!.warrantyFormatted != null) {
+        final warrantyDelta =
+            Delta.fromJson(jsonDecode(product!.warrantyFormatted));
+        warrantyController.document = Document.fromDelta(warrantyDelta);
+      }
     } else {
       descriptionController.document = Document()..insert(0, '');
       detailsController.document = Document.fromJson([

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 
+import '../../../../themes/styles/colors.dart';
 import '../components/quill_toolbar.dart';
 import '../controllers/create_product_controller.dart';
 
@@ -15,7 +16,15 @@ class ProductDescriptionTab extends StatelessWidget {
         return SafeArea(
           child: Column(
             children: [
-              CustomToolbar(controller: controller.descriptionController),
+              Hero(
+                tag: 'customToolbar',
+                child:
+                    CustomToolbar(controller: controller.descriptionController),
+              ),
+              Divider(
+                color: neutral400,
+              ),
+              SizedBox(height: 16),
               Expanded(
                 child: QuillEditor(
                   controller: controller.descriptionController,

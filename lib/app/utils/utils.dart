@@ -44,9 +44,12 @@ class Utils {
     }
   }
 
-  static String doubleToString(dynamic numero) {
+  static String? doubleToString(dynamic number) {
+    if (number == null) {
+      return null;
+    }
     try {
-      String variable = numero.toString();
+      String variable = number.toString();
       variable = variable.replaceAll('.0', '');
 
       return variable.trim();
