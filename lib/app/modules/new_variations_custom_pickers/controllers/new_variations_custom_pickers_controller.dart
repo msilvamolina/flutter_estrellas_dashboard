@@ -185,26 +185,6 @@ class NewVariationsCustomPickersController extends GetxController {
                       decoration: InputDecoration(
                         labelText: 'Código Hex',
                         hintText: '#RRGGBB',
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.color_lens),
-                          onPressed: () {
-                            try {
-                              if (hexController.text.startsWith('#') &&
-                                  hexController.text.length == 7) {
-                                final newColor = Color(
-                                  int.parse(hexController.text.substring(1),
-                                          radix: 16) +
-                                      0xFF000000,
-                                );
-                                setState(() {
-                                  currentColor = newColor;
-                                });
-                              }
-                            } catch (_) {
-                              // Manejo de errores para códigos inválidos
-                            }
-                          },
-                        ),
                       ),
                       onChanged: (String value) {
                         if (value.startsWith('#') && value.length == 7) {
