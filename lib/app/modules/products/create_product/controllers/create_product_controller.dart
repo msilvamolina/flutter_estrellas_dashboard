@@ -401,7 +401,7 @@ class CreateProductController extends GetxController {
         suggestedPrice: suggestedPrice,
         name: name,
         points: points,
-        warehouseID: product?.warehouseID ?? '',
+        warehouseID: warehouseModel!.id,
         provider: providerModel!.id,
         description: descriptionPlainText,
         category: _categoriesIds ?? '',
