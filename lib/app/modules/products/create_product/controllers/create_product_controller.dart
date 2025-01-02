@@ -139,7 +139,7 @@ class CreateProductController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    product = Get.arguments as ProductFirebaseModel;
+    product = Get.arguments;
     editMode.value = product != null;
 
     if (product != null) {
@@ -162,6 +162,7 @@ class CreateProductController extends GetxController {
         warrantyController.document = Document.fromDelta(warrantyDelta);
       }
     } else {
+      print('holaaa');
       descriptionController.document = Document()..insert(0, '');
       detailsController.document = Document.fromJson([
         {
