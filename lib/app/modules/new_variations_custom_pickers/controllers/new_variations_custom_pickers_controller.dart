@@ -137,7 +137,7 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<String?> pickColor(BuildContext context) async {
-    Color currentColor = Colors.red; // Color inicial
+    Color currentColor = Colors.red; // Color inicial por defecto
     String? selectedColorHex;
 
     await showDialog(
@@ -146,23 +146,26 @@ class NewVariationsCustomPickersController extends GetxController {
         return AlertDialog(
           title: const Text('Selecciona un color'),
           content: SingleChildScrollView(
-            child: BlockPicker(
+            child: ColorPicker(
               pickerColor: currentColor,
               onColorChanged: (Color color) {
-                currentColor = color;
+                currentColor = color; // Actualiza el color seleccionado
               },
+              showLabel: true, // Muestra el valor del color (Hex, RGB, etc.)
+              pickerAreaHeightPercent: 0.8, // Ajusta el área del selector
             ),
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () =>
+                  Navigator.of(context).pop(), // Cierra sin seleccionar
               child: const Text('Cancelar'),
             ),
             TextButton(
               onPressed: () {
                 selectedColorHex =
                     '#${currentColor.value.toRadixString(16).substring(2).toUpperCase()}';
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // Cierra con el color seleccionado
               },
               child: const Text('Aceptar'),
             ),
