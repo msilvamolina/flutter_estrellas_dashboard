@@ -1,17 +1,20 @@
 import 'dart:io';
 
+import 'package:estrellas_dashboard/app/data/models/variant_variant/variant_variant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../data/models/variant_attributte/variant_attributte.dart';
 import '../../../utils/utils_image.dart';
 
-Future<void> addVariation(VariantAttributeModel attribute) async {
+Future<VariantVariantModel?> addVariation(
+    VariantAttributeModel attribute) async {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
 
-  await showDialog<String>(
+  final result = await showDialog<VariantVariantModel?>(
     context: Get.context!,
     builder: (BuildContext context) {
       bool isImageValid = false;
@@ -80,7 +83,7 @@ Future<void> addVariation(VariantAttributeModel attribute) async {
                   decoration: InputDecoration(
                     labelText: 'Nombre',
                     hintText: 'Ingrese el nombre',
-                    errorText: nameError, // Mostrar error si aplica
+                    errorText: nameError,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -93,7 +96,7 @@ Future<void> addVariation(VariantAttributeModel attribute) async {
                   controller: valueController,
                   decoration: InputDecoration(
                     labelText: 'Valor',
-                    errorText: valueError, // Mostrar error si aplica
+                    errorText: valueError,
                     suffixIcon: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -108,8 +111,7 @@ Future<void> addVariation(VariantAttributeModel attribute) async {
                                 setState(() {
                                   isImageValid = valid;
                                   if (valid) {
-                                    valueError =
-                                        null; // Limpiar error cuando se selecciona una imagen válida
+                                    valueError = null;
                                     valueController.text = _imagePath;
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -137,8 +139,7 @@ Future<void> addVariation(VariantAttributeModel attribute) async {
                                 setState(() {
                                   isImageValid = valid;
                                   if (valid) {
-                                    valueError =
-                                        null; // Limpiar error cuando se selecciona una imagen válida
+                                    valueError = null;
                                     valueController.text = _imagePath;
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -191,9 +192,19 @@ Future<void> addVariation(VariantAttributeModel attribute) async {
                   final String value = valueController.text;
                   final bool isColor =
                       getColorFromHex(valueController.text) != null;
-                  print(
-                      'Nombre: $name, Valor: $value, isColor: $isColor, isImage: $isImageValid');
-                  Get.back();
+                  String id = Uuid().v4();
+
+                  VariantVariantModel variant = VariantVariantModel(
+                    id: id,
+                    name: name,
+                    value: value,
+                    isColor: isColor,
+                    isImage: isImageValid,
+                    attributeId: attribute.id,
+                    attributeName: attribute.name,
+                  );
+
+                  Get.back(result: variant); // Devolver el resultado
                 }
               },
               child: const Text('GUARDAR'),
@@ -203,6 +214,8 @@ Future<void> addVariation(VariantAttributeModel attribute) async {
       });
     },
   );
+
+  return result; // Retorna el resultado del diálogo
 }
 
 Future<String?> pickColor(BuildContext context, Color initialColor) async {

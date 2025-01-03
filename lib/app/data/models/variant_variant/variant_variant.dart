@@ -16,7 +16,7 @@ abstract class VariantVariantModel with _$VariantVariantModel {
     required String attributeName,
     required bool isColor,
     required bool isImage,
-    required String createdBy,
+    String? createdBy,
   }) = _VariantVariantModel;
 
   factory VariantVariantModel.fromJson(Map<String, dynamic> json) =>

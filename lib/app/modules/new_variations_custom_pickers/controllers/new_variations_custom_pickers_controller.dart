@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../../app/controllers/main_controller.dart';
+import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../utils/utils_image.dart';
 import '../dialogs/add_attribute_dialog.dart';
@@ -63,7 +64,11 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<void> saveVariant(VariantAttributeModel attribute) async {
-    await addVariation(attribute);
+    VariantVariantModel? variant = await addVariation(attribute);
+
+    if (variant != null) {
+      print('variant $variant');
+    }
   }
 
   Future<void> saveAttributeInFirebase(String name) async {

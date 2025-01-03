@@ -16,7 +16,7 @@ _$VariantVariantModelImpl _$$VariantVariantModelImplFromJson(
       attributeName: json['attributeName'] as String,
       isColor: json['isColor'] as bool,
       isImage: json['isImage'] as bool,
-      createdBy: json['createdBy'] as String,
+      createdBy: json['createdBy'] as String?,
     );
 
 Map<String, dynamic> _$$VariantVariantModelImplToJson(
