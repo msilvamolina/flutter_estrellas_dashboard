@@ -33,7 +33,8 @@ class NewVariationsController extends GetxController {
     _list.bindStream(_repository.getAllProductVariants(
       productId: product.id,
     ));
-    variantInfoModel = await _repository.getVariantsInfo(product.id);
+
+    await loadInfo();
 
     if (variantInfoModel != null) {
       _mainController.openTipDialog(
@@ -52,6 +53,11 @@ class NewVariationsController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+  }
+
+  Future<void> loadInfo() async {
+    variantInfoModel = await _repository.getVariantsInfo(product.id);
+    update(['view']);
   }
 
   Future<void> openGuideTour() async {
@@ -85,12 +91,12 @@ class NewVariationsController extends GetxController {
 
       response.fold((failure) {
         _mainController.setDropiDialogError(true, failure);
-      }, (product) async {
+      }, (imageUrl) async {
         _mainController.setDropiMessage('Success!');
 
         buildVariantsInfo(
           id: variant.id,
-          imageUrl: _imagePath,
+          imageUrl: imageUrl,
         );
       });
     }
@@ -123,8 +129,9 @@ class NewVariationsController extends GetxController {
     }, (product) async {
       _mainController.setDropiMessage('Success!');
 
-      Future.delayed(Duration(milliseconds: 200), () {
+      Future.delayed(Duration(milliseconds: 200), () async {
         Get.back();
+        await loadInfo();
       });
     });
   }
