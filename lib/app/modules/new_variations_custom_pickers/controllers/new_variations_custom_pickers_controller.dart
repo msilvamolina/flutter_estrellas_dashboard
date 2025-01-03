@@ -29,6 +29,8 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<void> selectAttributes() async {
+    bool isListAttributtesEmpty = listAttributes.isEmpty;
+
     List<String>? newList = await moreOptionsWithCheckboxes(
       list: list,
       listAttributes: listAttributes,
@@ -38,6 +40,9 @@ class NewVariationsCustomPickersController extends GetxController {
     if (newList != null) {
       listAttributes.clear();
       listAttributes.addAll(newList);
+      if (isListAttributtesEmpty) {
+        openGuideTour();
+      }
     }
   }
 

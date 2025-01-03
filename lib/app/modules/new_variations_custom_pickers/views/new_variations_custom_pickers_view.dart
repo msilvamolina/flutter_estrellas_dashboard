@@ -5,6 +5,7 @@ import 'package:feature_discovery/feature_discovery.dart';
 import 'package:get/get.dart';
 
 import '../../../components/widgets/button.dart';
+import '../../../themes/styles/colors.dart';
 import '../controllers/new_variations_custom_pickers_controller.dart';
 
 class NewVariationsCustomPickersView
@@ -23,24 +24,34 @@ class NewVariationsCustomPickersView
             featureId: 'feature_icon_button',
             tapTarget: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.attribution_outlined, size: 32),
+              child: Icon(
+                Icons.checklist,
+                size: 32,
+                color: Colors.black,
+              ),
             ),
-            title: const Text('Información importante'),
+            title: Text(
+              'Agrega más atributos más tarde',
+              style: TypographyStyle.h3Mobile.copyWith(color: white),
+            ),
             description: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text(
-                    'Tap the magnifying glass to quickly scan your compounds'),
+                Text(
+                  'Haciendo clic en esta opción, podrás volver a elegir los atributos en cualquier momento.',
+                  style:
+                      TypographyStyle.bodyRegularLarge.copyWith(color: white),
+                ),
               ],
             ),
-            backgroundColor: Colors.purple,
+            backgroundColor: Colors.black,
             backgroundOpacity: 0.9,
-            targetColor: Colors.red,
+            targetColor: Colors.white,
             textColor: Colors.white,
             overflowMode: OverflowMode.clipContent,
             child: IconButton(
               onPressed: controller.selectAttributes,
-              icon: const Icon(Icons.attribution_outlined),
+              icon: const Icon(Icons.checklist),
             ),
           ),
         ],
