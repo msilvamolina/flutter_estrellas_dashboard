@@ -10,8 +10,9 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import '../../../app/controllers/main_controller.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../utils/utils_image.dart';
-import '../widgets/add_attribute_dialog.dart';
-import '../widgets/add_variation_dialog.dart';
+import '../dialogs/add_attribute_dialog.dart';
+import '../dialogs/add_variation_dialog.dart';
+import '../dialogs/select_attributes_dialog.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
   MainController _mainController = Get.find<MainController>();
@@ -28,76 +29,16 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<void> selectAttributes() async {
-    List<String>? newList = await moreOptionsWithCheckboxes();
+    List<String>? newList = await moreOptionsWithCheckboxes(
+      list: list,
+      listAttributes: listAttributes,
+      onSave: saveAttribute,
+    );
 
     if (newList != null) {
       listAttributes.clear();
       listAttributes.addAll(newList);
     }
-  }
-
-  Future<List<String>?> moreOptionsWithCheckboxes() async {
-    Map<String, bool> attributes = {};
-
-    List<String>? result = await showDialog<List<String>?>(
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog(
-              title: const Text('Selecciona atributos'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (VariantAttributeModel element in list)
-                    ListTile(
-                      leading: Checkbox(
-                        value: attributes[element.name] ?? false,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            attributes[element.name] = value ?? false;
-                          });
-                        },
-                      ),
-                      title: Text(element.name),
-                      onTap: () {
-                        // Cambiar el estado del checkbox al hacer clic en el nombre
-                        setState(() {
-                          attributes[element.name] =
-                              !(attributes[element.name] ?? false);
-                        });
-                      },
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                  ListTile(
-                    onTap: () {
-                      Get.back();
-                      saveAttribute();
-                    },
-                    leading: Icon(Icons.add_circle),
-                    title: Text('Nuevo atributo'),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    List<String> selectedAttributes = attributes.entries
-                        .where((entry) => entry.value)
-                        .map((entry) => entry.key)
-                        .toList();
-
-                    Get.back(result: selectedAttributes); // Devuelve la lista
-                  },
-                  child: const Text('GUARDAR'),
-                ),
-              ],
-            );
-          },
-        );
-      },
-    );
-    return result;
   }
 
   Future<void> saveAttribute() async {
