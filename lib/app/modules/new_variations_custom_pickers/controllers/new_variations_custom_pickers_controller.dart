@@ -29,6 +29,8 @@ class NewVariationsCustomPickersController extends GetxController {
   RxList<VariantAttributeModel> listAttributes = RxList();
   late ProductFirebaseModel product;
 
+  RxBool isButtonEnabled = false.obs;
+  RxBool showButton = false.obs;
   Map<String, bool> variantChecked = {};
 
   @override
@@ -49,7 +51,17 @@ class NewVariationsCustomPickersController extends GetxController {
   void onVariantPressed(VariantVariantModel variant) {
     bool isChecked = variantChecked[variant.id] ?? false;
     variantChecked[variant.id] = !isChecked;
+
+    isButtonEnabled.value = isVariantCheckedEmpty();
     update(['view']);
+  }
+
+  bool isVariantCheckedEmpty() {
+    if (variantChecked.isNotEmpty) {
+      return true;
+    } else {
+      return variantChecked.values.any((value) => value);
+    }
   }
 
   bool isVariantChecked(VariantVariantModel variant) {
@@ -75,6 +87,7 @@ class NewVariationsCustomPickersController extends GetxController {
           listAttributes.add(matchingAttribute);
         }
       }
+      showButton.value = listAttributes.isNotEmpty;
 
       if (isListAttributesEmpty) {
         openGuideTour();
