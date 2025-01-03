@@ -594,7 +594,6 @@ class ProductsRepository {
       // ID del producto
       final productId = product['_id'] as String;
 
-      // Guardar las variaciones
       final variations = product['variations'] as List<dynamic>;
       for (var variation in variations) {
         final variationId = variation['_id'] as String;

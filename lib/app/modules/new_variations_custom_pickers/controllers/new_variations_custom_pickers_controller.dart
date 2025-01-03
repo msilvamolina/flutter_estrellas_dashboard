@@ -37,6 +37,9 @@ class NewVariationsCustomPickersController extends GetxController {
 
   VariantInfoModel? variantInfoModel;
   RxBool isLoading = true.obs;
+  List<VariantAttributeModel> selectedAttributes = [];
+  List<VariantVariantModel> selectedVariants = [];
+
   @override
   Future<void> onInit() async {
     product = Get.arguments as ProductFirebaseModel;
@@ -193,7 +196,7 @@ class NewVariationsCustomPickersController extends GetxController {
     List<Map<String, dynamic>> attributes =
         []; // Lista de atributos para el JSON
     List<Map<String, dynamic>> variations = []; // Lista de combinaciones
-
+    buildSelectedVariants();
     // Recopilar los valores de las variantes seleccionadas por atributo
     for (var attribute in listAttributes) {
       List<VariantVariantModel> selectedVariants = getVariations(attribute)
@@ -271,10 +274,7 @@ class NewVariationsCustomPickersController extends GetxController {
     });
   }
 
-  Future<void> onSaveInfoInFirebase() async {
-    List<VariantAttributeModel> selectedAttributes = [];
-    List<VariantVariantModel> selectedVariants = [];
-
+  Future<void> buildSelectedVariants() async {
     for (var attribute in listAttributes) {
       List<VariantVariantModel> variantsForAttribute = getVariations(attribute)
           .where((variant) => variantChecked[variant.id] == true)
@@ -285,7 +285,9 @@ class NewVariationsCustomPickersController extends GetxController {
         selectedVariants.addAll(variantsForAttribute);
       }
     }
+  }
 
+  Future<void> onSaveInfoInFirebase() async {
     Map<String, dynamic> finalJson = {
       'attributes': selectedAttributes.map((attr) => attr.toJson()).toList(),
       'variants': selectedVariants.map((variant) => variant.toJson()).toList(),
