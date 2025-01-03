@@ -6,13 +6,13 @@ import '../../../data/models/variant_attributte/variant_attributte.dart';
 Future<List<String>?> moreOptionsWithCheckboxes({
   required List<VariantAttributeModel> list,
   required Function() onSave,
-  List<String>? listAttributes,
+  List<VariantAttributeModel>? listAttributes,
 }) async {
   Map<String, bool> attributes = {};
 
   if (listAttributes != null) {
-    for (String element in listAttributes) {
-      attributes[element] = true;
+    for (VariantAttributeModel element in listAttributes) {
+      attributes[element.name] = true;
     }
   }
   List<String>? result = await showDialog<List<String>?>(

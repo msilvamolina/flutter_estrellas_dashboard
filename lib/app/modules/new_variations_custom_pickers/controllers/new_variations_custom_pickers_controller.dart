@@ -20,7 +20,7 @@ class NewVariationsCustomPickersController extends GetxController {
 
   final RxList<VariantAttributeModel> _list = <VariantAttributeModel>[].obs;
   List<VariantAttributeModel> get list => _list.toList();
-  RxList<String> listAttributes = RxList();
+  RxList<VariantAttributeModel> listAttributes = RxList();
 
   @override
   void onInit() {
@@ -29,7 +29,7 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<void> selectAttributes() async {
-    bool isListAttributtesEmpty = listAttributes.isEmpty;
+    bool isListAttributesEmpty = listAttributes.isEmpty;
 
     List<String>? newList = await moreOptionsWithCheckboxes(
       list: list,
@@ -39,8 +39,16 @@ class NewVariationsCustomPickersController extends GetxController {
 
     if (newList != null) {
       listAttributes.clear();
-      listAttributes.addAll(newList);
-      if (isListAttributtesEmpty) {
+
+      for (String element in newList) {
+        final matchingAttribute =
+            list.firstWhereOrNull((attribute) => attribute.name == element);
+        if (matchingAttribute != null) {
+          listAttributes.add(matchingAttribute);
+        }
+      }
+
+      if (isListAttributesEmpty) {
         openGuideTour();
       }
     }
