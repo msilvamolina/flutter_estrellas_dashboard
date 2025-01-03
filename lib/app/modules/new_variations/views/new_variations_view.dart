@@ -18,7 +18,7 @@ class NewVariationsView extends GetView<NewVariationsController> {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.layers),
           onPressed: () => Get.toNamed(
-            Routes.NEW_VARIATIONS,
+            Routes.NEW_VARIATIONS_CUSTOM_PICKERS,
             arguments: controller.product,
           ),
         ),

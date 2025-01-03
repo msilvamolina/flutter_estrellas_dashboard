@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../new_variations_custom_pickers/widgets/attributes_card.dart';
+import '../../new_variations_custom_pickers/widgets/empty_state.dart';
 import '../controllers/new_variations_controller.dart';
 
 class ProductVariantsTab extends StatelessWidget {
