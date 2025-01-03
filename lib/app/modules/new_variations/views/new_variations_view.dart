@@ -16,14 +16,14 @@ class NewVariationsView extends GetView<NewVariationsController> {
       length: 2,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.layers),
+          child: const Icon(Icons.add),
           onPressed: () => Get.toNamed(
             Routes.NEW_VARIATIONS_CUSTOM_PICKERS,
             arguments: controller.product,
           ),
         ),
         appBar: AppBar(
-          title: Text('Variaciones'),
+          title: Text('Variantes'),
         ),
         body: Column(
           children: [

@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,9 +10,10 @@ import '../../../data/models/variant_attributte/variant_attributte.dart';
 import '../../../data/models/variant_info/variant_info.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
-import '../dialogs/variations_first_time.dart';
+import '../../../app/dialogs/tip_dialog.dart';
 
 class NewVariationsController extends GetxController {
+  MainController mainController = Get.find<MainController>();
   late ProductFirebaseModel product;
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
@@ -29,6 +31,13 @@ class NewVariationsController extends GetxController {
     ));
     variantInfoModel = await _repository.getVariantsInfo(product.id);
 
+    if (variantInfoModel != null) {
+      mainController.openTipDialog(
+        title: "Agrega una imagen a la variante",
+        message:
+            "Si le haces clic a una variante, vas a poder cargar una imagen",
+      );
+    }
     isLoading.value = false;
     update(['view']);
     super.onInit();
@@ -36,7 +45,6 @@ class NewVariationsController extends GetxController {
 
   @override
   void onReady() {
-    openGuideTour();
     super.onReady();
   }
 
@@ -44,15 +52,5 @@ class NewVariationsController extends GetxController {
     return variantInfoModel!.variants!
         .where((variant) => variant.attributeId == attribute.id)
         .toList();
-  }
-
-  Future<void> openGuideTour() async {
-    showDialog(
-      barrierColor: Colors.transparent,
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return const VariationsFirstTime();
-      },
-    );
   }
 }

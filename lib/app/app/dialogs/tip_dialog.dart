@@ -6,9 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:get/get.dart';
 
-class VariationsFirstTime extends StatelessWidget {
-  const VariationsFirstTime({super.key});
+class TipDialog extends StatelessWidget {
+  const TipDialog({
+    required this.title,
+    required this.message,
+    super.key,
+  });
 
+  final String title;
+  final String message;
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find<MainController>();
@@ -38,7 +44,7 @@ class VariationsFirstTime extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Text(
-                    "Agrega una imagen a la variante",
+                    title,
                     textAlign: TextAlign.center,
                     style: TypographyStyle.h2Mobile,
                   ),
@@ -46,8 +52,7 @@ class VariationsFirstTime extends StatelessWidget {
                 SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                      "Si le haces clic a una variante, vas a poder cargar una imagen",
+                  child: Text(message,
                       textAlign: TextAlign.center,
                       style: TypographyStyle.bodyRegularLarge),
                 ),

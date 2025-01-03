@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/new_variations_controller.dart';
+import '../widgets/variant_empty_state.dart';
 import '../widgets/variations_card.dart';
 
 class ProductVariantsCombinationsTab extends StatelessWidget {
@@ -21,7 +22,7 @@ class ProductVariantsCombinationsTab extends StatelessWidget {
               },
               separatorBuilder: (context, index) => const SizedBox(height: 10),
             )
-          : const Text('no data'),
+          : const VariantEmptyState(),
     );
   }
 }

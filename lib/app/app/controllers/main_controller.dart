@@ -1,5 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/app/dialogs/tip_dialog.dart';
 import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -259,9 +260,20 @@ class MainController extends GetxController {
     }
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> openTipDialog({
+    required String title,
+    required String message,
+  }) async {
+    showDialog(
+      barrierColor: Colors.transparent,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return TipDialog(
+          title: title,
+          message: message,
+        );
+      },
+    );
   }
 
   IconData getThemeIcon() {

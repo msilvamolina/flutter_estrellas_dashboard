@@ -9,6 +9,7 @@ import '../../new_variations_custom_pickers/widgets/attributes_card.dart';
 import '../../new_variations_custom_pickers/widgets/empty_state.dart';
 import '../../new_variations_custom_pickers/widgets/variant_card.dart';
 import '../controllers/new_variations_controller.dart';
+import '../widgets/variant_empty_state.dart';
 
 class ProductVariantsTab extends StatelessWidget {
   const ProductVariantsTab({required this.controller, super.key});
@@ -22,41 +23,48 @@ class ProductVariantsTab extends StatelessWidget {
       id: 'view',
       builder: (_) {
         if (!controller.isLoading.value) {
-          return ListView.separated(
-            itemCount: controller.variantInfoModel!.attributes!.length,
-            itemBuilder: (context, index) {
-              List<VariantVariantModel> list = controller.getVariations(
-                  controller.variantInfoModel!.attributes![index]);
-              return Padding(
-                padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          controller.variantInfoModel!.attributes![index].name,
-                          style: TypographyStyle.bodyBlackLarge,
-                        ),
-                        SizedBox(height: 8),
-                        Wrap(
-                          children: [
-                            for (int index2 = 0; index2 < list.length; index2++)
-                              Card(
-                                color: primary,
-                                child: VariantCard(variant: list[index2]),
-                              )
-                          ],
-                        ),
-                      ],
+          if (controller.variantInfoModel != null) {
+            return ListView.separated(
+              itemCount: controller.variantInfoModel!.attributes!.length,
+              itemBuilder: (context, index) {
+                List<VariantVariantModel> list = controller.getVariations(
+                    controller.variantInfoModel!.attributes![index]);
+                return Padding(
+                  padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller
+                                .variantInfoModel!.attributes![index].name,
+                            style: TypographyStyle.bodyBlackLarge,
+                          ),
+                          SizedBox(height: 8),
+                          Wrap(
+                            children: [
+                              for (int index2 = 0;
+                                  index2 < list.length;
+                                  index2++)
+                                Card(
+                                  color: primary,
+                                  child: VariantCard(variant: list[index2]),
+                                )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => const SizedBox.shrink(),
-          );
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox.shrink(),
+            );
+          } else {
+            return VariantEmptyState();
+          }
         } else {
           return Center(
             child: CircularProgressIndicator(),
