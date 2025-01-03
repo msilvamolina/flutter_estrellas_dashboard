@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../data/models/product_variant/product_variant_model.dart';
+import '../../../data/models/variant_attributte/variant_attributte.dart';
 import '../../../data/models/variant_info/variant_info.dart';
+import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 
 class NewVariationsController extends GetxController {
@@ -26,5 +28,11 @@ class NewVariationsController extends GetxController {
     isLoading.value = false;
     update(['view']);
     super.onInit();
+  }
+
+  List<VariantVariantModel> getVariations(VariantAttributeModel attribute) {
+    return variantInfoModel!.variants!
+        .where((variant) => variant.attributeId == attribute.id)
+        .toList();
   }
 }
