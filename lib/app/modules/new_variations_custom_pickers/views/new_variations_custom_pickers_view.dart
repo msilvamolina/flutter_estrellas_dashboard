@@ -26,8 +26,9 @@ class NewVariationsCustomPickersView
                       padding:
                           const EdgeInsets.only(top: 8, left: 16, right: 16),
                       child: Button(
-                        onPressed:
-                            controller.isButtonEnabled.value ? () {} : null,
+                        onPressed: controller.isButtonEnabled.value
+                            ? controller.onSave
+                            : null,
                         label: 'Guardar',
                       ),
                     ),

@@ -739,4 +739,27 @@ class ProductsRepository {
       return left(e.code);
     }
   }
+
+  Future<Either<String, Unit>> saveVariantsInfoInFirebase({
+    required Map<String, dynamic> body,
+    required String productId,
+  }) async {
+    try {
+      String email = _firebaseAuth.currentUser!.email!;
+
+      await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variantsInfo')
+          .doc('variantsInfo')
+          .set({
+        ...body,
+        'createdBy': email,
+        'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 }

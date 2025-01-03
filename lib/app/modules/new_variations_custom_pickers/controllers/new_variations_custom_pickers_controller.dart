@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -138,6 +139,48 @@ class NewVariationsCustomPickersController extends GetxController {
 
     Either<String, dynamic> response =
         await _repository.saveAttributeInFirebase(name: name);
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (product) async {
+      _mainController.setDropiMessage('Success!');
+
+      Future.delayed(Duration(milliseconds: 200), () {
+        Get.back();
+      });
+    });
+  }
+
+  Future<void> onSave() async {
+    List<VariantAttributeModel> selectedAttributes = [];
+
+    List<VariantVariantModel> selectedVariants = [];
+
+    for (var attribute in listAttributes) {
+      List<VariantVariantModel> variantsForAttribute = getVariations(attribute)
+          .where((variant) => variantChecked[variant.id] == true)
+          .toList();
+
+      if (variantsForAttribute.isNotEmpty) {
+        selectedAttributes.add(attribute);
+        selectedVariants.addAll(variantsForAttribute);
+      }
+    }
+
+    Map<String, dynamic> finalJson = {
+      'attributes': selectedAttributes.map((attr) => attr.toJson()).toList(),
+      'variants': selectedVariants.map((variant) => variant.toJson()).toList(),
+    };
+
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, dynamic> response =
+        await _repository.saveVariantsInfoInFirebase(
+      productId: product.id,
+      body: finalJson,
+    );
 
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
