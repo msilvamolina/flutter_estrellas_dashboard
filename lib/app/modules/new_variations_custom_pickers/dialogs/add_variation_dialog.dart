@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 
+import '../../../data/models/variant_attributte/variant_attributte.dart';
 import '../../../utils/utils_image.dart';
 
-Future<void> addVariation() async {
+Future<void> addVariation(VariantAttributeModel attribute) async {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
 
@@ -69,7 +70,7 @@ Future<void> addVariation() async {
         }
 
         return AlertDialog(
-          title: const Text('Nuevo atributo'),
+          title: Text(attribute.name),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,

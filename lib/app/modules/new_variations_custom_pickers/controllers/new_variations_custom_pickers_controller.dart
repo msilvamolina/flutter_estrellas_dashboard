@@ -40,8 +40,6 @@ class NewVariationsCustomPickersController extends GetxController {
     if (newList != null) {
       listAttributes.clear();
 
-      print('newList $newList');
-
       for (String element in newList) {
         VariantAttributeModel? matchingAttribute =
             list.firstWhereOrNull((attribute) => attribute.name == element);
@@ -62,6 +60,10 @@ class NewVariationsCustomPickersController extends GetxController {
     if (name != null) {
       saveAttributeInFirebase(name);
     }
+  }
+
+  Future<void> saveVariant(VariantAttributeModel attribute) async {
+    await addVariation(attribute);
   }
 
   Future<void> saveAttributeInFirebase(String name) async {
