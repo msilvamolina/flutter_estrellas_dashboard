@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../utils/utils_image.dart';
 
-Future<void> addAttribute() async {
+Future<void> addVariation() async {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController valueController = TextEditingController();
 

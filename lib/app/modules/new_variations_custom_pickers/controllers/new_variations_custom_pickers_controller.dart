@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../../utils/utils_image.dart';
+import '../widgets/add_attribute_dialog.dart';
 import '../widgets/add_variation_dialog.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
@@ -70,7 +71,7 @@ class NewVariationsCustomPickersController extends GetxController {
                 ListTile(
                   onTap: () {
                     Get.back();
-                    addAttribute();
+                    saveAttribute();
                   },
                   leading: Icon(Icons.add_circle),
                   title: Text('Nuevo atributo'),
@@ -83,6 +84,14 @@ class NewVariationsCustomPickersController extends GetxController {
     );
 
     return selectedAttributes;
+  }
+
+  Future<void> saveAttribute() async {
+    String? name = await addAttribute();
+
+    if (name != null) {
+      print('name: $name');
+    }
   }
 
   Future<void> openGuideTour() async {
