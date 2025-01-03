@@ -3,7 +3,9 @@ import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/models/variant_variant/variant_variant.dart';
 import '../controllers/new_variations_custom_pickers_controller.dart';
+import 'variant_card.dart';
 
 class AttributesCard extends StatelessWidget {
   const AttributesCard({required this.attribute, super.key});
@@ -31,6 +33,15 @@ class AttributesCard extends StatelessWidget {
                       onPressed: () => controller.saveVariant(attribute),
                     ),
                   ],
+                ),
+                Obx(
+                  () => Wrap(
+                    children: [
+                      for (VariantVariantModel variant
+                          in controller.getVariations(attribute))
+                        VariantCard(variant: variant)
+                    ],
+                  ),
                 ),
               ],
             ),

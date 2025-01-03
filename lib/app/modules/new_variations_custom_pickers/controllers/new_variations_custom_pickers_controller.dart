@@ -22,6 +22,10 @@ class NewVariationsCustomPickersController extends GetxController {
 
   final RxList<VariantAttributeModel> _list = <VariantAttributeModel>[].obs;
   List<VariantAttributeModel> get list => _list.toList();
+
+  final RxList<VariantVariantModel> _listVariations =
+      <VariantVariantModel>[].obs;
+  List<VariantVariantModel> get listVariations => _listVariations.toList();
   RxList<VariantAttributeModel> listAttributes = RxList();
   late ProductFirebaseModel product;
 
@@ -30,7 +34,14 @@ class NewVariationsCustomPickersController extends GetxController {
     product = Get.arguments as ProductFirebaseModel;
 
     _list.bindStream(_repository.getAttributes());
+    _listVariations.bindStream(_repository.getVariant());
     super.onInit();
+  }
+
+  List<VariantVariantModel> getVariations(VariantAttributeModel attribute) {
+    return listVariations
+        .where((variant) => variant.attributeId == attribute.id)
+        .toList();
   }
 
   Future<void> selectAttributes() async {

@@ -660,6 +660,25 @@ class ProductsRepository {
     }
   }
 
+  Stream<List<VariantVariantModel>> getVariant() async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('admin')
+          .doc('productsVariations')
+          .collection('variants')
+          .orderBy('name', descending: false)
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => VariantVariantModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<Either<String, Unit>> saveAttributeInFirebase({
     required String name,
   }) async {

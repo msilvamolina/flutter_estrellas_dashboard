@@ -8,6 +8,7 @@ class NewVariationsController extends GetxController {
   late ProductFirebaseModel product;
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
+
   ProductsRepository _repository =
       ProductsRepository(); // Repositorio de productos
 

@@ -31,8 +31,9 @@ class Utils {
     return timeago.format(time, locale: 'es');
   }
 
-  Color getColor(String color) {
+  static Color getColor(String originalColor) {
     try {
+      String color = originalColor.replaceAll('#', '');
       if (color.length == 6) {
         color = '0xff${color}';
       }
