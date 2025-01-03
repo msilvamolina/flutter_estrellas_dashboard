@@ -250,7 +250,6 @@ class NewVariationsCustomPickersController extends GetxController {
       "warehouseID": product.warehouseID,
     };
 
-    log(finalJson.toString());
     _mainController.setDropiDialog(true);
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');

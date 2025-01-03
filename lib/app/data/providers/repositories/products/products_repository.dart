@@ -707,6 +707,28 @@ class ProductsRepository {
     }
   }
 
+  Future<Either<String, String>> saveImageVariants({
+    required String productId,
+    required String variantId,
+    required String imagePath,
+  }) async {
+    try {
+      MainController mainController = Get.find<MainController>();
+
+      mainController.setDropiMessage('Subiendo imagen');
+      String? imageUrl = await uploadImage(
+          id: variantId, productId: productId, path: imagePath);
+
+      if (imageUrl != null) {
+        return right(imageUrl);
+      } else {
+        return left('Imagen nula');
+      }
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
   Future<Either<String, Unit>> saveVariantInFirebase({
     required VariantVariantModel variant,
     required String productId,

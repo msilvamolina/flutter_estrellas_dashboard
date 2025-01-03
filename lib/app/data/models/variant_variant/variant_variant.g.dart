@@ -16,6 +16,7 @@ _$VariantVariantModelImpl _$$VariantVariantModelImplFromJson(
       attributeName: json['attributeName'] as String,
       isColor: json['isColor'] as bool,
       isImage: json['isImage'] as bool,
+      imageUrl: json['imageUrl'] as String?,
       createdBy: json['createdBy'] as String?,
     );
 
@@ -29,5 +30,6 @@ Map<String, dynamic> _$$VariantVariantModelImplToJson(
       'attributeName': instance.attributeName,
       'isColor': instance.isColor,
       'isImage': instance.isImage,
+      'imageUrl': instance.imageUrl,
       'createdBy': instance.createdBy,
     };

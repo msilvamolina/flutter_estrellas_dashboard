@@ -48,9 +48,13 @@ class ProductVariantsTab extends StatelessWidget {
                               for (int index2 = 0;
                                   index2 < list.length;
                                   index2++)
-                                Card(
-                                  color: primary,
-                                  child: VariantCard(variant: list[index2]),
+                                GestureDetector(
+                                  onTap: () =>
+                                      controller.onCardPressed(list[index2]),
+                                  child: Card(
+                                    color: primary,
+                                    child: VariantCard(variant: list[index2]),
+                                  ),
                                 )
                             ],
                           ),

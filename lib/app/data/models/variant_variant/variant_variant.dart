@@ -16,6 +16,7 @@ abstract class VariantVariantModel with _$VariantVariantModel {
     required String attributeName,
     required bool isColor,
     required bool isImage,
+    String? imageUrl,
     String? createdBy,
   }) = _VariantVariantModel;
 
