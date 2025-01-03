@@ -48,10 +48,7 @@ class NewVariationsView extends GetView<NewVariationsController> {
           overflowMode: OverflowMode.clipContent,
           child: FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: () => Get.toNamed(
-              Routes.NEW_VARIATIONS_CUSTOM_PICKERS,
-              arguments: controller.product,
-            ),
+            onPressed: controller.createVariants,
           ),
         ),
         appBar: AppBar(

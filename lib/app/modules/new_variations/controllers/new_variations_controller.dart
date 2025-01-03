@@ -14,6 +14,7 @@ import '../../../data/models/variant_info/variant_info.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../app/dialogs/tip_dialog.dart';
+import '../../../routes/app_pages.dart';
 import '../../../utils/utils_image.dart';
 
 class NewVariationsController extends GetxController {
@@ -100,6 +101,14 @@ class NewVariationsController extends GetxController {
         );
       });
     }
+  }
+
+  Future<void> createVariants() async {
+    await Get.toNamed(
+      Routes.NEW_VARIATIONS_CUSTOM_PICKERS,
+      arguments: product,
+    );
+    loadInfo();
   }
 
   Future<void> buildVariantsInfo(
