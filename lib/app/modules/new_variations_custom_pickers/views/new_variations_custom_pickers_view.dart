@@ -31,7 +31,7 @@ class NewVariationsCustomPickersView
               ),
             ),
             title: Text(
-              'Agrega más atributos más tarde',
+              'Agrega o modifica los atributos más tarde',
               style: TypographyStyle.h3Mobile.copyWith(color: white),
             ),
             description: Column(
