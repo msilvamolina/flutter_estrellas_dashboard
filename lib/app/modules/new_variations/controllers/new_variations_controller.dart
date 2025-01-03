@@ -37,6 +37,8 @@ class NewVariationsController extends GetxController {
         message:
             "Si le haces clic a una variante, vas a poder cargar una imagen",
       );
+    } else {
+      openGuideTour();
     }
     isLoading.value = false;
     update(['view']);
@@ -46,6 +48,16 @@ class NewVariationsController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+  }
+
+  Future<void> openGuideTour() async {
+    await FeatureDiscovery.clearPreferences(Get.context!, [
+      'feature_icon_button',
+    ]);
+    FeatureDiscovery.discoverFeatures(
+      Get.context!,
+      ['feature_icon_button'],
+    );
   }
 
   List<VariantVariantModel> getVariations(VariantAttributeModel attribute) {
