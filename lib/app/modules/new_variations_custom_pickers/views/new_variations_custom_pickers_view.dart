@@ -77,21 +77,25 @@ class NewVariationsCustomPickersView
             ],
           ),
           body: Obx(
-            () => controller.listAttributes.isNotEmpty
-                ? ListView.separated(
-                    itemCount: controller.listAttributes.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: AttributesCard(
-                          attribute: controller.listAttributes[index],
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) =>
-                        const SizedBox.shrink(),
-                  )
-                : VariationsEmptyState(),
+            () => !controller.isLoading.value
+                ? controller.listAttributes.isNotEmpty
+                    ? ListView.separated(
+                        itemCount: controller.listAttributes.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: AttributesCard(
+                              attribute: controller.listAttributes[index],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox.shrink(),
+                      )
+                    : VariationsEmptyState()
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ),
           ),
         );
       },

@@ -8,6 +8,7 @@ import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/product_image/product_image_model.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_attributte/variant_attributte.dart';
+import 'package:estrellas_dashboard/app/data/models/variant_info/variant_info.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_variant/variant_variant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -760,6 +761,45 @@ class ProductsRepository {
       return right(unit);
     } on FirebaseException catch (e) {
       return left(e.code);
+    }
+  }
+
+  Future<VariantInfoModel?> getVariantsInfo(String productId) async {
+    try {
+      // Referencia al documento en la colección de Firebase
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variantsInfo')
+          .doc('variantsInfo')
+          .get();
+
+      // Verificar si el documento existe
+      if (!snapshot.exists || snapshot.data() == null) {
+        throw Exception("El documento no existe o está vacío.");
+      }
+
+      final data = snapshot.data()!;
+
+      // Parsear atributos
+      List<VariantAttributeModel> attributes =
+          (data['attributes'] as List<dynamic>)
+              .map((json) =>
+                  VariantAttributeModel.fromJson(json as Map<String, dynamic>))
+              .toList();
+
+      // Parsear variantes
+      List<VariantVariantModel> variants = (data['variants'] as List<dynamic>)
+          .map((json) =>
+              VariantVariantModel.fromJson(json as Map<String, dynamic>))
+          .toList();
+
+      VariantInfoModel variantInfoModel =
+          VariantInfoModel(attributes: attributes, variants: variants);
+      return variantInfoModel;
+    } catch (e) {
+      print('Error al obtener datos de Firebase: $e');
+      return null;
     }
   }
 }

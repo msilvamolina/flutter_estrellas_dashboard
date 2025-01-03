@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_attributte/variant_attributte.dart';
+import 'package:estrellas_dashboard/app/data/models/variant_info/variant_info.dart';
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,13 +35,48 @@ class NewVariationsCustomPickersController extends GetxController {
   RxBool showButton = false.obs;
   Map<String, bool> variantChecked = {};
 
+  VariantInfoModel? variantInfoModel;
+  RxBool isLoading = true.obs;
   @override
-  void onInit() {
+  Future<void> onInit() async {
     product = Get.arguments as ProductFirebaseModel;
 
     _list.bindStream(_repository.getAttributes());
     _listVariations.bindStream(_repository.getVariant());
+    variantInfoModel = await _repository.getVariantsInfo(product.id);
+
+    if (variantInfoModel != null) {
+      buildVariantsInfo();
+    }
+    isLoading.value = false;
     super.onInit();
+  }
+
+  void buildVariantsInfo() {
+    if (variantInfoModel == null) return;
+
+    // Limpiar listas y mapa antes de reconstruir
+    listAttributes.clear();
+    variantChecked.clear();
+
+    // Cargar atributos seleccionados desde VariantInfoModel
+    if (variantInfoModel!.attributes != null) {
+      listAttributes.addAll(variantInfoModel!.attributes!);
+    }
+
+    // Cargar variantes seleccionadas desde VariantInfoModel
+    if (variantInfoModel!.variants != null) {
+      for (var variant in variantInfoModel!.variants!) {
+        variantChecked[variant.id] =
+            true; // Marcar la variante como seleccionada
+      }
+    }
+
+    // Actualizar el estado del botón y de la interfaz
+    isButtonEnabled.value = isVariantCheckedEmpty();
+    showButton.value = listAttributes.isNotEmpty;
+
+    update(['view']); // Notificar a la interfaz que se actualizó la vista
   }
 
   List<VariantVariantModel> getVariations(VariantAttributeModel attribute) {
