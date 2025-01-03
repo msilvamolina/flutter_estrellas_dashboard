@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../components/widgets/button.dart';
 import '../../../themes/styles/colors.dart';
 import '../controllers/new_variations_custom_pickers_controller.dart';
+import '../widgets/attributes_card.dart';
 
 class NewVariationsCustomPickersView
     extends GetView<NewVariationsCustomPickersController> {
@@ -56,9 +57,27 @@ class NewVariationsCustomPickersView
           ),
         ],
       ),
-      body: Obx(() => controller.listAttributes.isEmpty
-          ? VariationsEmptyState()
-          : Center(child: Text(controller.listAttributes.toString()))),
+      body: Obx(() => controller.listAttributes.isNotEmpty
+          ? ListView.separated(
+              itemCount: controller.listAttributes.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(
+                      top: index == 0 ? 8 : 0,
+                      bottom: index == (controller.listAttributes.length - 1)
+                          ? 48
+                          : 0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: AttributesCard(
+                      attribute: controller.listAttributes[index],
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox.shrink(),
+            )
+          : VariationsEmptyState()),
     );
   }
 }

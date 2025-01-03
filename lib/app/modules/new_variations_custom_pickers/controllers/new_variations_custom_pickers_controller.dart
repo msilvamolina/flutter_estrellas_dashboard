@@ -40,8 +40,10 @@ class NewVariationsCustomPickersController extends GetxController {
     if (newList != null) {
       listAttributes.clear();
 
+      print('newList $newList');
+
       for (String element in newList) {
-        final matchingAttribute =
+        VariantAttributeModel? matchingAttribute =
             list.firstWhereOrNull((attribute) => attribute.name == element);
         if (matchingAttribute != null) {
           listAttributes.add(matchingAttribute);
