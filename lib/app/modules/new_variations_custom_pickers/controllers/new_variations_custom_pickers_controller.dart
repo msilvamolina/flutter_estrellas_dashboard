@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/data/models/variant_attributte/variant_attributte.dart';
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,31 +14,32 @@ import '../widgets/add_attribute_dialog.dart';
 import '../widgets/add_variation_dialog.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
-  late Map<String, bool> attributes;
   MainController _mainController = Get.find<MainController>();
   ProductsRepository _repository = ProductsRepository();
+
+  final RxList<VariantAttributeModel> _list = <VariantAttributeModel>[].obs;
+  List<VariantAttributeModel> get list => _list.toList();
+  RxList<String> listAttributes = RxList();
+
   @override
   void onInit() {
-    attributes = {
-      'pepis2': false,
-      'Nombre2': false,
-      'Nombre3': false,
-      'Nombre4': false,
-    };
+    _list.bindStream(_repository.getAttributes());
     super.onInit();
   }
 
   Future<void> selectAttributes() async {
-    List<String> list = await moreOptionsWithCheckboxes();
-    // openGuideTour();
+    List<String>? newList = await moreOptionsWithCheckboxes();
 
-    print('list $list');
+    if (newList != null) {
+      listAttributes.clear();
+      listAttributes.addAll(newList);
+    }
   }
 
-  Future<List<String>> moreOptionsWithCheckboxes() async {
-    List<String> selectedAttributes = [];
+  Future<List<String>?> moreOptionsWithCheckboxes() async {
+    Map<String, bool> attributes = {};
 
-    await showDialog<void>(
+    List<String>? result = await showDialog<List<String>?>(
       context: Get.context!,
       builder: (BuildContext context) {
         return StatefulBuilder(
@@ -47,39 +49,47 @@ class NewVariationsCustomPickersController extends GetxController {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: attributes.keys.map((String name) {
-                      return ListTile(
-                        leading: Checkbox(
-                          value: attributes[name],
-                          onChanged: (bool? value) {
-                            setState(() {
-                              attributes[name] = value ?? false;
-                            });
-                          },
-                        ),
-                        title: Text(name),
-                        onTap: () {
-                          // Cambiar el estado del checkbox al hacer clic en el nombre
+                  for (VariantAttributeModel element in list)
+                    ListTile(
+                      leading: Checkbox(
+                        value: attributes[element.name] ?? false,
+                        onChanged: (bool? value) {
                           setState(() {
-                            attributes[name] = !(attributes[name] ?? false);
+                            attributes[element.name] = value ?? false;
                           });
                         },
-                        contentPadding: EdgeInsets.zero,
-                      );
-                    }).toList(),
+                      ),
+                      title: Text(element.name),
+                      onTap: () {
+                        // Cambiar el estado del checkbox al hacer clic en el nombre
+                        setState(() {
+                          attributes[element.name] =
+                              !(attributes[element.name] ?? false);
+                        });
+                      },
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                  ListTile(
+                    onTap: () {
+                      Get.back();
+                      saveAttribute();
+                    },
+                    leading: Icon(Icons.add_circle),
+                    title: Text('Nuevo atributo'),
                   ),
                 ],
               ),
               actions: [
-                ListTile(
-                  onTap: () {
-                    Get.back();
-                    saveAttribute();
+                TextButton(
+                  onPressed: () {
+                    List<String> selectedAttributes = attributes.entries
+                        .where((entry) => entry.value)
+                        .map((entry) => entry.key)
+                        .toList();
+
+                    Get.back(result: selectedAttributes); // Devuelve la lista
                   },
-                  leading: Icon(Icons.add_circle),
-                  title: Text('Nuevo atributo'),
+                  child: const Text('GUARDAR'),
                 ),
               ],
             );
@@ -87,8 +97,7 @@ class NewVariationsCustomPickersController extends GetxController {
         );
       },
     );
-
-    return selectedAttributes;
+    return result;
   }
 
   Future<void> saveAttribute() async {

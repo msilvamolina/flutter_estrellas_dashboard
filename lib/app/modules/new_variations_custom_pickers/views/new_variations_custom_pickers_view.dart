@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/modules/new_variations_custom_pickers/widgets/empty_state.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:feature_discovery/feature_discovery.dart';
@@ -44,33 +45,9 @@ class NewVariationsCustomPickersView
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/tag.png',
-              width: 180,
-            ),
-            SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Text(
-                'Selecciona uno o varios atributos para comenzar',
-                style: TypographyStyle.bodyBlackLarge,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Button(
-              onPressed: controller.selectAttributes,
-              label: 'Seleccionar',
-            ),
-          ],
-        ),
-      ),
+      body: Obx(() => controller.listAttributes.isEmpty
+          ? VariationsEmptyState()
+          : Center(child: Text(controller.listAttributes.toString()))),
     );
   }
 }
