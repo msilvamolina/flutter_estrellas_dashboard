@@ -8,6 +8,7 @@ import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/product_image/product_image_model.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_attributte/variant_attributte.dart';
+import 'package:estrellas_dashboard/app/data/models/variant_variant/variant_variant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/instance_manager.dart';
@@ -679,6 +680,39 @@ class ProductsRepository {
         'id': id,
         'name': name,
         'createdBy': email,
+        'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> saveVariantInFirebase({
+    required VariantVariantModel variant,
+    required String productId,
+  }) async {
+    try {
+      MainController mainController = Get.find<MainController>();
+      String email = _firebaseAuth.currentUser!.email!;
+      VariantVariantModel newVariant = variant.copyWith(createdBy: email);
+
+      if (variant.isImage) {
+        mainController.setDropiMessage('Subiendo imagen');
+        String? imageUrl = await uploadImage(
+            id: variant.id, productId: productId, path: variant.value);
+        if (imageUrl != null) {
+          newVariant = newVariant.copyWith(value: imageUrl);
+        }
+      }
+
+      await _firebaseFirestore
+          .collection('admin')
+          .doc('productsVariations')
+          .collection('variants')
+          .doc(newVariant.id)
+          .set({
+        ...newVariant.toJson(),
         'createdAt': DateTime.now(),
       });
       return right(unit);

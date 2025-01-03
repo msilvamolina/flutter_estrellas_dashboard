@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../../app/controllers/main_controller.dart';
+import '../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../utils/utils_image.dart';
@@ -22,9 +23,12 @@ class NewVariationsCustomPickersController extends GetxController {
   final RxList<VariantAttributeModel> _list = <VariantAttributeModel>[].obs;
   List<VariantAttributeModel> get list => _list.toList();
   RxList<VariantAttributeModel> listAttributes = RxList();
+  late ProductFirebaseModel product;
 
   @override
   void onInit() {
+    product = Get.arguments as ProductFirebaseModel;
+
     _list.bindStream(_repository.getAttributes());
     super.onInit();
   }
@@ -67,8 +71,28 @@ class NewVariationsCustomPickersController extends GetxController {
     VariantVariantModel? variant = await addVariation(attribute);
 
     if (variant != null) {
-      print('variant $variant');
+      saveVariantInFirebase(variant);
     }
+  }
+
+  Future<void> saveVariantInFirebase(VariantVariantModel variant) async {
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, dynamic> response = await _repository.saveVariantInFirebase(
+      variant: variant,
+      productId: product.id,
+    );
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (product) async {
+      _mainController.setDropiMessage('Success!');
+      Future.delayed(Duration(milliseconds: 200), () {
+        Get.back();
+      });
+    });
   }
 
   Future<void> saveAttributeInFirebase(String name) async {
