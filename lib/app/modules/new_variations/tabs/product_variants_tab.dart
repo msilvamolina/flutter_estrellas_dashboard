@@ -1,7 +1,9 @@
+import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/variant_variant/variant_variant.dart';
+import '../../../themes/styles/colors.dart';
 import '../../../themes/styles/typography.dart';
 import '../../new_variations_custom_pickers/widgets/attributes_card.dart';
 import '../../new_variations_custom_pickers/widgets/empty_state.dart';
@@ -23,6 +25,8 @@ class ProductVariantsTab extends StatelessWidget {
           return ListView.separated(
             itemCount: controller.variantInfoModel!.attributes!.length,
             itemBuilder: (context, index) {
+              List<VariantVariantModel> list = controller.getVariations(
+                  controller.variantInfoModel!.attributes![index]);
               return Padding(
                 padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
                 child: Card(
@@ -38,13 +42,11 @@ class ProductVariantsTab extends StatelessWidget {
                         SizedBox(height: 8),
                         Wrap(
                           children: [
-                            for (VariantVariantModel variant
-                                in controller.getVariations(controller
-                                    .variantInfoModel!.attributes![index]))
+                            for (int index2 = 0; index2 < list.length; index2++)
                               Card(
                                 color: primary,
-                                child: VariantCard(variant: variant),
-                              ),
+                                child: VariantCard(variant: list[index2]),
+                              )
                           ],
                         ),
                       ],

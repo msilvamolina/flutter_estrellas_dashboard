@@ -1,11 +1,15 @@
+import 'package:feature_discovery/feature_discovery.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../components/dialogs/dropi_dialog.dart';
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../data/models/product_variant/product_variant_model.dart';
 import '../../../data/models/variant_attributte/variant_attributte.dart';
 import '../../../data/models/variant_info/variant_info.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
+import '../dialogs/variations_first_time.dart';
 
 class NewVariationsController extends GetxController {
   late ProductFirebaseModel product;
@@ -30,9 +34,25 @@ class NewVariationsController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    openGuideTour();
+    super.onReady();
+  }
+
   List<VariantVariantModel> getVariations(VariantAttributeModel attribute) {
     return variantInfoModel!.variants!
         .where((variant) => variant.attributeId == attribute.id)
         .toList();
+  }
+
+  Future<void> openGuideTour() async {
+    showDialog(
+      barrierColor: Colors.transparent,
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return const VariationsFirstTime();
+      },
+    );
   }
 }
