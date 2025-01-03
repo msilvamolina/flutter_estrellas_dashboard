@@ -638,4 +638,32 @@ class ProductsRepository {
       return left(e.toString());
     }
   }
+
+  Future<Either<String, Unit>> saveAttributeInFirebase({
+    required String name,
+  }) async {
+    try {
+      MainController mainController = Get.find<MainController>();
+      String email = _firebaseAuth.currentUser!.email!;
+
+      String id = const Uuid().v4();
+
+      mainController.setDropiMessage('Escribiendo en firebase');
+
+      await _firebaseFirestore
+          .collection('admin')
+          .doc('productsVariations')
+          .collection('attributes')
+          .doc(id)
+          .set({
+        'id': id,
+        'name': name,
+        'createdBy': email,
+        'createdAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 }

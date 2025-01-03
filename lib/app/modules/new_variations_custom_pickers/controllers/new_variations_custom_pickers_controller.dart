@@ -1,16 +1,21 @@
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+import '../../../app/controllers/main_controller.dart';
+import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../utils/utils_image.dart';
 import '../widgets/add_attribute_dialog.dart';
 import '../widgets/add_variation_dialog.dart';
 
 class NewVariationsCustomPickersController extends GetxController {
   late Map<String, bool> attributes;
+  MainController _mainController = Get.find<MainController>();
+  ProductsRepository _repository = ProductsRepository();
   @override
   void onInit() {
     attributes = {
@@ -90,8 +95,27 @@ class NewVariationsCustomPickersController extends GetxController {
     String? name = await addAttribute();
 
     if (name != null) {
-      print('name: $name');
+      saveAttributeInFirebase(name);
     }
+  }
+
+  Future<void> saveAttributeInFirebase(String name) async {
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, dynamic> response =
+        await _repository.saveAttributeInFirebase(name: name);
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (product) async {
+      _mainController.setDropiMessage('Success!');
+
+      Future.delayed(Duration(milliseconds: 200), () {
+        Get.back();
+      });
+    });
   }
 
   Future<void> openGuideTour() async {
