@@ -29,6 +29,8 @@ class NewVariationsCustomPickersController extends GetxController {
   RxList<VariantAttributeModel> listAttributes = RxList();
   late ProductFirebaseModel product;
 
+  Map<String, bool> variantChecked = {};
+
   @override
   void onInit() {
     product = Get.arguments as ProductFirebaseModel;
@@ -42,6 +44,16 @@ class NewVariationsCustomPickersController extends GetxController {
     return listVariations
         .where((variant) => variant.attributeId == attribute.id)
         .toList();
+  }
+
+  void onVariantPressed(VariantVariantModel variant) {
+    bool isChecked = variantChecked[variant.id] ?? false;
+    variantChecked[variant.id] = !isChecked;
+    update(['view']);
+  }
+
+  bool isVariantChecked(VariantVariantModel variant) {
+    return variantChecked[variant.id] ?? false;
   }
 
   Future<void> selectAttributes() async {

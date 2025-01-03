@@ -11,51 +11,45 @@ class VariantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color primary = Theme.of(context).colorScheme.surface;
-
-    return Card(
-      color: primary,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            if (!variant.isColor && !variant.isImage)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: CircleAvatar(
-                  radius: 26,
-                  child: Text(variant.value),
-                  backgroundColor:
-                      Colors.grey, // Color de fondo del CircleAvatar
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          if (!variant.isColor && !variant.isImage)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: CircleAvatar(
+                radius: 26,
+                child: Text(variant.value),
+                backgroundColor: Colors.grey, // Color de fondo del CircleAvatar
               ),
-            if (variant.isColor)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: CircleAvatar(
-                  radius: 26,
-                  backgroundColor: Utils.getColor(variant.value),
-                ),
-              ),
-            if (variant.isImage)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: CircleAvatar(
-                  radius: 26,
-                  backgroundImage: NetworkImage(
-                      variant.value), // Usa la URL de variant.value
-                  onBackgroundImageError: (exception, stackTrace) {
-                    print(
-                        'Error al cargar la imagen: $exception'); // Manejo de error
-                  },
-                ),
-              ),
-            Text(
-              variant.name,
-              style: TypographyStyle.bodyBlackMedium,
             ),
-          ],
-        ),
+          if (variant.isColor)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: CircleAvatar(
+                radius: 26,
+                backgroundColor: Utils.getColor(variant.value),
+              ),
+            ),
+          if (variant.isImage)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: CircleAvatar(
+                radius: 26,
+                backgroundImage:
+                    NetworkImage(variant.value), // Usa la URL de variant.value
+                onBackgroundImageError: (exception, stackTrace) {
+                  print(
+                      'Error al cargar la imagen: $exception'); // Manejo de error
+                },
+              ),
+            ),
+          Text(
+            variant.name,
+            style: TypographyStyle.bodyBlackMedium,
+          ),
+        ],
       ),
     );
   }
