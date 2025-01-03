@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../data/models/product_variant/product_variant_model.dart';
+import '../../../data/models/variant_info/variant_info.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 
 class NewVariationsController extends GetxController {
@@ -11,23 +12,19 @@ class NewVariationsController extends GetxController {
 
   ProductsRepository _repository =
       ProductsRepository(); // Repositorio de productos
+  VariantInfoModel? variantInfoModel;
+  RxBool isLoading = true.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     product = Get.arguments as ProductFirebaseModel;
     _list.bindStream(_repository.getAllProductVariants(
       productId: product.id,
     ));
+    variantInfoModel = await _repository.getVariantsInfo(product.id);
+
+    isLoading.value = false;
+    update(['view']);
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 }

@@ -11,8 +11,18 @@ class ProductVariantsTab extends StatelessWidget {
   final NewVariationsController controller;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('asdasd'),
+    return GetBuilder<NewVariationsController>(
+      id: 'view',
+      builder: (_) {
+        if (!controller.isLoading.value)
+          return Center(
+            child: Text(controller.variantInfoModel.toString()),
+          );
+        else
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+      },
     );
   }
 }
