@@ -188,8 +188,91 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<void> onSave() async {
-    List<VariantAttributeModel> selectedAttributes = [];
+    Map<String, List<String>> attributeValuesMap =
+        {}; // Mapa para valores de atributos
+    List<Map<String, dynamic>> attributes =
+        []; // Lista de atributos para el JSON
+    List<Map<String, dynamic>> variations = []; // Lista de combinaciones
 
+    // Recopilar los valores de las variantes seleccionadas por atributo
+    for (var attribute in listAttributes) {
+      List<VariantVariantModel> selectedVariants = getVariations(attribute)
+          .where((variant) => variantChecked[variant.id] == true)
+          .toList();
+
+      if (selectedVariants.isNotEmpty) {
+        attributeValuesMap[attribute.name] =
+            selectedVariants.map((variant) => variant.name).toList();
+
+        // Agregar al JSON de atributos
+        attributes.add({
+          "description": attribute.name,
+          "values": selectedVariants.map((variant) => variant.name).toList(),
+        });
+      }
+    }
+
+    // Generar combinaciones de forma dinámica
+    void generateCombinations(Map<String, List<String>> attributesMap,
+        List<String> currentCombination, List<Map<String, dynamic>> result) {
+      if (attributesMap.isEmpty) {
+        result.add({"attributes": List.of(currentCombination)});
+        return;
+      }
+
+      String currentAttribute = attributesMap.keys.first;
+      List<String> values = attributesMap[currentAttribute]!;
+
+      Map<String, List<String>> remainingAttributes = Map.of(attributesMap)
+        ..remove(currentAttribute);
+
+      for (String value in values) {
+        generateCombinations(
+            remainingAttributes, [...currentCombination, value], result);
+      }
+    }
+
+    generateCombinations(attributeValuesMap, [], variations);
+
+    // Construir el JSON final en el formato requerido
+    Map<String, dynamic> finalJson = {
+      "id": product.id,
+      "attributes": attributes,
+      "variations": variations.map((comb) {
+        return {
+          "attributes": comb["attributes"],
+          "cost": product.price,
+          "value": product.suggestedPrice,
+          "stock": 1,
+          "points": product.points,
+        };
+      }).toList(),
+      "warehouseID": product.warehouseID,
+    };
+
+    log(finalJson.toString());
+    _mainController.setDropiDialog(true);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, dynamic> response =
+        await _repository.updateProductVariations(requestBody: finalJson);
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (product) async {
+      _mainController.setDropiMessage('Success!');
+      _mainController.setDropiDialog(false);
+      _mainController.setDropiMessage('Guardando en Firebase');
+      await _repository.saveCombinations(product: product);
+      _mainController.setDropiMessage('Success!');
+
+      onSaveInfoInFirebase();
+    });
+  }
+
+  Future<void> onSaveInfoInFirebase() async {
+    List<VariantAttributeModel> selectedAttributes = [];
     List<VariantVariantModel> selectedVariants = [];
 
     for (var attribute in listAttributes) {
@@ -208,9 +291,7 @@ class NewVariationsCustomPickersController extends GetxController {
       'variants': selectedVariants.map((variant) => variant.toJson()).toList(),
     };
 
-    _mainController.setDropiDialog(false);
-    _mainController.showDropiLoader();
-    _mainController.setDropiMessage('Iniciando conexión');
+    _mainController.setDropiMessage('Guardando Información de Variaciones');
 
     Either<String, dynamic> response =
         await _repository.saveVariantsInfoInFirebase(
@@ -224,6 +305,7 @@ class NewVariationsCustomPickersController extends GetxController {
       _mainController.setDropiMessage('Success!');
 
       Future.delayed(Duration(milliseconds: 200), () {
+        Get.back();
         Get.back();
       });
     });
