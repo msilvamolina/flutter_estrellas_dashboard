@@ -83,6 +83,7 @@ class ProductsRepository {
       );
 
       String thumb = imagesMap?['200x200'] ?? '';
+      String standardImage = imagesMap?['400x400'] ?? '';
       String fullImage = imagesMap?['800x800'] ?? '';
 
       mainController.setDropiMessage('Escribiendo en firebase');
@@ -90,6 +91,7 @@ class ProductsRepository {
       await _firebaseFirestore.collection('products').doc(product.id).set({
         ...product.toDocument(thumb),
         'fullImage': fullImage,
+        'standardImage': standardImage,
         'imagesMap': imagesMap,
         'createdBy': email,
       });
@@ -438,9 +440,10 @@ class ProductsRepository {
 
       // Mapa para almacenar las URLs de descarga
       Map<String, String> downloadUrls = {};
+      Map<String, String> paths = {};
 
       // Lista de tamaños a generar
-      List<int> sizes = [200, 800];
+      List<int> sizes = [200, 400, 800];
 
       // Generar y subir las versiones redimensionadas
       for (int size in sizes) {
@@ -454,23 +457,26 @@ class ProductsRepository {
         File resizedFile = File(resizedFilePath)
           ..writeAsBytesSync(img.encodePng(resizedImage));
 
-        // Subir la imagen redimensionada
+        String imageDestination = 'products/$productId/';
         Reference resizedRef = _firebaseStorage
             .ref()
-            .child('products/$productId/')
+            .child(imageDestination)
             .child(resizedFileName);
+
         UploadTask resizedUploadTask = resizedRef.putFile(resizedFile);
         TaskSnapshot resizedSnap = await resizedUploadTask;
         String resizedDownloadUrl = await resizedSnap.ref.getDownloadURL();
 
         // Agregar la URL al mapa
         downloadUrls['${size}x$size'] = resizedDownloadUrl;
+        paths['${size}x$size'] = resizedFilePath;
 
         // Eliminar el archivo temporal
         resizedFile.deleteSync();
       }
 
       String thumb = downloadUrls['200x200'] ?? '';
+      String standardImage = downloadUrls['400x400'] ?? '';
       String fullImage = downloadUrls['800x800'] ?? '';
 
       await _firebaseFirestore.collection('images').doc(id).set({
@@ -478,7 +484,9 @@ class ProductsRepository {
         'type': type,
         'thumbnail': thumb,
         'fullImage': fullImage,
+        'standardImage': standardImage,
         'imagesMap': downloadUrls,
+        'imagesPaths': paths,
         'productId': productId,
         'createdBy': email,
         'createdAt': DateTime.now(),
