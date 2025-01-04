@@ -3,17 +3,15 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:feature_discovery/feature_discovery.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../components/dialogs/dropi_dialog.dart';
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../data/models/product_variant/product_variant_model.dart';
+import '../../../data/models/product_variant_attributes/product_variant_attributes.dart';
 import '../../../data/models/variant_attributte/variant_attributte.dart';
 import '../../../data/models/variant_info/variant_info.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
-import '../../../app/dialogs/tip_dialog.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/utils_image.dart';
 import '../dialogs/edit_variation_dialog.dart';
@@ -24,6 +22,11 @@ class NewVariationsController extends GetxController {
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
 
+  final RxList<ProductVariantAttributesModel> _listAttributes =
+      <ProductVariantAttributesModel>[].obs;
+  List<ProductVariantAttributesModel> get listAttributes =>
+      _listAttributes.toList();
+
   ProductsRepository _repository = ProductsRepository();
   VariantInfoModel? variantInfoModel;
   RxBool isLoading = true.obs;
@@ -33,9 +36,9 @@ class NewVariationsController extends GetxController {
   @override
   Future<void> onInit() async {
     product = Get.arguments as ProductFirebaseModel;
-    _list.bindStream(_repository.getAllProductVariants(
-      productId: product.id,
-    ));
+    _list.bindStream(_repository.getAllProductVariants(productId: product.id));
+    _listAttributes.bindStream(
+        _repository.getAllProductVariantAttributes(productId: product.id));
 
     await loadInfo();
 
@@ -166,5 +169,50 @@ class NewVariationsController extends GetxController {
         await loadInfo();
       });
     });
+  }
+
+  void saveVariants() async {
+    // Verificar si hay variantes en la lista
+    if (_list.isEmpty) {
+      log('No hay variantes para guardar');
+      return;
+    }
+
+    Map<String, dynamic> finalJson = {};
+
+    List<Map<String, dynamic>> listNewAttributes = [];
+    List<Map<String, dynamic>> listNewVariants = [];
+
+    for (ProductVariantAttributesModel element in _listAttributes) {
+      List<String> listAttributes = [];
+      for (dynamic attribute in element.values) {
+        listAttributes.add(attribute['value']);
+      }
+      listNewAttributes.add({
+        "description": element.description,
+        "values": listAttributes.toList(),
+      });
+    }
+
+    for (ProductVariantModel element in _list) {
+      List<String> listAttributes = [];
+      for (dynamic attribute in element.values) {
+        listAttributes.add(attribute['value']);
+      }
+      listNewVariants.add({
+        "attributes": listAttributes.toList(),
+        "cost": element.sale_price,
+        "value": element.suggested_price,
+        "stock": element.stock,
+        "points": element.points,
+      });
+    }
+
+    finalJson["id"] = product.id;
+    finalJson["warehouseID"] = product.warehouseID;
+    finalJson["attributes"] = listNewAttributes.toList();
+    finalJson["variations"] = listNewVariants.toList();
+
+    log(finalJson.toString());
   }
 }

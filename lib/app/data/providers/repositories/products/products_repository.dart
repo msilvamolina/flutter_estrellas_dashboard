@@ -7,6 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/product_image/product_image_model.dart';
+import 'package:estrellas_dashboard/app/data/models/product_variant_attributes/product_variant_attributes.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_attributte/variant_attributte.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_info/variant_info.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_variant/variant_variant.dart';
@@ -323,6 +324,23 @@ class ProductsRepository {
       yield* snapshots.map((snapshot) {
         return snapshot.docs
             .map((doc) => ProductVariantModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Stream<List<ProductVariantAttributesModel>> getAllProductVariantAttributes(
+      {required String productId}) async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('products/$productId/attributes')
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => ProductVariantAttributesModel.fromDocument(doc))
             .toList();
       });
     } catch (e) {

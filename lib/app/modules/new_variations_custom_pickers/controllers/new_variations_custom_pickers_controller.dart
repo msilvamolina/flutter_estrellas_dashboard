@@ -55,28 +55,23 @@ class NewVariationsCustomPickersController extends GetxController {
   void buildVariantsInfo() {
     if (variantInfoModel == null) return;
 
-    // Limpiar listas y mapa antes de reconstruir
     listAttributes.clear();
     variantChecked.clear();
 
-    // Cargar atributos seleccionados desde VariantInfoModel
     if (variantInfoModel!.attributes != null) {
       listAttributes.addAll(variantInfoModel!.attributes!);
     }
 
-    // Cargar variantes seleccionadas desde VariantInfoModel
     if (variantInfoModel!.variants != null) {
       for (var variant in variantInfoModel!.variants!) {
-        variantChecked[variant.id] =
-            true; // Marcar la variante como seleccionada
+        variantChecked[variant.id] = true;
       }
     }
 
-    // Actualizar el estado del botón y de la interfaz
     isButtonEnabled.value = isVariantCheckedEmpty();
     showButton.value = listAttributes.isNotEmpty;
 
-    update(['view']); // Notificar a la interfaz que se actualizó la vista
+    update(['view']);
   }
 
   List<VariantVariantModel> getVariations(VariantAttributeModel attribute) {
@@ -188,13 +183,10 @@ class NewVariationsCustomPickersController extends GetxController {
   }
 
   Future<void> onSave() async {
-    Map<String, List<String>> attributeValuesMap =
-        {}; // Mapa para valores de atributos
-    List<Map<String, dynamic>> attributes =
-        []; // Lista de atributos para el JSON
-    List<Map<String, dynamic>> variations = []; // Lista de combinaciones
+    Map<String, List<String>> attributeValuesMap = {};
+    List<Map<String, dynamic>> attributes = [];
+    List<Map<String, dynamic>> variations = [];
 
-    // Recopilar los valores de las variantes seleccionadas por atributo
     for (var attribute in listAttributes) {
       List<VariantVariantModel> selectedVariants = getVariations(attribute)
           .where((variant) => variantChecked[variant.id] == true)
@@ -204,7 +196,6 @@ class NewVariationsCustomPickersController extends GetxController {
         attributeValuesMap[attribute.name] =
             selectedVariants.map((variant) => variant.name).toList();
 
-        // Agregar al JSON de atributos
         attributes.add({
           "description": attribute.name,
           "values": selectedVariants.map((variant) => variant.name).toList(),
@@ -212,7 +203,6 @@ class NewVariationsCustomPickersController extends GetxController {
       }
     }
 
-    // Generar combinaciones de forma dinámica
     void generateCombinations(Map<String, List<String>> attributesMap,
         List<String> currentCombination, List<Map<String, dynamic>> result) {
       if (attributesMap.isEmpty) {
@@ -234,7 +224,6 @@ class NewVariationsCustomPickersController extends GetxController {
 
     generateCombinations(attributeValuesMap, [], variations);
 
-    // Construir el JSON final en el formato requerido
     Map<String, dynamic> finalJson = {
       "id": product.id,
       "attributes": attributes,
@@ -250,6 +239,7 @@ class NewVariationsCustomPickersController extends GetxController {
       "warehouseID": product.warehouseID,
     };
 
+    log(finalJson.toString());
     _mainController.setDropiDialog(true);
     _mainController.showDropiLoader();
     _mainController.setDropiMessage('Iniciando conexión');

@@ -19,7 +19,7 @@ class ProductVariantsCombinationsTab extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
                   child: Button(
-                    onPressed: () {},
+                    onPressed: controller.saveVariants,
                     label: 'Guardar',
                   ),
                 ),
