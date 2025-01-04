@@ -70,19 +70,28 @@ class ProductsRepository {
   }) async {
     try {
       MainController mainController = Get.find<MainController>();
+      String email = _firebaseAuth.currentUser!.email!;
 
       String id = const Uuid().v4();
 
       mainController.setDropiMessage('Subiendo imagen a firebase');
       Map<String, String>? imagesMap = await uploadImageWithThumbs(
-          id: id, productId: product.id, path: imagePath);
+        id: id,
+        productId: product.id,
+        path: imagePath,
+        type: 'product',
+      );
 
-      String imageUrl = imagesMap?['200x200'] ?? '';
+      String thumb = imagesMap?['200x200'] ?? '';
+      String fullImage = imagesMap?['800x800'] ?? '';
+
       mainController.setDropiMessage('Escribiendo en firebase');
 
       await _firebaseFirestore.collection('products').doc(product.id).set({
-        ...product.toDocument(imageUrl),
+        ...product.toDocument(thumb),
+        'fullImage': fullImage,
         'imagesMap': imagesMap,
+        'createdBy': email,
       });
       return right(unit);
     } on FirebaseException catch (e) {
@@ -413,8 +422,11 @@ class ProductsRepository {
     required String id,
     required String productId,
     required String path,
+    required String type,
   }) async {
     try {
+      String email = _firebaseAuth.currentUser!.email!;
+
       final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
       File imageFile = File(path);
 
@@ -428,15 +440,7 @@ class ProductsRepository {
       Map<String, String> downloadUrls = {};
 
       // Lista de tamaños a generar
-      List<int> sizes = [200, 400, 600, 800];
-
-      // Subir la imagen original
-      Reference originalRef =
-          _firebaseStorage.ref().child('products/$productId/').child(id);
-      UploadTask originalUploadTask = originalRef.putFile(imageFile);
-      TaskSnapshot originalSnap = await originalUploadTask;
-      String originalDownloadUrl = await originalSnap.ref.getDownloadURL();
-      downloadUrls['original'] = originalDownloadUrl;
+      List<int> sizes = [200, 800];
 
       // Generar y subir las versiones redimensionadas
       for (int size in sizes) {
@@ -466,13 +470,25 @@ class ProductsRepository {
         resizedFile.deleteSync();
       }
 
+      String thumb = downloadUrls['200x200'] ?? '';
+      String fullImage = downloadUrls['800x800'] ?? '';
+
+      await _firebaseFirestore.collection('images').doc(id).set({
+        'id': id,
+        'type': type,
+        'thumbnail': thumb,
+        'fullImage': fullImage,
+        'imagesMap': downloadUrls,
+        'productId': productId,
+        'createdBy': email,
+        'createdAt': DateTime.now(),
+      });
+
       // Retornar el mapa con todas las URLs
       return downloadUrls;
     } on FirebaseException catch (e) {
-      print("Firebase error: $e");
       return null;
     } catch (e) {
-      print("Error general: $e");
       return null;
     }
   }
