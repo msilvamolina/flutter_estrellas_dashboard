@@ -331,7 +331,10 @@ class NewVariationsCustomPickersController extends GetxController {
 
     Map<String, dynamic> finalJson = {
       'attributes': selectedAttributes.map((attr) => attr.toJson()).toList(),
-      'variants': selectedVariants.map((variant) => variant.toJson()).toList(),
+      'variants': selectedVariants.map((variant) {
+        VariantVariantModel currentVariant = buildVariantVariantModel(variant);
+        return currentVariant.toJson();
+      }).toList(),
     };
 
     _mainController.setDropiMessage('Guardando Información de Variantes');
@@ -352,6 +355,19 @@ class NewVariationsCustomPickersController extends GetxController {
         Get.back();
       });
     });
+  }
+
+  VariantVariantModel buildVariantVariantModel(VariantVariantModel variant) {
+    if (variantInfoModel != null) {
+      VariantVariantModel? matchingVariant = variantInfoModel!.variants!
+          .firstWhereOrNull((v) => v.name == variant.name);
+
+      if (matchingVariant != null) {
+        return variant.copyWith(imageUrl: matchingVariant.imageUrl);
+      }
+    }
+
+    return variant;
   }
 
   Future<void> openGuideTour() async {
