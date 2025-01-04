@@ -13,14 +13,18 @@ class ProductVariantsCombinationsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
-          child: Button(
-            onPressed: () {},
-            label: 'Guardar',
-          ),
-        ),
+      bottomNavigationBar: Obx(
+        () => controller.showSaveButton.value
+            ? SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
+                  child: Button(
+                    onPressed: () {},
+                    label: 'Guardar',
+                  ),
+                ),
+              )
+            : SizedBox.shrink(),
       ),
       body: Obx(
         () => controller.list.isNotEmpty

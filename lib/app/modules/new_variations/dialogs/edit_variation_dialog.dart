@@ -29,18 +29,33 @@ Future<ProductVariantModel?> editVariationDialog(
 
           void validateInputs() {
             setState(() {
+              // Validar precio (double)
               priceError = priceController.text.isEmpty
                   ? 'El precio no puede estar vacío'
-                  : null;
+                  : double.tryParse(priceController.text) == null
+                      ? 'El precio debe ser un número válido'
+                      : null;
+
+              // Validar precio sugerido (double)
               suggestedPriceError = suggestedPriceController.text.isEmpty
                   ? 'El precio sugerido no puede estar vacío'
-                  : null;
+                  : double.tryParse(suggestedPriceController.text) == null
+                      ? 'El precio sugerido debe ser un número válido'
+                      : null;
+
+              // Validar puntos (int)
               pointsError = pointsController.text.isEmpty
                   ? 'Los puntos no pueden estar vacíos'
-                  : null;
+                  : int.tryParse(pointsController.text) == null
+                      ? 'Los puntos deben ser un número entero válido'
+                      : null;
+
+              // Validar stock (int)
               stockError = stockController.text.isEmpty
                   ? 'El stock no puede estar vacío'
-                  : null;
+                  : int.tryParse(stockController.text) == null
+                      ? 'El stock debe ser un número entero válido'
+                      : null;
             });
           }
 
@@ -53,84 +68,79 @@ Future<ProductVariantModel?> editVariationDialog(
 
           return AlertDialog(
             title: const Text('Editar Variación'),
-            content: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Campo Precio
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.start,
-                  children: [
-                    ...variation.values.asMap().entries.map(
-                      (entry) {
-                        final index = entry.key;
-                        final value = entry.value;
-                        final isLast = index == variation.values.length - 1;
-                        String name = value['value'];
-                        return SelectableText(
-                          isLast ? name : '$name - ',
-                          style: TypographyStyle.bodyBlackLarge.copyWith(
-                              color: Theme.of(context).colorScheme.primary),
-                        );
-                      },
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Campo Precio
+                  TextFormField(
+                    controller: priceController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Precio',
+                      errorText: priceError, // Mostrar error
                     ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                TextFormField(
-                  controller: priceController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Precio',
-                    errorText: priceError,
+                    onChanged: (_) {
+                      setState(() {
+                        priceError = null; // Limpiar error al escribir
+                      });
+                    },
                   ),
-                  onChanged: (_) => setState(() {
-                    priceError = null;
-                  }),
-                ),
-                const SizedBox(height: 8),
-                // Campo Precio Sugerido
-                TextFormField(
-                  controller: suggestedPriceController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Precio Sugerido',
-                    errorText: suggestedPriceError,
+                  const SizedBox(height: 8),
+                  // Campo Precio Sugerido
+                  TextFormField(
+                    controller: suggestedPriceController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Precio Sugerido',
+                      errorText: suggestedPriceError, // Mostrar error
+                    ),
+                    onChanged: (_) {
+                      setState(() {
+                        suggestedPriceError = null; // Limpiar error al escribir
+                      });
+                    },
                   ),
-                  onChanged: (_) => setState(() {
-                    suggestedPriceError = null;
-                  }),
-                ),
-                const SizedBox(height: 8),
-                // Campo Puntos
-                TextFormField(
-                  controller: pointsController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Puntos',
-                    errorText: pointsError,
+                  const SizedBox(height: 8),
+                  // Campo Puntos
+                  TextFormField(
+                    controller: pointsController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Puntos',
+                      errorText: pointsError, // Mostrar error
+                    ),
+                    onChanged: (_) {
+                      setState(() {
+                        pointsError = null; // Limpiar error al escribir
+                      });
+                    },
                   ),
-                  onChanged: (_) => setState(() {
-                    pointsError = null;
-                  }),
-                ),
-                const SizedBox(height: 8),
-                // Campo Stock
-                TextFormField(
-                  controller: stockController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Stock',
-                    errorText: stockError,
+                  const SizedBox(height: 8),
+                  // Campo Stock
+                  TextFormField(
+                    controller: stockController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Stock',
+                      errorText: stockError, // Mostrar error
+                    ),
+                    onChanged: (_) {
+                      setState(() {
+                        stockError = null; // Limpiar error al escribir
+                      });
+                    },
                   ),
-                  onChanged: (_) => setState(() {
-                    stockError = null;
-                  }),
-                ),
-              ],
+                ],
+              ),
             ),
             actions: [
+              TextButton(
+                onPressed: () => Get.back(result: null), // Cerrar el diálogo
+                child: const Text('CANCELAR'),
+              ),
               TextButton(
                 onPressed: () {
                   validateInputs();

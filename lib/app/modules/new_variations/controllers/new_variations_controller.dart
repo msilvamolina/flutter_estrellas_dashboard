@@ -24,10 +24,11 @@ class NewVariationsController extends GetxController {
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
 
-  ProductsRepository _repository =
-      ProductsRepository(); // Repositorio de productos
+  ProductsRepository _repository = ProductsRepository();
   VariantInfoModel? variantInfoModel;
   RxBool isLoading = true.obs;
+
+  RxBool showSaveButton = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -59,7 +60,17 @@ class NewVariationsController extends GetxController {
 
   Future<void> editVariation(ProductVariantModel variation) async {
     ProductVariantModel? newVariation = await editVariationDialog(variation);
-    print(newVariation);
+
+    if (newVariation != null) {
+      int index = _list.indexWhere((v) => v.id == variation.id);
+
+      if (index != -1) {
+        _list[index] = newVariation;
+
+        _list.refresh();
+        showSaveButton.value = true;
+      }
+    }
   }
 
   Future<void> loadInfo() async {
