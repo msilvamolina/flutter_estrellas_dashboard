@@ -19,62 +19,97 @@ class ProductVariantsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     Color primary = Theme.of(context).colorScheme.surface;
 
-    return GetBuilder<NewVariationsController>(
-      id: 'view',
-      builder: (_) {
-        if (!controller.isLoading.value) {
-          if (controller.variantInfoModel != null) {
-            return ListView.separated(
-              itemCount: controller.variantInfoModel!.attributes!.length,
-              itemBuilder: (context, index) {
-                List<VariantVariantModel> list = controller.getVariations(
-                    controller.variantInfoModel!.attributes![index]);
-                return Padding(
-                  padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            controller
-                                .variantInfoModel!.attributes![index].name,
-                            style: TypographyStyle.bodyBlackLarge,
-                          ),
-                          SizedBox(height: 8),
-                          Wrap(
-                            children: [
-                              for (int index2 = 0;
-                                  index2 < list.length;
-                                  index2++)
-                                GestureDetector(
-                                  onTap: () =>
-                                      controller.onCardPressed(list[index2]),
-                                  child: Card(
-                                    color: primary,
-                                    child: VariantCard(variant: list[index2]),
-                                  ),
-                                )
-                            ],
-                          ),
-                        ],
+    return Scaffold(
+      floatingActionButton: DescribedFeatureOverlay(
+        featureId: 'feature_icon_button',
+        tapTarget: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            Icons.add,
+            size: 32,
+            color: Colors.black,
+          ),
+        ),
+        title: Text(
+          'Agrega variaciones a este producto',
+          style: TypographyStyle.h3Mobile.copyWith(color: white),
+        ),
+        description: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Haciendo clic en esta opción, podrás volver elegir diferentes atributos y combinaciones',
+              style: TypographyStyle.bodyRegularLarge.copyWith(color: white),
+            ),
+          ],
+        ),
+        backgroundColor: Colors.black,
+        backgroundOpacity: 0.9,
+        targetColor: Colors.white,
+        textColor: Colors.white,
+        overflowMode: OverflowMode.clipContent,
+        child: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: controller.createVariants,
+        ),
+      ),
+      body: GetBuilder<NewVariationsController>(
+        id: 'view',
+        builder: (_) {
+          if (!controller.isLoading.value) {
+            if (controller.variantInfoModel != null) {
+              return ListView.separated(
+                itemCount: controller.variantInfoModel!.attributes!.length,
+                itemBuilder: (context, index) {
+                  List<VariantVariantModel> list = controller.getVariations(
+                      controller.variantInfoModel!.attributes![index]);
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              controller
+                                  .variantInfoModel!.attributes![index].name,
+                              style: TypographyStyle.bodyBlackLarge,
+                            ),
+                            SizedBox(height: 8),
+                            Wrap(
+                              children: [
+                                for (int index2 = 0;
+                                    index2 < list.length;
+                                    index2++)
+                                  GestureDetector(
+                                    onTap: () =>
+                                        controller.onCardPressed(list[index2]),
+                                    child: Card(
+                                      color: primary,
+                                      child: VariantCard(variant: list[index2]),
+                                    ),
+                                  )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox.shrink(),
-            );
+                  );
+                },
+                separatorBuilder: (context, index) => const SizedBox.shrink(),
+              );
+            } else {
+              return VariantEmptyState();
+            }
           } else {
-            return VariantEmptyState();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+        },
+      ),
     );
   }
 }

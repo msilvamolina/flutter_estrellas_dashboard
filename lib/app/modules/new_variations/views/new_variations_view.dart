@@ -18,39 +18,6 @@ class NewVariationsView extends GetView<NewVariationsController> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        floatingActionButton: DescribedFeatureOverlay(
-          featureId: 'feature_icon_button',
-          tapTarget: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.add,
-              size: 32,
-              color: Colors.black,
-            ),
-          ),
-          title: Text(
-            'Agrega variaciones a este producto',
-            style: TypographyStyle.h3Mobile.copyWith(color: white),
-          ),
-          description: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Haciendo clic en esta opción, podrás volver elegir diferentes atributos y combinaciones',
-                style: TypographyStyle.bodyRegularLarge.copyWith(color: white),
-              ),
-            ],
-          ),
-          backgroundColor: Colors.black,
-          backgroundOpacity: 0.9,
-          targetColor: Colors.white,
-          textColor: Colors.white,
-          overflowMode: OverflowMode.clipContent,
-          child: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: controller.createVariants,
-          ),
-        ),
         appBar: AppBar(
           title: Text('Variantes'),
         ),

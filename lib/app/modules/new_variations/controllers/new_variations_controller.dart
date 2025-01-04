@@ -16,6 +16,7 @@ import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../app/dialogs/tip_dialog.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/utils_image.dart';
+import '../dialogs/edit_variation_dialog.dart';
 
 class NewVariationsController extends GetxController {
   MainController _mainController = Get.find<MainController>();
@@ -56,7 +57,10 @@ class NewVariationsController extends GetxController {
     super.onReady();
   }
 
-  void editVariation(ProductVariantModel variation) {}
+  Future<void> editVariation(ProductVariantModel variation) async {
+    ProductVariantModel? newVariation = await editVariationDialog(variation);
+    print(newVariation);
+  }
 
   Future<void> loadInfo() async {
     variantInfoModel = await _repository.getVariantsInfo(product.id);
