@@ -41,7 +41,7 @@ class NewVariationsCustomPickersView
             actions: [
               DescribedFeatureOverlay(
                 contentLocation: ContentLocation.below,
-                featureId: 'feature_icon_button',
+                featureId: 'feature_variations_appbar_button',
                 tapTarget: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(

@@ -372,12 +372,11 @@ class NewVariationsCustomPickersController extends GetxController {
 
   Future<void> openGuideTour() async {
     await FeatureDiscovery.clearPreferences(Get.context!, [
-      'feature_icon_button',
-      'feature_floating_action',
+      'feature_variations_appbar_button',
     ]);
     FeatureDiscovery.discoverFeatures(
       Get.context!,
-      ['feature_icon_button', 'feature_floating_action'],
+      ['feature_variations_appbar_button'],
     );
   }
 }
