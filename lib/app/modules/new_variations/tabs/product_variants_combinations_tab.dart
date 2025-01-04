@@ -18,6 +18,7 @@ class ProductVariantsCombinationsTab extends StatelessWidget {
               itemBuilder: (context, index) {
                 return VariationsCard(
                   variation: controller.list[index],
+                  controller: controller,
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 10),

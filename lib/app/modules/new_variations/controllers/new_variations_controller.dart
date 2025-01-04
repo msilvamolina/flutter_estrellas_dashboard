@@ -56,6 +56,8 @@ class NewVariationsController extends GetxController {
     super.onReady();
   }
 
+  void editVariation(ProductVariantModel variation) {}
+
   Future<void> loadInfo() async {
     variantInfoModel = await _repository.getVariantsInfo(product.id);
     update(['view']);
@@ -68,6 +70,12 @@ class NewVariationsController extends GetxController {
     FeatureDiscovery.discoverFeatures(
       Get.context!,
       ['feature_icon_button'],
+    );
+  }
+
+  VariantVariantModel? getVariationWithName(String name) {
+    return variantInfoModel!.variants!.firstWhereOrNull(
+      (variant) => variant.name == name,
     );
   }
 
