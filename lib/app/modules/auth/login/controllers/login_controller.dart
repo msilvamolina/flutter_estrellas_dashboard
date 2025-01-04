@@ -41,6 +41,7 @@ class LoginController extends GetxController {
   List<BiometricType>? _availableBiometrics;
 
   bool _faceIDEnabled = false;
+  bool get getFaceIdEnabled => _faceIDEnabled;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.email.name: FormControl<String>(
@@ -66,6 +67,11 @@ class LoginController extends GetxController {
 
   @override
   Future<void> onReady() async {
+    openFaceId();
+    super.onReady();
+  }
+
+  Future<void> openFaceId() async {
     if (_faceIDEnabled) {
       await auth.isDeviceSupported().then(
             (bool isSupported) => _supportState = isSupported
@@ -79,8 +85,10 @@ class LoginController extends GetxController {
         _faceIdauthenticate();
       }
     }
+  }
 
-    super.onReady();
+  void onFaceIdButtonCicked() {
+    openFaceId();
   }
 
   @override

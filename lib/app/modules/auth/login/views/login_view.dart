@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:estrellas_dashboard/app/modules/auth/login/controllers/login_controller.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -114,6 +115,21 @@ class LoginView extends GetView<LoginController> {
                                     );
                                   },
                                 ),
+                                if (controller.getFaceIdEnabled)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 26),
+                                    child: GestureDetector(
+                                      onTap: controller.onFaceIdButtonCicked,
+                                      child: SvgPicture.asset(
+                                        'assets/svg/face-id.svg',
+                                        width: 78,
+                                        colorFilter: ColorFilter.mode(
+                                          Theme.of(context).colorScheme.primary,
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 SizedBox(height: 46),
                               ],
                             ),
