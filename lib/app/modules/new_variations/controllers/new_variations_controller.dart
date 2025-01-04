@@ -132,7 +132,7 @@ class NewVariationsController extends GetxController {
   Future<void> createVariants() async {
     await Get.toNamed(
       Routes.NEW_VARIATIONS_CUSTOM_PICKERS,
-      arguments: product,
+      arguments: [product, list],
     );
     loadInfo();
   }

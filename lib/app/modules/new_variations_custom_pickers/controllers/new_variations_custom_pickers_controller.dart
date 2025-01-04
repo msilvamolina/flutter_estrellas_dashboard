@@ -11,6 +11,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 import '../../../app/controllers/main_controller.dart';
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
+import '../../../data/models/product_variant/product_variant_model.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../utils/utils_image.dart';
@@ -37,9 +38,13 @@ class NewVariationsCustomPickersController extends GetxController {
 
   VariantInfoModel? variantInfoModel;
   RxBool isLoading = true.obs;
+
+  late List<ProductVariantModel>? listCombination;
+
   @override
   Future<void> onInit() async {
-    product = Get.arguments as ProductFirebaseModel;
+    product = Get.arguments[0] as ProductFirebaseModel;
+    listCombination = Get.arguments[1] as List<ProductVariantModel>;
 
     _list.bindStream(_repository.getAttributes());
     _listVariations.bindStream(_repository.getVariant());
@@ -49,6 +54,7 @@ class NewVariationsCustomPickersController extends GetxController {
       buildVariantsInfo();
     }
     isLoading.value = false;
+
     super.onInit();
   }
 
@@ -228,13 +234,10 @@ class NewVariationsCustomPickersController extends GetxController {
       "id": product.id,
       "attributes": attributes,
       "variations": variations.map((comb) {
-        return {
-          "attributes": comb["attributes"],
-          "cost": product.price,
-          "value": product.suggestedPrice,
-          "stock": 1,
-          "points": product.points,
-        };
+        return buildVariant(
+          attributes: comb["attributes"],
+          product: product,
+        );
       }).toList(),
       "warehouseID": product.warehouseID,
     };
@@ -257,6 +260,58 @@ class NewVariationsCustomPickersController extends GetxController {
 
       onSaveInfoInFirebase();
     });
+  }
+
+  Map<String, dynamic> buildVariant({
+    required List<String> attributes,
+    required ProductFirebaseModel product,
+  }) {
+    double? price = product.price;
+    double? suggestedPrice = product.suggestedPrice;
+    int? stock = 1;
+    int? points = product.points;
+    if (listCombination != null) {
+      ProductVariantModel? currentCombination = findCombination(attributes);
+
+      if (currentCombination != null) {
+        price = currentCombination.sale_price;
+        suggestedPrice = currentCombination.suggested_price;
+        stock = currentCombination.stock;
+        points = currentCombination.points;
+      }
+    }
+
+    return {
+      "attributes": attributes,
+      "cost": price,
+      "value": suggestedPrice,
+      "stock": stock,
+      "points": points,
+    };
+  }
+
+  ProductVariantModel? findCombination(List<String> attributes) {
+    Map<String, bool> mapAttributes = {};
+
+    for (String value in attributes) {
+      mapAttributes[value] = true;
+    }
+
+    for (ProductVariantModel element in listCombination!) {
+      int quantityAttributes = 0;
+      for (Map<String, dynamic> value in element.values) {
+        String attributeValue = value['value'];
+
+        if (mapAttributes[attributeValue] ?? false) {
+          quantityAttributes++;
+        }
+      }
+
+      if (quantityAttributes == mapAttributes.length) {
+        return element;
+      }
+    }
+    return null;
   }
 
   Future<void> onSaveInfoInFirebase() async {

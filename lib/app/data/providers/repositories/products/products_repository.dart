@@ -603,6 +603,15 @@ class ProductsRepository {
   }) async {
     try {
       final productId = product['_id'] as String;
+      final variantsRef = _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants');
+
+      final existingVariants = await variantsRef.get();
+      for (var doc in existingVariants.docs) {
+        await doc.reference.delete();
+      }
 
       final variations = product['variations'] as List<dynamic>;
       for (var variation in variations) {
@@ -623,6 +632,16 @@ class ProductsRepository {
           'stock': variation['stock'],
           'values': variation['values'],
         });
+      }
+
+      final variantsRef2 = _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('attributes');
+
+      final existingVariants2 = await variantsRef2.get();
+      for (var doc in existingVariants2.docs) {
+        await doc.reference.delete();
       }
 
       final attributes = product['attributes'] as List<dynamic>;
