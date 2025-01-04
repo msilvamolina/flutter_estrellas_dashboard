@@ -26,6 +26,7 @@ import 'package:async/async.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:image/image.dart' as img;
 
 import '../../../models/product_variant_combination/product_variant_combination_model.dart';
 
@@ -73,15 +74,16 @@ class ProductsRepository {
       String id = const Uuid().v4();
 
       mainController.setDropiMessage('Subiendo imagen a firebase');
-      String? imageUrl =
-          await uploadImage(id: id, productId: product.id, path: imagePath);
+      Map<String, String>? imagesMap = await uploadImageWithThumbs(
+          id: id, productId: product.id, path: imagePath);
 
+      String imageUrl = imagesMap?['200x200'] ?? '';
       mainController.setDropiMessage('Escribiendo en firebase');
 
-      await _firebaseFirestore
-          .collection('products')
-          .doc(product.id)
-          .set(product.toDocument(imageUrl));
+      await _firebaseFirestore.collection('products').doc(product.id).set({
+        ...product.toDocument(imageUrl),
+        'imagesMap': imagesMap,
+      });
       return right(unit);
     } on FirebaseException catch (e) {
       return left(e.code);
@@ -403,6 +405,74 @@ class ProductsRepository {
 
       return downloadUrl;
     } on FirebaseException catch (e) {
+      return null;
+    }
+  }
+
+  Future<Map<String, String>?> uploadImageWithThumbs({
+    required String id,
+    required String productId,
+    required String path,
+  }) async {
+    try {
+      final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
+      File imageFile = File(path);
+
+      // Leer y procesar la imagen original
+      img.Image? originalImage = img.decodeImage(imageFile.readAsBytesSync());
+      if (originalImage == null) {
+        throw Exception("No se pudo procesar la imagen");
+      }
+
+      // Mapa para almacenar las URLs de descarga
+      Map<String, String> downloadUrls = {};
+
+      // Lista de tamaños a generar
+      List<int> sizes = [200, 400, 600, 800];
+
+      // Subir la imagen original
+      Reference originalRef =
+          _firebaseStorage.ref().child('products/$productId/').child(id);
+      UploadTask originalUploadTask = originalRef.putFile(imageFile);
+      TaskSnapshot originalSnap = await originalUploadTask;
+      String originalDownloadUrl = await originalSnap.ref.getDownloadURL();
+      downloadUrls['original'] = originalDownloadUrl;
+
+      // Generar y subir las versiones redimensionadas
+      for (int size in sizes) {
+        // Redimensionar la imagen
+        img.Image resizedImage =
+            img.copyResize(originalImage, width: size, height: size);
+
+        // Guardar temporalmente la imagen redimensionada
+        String resizedFileName = 'thumb_${size}x$size$id.png';
+        String resizedFilePath = '${imageFile.parent.path}/$resizedFileName';
+        File resizedFile = File(resizedFilePath)
+          ..writeAsBytesSync(img.encodePng(resizedImage));
+
+        // Subir la imagen redimensionada
+        Reference resizedRef = _firebaseStorage
+            .ref()
+            .child('products/$productId/')
+            .child(resizedFileName);
+        UploadTask resizedUploadTask = resizedRef.putFile(resizedFile);
+        TaskSnapshot resizedSnap = await resizedUploadTask;
+        String resizedDownloadUrl = await resizedSnap.ref.getDownloadURL();
+
+        // Agregar la URL al mapa
+        downloadUrls['${size}x$size'] = resizedDownloadUrl;
+
+        // Eliminar el archivo temporal
+        resizedFile.deleteSync();
+      }
+
+      // Retornar el mapa con todas las URLs
+      return downloadUrls;
+    } on FirebaseException catch (e) {
+      print("Firebase error: $e");
+      return null;
+    } catch (e) {
+      print("Error general: $e");
       return null;
     }
   }
