@@ -171,13 +171,7 @@ class NewVariationsController extends GetxController {
     });
   }
 
-  void saveVariants() async {
-    // Verificar si hay variantes en la lista
-    if (_list.isEmpty) {
-      log('No hay variantes para guardar');
-      return;
-    }
-
+  Map<String, dynamic> buildJson() {
     Map<String, dynamic> finalJson = {};
 
     List<Map<String, dynamic>> listNewAttributes = [];
@@ -213,6 +207,31 @@ class NewVariationsController extends GetxController {
     finalJson["attributes"] = listNewAttributes.toList();
     finalJson["variations"] = listNewVariants.toList();
 
-    log(finalJson.toString());
+    return finalJson;
+  }
+
+  Future<void> saveVariants() async {
+    Map<String, dynamic> finalJson = buildJson();
+
+    _mainController.setDropiDialog(true);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, dynamic> response =
+        await _repository.updateProductVariations(requestBody: finalJson);
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (product) async {
+      _mainController.setDropiMessage('Success!');
+      _mainController.setDropiDialog(false);
+      _mainController.setDropiMessage('Guardando en Firebase');
+      await _repository.saveCombinations(product: product);
+      _mainController.setDropiMessage('Success!');
+
+      Future.delayed(Duration(milliseconds: 200), () {
+        Get.back();
+      });
+    });
   }
 }
