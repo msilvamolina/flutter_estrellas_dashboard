@@ -226,7 +226,7 @@ class NewVariationsController extends GetxController {
       _mainController.setDropiMessage('Success!');
       _mainController.setDropiDialog(false);
       _mainController.setDropiMessage('Guardando en Firebase');
-      await _repository.saveCombinations(product: product);
+      await _repository.updateFirebaseCombinations(product: product);
       _mainController.setDropiMessage('Success!');
 
       Future.delayed(Duration(milliseconds: 200), () {

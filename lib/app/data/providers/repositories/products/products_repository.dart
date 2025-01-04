@@ -172,11 +172,6 @@ class ProductsRepository {
         'description': description,
         'category': category,
         'stock': stock,
-
-        // 'weight': '100',
-        // 'length': '321',
-        // 'width': '1231',
-        // 'height': '1231',
       };
 
       StreamedResponse response = await services.postWithFileAndToken(
@@ -581,17 +576,15 @@ class ProductsRepository {
     String url = 'api/products/updateProduct';
 
     try {
-      // Serializamos el cuerpo a JSON
       String bodyJson = jsonEncode(requestBody);
 
       log(bodyJson.toString());
-      // Enviamos la solicitud PUT
+
       Response response = await services.postJsonWithToken(
         url: url,
-        body: bodyJson, // Pasamos el cuerpo como JSON serializado
+        body: bodyJson,
       );
 
-      // Parseamos la respuesta
       dynamic json = jsonDecode(response.body);
       bool ok = json['ok'] ?? false;
 
@@ -609,7 +602,6 @@ class ProductsRepository {
     required Map<String, dynamic> product,
   }) async {
     try {
-      // ID del producto
       final productId = product['_id'] as String;
 
       final variations = product['variations'] as List<dynamic>;
@@ -633,7 +625,6 @@ class ProductsRepository {
         });
       }
 
-      // Guardar los atributos
       final attributes = product['attributes'] as List<dynamic>;
       for (var attribute in attributes) {
         final attributeId = attribute['_id'] as String;
@@ -648,6 +639,46 @@ class ProductsRepository {
           'description': attribute['description'],
           'isVariation': attribute['isVariation'],
           'values': attribute['values'],
+        });
+      }
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  Future<Either<String, Unit>> updateFirebaseCombinations({
+    required Map<String, dynamic> product,
+  }) async {
+    try {
+      final productId = product['_id'] as String;
+
+      final variantsRef = _firebaseFirestore
+          .collection('products')
+          .doc(productId)
+          .collection('variants');
+
+      final existingVariants = await variantsRef.get();
+      for (var doc in existingVariants.docs) {
+        await doc.reference.delete();
+      }
+
+      final variations = product['variations'] as List<dynamic>;
+      for (var variation in variations) {
+        final variationId = variation['_id'] as String;
+
+        await variantsRef.doc(variationId).set({
+          'id': variationId,
+          'externalID': variation['externalID'],
+          'sale_price': variation['sale_price'],
+          'suggested_price': variation['suggested_price'],
+          'points': variation['points'],
+          'sku': variation['sku'],
+          'stock': variation['stock'],
+          'values': variation['values'],
         });
       }
 
@@ -805,7 +836,6 @@ class ProductsRepository {
 
   Future<VariantInfoModel?> getVariantsInfo(String productId) async {
     try {
-      // Referencia al documento en la colección de Firebase
       DocumentSnapshot<Map<String, dynamic>> snapshot = await _firebaseFirestore
           .collection('products')
           .doc(productId)
@@ -813,21 +843,18 @@ class ProductsRepository {
           .doc('variantsInfo')
           .get();
 
-      // Verificar si el documento existe
       if (!snapshot.exists || snapshot.data() == null) {
         throw Exception("El documento no existe o está vacío.");
       }
 
       final data = snapshot.data()!;
 
-      // Parsear atributos
       List<VariantAttributeModel> attributes =
           (data['attributes'] as List<dynamic>)
               .map((json) =>
                   VariantAttributeModel.fromJson(json as Map<String, dynamic>))
               .toList();
 
-      // Parsear variantes
       List<VariantVariantModel> variants = (data['variants'] as List<dynamic>)
           .map((json) =>
               VariantVariantModel.fromJson(json as Map<String, dynamic>))
