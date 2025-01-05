@@ -61,7 +61,7 @@ class LoginController extends GetxController {
   @override
   void onInit() async {
     _faceIDEnabled = await _localStorage.getFaceIdEnabled();
-
+    update(['view']);
     super.onInit();
   }
 

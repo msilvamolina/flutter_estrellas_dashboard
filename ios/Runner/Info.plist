@@ -51,7 +51,7 @@
 		<string>Photo Library Needed</string>
 		<key>NSFaceIDUsageDescription</key>
 		<string>Why is my app authenticating using face id?</string>
-		<key>NSCameraUsageDescription</key>		
+		<key>NSCameraUsageDescription</key>
 		<string>Camera Needed</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>Microphone Library Needed</string>
