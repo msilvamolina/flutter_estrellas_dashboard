@@ -42,18 +42,20 @@ class NewVariationsController extends GetxController {
     _listAttributes.bindStream(
         _repository.getAllProductVariantAttributes(productId: product.id));
 
+    ever<List<ProductVariantModel>>(_list, (variantList) {
+      if (variantList.isNotEmpty && variantList.length > 1) {
+        Future.delayed(Duration(seconds: 2), () {
+          _mainController.openTipDialog(
+            featureId: 'addVariants',
+            title: 'Cambiar orden',
+            message:
+                'Manteniendo el clic en una imágen, puedes arratrarla hasta el lugar donde quieres que se muestra',
+          );
+        });
+      }
+    });
     await loadInfo();
 
-    if (variantInfoModel != null) {
-      _mainController.openTipDialog(
-        featureId: 'newVariationsTip',
-        title: "Agrega una imagen a la variante",
-        message:
-            "Si le haces clic a una variante, vas a poder cargar una imagen",
-      );
-    } else {
-      openGuideTour();
-    }
     isLoading.value = false;
     update(['view']);
     super.onInit();
@@ -61,6 +63,7 @@ class NewVariationsController extends GetxController {
 
   @override
   void onReady() {
+    openGuideTour();
     super.onReady();
   }
 
