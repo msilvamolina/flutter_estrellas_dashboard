@@ -97,10 +97,10 @@ class ProductDetailsController extends GetxController {
   final FocusNode warrantyEditorFocusNode = FocusNode();
   final ScrollController warrantyEditorScrollController = ScrollController();
 
-  final RxList<ProductVariantModel> _listVariantAttributes =
+  final RxList<ProductVariantModel> _listVariantCombinations =
       <ProductVariantModel>[].obs;
-  List<ProductVariantModel> get listVariantAttributes =>
-      _listVariantAttributes.toList();
+  List<ProductVariantModel> get listVariantCombinations =>
+      _listVariantCombinations.toList();
   final RxList<ProductVariantAttributesModel> _listAttributes =
       <ProductVariantAttributesModel>[].obs;
   List<ProductVariantAttributesModel> get listAttributes =>
@@ -112,7 +112,7 @@ class ProductDetailsController extends GetxController {
   void onInit() {
     product = Get.arguments as ProductFirebaseModel;
     _listImages.bindStream(_repository.getProductImages(productId: product.id));
-    _listVariantAttributes
+    _listVariantCombinations
         .bindStream(_repository.getAllProductVariants(productId: product.id));
     _listAttributes.bindStream(
         _repository.getAllProductVariantAttributes(productId: product.id));
@@ -178,6 +178,30 @@ class ProductDetailsController extends GetxController {
 
   Future<void> onCardPressed(VariantVariantModel variant) async {
     selectedVariantsMap[variant.attributeName] = variant.name;
+    checkVariations();
+  }
+
+  void checkVariations() {
+    if (selectedVariantsMap.length == variantInfoModel!.attributes!.length) {
+      ProductVariantModel? pepis = findMatchingCombination();
+      print('pepis $pepis');
+    }
+  }
+
+  ProductVariantModel? findMatchingCombination() {
+    return listVariantCombinations.firstWhereOrNull(
+      (combination) {
+        return selectedVariantsMap.entries.every((entry) {
+          final attribute = entry.key;
+          final selectedValue = entry.value;
+
+          return combination.values.any((value) =>
+              value['attribute_name']?.toLowerCase() ==
+                  attribute.toLowerCase() &&
+              value['value']?.toLowerCase() == selectedValue.toLowerCase());
+        });
+      },
+    );
   }
 
   void resetPrice() {
@@ -274,11 +298,7 @@ class ProductDetailsController extends GetxController {
     ]);
 
     showImageViewerPager(Get.context!, multiImageProvider,
-        onPageChanged: (page) {
-      // print("page changed to $page");
-    }, onViewerDismissed: (page) {
-      // print("dismissed while on page $page");
-    });
+        onPageChanged: (page) {}, onViewerDismissed: (page) {});
   }
 
   Future<void> moreOptions() async {
@@ -361,13 +381,13 @@ class ProductDetailsController extends GetxController {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(false); // Cancelar
+                Navigator.of(context).pop(false);
               },
               child: const Text('Cancelar'),
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(true); // Confirmar
+                Navigator.of(context).pop(true);
               },
               child: const Text('Eliminar'),
             ),

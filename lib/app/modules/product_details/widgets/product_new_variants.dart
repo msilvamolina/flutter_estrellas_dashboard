@@ -45,9 +45,7 @@ class ProductNewVariants extends StatelessWidget {
                         () => Row(
                           children: [
                             Text(
-                              controller.variantInfoModel!.attributes![index]
-                                      .name +
-                                  ': ',
+                              '${controller.variantInfoModel!.attributes![index].name}: ',
                               style: TypographyStyle.bodyRegularLarge
                                   .copyWith(color: neutral700),
                             ),
