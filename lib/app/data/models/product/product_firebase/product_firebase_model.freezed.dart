@@ -47,6 +47,9 @@ mixin _$ProductFirebaseModel {
   String? get warrantyPlainText => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
+  String? get standardImage => throw _privateConstructorUsedError;
+  String? get fullImage => throw _privateConstructorUsedError;
+  Map<String, String>? get imagesMap => throw _privateConstructorUsedError;
   String? get warehouseID => throw _privateConstructorUsedError;
   String? get defaultVariation => throw _privateConstructorUsedError;
   dynamic get attributes => throw _privateConstructorUsedError;
@@ -100,6 +103,9 @@ abstract class $ProductFirebaseModelCopyWith<$Res> {
       String? warrantyPlainText,
       double? suggestedPrice,
       String? thumbnail,
+      String? standardImage,
+      String? fullImage,
+      Map<String, String>? imagesMap,
       String? warehouseID,
       String? defaultVariation,
       dynamic attributes,
@@ -153,6 +159,9 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
     Object? warrantyPlainText = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
+    Object? standardImage = freezed,
+    Object? fullImage = freezed,
+    Object? imagesMap = freezed,
     Object? warehouseID = freezed,
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
@@ -268,6 +277,18 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagesMap: freezed == imagesMap
+          ? _value.imagesMap
+          : imagesMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
       warehouseID: freezed == warehouseID
           ? _value.warehouseID
           : warehouseID // ignore: cast_nullable_to_non_nullable
@@ -343,6 +364,9 @@ abstract class _$$ProductFirebaseModelImplCopyWith<$Res>
       String? warrantyPlainText,
       double? suggestedPrice,
       String? thumbnail,
+      String? standardImage,
+      String? fullImage,
+      Map<String, String>? imagesMap,
       String? warehouseID,
       String? defaultVariation,
       dynamic attributes,
@@ -393,6 +417,9 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
     Object? warrantyPlainText = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
+    Object? standardImage = freezed,
+    Object? fullImage = freezed,
+    Object? imagesMap = freezed,
     Object? warehouseID = freezed,
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
@@ -508,6 +535,18 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagesMap: freezed == imagesMap
+          ? _value._imagesMap
+          : imagesMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
       warehouseID: freezed == warehouseID
           ? _value.warehouseID
           : warehouseID // ignore: cast_nullable_to_non_nullable
@@ -578,6 +617,9 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
       this.warrantyPlainText,
       this.suggestedPrice,
       this.thumbnail,
+      this.standardImage,
+      this.fullImage,
+      final Map<String, String>? imagesMap,
       this.warehouseID,
       this.defaultVariation,
       this.attributes,
@@ -587,7 +629,8 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
       this.searchField,
       this.reference,
       this.updatedAt})
-      : super._();
+      : _imagesMap = imagesMap,
+        super._();
 
   factory _$ProductFirebaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductFirebaseModelImplFromJson(json);
@@ -646,6 +689,20 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   @override
   final String? thumbnail;
   @override
+  final String? standardImage;
+  @override
+  final String? fullImage;
+  final Map<String, String>? _imagesMap;
+  @override
+  Map<String, String>? get imagesMap {
+    final value = _imagesMap;
+    if (value == null) return null;
+    if (_imagesMap is EqualUnmodifiableMapView) return _imagesMap;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  @override
   final String? warehouseID;
   @override
   final String? defaultVariation;
@@ -666,7 +723,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, warehouseID: $warehouseID, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, standardImage: $standardImage, fullImage: $fullImage, imagesMap: $imagesMap, warehouseID: $warehouseID, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
   }
 
   @override
@@ -716,6 +773,12 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
                 other.suggestedPrice == suggestedPrice) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.standardImage, standardImage) ||
+                other.standardImage == standardImage) &&
+            (identical(other.fullImage, fullImage) ||
+                other.fullImage == fullImage) &&
+            const DeepCollectionEquality()
+                .equals(other._imagesMap, _imagesMap) &&
             (identical(other.warehouseID, warehouseID) ||
                 other.warehouseID == warehouseID) &&
             (identical(other.defaultVariation, defaultVariation) ||
@@ -765,6 +828,9 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
         warrantyPlainText,
         suggestedPrice,
         thumbnail,
+        standardImage,
+        fullImage,
+        const DeepCollectionEquality().hash(_imagesMap),
         warehouseID,
         defaultVariation,
         const DeepCollectionEquality().hash(attributes),
@@ -822,6 +888,9 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
       final String? warrantyPlainText,
       final double? suggestedPrice,
       final String? thumbnail,
+      final String? standardImage,
+      final String? fullImage,
+      final Map<String, String>? imagesMap,
       final String? warehouseID,
       final String? defaultVariation,
       final dynamic attributes,
@@ -889,6 +958,12 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   double? get suggestedPrice;
   @override
   String? get thumbnail;
+  @override
+  String? get standardImage;
+  @override
+  String? get fullImage;
+  @override
+  Map<String, String>? get imagesMap;
   @override
   String? get warehouseID;
   @override

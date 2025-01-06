@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 
+import '../../../components/images/cached_image_with_thumb.dart';
 import '../../../libraries/icons/icons_font.dart';
 import '../../../themes/styles/colors.dart';
 import '../../../themes/styles/typography.dart';
@@ -32,16 +33,16 @@ class ProductMainHeader extends StatelessWidget {
                 child: Container(
                   width: imageSize,
                   height: imageSize,
-                  // decoration: BoxDecoration(
-                  //   borderRadius: BorderRadius.all(Radius.circular(16)),
-                  //   image: DecorationImage(
-                  //     image: NetworkImage(controller.product.thumbnail ?? ''),
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
                   margin: EdgeInsets.all(padding),
                   child: Stack(
                     children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        child: CachedImageWithThumb(
+                          thumbnail: controller.product.thumbnail,
+                          fullImage: controller.product.fullImage,
+                        ),
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,6 @@ class ProductMainHeader extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text('holaaa'),
                     ],
                   ),
                 ),
