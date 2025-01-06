@@ -16,14 +16,14 @@ class VariantEmptyState extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/tag.png',
+              'assets/images/variant.png',
               width: 180,
             ),
             SizedBox(height: 8),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
-                'Este producto no tiene variantes',
+                'Este producto no tiene variantes ni combinaciones',
                 style: TypographyStyle.bodyBlackLarge,
                 textAlign: TextAlign.center,
               ),

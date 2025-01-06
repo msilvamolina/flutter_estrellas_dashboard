@@ -2,6 +2,7 @@ import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../components/discovery_feature/discover_feature_floating_action_button.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../themes/styles/colors.dart';
 import '../../../themes/styles/typography.dart';
@@ -20,38 +21,13 @@ class ProductVariantsTab extends StatelessWidget {
     Color primary = Theme.of(context).colorScheme.surface;
 
     return Scaffold(
-      floatingActionButton: DescribedFeatureOverlay(
-        featureId: 'feature_icon_button',
-        tapTarget: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(
-            Icons.add,
-            size: 32,
-            color: Colors.black,
-          ),
-        ),
-        title: Text(
-          'Agrega variaciones a este producto',
-          style: TypographyStyle.h3Mobile.copyWith(color: white),
-        ),
-        description: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Haciendo clic en esta opción, podrás volver elegir diferentes atributos y combinaciones',
-              style: TypographyStyle.bodyRegularLarge.copyWith(color: white),
-            ),
-          ],
-        ),
-        backgroundColor: Colors.black,
-        backgroundOpacity: 0.9,
-        targetColor: Colors.white,
-        textColor: Colors.white,
-        overflowMode: OverflowMode.clipContent,
-        child: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: controller.createVariants,
-        ),
+      floatingActionButton: DiscoverFeatureFloatingActionButton(
+        featureId: controller.guideTourName,
+        title: 'Agrega variaciones a este producto',
+        description:
+            'Haciendo clic en esta opción, podrás volver elegir diferentes atributos y combinaciones',
+        icon: Icons.add,
+        onIconPressed: controller.createVariants,
       ),
       body: GetBuilder<NewVariationsController>(
         id: 'view',

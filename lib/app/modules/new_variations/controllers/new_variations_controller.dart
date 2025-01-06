@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,7 @@ import '../dialogs/edit_variation_dialog.dart';
 class NewVariationsController extends GetxController {
   MainController _mainController = Get.find<MainController>();
   late ProductFirebaseModel product;
+  LocalStorage localStorage = Get.find<LocalStorage>();
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
 
@@ -82,14 +84,19 @@ class NewVariationsController extends GetxController {
     update(['view']);
   }
 
+  String guideTourName = 'feature_variant_icon_button';
   Future<void> openGuideTour() async {
-    await FeatureDiscovery.clearPreferences(Get.context!, [
-      'feature_icon_button',
-    ]);
-    FeatureDiscovery.discoverFeatures(
-      Get.context!,
-      ['feature_icon_button'],
-    );
+    bool userWantToSee = await localStorage.getGuideTourStatus(guideTourName);
+
+    if (userWantToSee) {
+      await FeatureDiscovery.clearPreferences(Get.context!, [
+        guideTourName,
+      ]);
+      FeatureDiscovery.discoverFeatures(
+        Get.context!,
+        [guideTourName],
+      );
+    }
   }
 
   VariantVariantModel? getVariationWithName(String name) {
