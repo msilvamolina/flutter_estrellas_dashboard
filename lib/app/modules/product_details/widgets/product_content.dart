@@ -25,7 +25,6 @@ class ProductContent extends StatelessWidget {
             ProductContentProduct(),
             SizedBox(height: 16),
             ProductPrice(),
-            SizedBox(height: 16),
             Obx(
               () => !controller.isLoading.value
                   ? ProductNewVariants(controller: controller)

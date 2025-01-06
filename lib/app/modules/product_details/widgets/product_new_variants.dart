@@ -6,6 +6,8 @@ import '../../../themes/styles/colors.dart';
 import '../../../themes/styles/typography.dart';
 import '../../new_variations_custom_pickers/widgets/variant_card.dart';
 import '../controllers/product_details_controller.dart';
+import 'content/product_card_container.dart';
+import 'product_variant_card.dart';
 
 class ProductNewVariants extends StatelessWidget {
   const ProductNewVariants({required this.controller, super.key});
@@ -15,20 +17,35 @@ class ProductNewVariants extends StatelessWidget {
   Widget build(BuildContext context) {
     if (controller.variantInfoModel != null) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.only(
+          top: 16,
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             for (int index = 0;
                 index < controller.variantInfoModel!.attributes!.length;
                 index++)
-              Card(
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  width: double.infinity,
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom:
+                      (controller.variantInfoModel!.attributes!.length - 1) <
+                              index
+                          ? 0
+                          : 16,
+                ),
+                child: ProductCardContainer(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                          controller.variantInfoModel!.attributes![index].name),
+                        controller.variantInfoModel!.attributes![index].name,
+                        style: TypographyStyle.bodyRegularLarge
+                            .copyWith(color: neutral700),
+                      ),
+                      SizedBox(height: 8),
                       Wrap(
                         children: [
                           for (int index2 = 0;
@@ -43,13 +60,10 @@ class ProductNewVariants extends StatelessWidget {
                                   controller.getVariations(controller
                                       .variantInfoModel!
                                       .attributes![index])[index2]),
-                              child: Card(
-                                color: Colors.amber,
-                                child: VariantCard(
-                                    variant: controller.getVariations(controller
-                                        .variantInfoModel!
-                                        .attributes![index])[index2]),
-                              ),
+                              child: ProductVariantCard(
+                                  variant: controller.getVariations(controller
+                                      .variantInfoModel!
+                                      .attributes![index])[index2]),
                             )
                         ],
                       ),
