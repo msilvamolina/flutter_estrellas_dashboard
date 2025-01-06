@@ -75,44 +75,6 @@ class ProductNewVariants extends StatelessWidget {
           ],
         ),
       );
-      return ListView.separated(
-        itemCount: controller.variantInfoModel!.attributes!.length,
-        itemBuilder: (context, index) {
-          List<VariantVariantModel> list = controller
-              .getVariations(controller.variantInfoModel!.attributes![index]);
-          return Padding(
-            padding: const EdgeInsets.only(top: 16, left: 8, right: 8),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      controller.variantInfoModel!.attributes![index].name,
-                      style: TypographyStyle.bodyBlackLarge,
-                    ),
-                    SizedBox(height: 8),
-                    Wrap(
-                      children: [
-                        for (int index2 = 0; index2 < list.length; index2++)
-                          GestureDetector(
-                            onTap: () => controller.onCardPressed(list[index2]),
-                            child: Card(
-                              color: Colors.amber,
-                              child: VariantCard(variant: list[index2]),
-                            ),
-                          )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox.shrink(),
-      );
     }
 
     return SizedBox.shrink();

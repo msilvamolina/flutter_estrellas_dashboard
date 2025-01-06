@@ -36,19 +36,31 @@ class ProductVariantCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: neutral400,
+                  constraints: BoxConstraints(
+                    minWidth: 52,
                   ),
-                  width: 52,
+                  decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(8), // Esquinas redondeadas
+                    border: Border.all(
+                      color: neutral400, // Color del borde
+                      width: 1, // Ancho del borde
+                    ),
+                    color: Colors.white, // Fondo blanco
+                  ),
                   height: 52,
-                  child: Center(
-                    child: Text(
-                      variant.value,
-                      style: TypographyStyle.bodyBlackLarge2.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: neutral950,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          variant.value,
+                          style: TypographyStyle.bodyBlackMedium.copyWith(
+                            color: neutral700,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
