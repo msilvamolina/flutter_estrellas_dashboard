@@ -106,6 +106,7 @@ class ProductDetailsController extends GetxController {
   List<ProductVariantAttributesModel> get listAttributes =>
       _listAttributes.toList();
   VariantInfoModel? variantInfoModel;
+  RxMap<String, String> selectedVariantsMap = <String, String>{}.obs;
 
   @override
   void onInit() {
@@ -175,7 +176,9 @@ class ProductDetailsController extends GetxController {
         .toList();
   }
 
-  Future<void> onCardPressed(VariantVariantModel variant) async {}
+  Future<void> onCardPressed(VariantVariantModel variant) async {
+    selectedVariantsMap[variant.attributeName] = variant.name;
+  }
 
   void resetPrice() {
     _price = product.price ?? 0;

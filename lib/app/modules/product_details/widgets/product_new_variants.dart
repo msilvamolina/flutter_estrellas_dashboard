@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../data/models/variant_attributte/variant_attributte.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
@@ -40,10 +41,28 @@ class ProductNewVariants extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        controller.variantInfoModel!.attributes![index].name,
-                        style: TypographyStyle.bodyRegularLarge
-                            .copyWith(color: neutral700),
+                      Obx(
+                        () => Row(
+                          children: [
+                            Text(
+                              controller.variantInfoModel!.attributes![index]
+                                      .name +
+                                  ': ',
+                              style: TypographyStyle.bodyRegularLarge
+                                  .copyWith(color: neutral700),
+                            ),
+                            Text(
+                              controller.selectedVariantsMap[controller
+                                      .variantInfoModel!
+                                      .attributes![index]
+                                      .name] ??
+                                  '',
+                              style: TypographyStyle.bodyRegularLarge.copyWith(
+                                  color: neutral700,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(height: 8),
                       Wrap(
@@ -55,15 +74,44 @@ class ProductNewVariants extends StatelessWidget {
                                           .variantInfoModel!.attributes![index])
                                       .length;
                               index2++)
-                            GestureDetector(
-                              onTap: () => controller.onCardPressed(
-                                  controller.getVariations(controller
-                                      .variantInfoModel!
-                                      .attributes![index])[index2]),
-                              child: ProductVariantCard(
-                                variant: controller.getVariations(controller
-                                    .variantInfoModel!
-                                    .attributes![index])[index2],
+                            Obx(
+                              () => GestureDetector(
+                                onTap: () => controller.onCardPressed(
+                                    controller.getVariations(controller
+                                        .variantInfoModel!
+                                        .attributes![index])[index2]),
+                                child: Container(
+                                  margin: EdgeInsets.only(right: 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      10,
+                                    ),
+                                    border: Border.all(
+                                      color: controller.selectedVariantsMap[
+                                                  controller
+                                                      .getVariations(controller
+                                                              .variantInfoModel!
+                                                              .attributes![
+                                                          index])[index2]
+                                                      .attributeName] ==
+                                              controller
+                                                  .getVariations(controller
+                                                          .variantInfoModel!
+                                                          .attributes![
+                                                      index])[index2]
+                                                  .name
+                                          ? primaryBase
+                                          : neutral400,
+                                      width: 2,
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                  child: ProductVariantCard(
+                                    variant: controller.getVariations(controller
+                                        .variantInfoModel!
+                                        .attributes![index])[index2],
+                                  ),
+                                ),
                               ),
                             )
                         ],
