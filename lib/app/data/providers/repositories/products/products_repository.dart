@@ -889,11 +889,18 @@ class ProductsRepository {
       MainController mainController = Get.find<MainController>();
 
       mainController.setDropiMessage('Subiendo imagen');
-      String? imageUrl = await uploadImage(
-          id: variantId, productId: productId, path: imagePath);
 
-      if (imageUrl != null) {
-        return right(imageUrl);
+      Map<String, String>? imagesMap = await uploadImageWithThumbs(
+        id: variantId,
+        productId: productId,
+        path: imagePath,
+        type: 'productVariant',
+      );
+
+      String thumb = imagesMap?['80x80'] ?? '';
+
+      if (imagesMap != null) {
+        return right(thumb);
       } else {
         return left('Imagen nula');
       }
