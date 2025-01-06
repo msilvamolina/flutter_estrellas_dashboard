@@ -46,7 +46,11 @@ mixin _$ProductLiteModel {
   String? get defaultVariation => throw _privateConstructorUsedError;
   dynamic get attributes => throw _privateConstructorUsedError;
   dynamic get variations => throw _privateConstructorUsedError;
+  dynamic get provider => throw _privateConstructorUsedError;
+  dynamic? get providerID => throw _privateConstructorUsedError;
+  String? get providerName => throw _privateConstructorUsedError;
   String? get warehouseID => throw _privateConstructorUsedError;
+  String? get warehouseName => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
 
@@ -92,7 +96,11 @@ abstract class $ProductLiteModelCopyWith<$Res> {
       String? defaultVariation,
       dynamic attributes,
       dynamic variations,
+      dynamic provider,
+      dynamic? providerID,
+      String? providerName,
       String? warehouseID,
+      String? warehouseName,
       String? createdAt,
       String? updatedAt});
 }
@@ -137,7 +145,11 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
     Object? variations = freezed,
+    Object? provider = freezed,
+    Object? providerID = freezed,
+    Object? providerName = freezed,
     Object? warehouseID = freezed,
+    Object? warehouseName = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -242,9 +254,25 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.variations
           : variations // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      provider: freezed == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      providerID: freezed == providerID
+          ? _value.providerID
+          : providerID // ignore: cast_nullable_to_non_nullable
+              as dynamic?,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
       warehouseID: freezed == warehouseID
           ? _value.warehouseID
           : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseName: freezed == warehouseName
+          ? _value.warehouseName
+          : warehouseName // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -292,7 +320,11 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
       String? defaultVariation,
       dynamic attributes,
       dynamic variations,
+      dynamic provider,
+      dynamic? providerID,
+      String? providerName,
       String? warehouseID,
+      String? warehouseName,
       String? createdAt,
       String? updatedAt});
 }
@@ -335,7 +367,11 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
     Object? variations = freezed,
+    Object? provider = freezed,
+    Object? providerID = freezed,
+    Object? providerName = freezed,
     Object? warehouseID = freezed,
+    Object? warehouseName = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -440,9 +476,25 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.variations
           : variations // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      provider: freezed == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      providerID: freezed == providerID
+          ? _value.providerID
+          : providerID // ignore: cast_nullable_to_non_nullable
+              as dynamic?,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
       warehouseID: freezed == warehouseID
           ? _value.warehouseID
           : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseName: freezed == warehouseName
+          ? _value.warehouseName
+          : warehouseName // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -485,7 +537,11 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.defaultVariation,
       this.attributes,
       this.variations,
+      this.provider,
+      this.providerID,
+      this.providerName,
       this.warehouseID,
+      this.warehouseName,
       this.createdAt,
       this.updatedAt})
       : super._();
@@ -545,7 +601,15 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final dynamic variations;
   @override
+  final dynamic provider;
+  @override
+  final dynamic? providerID;
+  @override
+  final String? providerName;
+  @override
   final String? warehouseID;
+  @override
+  final String? warehouseName;
   @override
   final String? createdAt;
   @override
@@ -553,7 +617,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, stock: $stock, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, warehouseID: $warehouseID, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, stock: $stock, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, provider: $provider, providerID: $providerID, providerName: $providerName, warehouseID: $warehouseID, warehouseName: $warehouseName, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -603,8 +667,15 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
                 .equals(other.attributes, attributes) &&
             const DeepCollectionEquality()
                 .equals(other.variations, variations) &&
+            const DeepCollectionEquality().equals(other.provider, provider) &&
+            const DeepCollectionEquality()
+                .equals(other.providerID, providerID) &&
+            (identical(other.providerName, providerName) ||
+                other.providerName == providerName) &&
             (identical(other.warehouseID, warehouseID) ||
                 other.warehouseID == warehouseID) &&
+            (identical(other.warehouseName, warehouseName) ||
+                other.warehouseName == warehouseName) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -640,7 +711,11 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
         defaultVariation,
         const DeepCollectionEquality().hash(attributes),
         const DeepCollectionEquality().hash(variations),
+        const DeepCollectionEquality().hash(provider),
+        const DeepCollectionEquality().hash(providerID),
+        providerName,
         warehouseID,
+        warehouseName,
         createdAt,
         updatedAt
       ]);
@@ -689,7 +764,11 @@ abstract class _ProductLiteModel extends ProductLiteModel {
       final String? defaultVariation,
       final dynamic attributes,
       final dynamic variations,
+      final dynamic provider,
+      final dynamic? providerID,
+      final String? providerName,
       final String? warehouseID,
+      final String? warehouseName,
       final String? createdAt,
       final String? updatedAt}) = _$ProductLiteModelImpl;
   const _ProductLiteModel._() : super._();
@@ -749,7 +828,15 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   @override
   dynamic get variations;
   @override
+  dynamic get provider;
+  @override
+  dynamic? get providerID;
+  @override
+  String? get providerName;
+  @override
   String? get warehouseID;
+  @override
+  String? get warehouseName;
   @override
   String? get createdAt;
   @override

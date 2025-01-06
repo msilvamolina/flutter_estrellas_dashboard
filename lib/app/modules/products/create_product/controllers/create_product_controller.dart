@@ -285,6 +285,7 @@ class CreateProductController extends GetxController {
     if (result != null) {
       _warehouseModel = result[0];
       _providerModel = result[1];
+
       update(['view']);
     }
   }
@@ -402,7 +403,7 @@ class CreateProductController extends GetxController {
         name: name,
         points: points,
         warehouseID: warehouseModel!.id,
-        provider: providerModel!.id,
+        provider: _providerModel!.id,
         description: descriptionPlainText,
         category: _categoriesIds ?? '',
       );
@@ -415,7 +416,9 @@ class CreateProductController extends GetxController {
         name: name,
         points: points,
         warehouseID: warehouseModel!.id,
-        provider: providerModel!.id,
+        warehouseName: warehouseModel!.name ?? '',
+        provider: _providerModel?.id ?? '',
+        providerName: _providerModel?.name ?? '',
         description: descriptionPlainText,
         category: _categoriesIds ?? '',
       );
@@ -442,20 +445,5 @@ class CreateProductController extends GetxController {
         imagePath: _imagePath!,
       );
     });
-
-    // Either<String, ProductLiteModel> response = await _repository.updateProduct(
-    //   id: '6773dbbc0813456f97488cbd',
-    //   imagePath: _imagePath!,
-    //   price: price,
-    //   suggestedPrice: suggestedPrice,
-    //   name: name,
-    //   points: points,
-    //   warehouseID: '6772b36ce54f5e0233020bc8',
-    //   provider: providerModel!.id,
-    // );
-
-    // Either<String, Unit> response = await _repository.deleteProduct(
-    //   externalId: '1425674',
-    // );
   }
 }

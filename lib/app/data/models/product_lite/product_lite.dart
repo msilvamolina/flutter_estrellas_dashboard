@@ -35,7 +35,11 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
     String? defaultVariation,
     dynamic attributes,
     dynamic variations,
+    dynamic provider,
+    dynamic? providerID,
+    String? providerName,
     String? warehouseID,
+    String? warehouseName,
     String? createdAt,
     String? updatedAt,
   }) = _ProductLiteModel;

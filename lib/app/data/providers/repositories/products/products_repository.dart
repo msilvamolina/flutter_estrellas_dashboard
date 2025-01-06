@@ -108,7 +108,9 @@ class ProductsRepository {
     required String points,
     required String stock,
     required String warehouseID,
+    required String warehouseName,
     required String provider,
+    required String providerName,
     required String imagePath,
     required String description,
     required String category,
@@ -121,7 +123,9 @@ class ProductsRepository {
         'suggestedPrice': suggestedPrice,
         'points': points,
         'warehouseID': warehouseID,
+        'warehouseName': warehouseName,
         'provider': provider,
+        'providerName': providerName,
         'description': description,
         'category': category,
         'stock': stock,
@@ -149,11 +153,14 @@ class ProductsRepository {
         return left(json['data']);
       }
 
-      log(json['data'].toString());
-
       ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
 
-      return right(productModel.copyWith(warehouseID: warehouseID));
+      return right(productModel.copyWith(
+        warehouseID: warehouseID,
+        warehouseName: warehouseName,
+        providerID: provider,
+        providerName: providerName,
+      ));
     } catch (e) {
       return left(e.toString());
     }

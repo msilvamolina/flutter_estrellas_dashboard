@@ -34,7 +34,11 @@ _$ProductLiteModelImpl _$$ProductLiteModelImplFromJson(
       defaultVariation: json['defaultVariation'] as String?,
       attributes: json['attributes'],
       variations: json['variations'],
+      provider: json['provider'],
+      providerID: json['providerID'],
+      providerName: json['providerName'] as String?,
       warehouseID: json['warehouseID'] as String?,
+      warehouseName: json['warehouseName'] as String?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
     );
@@ -67,7 +71,11 @@ Map<String, dynamic> _$$ProductLiteModelImplToJson(
       'defaultVariation': instance.defaultVariation,
       'attributes': instance.attributes,
       'variations': instance.variations,
+      'provider': instance.provider,
+      'providerID': instance.providerID,
+      'providerName': instance.providerName,
       'warehouseID': instance.warehouseID,
+      'warehouseName': instance.warehouseName,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
     };
