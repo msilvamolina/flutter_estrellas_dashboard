@@ -28,8 +28,6 @@ import '../modules/product_info/bindings/product_info_binding.dart';
 import '../modules/product_info/views/product_info_view.dart';
 import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
 import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
-import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
-import '../modules/product_variants/product_add_variant/views/product_add_variant_view.dart';
 import '../modules/product_variants/product_variant_combinations/bindings/product_variant_combinations_binding.dart';
 import '../modules/product_variants/product_variant_combinations/views/product_variant_combinations_view.dart';
 import '../modules/product_variants/product_variant_for_type/bindings/product_variant_for_type_binding.dart';
@@ -158,11 +156,7 @@ class AppPages {
       page: () => const ProductVariantsView(),
       binding: ProductVariantsBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_ADD_VARIANT,
-      page: () => const ProductAddVariantView(),
-      binding: ProductAddVariantBinding(),
-    ),
+
     GetPage(
       name: _Paths.CREATE_PRODUCT,
       page: () => const CreateProductView(),
