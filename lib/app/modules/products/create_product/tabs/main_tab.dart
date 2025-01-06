@@ -94,8 +94,8 @@ class ProductMainTab extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                controller.warehouseModel != null
-                                    ? ('${controller.warehouseModel!.name}\n${controller.providerModel!.name!}')
+                                controller.warehouseName != null
+                                    ? ('${controller.warehouseName}\n${controller.providerName}')
                                     : '(Selecciona un proveedor)',
                                 style: TypographyStyle.bodyRegularSmall,
                               ),

@@ -44,6 +44,7 @@ class CreateProductController extends GetxController {
   ProviderWarehouseModel? _warehouseModel;
   ProviderWarehouseModel? get warehouseModel => _warehouseModel;
 
+  String? warehouseName, warehouseID, providerName, providerID;
   // Estado de las categorías seleccionadas
   final RxList<String> multipleSelected = <String>[].obs;
 
@@ -166,8 +167,12 @@ class CreateProductController extends GetxController {
             Delta.fromJson(jsonDecode(product!.warrantyFormatted));
         warrantyController.document = Document.fromDelta(warrantyDelta);
       }
+
+      providerID = product?.providerID;
+      providerName = product?.providerName;
+      warehouseID = product?.warehouseID;
+      warehouseName = product?.warehouseName;
     } else {
-      print('holaaa');
       descriptionController.document = Document()..insert(0, '');
       detailsController.document = Document.fromJson([
         {
@@ -281,11 +286,18 @@ class CreateProductController extends GetxController {
   }
 
   Future<void> pickWarehouse() async {
-    final result = await Get.toNamed(Routes.SELECT_PROVIDER);
+    final result = await Get.toNamed(
+      Routes.SELECT_PROVIDER,
+      arguments: [editMode.value, providerID],
+    );
     if (result != null) {
       _warehouseModel = result[0];
       _providerModel = result[1];
 
+      warehouseName = _warehouseModel?.name;
+      warehouseID = _warehouseModel?.id;
+      providerID = _providerModel?.id;
+      providerName = _providerModel?.name;
       update(['view']);
     }
   }
