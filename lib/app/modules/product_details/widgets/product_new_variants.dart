@@ -61,9 +61,10 @@ class ProductNewVariants extends StatelessWidget {
                                       .variantInfoModel!
                                       .attributes![index])[index2]),
                               child: ProductVariantCard(
-                                  variant: controller.getVariations(controller
-                                      .variantInfoModel!
-                                      .attributes![index])[index2]),
+                                variant: controller.getVariations(controller
+                                    .variantInfoModel!
+                                    .attributes![index])[index2],
+                              ),
                             )
                         ],
                       ),
