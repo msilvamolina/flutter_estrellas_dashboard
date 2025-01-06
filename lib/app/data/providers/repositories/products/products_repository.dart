@@ -493,97 +493,6 @@ class ProductsRepository {
     }
   }
 
-  // Future<Either<String, Unit>> saveVariant({
-  //   required String productId,
-  //   required String name,
-  //   required String label,
-  //   required String type,
-  //   int? color,
-  //   String? imageUrl,
-  // }) async {
-  //   try {
-  //     MainController mainController = Get.find<MainController>();
-
-  //     String id = const Uuid().v4();
-  //     String? newImageUrl;
-  //     if (imageUrl != null) {
-  //       mainController.setDropiMessage('Subiendo imagen a firebase');
-  //       newImageUrl =
-  //           await uploadImage(id: id, productId: productId, path: imageUrl);
-  //     }
-
-  //     mainController.setDropiMessage('Escribiendo en firebase');
-
-  //     await _firebaseFirestore
-  //         .collection('products')
-  //         .doc(productId)
-  //         .collection('variants')
-  //         .doc(id)
-  //         .set({
-  //       'id': id,
-  //       'name': name,
-  //       'label': label,
-  //       'type': type,
-  //       'color': color,
-  //       'imageUrl': newImageUrl,
-  //       'order': 0,
-  //       'createdAt': DateTime.now(),
-  //     });
-  //     return right(unit);
-  //   } on FirebaseException catch (e) {
-  //     return left(e.code);
-  //   }
-  // }
-
-  // Future<Either<String, Unit>> saveVariantComination({
-  //   required String productId,
-  //   required String name,
-  //   required String label,
-  //   int? color,
-  //   String? imageUrl,
-  //   String? sizeId,
-  //   String? sizeName,
-  //   String? sizeLabel,
-  //   String? colorId,
-  //   String? colorName,
-  //   String? colorLabel,
-  //   double? price,
-  //   int? stock,
-  //   double? suggestedPrice,
-  //   int? points,
-  // }) async {
-  //   try {
-  //     String id = const Uuid().v4();
-
-  //     await _firebaseFirestore
-  //         .collection('products')
-  //         .doc(productId)
-  //         .collection('variants_combinations')
-  //         .doc(id)
-  //         .set({
-  //       'id': id,
-  //       'name': name,
-  //       'label': label,
-  //       'color': color,
-  //       'imageUrl': imageUrl,
-  //       'sizeId': sizeId,
-  //       'sizeName': sizeName,
-  //       'sizeLabel': sizeLabel,
-  //       'colorId': colorId,
-  //       'colorName': colorName,
-  //       'colorLabel': colorLabel,
-  //       'price': price,
-  //       'suggestedPrice': suggestedPrice,
-  //       'points': points,
-  //       'stock': stock,
-  //       'createdAt': DateTime.now(),
-  //     });
-  //     return right(unit);
-  //   } on FirebaseException catch (e) {
-  //     return left(e.code);
-  //   }
-  // }
-
   Future<Either<String, Unit>> updateVariantComination({
     required String productId,
     required String variationCombinationId,
@@ -908,9 +817,14 @@ class ProductsRepository {
         );
 
         String thumb = imagesMap?['80x80'] ?? '';
-
+        String standardImage = imagesMap?['400x400'] ?? '';
+        String fullImage = imagesMap?['800x800'] ?? '';
         if (imagesMap != null) {
-          newVariant = newVariant.copyWith(value: thumb);
+          newVariant = newVariant.copyWith(
+            value: thumb,
+            standardImage: standardImage,
+            fullImage: fullImage,
+          );
         }
       }
 
