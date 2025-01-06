@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../components/appbars/estrellas_appbar.dart';
 import '../../../components/buttons/buttons.dart';
+import '../../../components/discovery_feature/discover_feature_appbar_button.dart';
 import '../../../themes/styles/colors.dart';
 import '../../../themes/styles/typography.dart';
 import '../../../themes/themes/default_light_theme.dart';
@@ -68,53 +69,13 @@ class ProductDetailsView extends GetView<ProductDetailsController> {
             ),
             surfaceTintColor: white,
             actions: [
-              DescribedFeatureOverlay(
-                contentLocation: ContentLocation.below,
+              DiscoverFeatureAppBarButton(
                 featureId: controller.guideTourName,
-                tapTarget: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.more_vert,
-                    size: 32,
-                    color: Colors.black,
-                  ),
-                ),
-                title: Text(
-                  'Más opciones',
-                  style: TypographyStyle.h3Mobile.copyWith(color: white),
-                ),
-                description: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Aquí vas a encontrar todas las opciones para modificar el producto.',
-                      style: TypographyStyle.bodyRegularLarge
-                          .copyWith(color: white),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(top: 16),
-                      transform: Matrix4.translationValues(-11, 0, 0),
-                      child: TextButton(
-                        onPressed: controller.guideTourNotShowAgain,
-                        child: Text(
-                          'No volver a mostrar',
-                          style: TypographyStyle.bodyBlackMedium.copyWith(
-                            color: Colors.white.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                backgroundColor: Colors.black,
-                backgroundOpacity: 0.9,
-                targetColor: Colors.white,
-                textColor: Colors.white,
-                overflowMode: OverflowMode.clipContent,
-                child: IconButton(
-                  onPressed: controller.moreOptions,
-                  icon: const Icon(Icons.more_vert),
-                ),
+                icon: Icons.more_vert,
+                title: 'Más opciones al alcance de tu mano',
+                description:
+                    'Aquí vas a encontrar todas las opciones para modificar el producto.',
+                onIconPressed: controller.moreOptions,
               ),
             ],
           ),

@@ -38,8 +38,6 @@ import '../modules/product_variants/product_variants/bindings/product_variants_b
 import '../modules/product_variants/product_variants/views/product_variants_view.dart';
 import '../modules/products/create_product/bindings/create_product_binding.dart';
 import '../modules/products/create_product/views/create_product_view.dart';
-import '../modules/products/product_add_image/bindings/product_add_image_binding.dart';
-import '../modules/products/product_add_image/views/product_add_image_view.dart';
 import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
 import '../modules/products/product_estrellas_1/views/product_estrellas_1_view.dart';
 import '../modules/products/product_images/bindings/product_images_binding.dart';
@@ -154,11 +152,7 @@ class AppPages {
       page: () => const ProductImagesView(),
       binding: ProductImagesBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_ADD_IMAGE,
-      page: () => const ProductAddImageView(),
-      binding: ProductAddImageBinding(),
-    ),
+
     GetPage(
       name: _Paths.PRODUCT_VARIANTS,
       page: () => const ProductVariantsView(),

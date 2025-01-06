@@ -65,11 +65,6 @@ class ProductImagesController extends GetxController {
     }
   }
 
-  Future<void> onGuideTourDismiss() async {
-    await localStorage.setGuideTourStatus(guideTourName, false);
-    FeatureDiscovery.completeCurrentStep(Get.context!);
-  }
-
   Future<void> onAddButtonPressed() async {
     String? _imagePath = await UtilsImage.pickImage();
 

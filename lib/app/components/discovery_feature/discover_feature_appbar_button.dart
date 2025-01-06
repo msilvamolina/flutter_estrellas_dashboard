@@ -1,13 +1,13 @@
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/providers/local/local_storage.dart';
 import '../../themes/styles/colors.dart';
 import '../../themes/styles/typography.dart';
 
-class DiscoverFeatureFloatingActionButton extends StatelessWidget {
-  const DiscoverFeatureFloatingActionButton({
+class DiscoverFeatureAppBarButton extends StatelessWidget {
+  const DiscoverFeatureAppBarButton({
     super.key,
     required this.featureId,
     required this.title,
@@ -24,6 +24,7 @@ class DiscoverFeatureFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DescribedFeatureOverlay(
+      contentLocation: ContentLocation.below,
       featureId: featureId,
       tapTarget: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -68,9 +69,9 @@ class DiscoverFeatureFloatingActionButton extends StatelessWidget {
       targetColor: Colors.white,
       textColor: Colors.white,
       overflowMode: OverflowMode.clipContent,
-      child: FloatingActionButton(
+      child: IconButton(
         onPressed: onIconPressed,
-        child: Icon(icon),
+        icon: Icon(icon),
       ),
     );
   }

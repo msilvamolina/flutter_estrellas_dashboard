@@ -144,13 +144,6 @@ class ProductDetailsController extends GetxController {
     }
   }
 
-  Future<void> guideTourNotShowAgain() async {
-    await localStorage.setGuideTourStatus(guideTourName, false);
-    FeatureDiscovery.completeCurrentStep(Get.context!);
-  }
-
-  
-
   void resetPrice() {
     _price = product.price ?? 0;
     _suggestedPrice = product.suggestedPrice ?? 0;

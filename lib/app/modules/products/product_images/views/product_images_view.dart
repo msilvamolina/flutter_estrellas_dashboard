@@ -29,7 +29,6 @@ class ProductImagesView extends GetView<ProductImagesController> {
         description:
             'Apretando en este botón podrás añadir más imágenes a este producto, que se podrán ver en full resolución.',
         onIconPressed: controller.onAddButtonPressed,
-        onDismiss: controller.onGuideTourDismiss,
       ),
       showMenu: false,
       bottomNavigationBar: GetBuilder<ProductImagesController>(
