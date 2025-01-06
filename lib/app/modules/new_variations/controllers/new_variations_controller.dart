@@ -20,17 +20,17 @@ import '../dialogs/edit_variation_dialog.dart';
 class NewVariationsController extends GetxController {
   MainController _mainController = Get.find<MainController>();
   late ProductFirebaseModel product;
+  ProductsRepository _repository = ProductsRepository();
+
   LocalStorage localStorage = Get.find<LocalStorage>();
   final RxList<ProductVariantModel> _list = <ProductVariantModel>[].obs;
   List<ProductVariantModel> get list => _list.toList();
-
   final RxList<ProductVariantAttributesModel> _listAttributes =
       <ProductVariantAttributesModel>[].obs;
   List<ProductVariantAttributesModel> get listAttributes =>
       _listAttributes.toList();
-
-  ProductsRepository _repository = ProductsRepository();
   VariantInfoModel? variantInfoModel;
+
   RxBool isLoading = true.obs;
 
   RxBool showSaveButton = false.obs;

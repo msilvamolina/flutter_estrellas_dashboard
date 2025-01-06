@@ -9,6 +9,7 @@ import 'content/product_content_product.dart';
 import 'content/product_price.dart';
 import 'content/product_quantity.dart';
 import 'content/product_variants.dart';
+import 'product_new_variants.dart';
 import 'variants/product_variants_size.dart';
 import 'variants/product_variants_color.dart';
 
@@ -26,9 +27,11 @@ class ProductContent extends StatelessWidget {
             ProductPrice(),
             SizedBox(height: 16),
             Obx(
-              () => controller.listVariants.isNotEmpty
-                  ? ProductVariants(listVariants: controller.listVariants)
-                  : SizedBox.shrink(),
+              () => !controller.isLoading.value
+                  ? ProductNewVariants(controller: controller)
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ),
             ),
             SizedBox(height: 16),
             ProductQuantity(),

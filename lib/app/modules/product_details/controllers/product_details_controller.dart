@@ -14,7 +14,11 @@ import '../../../data/models/product/product_firebase/product_firebase_model.dar
 import '../../../data/models/product/product_firebase_lite/product_firebase_lite.dart';
 import '../../../data/models/product_image/product_image_model.dart';
 import '../../../data/models/product_variant/product_variant_model.dart';
+import '../../../data/models/product_variant_attributes/product_variant_attributes.dart';
 import '../../../data/models/product_variant_combination/product_variant_combination_model.dart';
+import '../../../data/models/variant_attributte/variant_attributte.dart';
+import '../../../data/models/variant_info/variant_info.dart';
+import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../../data/models/videos/video_post_model.dart';
 import '../../../data/providers/repositories/products/products_repository.dart';
 import '../../../routes/app_pages.dart';
@@ -49,6 +53,7 @@ class ProductDetailsController extends GetxController {
   ProductVariantModel? get userProductVariantSize => _userProductVariantSize;
 
   ProductVariantCombinationModel? _productVariantCombination;
+  RxBool isLoading = true.obs;
 
   bool _isInCart = true;
   bool get isInCart => _isInCart;
@@ -92,16 +97,24 @@ class ProductDetailsController extends GetxController {
   final FocusNode warrantyEditorFocusNode = FocusNode();
   final ScrollController warrantyEditorScrollController = ScrollController();
 
+  final RxList<ProductVariantModel> _listVariantAttributes =
+      <ProductVariantModel>[].obs;
+  List<ProductVariantModel> get listVariantAttributes =>
+      _listVariantAttributes.toList();
+  final RxList<ProductVariantAttributesModel> _listAttributes =
+      <ProductVariantAttributesModel>[].obs;
+  List<ProductVariantAttributesModel> get listAttributes =>
+      _listAttributes.toList();
+  VariantInfoModel? variantInfoModel;
+
   @override
   void onInit() {
     product = Get.arguments as ProductFirebaseModel;
     _listImages.bindStream(_repository.getProductImages(productId: product.id));
-    _listVariants.bindStream(_repository.getAllProductVariants(
-      productId: product.id,
-    ));
-    _listCombination.bindStream(_repository.getAllProductVariantsCombinations(
-      productId: product.id,
-    ));
+    _listVariantAttributes
+        .bindStream(_repository.getAllProductVariants(productId: product.id));
+    _listAttributes.bindStream(
+        _repository.getAllProductVariantAttributes(productId: product.id));
 
     if (product.descriptionFormatted != null) {
       final descriptionDelta =
@@ -119,9 +132,15 @@ class ProductDetailsController extends GetxController {
           Delta.fromJson(jsonDecode(product.warrantyFormatted));
       warrantyController.document = Document.fromDelta(warrantyDelta);
     }
-
+    loadInfo();
     resetPrice();
     super.onInit();
+  }
+
+  Future<void> loadInfo() async {
+    variantInfoModel = await _repository.getVariantsInfo(product.id);
+    isLoading.value = false;
+    update(['view']);
   }
 
   @override
@@ -143,6 +162,20 @@ class ProductDetailsController extends GetxController {
       );
     }
   }
+
+  VariantVariantModel? getVariationWithName(String name) {
+    return variantInfoModel!.variants!.firstWhereOrNull(
+      (variant) => variant.name == name,
+    );
+  }
+
+  List<VariantVariantModel> getVariations(VariantAttributeModel attribute) {
+    return variantInfoModel!.variants!
+        .where((variant) => variant.attributeId == attribute.id)
+        .toList();
+  }
+
+  Future<void> onCardPressed(VariantVariantModel variant) async {}
 
   void resetPrice() {
     _price = product.price ?? 0;
