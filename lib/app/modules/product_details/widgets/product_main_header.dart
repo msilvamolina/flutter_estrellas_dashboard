@@ -32,50 +32,56 @@ class ProductMainHeader extends StatelessWidget {
                 child: Container(
                   width: imageSize,
                   height: imageSize,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    image: DecorationImage(
-                      image: NetworkImage(controller.product.thumbnail ?? ''),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.all(Radius.circular(16)),
+                  //   image: DecorationImage(
+                  //     image: NetworkImage(controller.product.thumbnail ?? ''),
+                  //     fit: BoxFit.cover,
+                  //   ),
+                  // ),
                   margin: EdgeInsets.all(padding),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
+                  child: Stack(
                     children: [
-                      Container(
-                        margin: EdgeInsets.all(16),
-                        padding: EdgeInsets.only(
-                            left: 6, right: 8, top: 2, bottom: 3),
-                        decoration: BoxDecoration(
-                          color: primaryLight,
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              EstrellasIcons.medal,
-                              color: neutral900,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(16),
+                            padding: EdgeInsets.only(
+                                left: 6, right: 8, top: 2, bottom: 3),
+                            decoration: BoxDecoration(
+                              color: primaryLight,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
                             ),
-                            Text(
-                              '${controller.product.points} puntos',
-                              style: TypographyStyle.bodyBlackMedium
-                                  .copyWith(color: neutral900),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  EstrellasIcons.medal,
+                                  color: neutral900,
+                                ),
+                                Text(
+                                  '${controller.product.points} puntos',
+                                  style: TypographyStyle.bodyBlackMedium
+                                      .copyWith(color: neutral900),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Spacer(),
+                          Obx(
+                            () => controller.listImages.isNotEmpty
+                                ? ProductImagesCard(
+                                    listImages: controller.listImages,
+                                  )
+                                : SizedBox.shrink(),
+                          ),
+                        ],
                       ),
-                      Spacer(),
-                      Obx(
-                        () => controller.listImages.isNotEmpty
-                            ? ProductImagesCard(
-                                listImages: controller.listImages,
-                              )
-                            : SizedBox.shrink(),
-                      ),
+                      Text('holaaa'),
                     ],
                   ),
                 ),

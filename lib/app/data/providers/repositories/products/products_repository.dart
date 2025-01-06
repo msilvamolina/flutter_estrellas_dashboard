@@ -426,10 +426,10 @@ class ProductsRepository {
     required String path,
     required String type,
   }) async {
+    MainController mainController = Get.find<MainController>();
     try {
       String email = _firebaseAuth.currentUser!.email!;
 
-      final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
       File imageFile = File(path);
 
       // Leer y procesar la imagen original
@@ -437,14 +437,12 @@ class ProductsRepository {
       if (originalImage == null) {
         throw Exception("No se pudo procesar la imagen");
       }
-
       // Mapa para almacenar las URLs de descarga
       Map<String, String> downloadUrls = {};
       Map<String, String> paths = {};
 
       // Lista de tamaños a generar
-      List<int> sizes = [200, 400, 800];
-
+      List<int> sizes = [80, 200, 400, 800];
       // Generar y subir las versiones redimensionadas
       for (int size in sizes) {
         // Redimensionar la imagen
@@ -457,6 +455,7 @@ class ProductsRepository {
         File resizedFile = File(resizedFilePath)
           ..writeAsBytesSync(img.encodePng(resizedImage));
 
+        mainController.setDropiMessage('Generando imagen ${size}x${size}');
         String imageDestination = 'products/$productId/';
         Reference resizedRef = _firebaseStorage
             .ref()
@@ -467,15 +466,13 @@ class ProductsRepository {
         TaskSnapshot resizedSnap = await resizedUploadTask;
         String resizedDownloadUrl = await resizedSnap.ref.getDownloadURL();
 
-        // Agregar la URL al mapa
         downloadUrls['${size}x$size'] = resizedDownloadUrl;
         paths['${size}x$size'] = resizedFilePath;
 
-        // Eliminar el archivo temporal
         resizedFile.deleteSync();
       }
 
-      String thumb = downloadUrls['200x200'] ?? '';
+      String thumb = downloadUrls['80x80'] ?? '';
       String standardImage = downloadUrls['400x400'] ?? '';
       String fullImage = downloadUrls['800x800'] ?? '';
 

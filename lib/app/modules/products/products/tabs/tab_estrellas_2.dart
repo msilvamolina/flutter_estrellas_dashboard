@@ -74,7 +74,7 @@ Widget _listItem({
               MoneyAmount.convertMoneyString(product.price ?? 0),
               style: TypographyStyle.bodyBlackLarge,
               textAlign: TextAlign.start,
-            )
+            ),
           ],
         ),
       ),

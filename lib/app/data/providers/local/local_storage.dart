@@ -14,6 +14,23 @@ class LocalStorage {
     // await _getStorage.erase();
   }
 
+  /// Obtiene si el usuario quiere ver el tour de la pantalla
+  Future<bool> getGuideTourStatus(String screenName) async {
+    final key = _generateGuideTourKey(screenName);
+    return await _getStorage.read(key) ?? true; // Por defecto, muestra el tour
+  }
+
+  /// Establece si el usuario quiere ver el tour de la pantalla
+  Future<void> setGuideTourStatus(String screenName, bool value) async {
+    final key = _generateGuideTourKey(screenName);
+    await _getStorage.write(key, value);
+  }
+
+  /// Genera la clave única para el guide tour de cada pantalla
+  String _generateGuideTourKey(String screenName) {
+    return "GUIDETOUR_$screenName";
+  }
+
   Future<bool> getWelcome() async {
     final value = await _getStorage.read(welcomeKey) ?? false;
     return value;

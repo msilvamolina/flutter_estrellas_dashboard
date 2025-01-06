@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:easy_image_viewer/easy_image_viewer.dart';
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
+import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
@@ -20,6 +22,9 @@ import '../../../routes/app_pages.dart';
 class ProductDetailsController extends GetxController {
   MainController mainController = Get.find<MainController>();
   final ProductsRepository _repository = ProductsRepository();
+
+  LocalStorage localStorage = Get.find<LocalStorage>();
+
   late VideoPostModel videoPostModel;
   late ProductFirebaseModel product;
 
@@ -121,9 +126,28 @@ class ProductDetailsController extends GetxController {
 
   @override
   Future<void> onReady() async {
-    // product = await _repository.getProduct(productId: productLite.id);
+    openGuideTour();
+  }
 
-    // update(['product_info']);
+  String guideTourName = 'feature_product_detail_button';
+
+  Future<void> openGuideTour() async {
+    bool userWantToSee = await localStorage.getGuideTourStatus(guideTourName);
+
+    if (userWantToSee) {
+      await FeatureDiscovery.clearPreferences(Get.context!, [
+        guideTourName,
+      ]);
+      FeatureDiscovery.discoverFeatures(
+        Get.context!,
+        [guideTourName],
+      );
+    }
+  }
+
+  Future<void> guideTourNotShowAgain() async {
+    await localStorage.setGuideTourStatus(guideTourName, false);
+    FeatureDiscovery.completeCurrentStep(Get.context!);
   }
 
   void resetPrice() {
