@@ -261,19 +261,25 @@ class MainController extends GetxController {
   }
 
   Future<void> openTipDialog({
+    required String featureId,
     required String title,
     required String message,
   }) async {
-    showDialog(
-      barrierColor: Colors.transparent,
-      context: Get.context!,
-      builder: (BuildContext context) {
-        return TipDialog(
-          title: title,
-          message: message,
-        );
-      },
-    );
+    bool userWantToSee = await localStorage.getGuideTourStatus(featureId);
+
+    if (userWantToSee) {
+      showDialog(
+        barrierColor: Colors.transparent,
+        context: Get.context!,
+        builder: (BuildContext context) {
+          return TipDialog(
+            featureId: featureId,
+            title: title,
+            message: message,
+          );
+        },
+      );
+    }
   }
 
   IconData getThemeIcon() {

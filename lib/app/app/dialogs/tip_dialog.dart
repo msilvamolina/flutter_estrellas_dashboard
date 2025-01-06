@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/components/widgets/button.dart';
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:get/get.dart';
@@ -9,11 +10,13 @@ import 'package:get/get.dart';
 class TipDialog extends StatelessWidget {
   const TipDialog({
     required this.title,
+    required this.featureId,
     required this.message,
     super.key,
   });
 
   final String title;
+  final String featureId;
   final String message;
   @override
   Widget build(BuildContext context) {
@@ -58,8 +61,16 @@ class TipDialog extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Button(onPressed: Get.back, label: 'Entendido')),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Button(
+                    onPressed: () {
+                      Get.find<LocalStorage>()
+                          .setGuideTourStatus(featureId, false);
+                      Get.back();
+                    },
+                    label: 'Entendido',
+                  ),
+                ),
               ],
             ),
           ),

@@ -30,6 +30,18 @@ class ProductImagesController extends GetxController {
     product = Get.arguments as ProductFirebaseModel;
     _list.bindStream(_repository.getProductImages(productId: product.id));
 
+    ever<List<ProductImageModel>>(_list, (imagesList) {
+      if (imagesList.isNotEmpty && imagesList.length > 1) {
+        Future.delayed(Duration(seconds: 2), () {
+          _mainController.openTipDialog(
+            featureId: 'addImagesDialog',
+            title: 'Cambiar orden',
+            message:
+                'Manteniendo el clic en una imágen, puedes arratrarla hasta el lugar donde quieres que se muestra',
+          );
+        });
+      }
+    });
     super.onInit();
   }
 

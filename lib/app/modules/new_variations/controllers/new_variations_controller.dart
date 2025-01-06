@@ -44,6 +44,7 @@ class NewVariationsController extends GetxController {
 
     if (variantInfoModel != null) {
       _mainController.openTipDialog(
+        featureId: 'newVariationsTip',
         title: "Agrega una imagen a la variante",
         message:
             "Si le haces clic a una variante, vas a poder cargar una imagen",
