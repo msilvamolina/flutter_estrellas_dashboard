@@ -124,7 +124,10 @@ class LoginView extends GetView<LoginController> {
                                         'assets/svg/face-id.svg',
                                         width: 78,
                                         colorFilter: ColorFilter.mode(
-                                          Theme.of(context).colorScheme.primary,
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                              .withOpacity(0.7),
                                           BlendMode.srcIn,
                                         ),
                                       ),
