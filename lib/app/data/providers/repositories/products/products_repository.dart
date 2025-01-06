@@ -415,25 +415,6 @@ class ProductsRepository {
     }
   }
 
-  Future<String?> uploadImage({
-    required String id,
-    required String productId,
-    required String path,
-  }) async {
-    try {
-      Reference ref =
-          _firebaseStorage.ref().child('products/$productId/').child(id);
-
-      UploadTask uploadTask = ref.putFile(File(path));
-      TaskSnapshot snap = await uploadTask;
-      String downloadUrl = await snap.ref.getDownloadURL();
-
-      return downloadUrl;
-    } on FirebaseException catch (e) {
-      return null;
-    }
-  }
-
   Future<Map<String, String>?> uploadImageWithThumbs({
     required String id,
     required String productId,
@@ -512,47 +493,47 @@ class ProductsRepository {
     }
   }
 
-  Future<Either<String, Unit>> saveVariant({
-    required String productId,
-    required String name,
-    required String label,
-    required String type,
-    int? color,
-    String? imageUrl,
-  }) async {
-    try {
-      MainController mainController = Get.find<MainController>();
+  // Future<Either<String, Unit>> saveVariant({
+  //   required String productId,
+  //   required String name,
+  //   required String label,
+  //   required String type,
+  //   int? color,
+  //   String? imageUrl,
+  // }) async {
+  //   try {
+  //     MainController mainController = Get.find<MainController>();
 
-      String id = const Uuid().v4();
-      String? newImageUrl;
-      if (imageUrl != null) {
-        mainController.setDropiMessage('Subiendo imagen a firebase');
-        newImageUrl =
-            await uploadImage(id: id, productId: productId, path: imageUrl);
-      }
+  //     String id = const Uuid().v4();
+  //     String? newImageUrl;
+  //     if (imageUrl != null) {
+  //       mainController.setDropiMessage('Subiendo imagen a firebase');
+  //       newImageUrl =
+  //           await uploadImage(id: id, productId: productId, path: imageUrl);
+  //     }
 
-      mainController.setDropiMessage('Escribiendo en firebase');
+  //     mainController.setDropiMessage('Escribiendo en firebase');
 
-      await _firebaseFirestore
-          .collection('products')
-          .doc(productId)
-          .collection('variants')
-          .doc(id)
-          .set({
-        'id': id,
-        'name': name,
-        'label': label,
-        'type': type,
-        'color': color,
-        'imageUrl': newImageUrl,
-        'order': 0,
-        'createdAt': DateTime.now(),
-      });
-      return right(unit);
-    } on FirebaseException catch (e) {
-      return left(e.code);
-    }
-  }
+  //     await _firebaseFirestore
+  //         .collection('products')
+  //         .doc(productId)
+  //         .collection('variants')
+  //         .doc(id)
+  //         .set({
+  //       'id': id,
+  //       'name': name,
+  //       'label': label,
+  //       'type': type,
+  //       'color': color,
+  //       'imageUrl': newImageUrl,
+  //       'order': 0,
+  //       'createdAt': DateTime.now(),
+  //     });
+  //     return right(unit);
+  //   } on FirebaseException catch (e) {
+  //     return left(e.code);
+  //   }
+  // }
 
   Future<Either<String, Unit>> saveVariantComination({
     required String productId,
@@ -920,10 +901,18 @@ class ProductsRepository {
 
       if (variant.isImage) {
         mainController.setDropiMessage('Subiendo imagen');
-        String? imageUrl = await uploadImage(
-            id: variant.id, productId: productId, path: variant.value);
-        if (imageUrl != null) {
-          newVariant = newVariant.copyWith(value: imageUrl);
+
+        Map<String, String>? imagesMap = await uploadImageWithThumbs(
+          id: variant.id,
+          productId: productId,
+          path: variant.value,
+          type: 'productVariantType',
+        );
+
+        String thumb = imagesMap?['80x80'] ?? '';
+
+        if (imagesMap != null) {
+          newVariant = newVariant.copyWith(value: thumb);
         }
       }
 
