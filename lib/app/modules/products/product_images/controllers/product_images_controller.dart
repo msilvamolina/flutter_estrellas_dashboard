@@ -1,3 +1,5 @@
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
+import 'package:feature_discovery/feature_discovery.dart';
 import 'package:get/get.dart';
 
 import '../../../../app/controllers/main_controller.dart';
@@ -9,7 +11,7 @@ class ProductImagesController extends GetxController {
   late ProductFirebaseModel product;
   final MainController _mainController = Get.find<MainController>();
   final ProductsRepository _repository = ProductsRepository();
-
+  final LocalStorage localStorage = Get.find<LocalStorage>();
   final RxList<ProductImageModel> _list = <ProductImageModel>[].obs;
   List<ProductImageModel> get list => _list.toList();
 
@@ -27,6 +29,33 @@ class ProductImagesController extends GetxController {
 
     super.onInit();
   }
+
+  @override
+  Future<void> onReady() async {
+    openGuideTour();
+  }
+
+  String guideTourName = 'feature_product_images_floating';
+  Future<void> openGuideTour() async {
+    bool userWantToSee = await localStorage.getGuideTourStatus(guideTourName);
+
+    if (userWantToSee) {
+      await FeatureDiscovery.clearPreferences(Get.context!, [
+        guideTourName,
+      ]);
+      FeatureDiscovery.discoverFeatures(
+        Get.context!,
+        [guideTourName],
+      );
+    }
+  }
+
+  Future<void> onGuideTourDismiss() async {
+    await localStorage.setGuideTourStatus(guideTourName, false);
+    FeatureDiscovery.completeCurrentStep(Get.context!);
+  }
+
+  void onAddButtonPressed() {}
 
   void onListChanged(List<String> list) {
     _listChanged = true;

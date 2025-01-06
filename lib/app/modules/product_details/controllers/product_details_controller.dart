@@ -130,7 +130,6 @@ class ProductDetailsController extends GetxController {
   }
 
   String guideTourName = 'feature_product_detail_button';
-
   Future<void> openGuideTour() async {
     bool userWantToSee = await localStorage.getGuideTourStatus(guideTourName);
 
@@ -149,6 +148,8 @@ class ProductDetailsController extends GetxController {
     await localStorage.setGuideTourStatus(guideTourName, false);
     FeatureDiscovery.completeCurrentStep(Get.context!);
   }
+
+  
 
   void resetPrice() {
     _price = product.price ?? 0;

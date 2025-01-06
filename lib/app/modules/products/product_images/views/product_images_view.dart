@@ -1,5 +1,6 @@
 import 'package:drag_grid/drag_grid.dart';
 import 'package:estrellas_dashboard/app/components/widgets/loadingButton.dart';
+import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,29 +8,34 @@ import 'package:slideable/slideable.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/appbars/appbar_title_with_back.dart';
+import '../../../../components/discovery_feature/discover_feature_floating_action_button.dart';
 import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../data/models/product_image/product_image_model.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../themes/styles/colors.dart';
+import '../../../../themes/styles/typography.dart';
 import '../controllers/product_images_controller.dart';
+import '../widget/product_images_empty_state.dart';
 
 class ProductImagesView extends GetView<ProductImagesController> {
   const ProductImagesView({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      floatingActionButton: CustomFloatingActionButton(
-        label: 'Agregar',
+      floatingActionButton: DiscoverFeatureFloatingActionButton(
+        featureId: controller.guideTourName,
         icon: Icons.add,
-        onPressed: () => Get.toNamed(
-          Routes.PRODUCT_ADD_IMAGE,
-          arguments: controller.product,
-        ),
+        title: 'Agrega imágenes a este producto',
+        description:
+            'Apretando en este botón podrás añadir más imágenes a este producto, que se podrán ver en full resolución.',
+        onIconPressed: controller.onAddButtonPressed,
+        onDismiss: controller.onGuideTourDismiss,
       ),
       showMenu: false,
       bottomNavigationBar: GetBuilder<ProductImagesController>(
         id: 'list_changed',
         builder: (_) {
-          if (controller.listChanged)
+          if (controller.listChanged) {
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -43,13 +49,15 @@ class ProductImagesView extends GetView<ProductImagesController> {
                 ),
               ),
             );
-          else
+          } else
             return SizedBox.shrink();
         },
       ),
       currentRoute: Routes.PRODUCT_ADD_IMAGE,
       appBarTitle: 'Añadir imagen',
-      appBarWidget: AppbarTitleWithBack(title: 'Imágenes'),
+      appBarWidget: AppbarTitleWithBack(
+        title: 'Imágenes',
+      ),
       child: Obx(
         () => controller.list.isNotEmpty
             ? DragGrid<String>(
@@ -77,7 +85,7 @@ class ProductImagesView extends GetView<ProductImagesController> {
                   );
                 },
               )
-            : const Text('no data'),
+            : const ProductImagesEmptyState(),
       ),
     );
   }
