@@ -82,7 +82,7 @@ class ProductsRepository {
         type: 'product',
       );
 
-      String thumb = imagesMap?['200x200'] ?? '';
+      String thumb = imagesMap?['80x80'] ?? '';
       String standardImage = imagesMap?['400x400'] ?? '';
       String fullImage = imagesMap?['800x800'] ?? '';
 
@@ -371,31 +371,45 @@ class ProductsRepository {
   }
 
   Future<Either<String, Unit>> saveImage({
-    required String name,
-    required String id,
     required String productId,
-    required String path,
+    required String imagePath,
   }) async {
-    try {
-      String? imageUrl =
-          await uploadImage(id: id, productId: productId, path: path);
+    String email = _firebaseAuth.currentUser!.email!;
 
-      if (imageUrl != null) {
+    try {
+      String imageId = Uuid().v4();
+
+      Map<String, String>? imagesMap = await uploadImageWithThumbs(
+        id: imageId,
+        productId: productId,
+        path: imagePath,
+        type: 'productImage',
+      );
+
+      String thumb = imagesMap?['80x80'] ?? '';
+      String standardImage = imagesMap?['400x400'] ?? '';
+      String fullImage = imagesMap?['800x800'] ?? '';
+
+      if (imagesMap != null) {
         await _firebaseFirestore
             .collection('products')
             .doc(productId)
             .collection('images')
-            .doc(id)
+            .doc(imageId)
             .set({
           'order': 0,
-          'id': id,
-          'name': name,
-          'imageUrl': imageUrl,
+          'id': imageId,
+          'productId': productId,
+          'imageUrl': thumb,
+          'fullImage': fullImage,
+          'standardImage': standardImage,
+          'imagesMap': imagesMap,
+          'createdBy': email,
           'createdAt': DateTime.now(),
         });
         return right(unit);
       }
-      return left('image null');
+      return left('La imágen no se cargó correctamente');
     } on FirebaseException catch (e) {
       return left(e.code);
     }

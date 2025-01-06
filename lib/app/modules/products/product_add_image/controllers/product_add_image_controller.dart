@@ -48,26 +48,26 @@ class ProductAddImageController extends GetxController {
     String uuid = const Uuid().v4();
     String imageId = 'image-$uuid';
 
-    String? _imagePath = await UtilsImage.pickImage();
+    // String? _imagePath = await UtilsImage.pickImage();
 
-    if (_imagePath != null) {
-      _mainController.showLoader();
+    // if (_imagePath != null) {
+    //   _mainController.showLoader();
 
-      Either<String, Unit> response = await _repository.saveImage(
-        id: imageId,
-        name: name,
-        productId: product.id,
-        path: _imagePath,
-      );
-      Get.back();
-      response.fold((failure) {
-        Get.snackbar("Error", failure);
-        _loading = false;
-        update(['view']);
-      }, (_) {
-        Get.back();
-        Get.snackbar(name, "Guardada exitosamente");
-      });
-    }
+    //   Either<String, Unit> response = await _repository.saveImage(
+    //     id: imageId,
+    //     name: name,
+    //     productId: product.id,
+    //     path: _imagePath,
+    //   );
+    //   Get.back();
+    //   response.fold((failure) {
+    //     Get.snackbar("Error", failure);
+    //     _loading = false;
+    //     update(['view']);
+    //   }, (_) {
+    //     Get.back();
+    //     Get.snackbar(name, "Guardada exitosamente");
+    //   });
+    // }
   }
 }
