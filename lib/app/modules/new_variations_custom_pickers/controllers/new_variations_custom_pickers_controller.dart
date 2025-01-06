@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_attributte/variant_attributte.dart';
 import 'package:estrellas_dashboard/app/data/models/variant_info/variant_info.dart';
+import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
 import 'package:feature_discovery/feature_discovery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ import '../dialogs/select_attributes_dialog.dart';
 class NewVariationsCustomPickersController extends GetxController {
   MainController _mainController = Get.find<MainController>();
   ProductsRepository _repository = ProductsRepository();
-
+  LocalStorage localStorage = Get.find<LocalStorage>();
   final RxList<VariantAttributeModel> _list = <VariantAttributeModel>[].obs;
   List<VariantAttributeModel> get list => _list.toList();
 
@@ -56,6 +57,28 @@ class NewVariationsCustomPickersController extends GetxController {
     isLoading.value = false;
 
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    openGuideTour();
+    super.onReady();
+  }
+
+  String guideTourName = 'feature_variations_appbar_button';
+
+  Future<void> openGuideTour() async {
+    bool userWantToSee = await localStorage.getGuideTourStatus(guideTourName);
+
+    if (userWantToSee) {
+      await FeatureDiscovery.clearPreferences(Get.context!, [
+        guideTourName,
+      ]);
+      FeatureDiscovery.discoverFeatures(
+        Get.context!,
+        [guideTourName],
+      );
+    }
   }
 
   void buildVariantsInfo() {
@@ -126,10 +149,6 @@ class NewVariationsCustomPickersController extends GetxController {
         }
       }
       showButton.value = listAttributes.isNotEmpty;
-
-      if (isListAttributesEmpty) {
-        openGuideTour();
-      }
     }
   }
 
@@ -368,15 +387,5 @@ class NewVariationsCustomPickersController extends GetxController {
     }
 
     return variant;
-  }
-
-  Future<void> openGuideTour() async {
-    await FeatureDiscovery.clearPreferences(Get.context!, [
-      'feature_variations_appbar_button',
-    ]);
-    FeatureDiscovery.discoverFeatures(
-      Get.context!,
-      ['feature_variations_appbar_button'],
-    );
   }
 }

@@ -33,10 +33,6 @@ class VariationsEmptyState extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Button(
-                onPressed: controller.selectAttributes,
-                label: 'Seleccionar',
-              ),
             ],
           ),
         );
