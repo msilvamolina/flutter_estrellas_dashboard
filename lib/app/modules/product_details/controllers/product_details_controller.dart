@@ -231,10 +231,10 @@ class ProductDetailsController extends GetxController {
 
   void openPhotoView() {
     MultiImageProvider multiImageProvider = MultiImageProvider([
-      NetworkImage(product.thumbnail ?? ''),
+      NetworkImage(product.fullImage ?? product.thumbnail ?? ''),
       if (_listImages.isNotEmpty)
         for (ProductImageModel image in _listImages)
-          NetworkImage(image.imageUrl),
+          NetworkImage(image.fullImage ?? image.imageUrl),
     ]);
 
     showImageViewerPager(Get.context!, multiImageProvider,
