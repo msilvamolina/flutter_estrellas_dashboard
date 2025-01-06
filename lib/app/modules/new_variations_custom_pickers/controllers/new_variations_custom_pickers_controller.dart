@@ -382,7 +382,11 @@ class NewVariationsCustomPickersController extends GetxController {
           .firstWhereOrNull((v) => v.name == variant.name);
 
       if (matchingVariant != null) {
-        return variant.copyWith(imageUrl: matchingVariant.imageUrl);
+        return variant.copyWith(
+          imageUrl: matchingVariant.imageUrl,
+          standardImage: matchingVariant.standardImage,
+          fullImage: matchingVariant.fullImage,
+        );
       }
     }
 
