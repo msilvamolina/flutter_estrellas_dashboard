@@ -10,7 +10,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/instance_manager.dart';
 import 'package:http/http.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../../../app/controllers/main_controller.dart';
 import '../../../../services/api_services.dart';
 import '../../../models/product/product_firebase/product_firebase_model.dart';
 import '../../../models/product_variant/product_variant_model.dart';
@@ -19,7 +21,7 @@ import 'package:async/async.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import 'package:image/image.dart' as img;
 import '../../../models/provider/provider/provider_model.dart';
 
 class ProvidersRepository {
@@ -56,17 +58,130 @@ class ProvidersRepository {
     }
   }
 
+  Future<Map<String, String>?> uploadImageWithThumbs({
+    required String id,
+    required String providerId,
+    required String path,
+    required String type,
+  }) async {
+    MainController mainController = Get.find<MainController>();
+    try {
+      String email = _firebaseAuth.currentUser!.email!;
+
+      File imageFile = File(path);
+
+      // Leer y procesar la imagen original
+      img.Image? originalImage = img.decodeImage(imageFile.readAsBytesSync());
+      if (originalImage == null) {
+        throw Exception("No se pudo procesar la imagen");
+      }
+      // Mapa para almacenar las URLs de descarga
+      Map<String, String> downloadUrls = {};
+      Map<String, String> paths = {};
+
+      // Lista de tamaños a generar
+      List<int> sizes = [80, 200, 400, 800];
+      // Generar y subir las versiones redimensionadas
+      for (int size in sizes) {
+        // Redimensionar la imagen
+        img.Image resizedImage =
+            img.copyResize(originalImage, width: size, height: size);
+
+        // Guardar temporalmente la imagen redimensionada
+        String resizedFileName = 'thumb_${size}x$size$id.png';
+        String resizedFilePath = '${imageFile.parent.path}/$resizedFileName';
+        File resizedFile = File(resizedFilePath)
+          ..writeAsBytesSync(img.encodePng(resizedImage));
+
+        mainController.setDropiMessage('Generando imagen ${size}x${size}');
+        String imageDestination = 'providers/$providerId/';
+        Reference resizedRef = _firebaseStorage
+            .ref()
+            .child(imageDestination)
+            .child(resizedFileName);
+
+        UploadTask resizedUploadTask = resizedRef.putFile(resizedFile);
+        TaskSnapshot resizedSnap = await resizedUploadTask;
+        String resizedDownloadUrl = await resizedSnap.ref.getDownloadURL();
+
+        downloadUrls['${size}x$size'] = resizedDownloadUrl;
+        paths['${size}x$size'] = resizedFilePath;
+
+        resizedFile.deleteSync();
+      }
+
+      String thumb = downloadUrls['80x80'] ?? '';
+      String standardImage = downloadUrls['400x400'] ?? '';
+      String fullImage = downloadUrls['800x800'] ?? '';
+
+      await _firebaseFirestore.collection('images').doc(id).set({
+        'id': id,
+        'type': type,
+        'thumbnail': thumb,
+        'fullImage': fullImage,
+        'standardImage': standardImage,
+        'imagesMap': downloadUrls,
+        'imagesPaths': paths,
+        'providerId': providerId,
+        'createdBy': email,
+        'createdAt': DateTime.now(),
+      });
+
+      // Retornar el mapa con todas las URLs
+      return downloadUrls;
+    } on FirebaseException catch (e) {
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   Future<Either<String, Unit>> saveProviderInFirebase({
     required ProviderModel provider,
+    String? imagePath,
   }) async {
-    try {
-      await _firebaseFirestore
-          .collection('providers')
-          .doc(provider.id)
-          .set(provider.toDocument());
-      return right(unit);
-    } on FirebaseException catch (e) {
-      return left(e.code);
+    MainController mainController = Get.find<MainController>();
+    String email = _firebaseAuth.currentUser!.email!;
+
+    if (imagePath != null) {
+      mainController.setDropiMessage('Subiendo imagen');
+
+      String id = Uuid().v4();
+      Map<String, String>? imagesMap = await uploadImageWithThumbs(
+        id: id,
+        providerId: provider.id,
+        path: imagePath,
+        type: 'provider',
+      );
+      String thumb = imagesMap?['80x80'] ?? '';
+      String standardImage = imagesMap?['400x400'] ?? '';
+      String fullImage = imagesMap?['800x800'] ?? '';
+
+      Map<String, dynamic> document = provider.toDocument();
+      document['avatarUrl'] = thumb;
+      document['standardImage'] = standardImage;
+      document['fullImage'] = fullImage;
+      document['createdBy'] = email;
+
+      try {
+        await _firebaseFirestore
+            .collection('providers')
+            .doc(provider.id)
+            .set(document);
+        return right(unit);
+      } on FirebaseException catch (e) {
+        return left(e.code);
+      }
+    } else {
+      try {
+        await _firebaseFirestore
+            .collection('providers')
+            .doc(provider.id)
+            .set(provider.toDocument());
+        return right(unit);
+      } on FirebaseException catch (e) {
+        return left(e.code);
+      }
     }
   }
 

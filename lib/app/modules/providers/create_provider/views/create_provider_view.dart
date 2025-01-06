@@ -34,6 +34,8 @@ class CreateProviderView extends GetView<CreateProviderController> {
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Card(
                           child: InkWell(
