@@ -48,29 +48,34 @@ class ProductMainHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Container(
-                            margin: EdgeInsets.all(16),
-                            padding: EdgeInsets.only(
-                                left: 6, right: 8, top: 2, bottom: 3),
-                            decoration: BoxDecoration(
-                              color: primaryLight,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  EstrellasIcons.medal,
-                                  color: neutral900,
+                          GetBuilder<ProductDetailsController>(
+                            id: 'product_points',
+                            builder: (_) {
+                              return Container(
+                                margin: EdgeInsets.all(16),
+                                padding: EdgeInsets.only(
+                                    left: 6, right: 8, top: 2, bottom: 3),
+                                decoration: BoxDecoration(
+                                  color: primaryLight,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
                                 ),
-                                Text(
-                                  '${controller.product.points} puntos',
-                                  style: TypographyStyle.bodyBlackMedium
-                                      .copyWith(color: neutral900),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      EstrellasIcons.medal,
+                                      color: neutral900,
+                                    ),
+                                    Text(
+                                      '${controller.points} puntos',
+                                      style: TypographyStyle.bodyBlackMedium
+                                          .copyWith(color: neutral900),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           ),
                           Spacer(),
                           Obx(

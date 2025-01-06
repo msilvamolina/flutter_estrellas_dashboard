@@ -183,8 +183,20 @@ class ProductDetailsController extends GetxController {
 
   void checkVariations() {
     if (selectedVariantsMap.length == variantInfoModel!.attributes!.length) {
-      ProductVariantModel? pepis = findMatchingCombination();
-      print('pepis $pepis');
+      ProductVariantModel? productVariant = findMatchingCombination();
+      if (productVariant != null) {
+        _stock = productVariant.stock;
+        _suggestedPrice = productVariant.suggested_price;
+        _price = productVariant.sale_price;
+        _points = productVariant.points;
+        _quantity = 1;
+        update([
+          'product_points',
+          'product_price',
+          'content_product',
+          'product_quantity'
+        ]);
+      }
     }
   }
 
