@@ -129,12 +129,12 @@ class NewVariationsController extends GetxController {
 
       response.fold((failure) {
         _mainController.setDropiDialogError(true, failure);
-      }, (imageUrl) async {
+      }, (imagesMap) async {
         _mainController.setDropiMessage('Success!');
 
         buildVariantsInfo(
           id: variant.id,
-          imageUrl: imageUrl,
+          imagesMap: imagesMap,
         );
       });
     }
@@ -148,14 +148,26 @@ class NewVariationsController extends GetxController {
     loadInfo();
   }
 
-  Future<void> buildVariantsInfo(
-      {required String id, required String imageUrl}) async {
+  Future<void> buildVariantsInfo({
+    required String id,
+    required Map<String, String>? imagesMap,
+  }) async {
     Map<String, dynamic> finalJson = {
       'attributes':
           variantInfoModel!.attributes!.map((attr) => attr.toJson()).toList(),
       'variants': variantInfoModel!.variants!.map((variant) {
         if (variant.id == id) {
-          return variant.copyWith(imageUrl: imageUrl).toJson();
+          String thumb = imagesMap?['80x80'] ?? '';
+          String standardImage = imagesMap?['400x400'] ?? '';
+          String fullImage = imagesMap?['800x800'] ?? '';
+
+          return variant
+              .copyWith(
+                imageUrl: thumb,
+                standardImage: standardImage,
+                fullImage: fullImage,
+              )
+              .toJson();
         } else {
           return variant.toJson();
         }

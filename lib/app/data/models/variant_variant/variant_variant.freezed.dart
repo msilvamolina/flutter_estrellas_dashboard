@@ -28,6 +28,8 @@ mixin _$VariantVariantModel {
   bool get isColor => throw _privateConstructorUsedError;
   bool get isImage => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
+  String? get standardImage => throw _privateConstructorUsedError;
+  String? get fullImage => throw _privateConstructorUsedError;
   String? get createdBy => throw _privateConstructorUsedError;
 
   /// Serializes this VariantVariantModel to a JSON map.
@@ -55,6 +57,8 @@ abstract class $VariantVariantModelCopyWith<$Res> {
       bool isColor,
       bool isImage,
       String? imageUrl,
+      String? standardImage,
+      String? fullImage,
       String? createdBy});
 }
 
@@ -81,6 +85,8 @@ class _$VariantVariantModelCopyWithImpl<$Res, $Val extends VariantVariantModel>
     Object? isColor = null,
     Object? isImage = null,
     Object? imageUrl = freezed,
+    Object? standardImage = freezed,
+    Object? fullImage = freezed,
     Object? createdBy = freezed,
   }) {
     return _then(_value.copyWith(
@@ -116,6 +122,14 @@ class _$VariantVariantModelCopyWithImpl<$Res, $Val extends VariantVariantModel>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -141,6 +155,8 @@ abstract class _$$VariantVariantModelImplCopyWith<$Res>
       bool isColor,
       bool isImage,
       String? imageUrl,
+      String? standardImage,
+      String? fullImage,
       String? createdBy});
 }
 
@@ -165,6 +181,8 @@ class __$$VariantVariantModelImplCopyWithImpl<$Res>
     Object? isColor = null,
     Object? isImage = null,
     Object? imageUrl = freezed,
+    Object? standardImage = freezed,
+    Object? fullImage = freezed,
     Object? createdBy = freezed,
   }) {
     return _then(_$VariantVariantModelImpl(
@@ -200,6 +218,14 @@ class __$$VariantVariantModelImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
@@ -220,6 +246,8 @@ class _$VariantVariantModelImpl implements _VariantVariantModel {
       required this.isColor,
       required this.isImage,
       this.imageUrl,
+      this.standardImage,
+      this.fullImage,
       this.createdBy});
 
   factory _$VariantVariantModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -242,11 +270,15 @@ class _$VariantVariantModelImpl implements _VariantVariantModel {
   @override
   final String? imageUrl;
   @override
+  final String? standardImage;
+  @override
+  final String? fullImage;
+  @override
   final String? createdBy;
 
   @override
   String toString() {
-    return 'VariantVariantModel(id: $id, name: $name, value: $value, attributeId: $attributeId, attributeName: $attributeName, isColor: $isColor, isImage: $isImage, imageUrl: $imageUrl, createdBy: $createdBy)';
+    return 'VariantVariantModel(id: $id, name: $name, value: $value, attributeId: $attributeId, attributeName: $attributeName, isColor: $isColor, isImage: $isImage, imageUrl: $imageUrl, standardImage: $standardImage, fullImage: $fullImage, createdBy: $createdBy)';
   }
 
   @override
@@ -265,14 +297,29 @@ class _$VariantVariantModelImpl implements _VariantVariantModel {
             (identical(other.isImage, isImage) || other.isImage == isImage) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
+            (identical(other.standardImage, standardImage) ||
+                other.standardImage == standardImage) &&
+            (identical(other.fullImage, fullImage) ||
+                other.fullImage == fullImage) &&
             (identical(other.createdBy, createdBy) ||
                 other.createdBy == createdBy));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, value, attributeId,
-      attributeName, isColor, isImage, imageUrl, createdBy);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      value,
+      attributeId,
+      attributeName,
+      isColor,
+      isImage,
+      imageUrl,
+      standardImage,
+      fullImage,
+      createdBy);
 
   /// Create a copy of VariantVariantModel
   /// with the given fields replaced by the non-null parameter values.
@@ -301,6 +348,8 @@ abstract class _VariantVariantModel implements VariantVariantModel {
       required final bool isColor,
       required final bool isImage,
       final String? imageUrl,
+      final String? standardImage,
+      final String? fullImage,
       final String? createdBy}) = _$VariantVariantModelImpl;
 
   factory _VariantVariantModel.fromJson(Map<String, dynamic> json) =
@@ -322,6 +371,10 @@ abstract class _VariantVariantModel implements VariantVariantModel {
   bool get isImage;
   @override
   String? get imageUrl;
+  @override
+  String? get standardImage;
+  @override
+  String? get fullImage;
   @override
   String? get createdBy;
 
