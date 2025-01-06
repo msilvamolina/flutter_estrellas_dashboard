@@ -32,11 +32,13 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
     dynamic warrantyFormatted,
     String? warrantyPlainText,
     String? thumbnail,
+    String? fullImage,
+    String? standardImage,
     String? defaultVariation,
     dynamic attributes,
     dynamic variations,
     dynamic provider,
-    dynamic? providerID,
+    String? providerID,
     String? providerName,
     String? warehouseID,
     String? warehouseName,
@@ -47,13 +49,21 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
   factory ProductLiteModel.fromJson(Map<String, dynamic> json) =>
       _$ProductLiteModelFromJson(json);
 
-  Map<String, dynamic> toDocument(String? imageUrl) {
+  Map<String, dynamic> toDocument() {
     Map<String, dynamic> json = toJson();
 
-    if (imageUrl != null) {
-      json['thumbnail'] = imageUrl;
-    }
+    json['createdAt'] = ModelHelpers.dateToDocument(json['createdAt']);
+    json['updatedAt'] = ModelHelpers.dateToDocument(json['updatedAt']);
 
+    return json;
+  }
+
+  Map<String, dynamic> toDocumenWithoutImage() {
+    Map<String, dynamic> json = toJson();
+
+    json.remove('thumbnail');
+    json.remove('standardImage');
+    json.remove('fullImage');
     json['createdAt'] = ModelHelpers.dateToDocument(json['createdAt']);
     json['updatedAt'] = ModelHelpers.dateToDocument(json['updatedAt']);
 

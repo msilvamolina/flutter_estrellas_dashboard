@@ -66,7 +66,7 @@ class ProductsRepository {
 
   Future<Either<String, Unit>> saveProductLiteInFirebase({
     required ProductLiteModel product,
-    required String imagePath,
+    String? imagePath,
   }) async {
     try {
       MainController mainController = Get.find<MainController>();
@@ -74,27 +74,37 @@ class ProductsRepository {
 
       String id = const Uuid().v4();
 
-      mainController.setDropiMessage('Subiendo imagen a firebase');
-      Map<String, String>? imagesMap = await uploadImageWithThumbs(
-        id: id,
-        productId: product.id,
-        path: imagePath,
-        type: 'product',
-      );
+      if (imagePath != null) {
+        mainController.setDropiMessage('Subiendo imagen a firebase');
 
-      String thumb = imagesMap?['80x80'] ?? '';
-      String standardImage = imagesMap?['400x400'] ?? '';
-      String fullImage = imagesMap?['800x800'] ?? '';
+        Map<String, String>? imagesMap = await uploadImageWithThumbs(
+          id: id,
+          productId: product.id,
+          path: imagePath,
+          type: 'product',
+        );
 
-      mainController.setDropiMessage('Escribiendo en firebase');
+        String thumb = imagesMap?['80x80'] ?? '';
+        String standardImage = imagesMap?['400x400'] ?? '';
+        String fullImage = imagesMap?['800x800'] ?? '';
 
-      await _firebaseFirestore.collection('products').doc(product.id).set({
-        ...product.toDocument(thumb),
-        'fullImage': fullImage,
-        'standardImage': standardImage,
-        'imagesMap': imagesMap,
-        'createdBy': email,
-      });
+        mainController.setDropiMessage('Escribiendo en firebase');
+
+        await _firebaseFirestore.collection('products').doc(product.id).set({
+          ...product.toDocument(),
+          'thumbnail': thumb,
+          'fullImage': fullImage,
+          'standardImage': standardImage,
+          'imagesMap': imagesMap,
+          'createdBy': email,
+        });
+      } else {
+        await _firebaseFirestore
+            .collection('products')
+            .doc(product.id)
+            .update(product.toDocumenWithoutImage());
+      }
+
       return right(unit);
     } on FirebaseException catch (e) {
       return left(e.code);
@@ -155,12 +165,14 @@ class ProductsRepository {
 
       ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
 
-      return right(productModel.copyWith(
-        warehouseID: warehouseID,
-        warehouseName: warehouseName,
-        providerID: provider,
-        providerName: providerName,
-      ));
+      return right(
+        productModel.copyWith(
+          warehouseID: warehouseID,
+          warehouseName: warehouseName,
+          providerID: provider,
+          providerName: providerName,
+        ),
+      );
     } catch (e) {
       return left(e.toString());
     }
@@ -173,6 +185,8 @@ class ProductsRepository {
     required String suggestedPrice,
     required String points,
     required String warehouseID,
+    required String warehouseName,
+    required String providerName,
     required String provider,
     required String imagePath,
     required String description,
@@ -217,11 +231,74 @@ class ProductsRepository {
         return left(json['data']);
       }
 
-      log(json['data'].toString());
+      ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
+
+      return right(
+        productModel.copyWith(
+          warehouseID: warehouseID,
+          warehouseName: warehouseName,
+          providerID: provider,
+          providerName: providerName,
+        ),
+      );
+    } catch (e) {
+      return left(e.toString());
+    }
+  }
+
+  Future<Either<String, ProductLiteModel>> updateProductWithoutImage({
+    required String id,
+    required String name,
+    required String price,
+    required String suggestedPrice,
+    required String points,
+    required String warehouseID,
+    required String warehouseName,
+    required String providerName,
+    required String provider,
+    required String description,
+    required String category,
+    required String stock,
+  }) async {
+    String url = 'api/products/updateProduct';
+
+    try {
+      Map<String, dynamic> body = {
+        'id': id,
+        'name': name,
+        'price': price,
+        'suggestedPrice': suggestedPrice,
+        'points': points,
+        'warehouseID': warehouseID,
+        'provider': provider,
+        'description': description,
+        'category': category,
+        'stock': stock,
+      };
+
+      Response response = await services.postWithToken(url: url, body: body);
+      dynamic json = jsonDecode(response.body);
+      bool ok = json['ok'] ?? false;
+
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
+
+      if (!ok) {
+        return left(json['data']);
+      }
 
       ProductLiteModel productModel = ProductLiteModel.fromJson(json['data']);
 
-      return right(productModel.copyWith(warehouseID: warehouseID));
+      return right(
+        productModel.copyWith(
+          warehouseID: warehouseID,
+          warehouseName: warehouseName,
+          providerID: provider,
+          providerName: providerName,
+        ),
+      );
     } catch (e) {
       return left(e.toString());
     }

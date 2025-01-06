@@ -95,6 +95,7 @@ class CreateProductController extends GetxController {
 
   String productId = '';
   RxBool editMode = false.obs;
+  RxBool imageIsEditted = true.obs;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.name.name: FormControl<String>(
@@ -145,6 +146,7 @@ class CreateProductController extends GetxController {
 
     if (product != null) {
       productId = product!.id;
+      imageIsEditted.value = false;
       if (product!.categoriesNames != null) {
         multipleSelected.assignAll(
           product!.categoriesNames!.split(', ').toList(),
@@ -282,6 +284,7 @@ class CreateProductController extends GetxController {
 
   Future<void> pickImage() async {
     _imagePath = await UtilsImage.pickImage();
+    imageIsEditted.value = true;
     update(['view']);
   }
 
@@ -304,7 +307,7 @@ class CreateProductController extends GetxController {
 
   Future<void> saveInFirebase({
     required ProductLiteModel product,
-    required String imagePath,
+    String? imagePath,
   }) async {
     _mainController.setDropiDialog(false);
 
@@ -335,12 +338,14 @@ class CreateProductController extends GetxController {
   Future<void> sendForm(Map<String, Object?> data) async {
     buildCategories();
 
-    if (_imagePath == null) {
-      Get.snackbar('Error', "Tienes que elegir una imagen");
-      return;
+    if (imageIsEditted.value) {
+      if (_imagePath == null) {
+        Get.snackbar('Error', "Tienes que elegir una imagen");
+        return;
+      }
     }
 
-    if (_warehouseModel == null) {
+    if (warehouseID == null) {
       Get.snackbar('Error', "Tienes que elegir una bodega");
       return;
     }
@@ -406,19 +411,38 @@ class CreateProductController extends GetxController {
 
     late Either<String, ProductLiteModel> response;
     if (editMode.value) {
-      response = await _repository.updateProduct(
-        id: productId,
-        imagePath: _imagePath!,
-        stock: stock,
-        price: price,
-        suggestedPrice: suggestedPrice,
-        name: name,
-        points: points,
-        warehouseID: warehouseID ?? '',
-        provider: providerID ?? '',
-        description: descriptionPlainText,
-        category: _categoriesIds ?? '',
-      );
+      if (imageIsEditted.value) {
+        response = await _repository.updateProduct(
+          id: productId,
+          imagePath: _imagePath!,
+          stock: stock,
+          price: price,
+          suggestedPrice: suggestedPrice,
+          name: name,
+          points: points,
+          warehouseID: warehouseID ?? '',
+          warehouseName: warehouseName ?? '',
+          provider: providerID ?? '',
+          providerName: providerName ?? '',
+          description: descriptionPlainText,
+          category: _categoriesIds ?? '',
+        );
+      } else {
+        response = await _repository.updateProductWithoutImage(
+          id: productId,
+          stock: stock,
+          price: price,
+          suggestedPrice: suggestedPrice,
+          name: name,
+          points: points,
+          warehouseID: warehouseID ?? '',
+          warehouseName: warehouseName ?? '',
+          provider: providerID ?? '',
+          providerName: providerName ?? '',
+          description: descriptionPlainText,
+          category: _categoriesIds ?? '',
+        );
+      }
     } else {
       response = await _repository.createProduct(
         imagePath: _imagePath!,
@@ -454,7 +478,7 @@ class CreateProductController extends GetxController {
       _mainController.setDropiMessage('Success!');
       saveInFirebase(
         product: newProduct,
-        imagePath: _imagePath!,
+        imagePath: _imagePath,
       );
     });
   }

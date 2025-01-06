@@ -43,11 +43,13 @@ mixin _$ProductLiteModel {
   dynamic get warrantyFormatted => throw _privateConstructorUsedError;
   String? get warrantyPlainText => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
+  String? get fullImage => throw _privateConstructorUsedError;
+  String? get standardImage => throw _privateConstructorUsedError;
   String? get defaultVariation => throw _privateConstructorUsedError;
   dynamic get attributes => throw _privateConstructorUsedError;
   dynamic get variations => throw _privateConstructorUsedError;
   dynamic get provider => throw _privateConstructorUsedError;
-  dynamic? get providerID => throw _privateConstructorUsedError;
+  String? get providerID => throw _privateConstructorUsedError;
   String? get providerName => throw _privateConstructorUsedError;
   String? get warehouseID => throw _privateConstructorUsedError;
   String? get warehouseName => throw _privateConstructorUsedError;
@@ -93,11 +95,13 @@ abstract class $ProductLiteModelCopyWith<$Res> {
       dynamic warrantyFormatted,
       String? warrantyPlainText,
       String? thumbnail,
+      String? fullImage,
+      String? standardImage,
       String? defaultVariation,
       dynamic attributes,
       dynamic variations,
       dynamic provider,
-      dynamic? providerID,
+      String? providerID,
       String? providerName,
       String? warehouseID,
       String? warehouseName,
@@ -142,6 +146,8 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? warrantyFormatted = freezed,
     Object? warrantyPlainText = freezed,
     Object? thumbnail = freezed,
+    Object? fullImage = freezed,
+    Object? standardImage = freezed,
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
     Object? variations = freezed,
@@ -242,6 +248,14 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       defaultVariation: freezed == defaultVariation
           ? _value.defaultVariation
           : defaultVariation // ignore: cast_nullable_to_non_nullable
@@ -261,7 +275,7 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
       providerID: freezed == providerID
           ? _value.providerID
           : providerID // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as String?,
       providerName: freezed == providerName
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
@@ -317,11 +331,13 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
       dynamic warrantyFormatted,
       String? warrantyPlainText,
       String? thumbnail,
+      String? fullImage,
+      String? standardImage,
       String? defaultVariation,
       dynamic attributes,
       dynamic variations,
       dynamic provider,
-      dynamic? providerID,
+      String? providerID,
       String? providerName,
       String? warehouseID,
       String? warehouseName,
@@ -364,6 +380,8 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? warrantyFormatted = freezed,
     Object? warrantyPlainText = freezed,
     Object? thumbnail = freezed,
+    Object? fullImage = freezed,
+    Object? standardImage = freezed,
     Object? defaultVariation = freezed,
     Object? attributes = freezed,
     Object? variations = freezed,
@@ -464,6 +482,14 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       defaultVariation: freezed == defaultVariation
           ? _value.defaultVariation
           : defaultVariation // ignore: cast_nullable_to_non_nullable
@@ -483,7 +509,7 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
       providerID: freezed == providerID
           ? _value.providerID
           : providerID // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as String?,
       providerName: freezed == providerName
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
@@ -534,6 +560,8 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.warrantyFormatted,
       this.warrantyPlainText,
       this.thumbnail,
+      this.fullImage,
+      this.standardImage,
       this.defaultVariation,
       this.attributes,
       this.variations,
@@ -595,6 +623,10 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final String? thumbnail;
   @override
+  final String? fullImage;
+  @override
+  final String? standardImage;
+  @override
   final String? defaultVariation;
   @override
   final dynamic attributes;
@@ -603,7 +635,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final dynamic provider;
   @override
-  final dynamic? providerID;
+  final String? providerID;
   @override
   final String? providerName;
   @override
@@ -617,7 +649,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, stock: $stock, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, provider: $provider, providerID: $providerID, providerName: $providerName, warehouseID: $warehouseID, warehouseName: $warehouseName, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, stock: $stock, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, fullImage: $fullImage, standardImage: $standardImage, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, provider: $provider, providerID: $providerID, providerName: $providerName, warehouseID: $warehouseID, warehouseName: $warehouseName, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -661,6 +693,10 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
                 other.warrantyPlainText == warrantyPlainText) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.fullImage, fullImage) ||
+                other.fullImage == fullImage) &&
+            (identical(other.standardImage, standardImage) ||
+                other.standardImage == standardImage) &&
             (identical(other.defaultVariation, defaultVariation) ||
                 other.defaultVariation == defaultVariation) &&
             const DeepCollectionEquality()
@@ -668,8 +704,8 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
             const DeepCollectionEquality()
                 .equals(other.variations, variations) &&
             const DeepCollectionEquality().equals(other.provider, provider) &&
-            const DeepCollectionEquality()
-                .equals(other.providerID, providerID) &&
+            (identical(other.providerID, providerID) ||
+                other.providerID == providerID) &&
             (identical(other.providerName, providerName) ||
                 other.providerName == providerName) &&
             (identical(other.warehouseID, warehouseID) ||
@@ -708,11 +744,13 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
         const DeepCollectionEquality().hash(warrantyFormatted),
         warrantyPlainText,
         thumbnail,
+        fullImage,
+        standardImage,
         defaultVariation,
         const DeepCollectionEquality().hash(attributes),
         const DeepCollectionEquality().hash(variations),
         const DeepCollectionEquality().hash(provider),
-        const DeepCollectionEquality().hash(providerID),
+        providerID,
         providerName,
         warehouseID,
         warehouseName,
@@ -761,11 +799,13 @@ abstract class _ProductLiteModel extends ProductLiteModel {
       final dynamic warrantyFormatted,
       final String? warrantyPlainText,
       final String? thumbnail,
+      final String? fullImage,
+      final String? standardImage,
       final String? defaultVariation,
       final dynamic attributes,
       final dynamic variations,
       final dynamic provider,
-      final dynamic? providerID,
+      final String? providerID,
       final String? providerName,
       final String? warehouseID,
       final String? warehouseName,
@@ -822,6 +862,10 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   @override
   String? get thumbnail;
   @override
+  String? get fullImage;
+  @override
+  String? get standardImage;
+  @override
   String? get defaultVariation;
   @override
   dynamic get attributes;
@@ -830,7 +874,7 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   @override
   dynamic get provider;
   @override
-  dynamic? get providerID;
+  String? get providerID;
   @override
   String? get providerName;
   @override
