@@ -5,18 +5,24 @@ import '../../utils/datetime_formatters.dart';
 class TableRowDate extends StatelessWidget {
   const TableRowDate({required this.date, super.key});
 
-  final String date;
+  final String? date;
   @override
   Widget build(BuildContext context) {
-    DateTime? dateTime = DateTime.tryParse(date);
-    String dateWithFormat =
-        DateTimeFormatter.getDateWithMonthAndTime(dateTime!);
-    return Wrap(
-      children: [
-        SelectableText(dateWithFormat),
-        Text(' -  '),
-        SelectableText(date),
-      ],
-    );
+    DateTime? dateTime;
+    String? dateWithFormat;
+    if (date != null) {
+      dateTime = DateTime.tryParse(date!);
+      dateWithFormat = DateTimeFormatter.getDateWithMonthAndTime(dateTime!);
+    }
+
+    return date != null
+        ? Wrap(
+            children: [
+              SelectableText(dateWithFormat!),
+              Text(' -  '),
+              SelectableText(date!),
+            ],
+          )
+        : Text('(Vacío)');
   }
 }

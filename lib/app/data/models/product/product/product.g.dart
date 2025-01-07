@@ -18,7 +18,7 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
           : ProductCategoryModel.fromJson(
               json['category'] as Map<String, dynamic>),
       name: json['name'] as String?,
-      externalId: json['externalId'] as String?,
+      externalId: (json['externalId'] as num?)?.toInt(),
       usefulId: json['usefulId'] as String?,
       videoUrl: json['videoUrl'] as String?,
       description: json['description'] as String?,

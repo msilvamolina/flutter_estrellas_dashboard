@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:stylish_pull_to_refresh/stylish_pull_to_refresh.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
+import '../../../../components/adminscaffold/admin_scaffold.dart';
 import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../routes/app_pages.dart';
+import '../../../../services/user_permissions.dart';
 import '../controllers/providers_list_controller.dart';
 import '../widgets/providers_error_widget.dart';
 import '../widgets/providers_list_widget.dart';
@@ -29,18 +31,21 @@ class ProvidersListView extends GetView<ProvidersListController> {
         onRefresh: () async {
           await controller.getData();
         },
-        child: GetBuilder<ProvidersListController>(
-          id: 'view',
-          builder: (_) {
-            return !controller.isLoading
-                ? controller.responseError != null
-                    ? ProvidersErrorWidget(error: controller.responseError!)
-                    : ProvidersListWidget(
-                        list: controller.data,
-                        functionIsDone: controller.getData,
-                      )
-                : const ProvidersLoadingWidget();
-          },
+        child: AdminScaffold(
+          permission: Permissions.providerList,
+          child: GetBuilder<ProvidersListController>(
+            id: 'view',
+            builder: (_) {
+              return !controller.isLoading
+                  ? controller.responseError != null
+                      ? ProvidersErrorWidget(error: controller.responseError!)
+                      : ProvidersListWidget(
+                          list: controller.data,
+                          functionIsDone: controller.getData,
+                        )
+                  : const ProvidersLoadingWidget();
+            },
+          ),
         ),
       ),
     );

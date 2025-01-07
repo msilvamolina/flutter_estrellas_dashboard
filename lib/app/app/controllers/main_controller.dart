@@ -1,3 +1,7 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/app/dialogs/tip_dialog.dart';
+import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:estrellas_dashboard/app/components/dialogs/loader_dialog.dart';
@@ -5,14 +9,18 @@ import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart'
 import 'package:estrellas_dashboard/app/data/providers/repositories/auth/user_repository.dart';
 import 'package:estrellas_dashboard/app/routes/app_pages.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:estrellas_dashboard/app/themes/themes/black.dart';
+import 'package:local_auth/local_auth.dart';
 
 import '../../components/dialogs/dropi_dialog.dart';
 import '../../components/snackbars/snackbars.dart';
 import '../../data/models/theme_model.dart';
 import '../../data/models/user_data/user_data.dart';
+import '../../data/providers/repositories/auth/auth_repository.dart';
 import '../../services/theme_service.dart';
+import '../../utils/encrypt.dart';
 import '../dialogs/change_color_dialog.dart';
 
 enum UserStatus {
@@ -27,6 +35,7 @@ class MainController extends GetxController {
   UserRepository userRepository = UserRepository();
   bool _withVolume = true;
   bool get withVolume => _withVolume;
+  final AuthRepository _authRepository = AuthRepository();
 
   UserStatus _userStatus = UserStatus.loading;
   UserStatus get userStatus => _userStatus;
@@ -53,18 +62,134 @@ class MainController extends GetxController {
   RxString dropiDialogError = ''.obs;
   RxBool dropiDialogIsError = false.obs;
 
+  bool _isFaceIdEnabled = false;
+  bool get isFaceIdEnabled => _isFaceIdEnabled;
+  final LocalAuthentication auth = LocalAuthentication();
+  bool? _canCheckBiometrics;
+
+  List<String> _userPermissions = [];
+  List<String> get userPermissions => _userPermissions;
+
   @override
   Future<void> onInit() async {
     _isWelcome = await localStorage.getWelcome();
+    _isFaceIdEnabled = await localStorage.getFaceIdEnabled();
     super.onInit();
+  }
+
+  void onChangedUserPermissions(List<String> permissions) {
+    _userPermissions.clear();
+    _userPermissions.addAll(permissions);
+  }
+
+  bool checkUserPermission(Permissions check) {
+    return _userPermissions.contains(check.name);
   }
 
   @override
   void onReady() async {
     checkTheme();
+    _checkBiometrics();
 
     checkUser();
     super.onReady();
+  }
+
+  Future<void> changeFaceId() async {
+    if (_canCheckBiometrics ?? false) {
+      print('holis');
+
+      _faceIdauthenticate();
+    }
+  }
+
+  Future<void> _faceIdauthenticate() async {
+    bool authenticated = false;
+    try {
+      authenticated = await auth.authenticate(
+        localizedReason:
+            'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+          useErrorDialogs: false,
+          sensitiveTransaction: false,
+        ),
+      );
+    } on PlatformException catch (e) {
+      print(e);
+    }
+
+    if (authenticated) {
+      openChangeFaceId();
+    }
+  }
+
+  Future<void> openChangeFaceId() async {
+    final result = await showTextInputDialog(
+      context: Get.context!,
+      textFields: [
+        DialogTextField(
+          hintText: 'Ingresa tu contraseña',
+          obscureText: true,
+        ),
+      ],
+      title: 'Contraseña',
+      message: 'Por favor ingresa tu contraseña para continuar',
+      okLabel: 'Enviar',
+      cancelLabel: 'Cancel',
+    );
+
+    if (result != null && result.isNotEmpty) {
+      loginUser(result.first);
+    }
+  }
+
+  Future<void> loginUser(String password) async {
+    showLoader(
+      title: 'Verificando',
+      message: 'Por favor espere',
+    );
+    String email = await localStorage.getFaceEmail();
+
+    Either<String, Unit> authFailureOrSuccessOption =
+        await _authRepository.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    authFailureOrSuccessOption.fold(
+      (failure) {
+        Get.back();
+        Snackbars.error(failure);
+      },
+      (response) async {
+        String _pass = Encrypt.encryptString(password);
+
+        await localStorage.saveFaceP(_pass);
+        Get.back();
+
+        _isFaceIdEnabled = !_isFaceIdEnabled;
+        await localStorage.saveFaceIdEnabled(_isFaceIdEnabled);
+        update(['changeFaceId']);
+        if (_isFaceIdEnabled) {
+          Snackbars.success("¡Face ID habilitado correctamente!");
+        } else {
+          Snackbars.success("¡Face ID deshabilitado correctamente!");
+        }
+      },
+    );
+  }
+
+  Future<void> _checkBiometrics() async {
+    late bool canCheckBiometrics;
+    try {
+      canCheckBiometrics = await auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      canCheckBiometrics = false;
+      print(e);
+    }
+    _canCheckBiometrics = canCheckBiometrics;
   }
 
   void setToken(String value) {
@@ -129,23 +254,70 @@ class MainController extends GetxController {
 
     if (_userStatus == UserStatus.notLogged) {
       Get.offAllNamed(Routes.LOGIN);
-    }
-
-    if (_userStatus == UserStatus.full) {
-      Get.offAllNamed(Routes.HOME);
+    } else {
+      userRepository.signOut();
+      Get.offAllNamed(Routes.LOGIN);
     }
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> openTipDialog({
+    required String featureId,
+    required String title,
+    required String message,
+  }) async {
+    bool userWantToSee = await localStorage.getGuideTourStatus(featureId);
+
+    if (userWantToSee) {
+      showDialog(
+        barrierColor: Colors.transparent,
+        context: Get.context!,
+        builder: (BuildContext context) {
+          return TipDialog(
+            featureId: featureId,
+            title: title,
+            message: message,
+          );
+        },
+      );
+    }
   }
 
   IconData getThemeIcon() {
     return isThemeModeDark ? Icons.light_mode : Icons.dark_mode;
   }
 
-  void signOut() {
+  Future<void> signOut() async {
+    final result = await showDialog<bool>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirmación'),
+          content: const Text('¿Estás seguro de que deseas salir?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false); // Cancelar
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // Confirmar
+              },
+              child: const Text('Salir'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (result == true) {
+      // Acción a realizar si el usuario confirma salir
+      signOutApp();
+    }
+  }
+
+  void signOutApp() {
     String theme = ThemeService.readSavedTheme();
     _userStatus = UserStatus.loading;
     update(['login']);

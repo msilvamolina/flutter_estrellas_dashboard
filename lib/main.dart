@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:feature_discovery/feature_discovery.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
@@ -81,15 +84,23 @@ class MyApp extends StatelessWidget {
     var theme = ThemeService.getTheme();
     bool isDark = ThemeService.isSavedDarkMode();
 
-    return GetMaterialApp(
-      initialBinding: MainBinding(),
-      title: "Estrellas Dashboard",
-      locale: const Locale('es'),
-      fallbackLocale: const Locale('es'),
-      debugShowCheckedModeBanner: false,
-      theme: isDark ? theme.theme.dark(context) : theme.theme.light(context),
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
+    return FeatureDiscovery(
+      child: GetMaterialApp(
+        initialBinding: MainBinding(),
+        title: "Estrellas Dashboard",
+        locale: const Locale('es'),
+        fallbackLocale: const Locale('es'),
+        debugShowCheckedModeBanner: false,
+        theme: isDark ? theme.theme.dark(context) : theme.theme.light(context),
+        initialRoute: AppPages.INITIAL,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          FlutterQuillLocalizations.delegate,
+        ],
+        getPages: AppPages.routes,
+      ),
     );
   }
 }

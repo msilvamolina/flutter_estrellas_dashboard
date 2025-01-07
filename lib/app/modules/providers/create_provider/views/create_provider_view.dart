@@ -1,3 +1,4 @@
+import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
+import '../../../../components/adminscaffold/admin_scaffold.dart';
 import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/input_decoration.dart';
@@ -27,133 +29,140 @@ class CreateProviderView extends GetView<CreateProviderController> {
             child: GetBuilder<CreateProviderController>(
               id: 'view',
               builder: (_) {
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Card(
-                        child: InkWell(
-                          onTap: controller.pickImage,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  controller.imagePath ??
-                                      'assets/images/picture.png',
-                                  width: 80,
-                                ),
-                                const SizedBox(width: 12),
-                                // Elimina el Padding alrededor del Expanded
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Avatar Url',
-                                        style: TypographyStyle.bodyBlackLarge
-                                            .copyWith(color: primary),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        controller.imagePath ??
-                                            '(Selecciona una foto)',
-                                        style: TypographyStyle.bodyRegularSmall,
-                                      ),
-                                    ],
+                return AdminScaffold(
+                  permission: Permissions.createProvider,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Card(
+                          child: InkWell(
+                            onTap: controller.pickImage,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    controller.imagePath ??
+                                        'assets/images/picture.png',
+                                    width: 80,
                                   ),
-                                ),
-                                Icon(
-                                  Icons.chevron_right_rounded,
-                                  color: primary,
-                                  size: 48,
-                                ),
-                              ],
+                                  const SizedBox(width: 12),
+                                  // Elimina el Padding alrededor del Expanded
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Avatar Url',
+                                          style: TypographyStyle.bodyBlackLarge
+                                              .copyWith(color: primary),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          controller.imagePath ??
+                                              '(Selecciona una foto)',
+                                          style:
+                                              TypographyStyle.bodyRegularSmall,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    color: primary,
+                                    size: 48,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
+                        const SizedBox(height: 16),
 
-                      ReactiveTextField(
-                        formControlName: Fields.name.name,
-                        keyboardType: TextInputType.text,
-                        decoration: CustomInputDecoration.inputDecoration(
-                          text: "Name",
+                        ReactiveTextField(
+                          formControlName: Fields.name.name,
+                          keyboardType: TextInputType.text,
+                          decoration: CustomInputDecoration.inputDecoration(
+                            text: "Name",
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      ReactiveTextField(
-                        formControlName: Fields.surname.name,
-                        keyboardType: TextInputType.text,
-                        decoration: CustomInputDecoration.inputDecoration(
-                          text: "Surname",
+                        const SizedBox(height: 16),
+                        ReactiveTextField(
+                          formControlName: Fields.surname.name,
+                          keyboardType: TextInputType.text,
+                          decoration: CustomInputDecoration.inputDecoration(
+                            text: "Surname",
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      ReactiveTextField(
-                        formControlName: Fields.email.name,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: CustomInputDecoration.inputDecoration(
-                          text: "E-mail",
+                        const SizedBox(height: 16),
+                        ReactiveTextField(
+                          formControlName: Fields.email.name,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: CustomInputDecoration.inputDecoration(
+                            text: "E-mail",
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      ReactiveTextField(
-                        formControlName: Fields.phone.name,
-                        keyboardType: TextInputType.phone,
-                        decoration: CustomInputDecoration.inputDecoration(
-                          text: "Phone",
+                        const SizedBox(height: 16),
+                        ReactiveTextField(
+                          formControlName: Fields.phone.name,
+                          keyboardType: TextInputType.phone,
+                          decoration: CustomInputDecoration.inputDecoration(
+                            text: "Phone",
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      ReactiveTextField(
-                        formControlName: Fields.document.name,
-                        keyboardType: TextInputType.number,
-                        decoration: CustomInputDecoration.inputDecoration(
-                          text: "Document",
+                        const SizedBox(height: 16),
+                        ReactiveTextField(
+                          formControlName: Fields.document.name,
+                          keyboardType: TextInputType.number,
+                          decoration: CustomInputDecoration.inputDecoration(
+                            text: "Document",
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      ReactiveTextField(
-                        formControlName: Fields.porcentage.name,
-                        keyboardType: TextInputType.number,
-                        decoration: CustomInputDecoration.inputDecoration(
-                          text: "Porcentage",
+                        const SizedBox(height: 16),
+                        ReactiveTextField(
+                          formControlName: Fields.porcentage.name,
+                          keyboardType: TextInputType.number,
+                          decoration: CustomInputDecoration.inputDecoration(
+                            text: "Porcentage",
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      // Obx(
-                      //   () => DropDown(
-                      //     error: controller.productsError,
-                      //     selectedValue: controller.productSelected,
-                      //     values: controller.listProducts
-                      //         .map(
-                      //           (ProductFirebaseModel value) => OptionDropDown(
-                      //             text: value.name,
-                      //             value: value.id,
-                      //           ),
-                      //         )
-                      //         .toList(),
-                      //     onChanged: controller.onProductSelected,
-                      //   ),
-                      // ),
-                      const SizedBox(height: 26),
-                      ReactiveFormConsumer(
-                        builder: (context, form, child) => LoadingButton(
-                          label: 'Crear',
-                          // isLoading: controller.loading,
-                          isLoading: false,
-                          onPressed: (form.valid)
-                              ? () => controller.sendForm(form.value)
-                              : null,
+                        const SizedBox(height: 16),
+                        // Obx(
+                        //   () => DropDown(
+                        //     error: controller.productsError,
+                        //     selectedValue: controller.productSelected,
+                        //     values: controller.listProducts
+                        //         .map(
+                        //           (ProductFirebaseModel value) => OptionDropDown(
+                        //             text: value.name,
+                        //             value: value.id,
+                        //           ),
+                        //         )
+                        //         .toList(),
+                        //     onChanged: controller.onProductSelected,
+                        //   ),
+                        // ),
+                        const SizedBox(height: 26),
+                        ReactiveFormConsumer(
+                          builder: (context, form, child) => LoadingButton(
+                            label: 'Crear',
+                            // isLoading: controller.loading,
+                            isLoading: false,
+                            onPressed: (form.valid)
+                                ? () => controller.sendForm(form.value)
+                                : null,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },

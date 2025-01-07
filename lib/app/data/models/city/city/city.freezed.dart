@@ -20,11 +20,16 @@ CityModel _$CityModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CityModel {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'dropi_id')
-  int get dropiId => throw _privateConstructorUsedError;
+  int? get dropiId => throw _privateConstructorUsedError;
   @JsonKey(name: 'department_id')
-  int get departmenId => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  int? get departmenId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cod_dane')
+  String? get codeDane => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
 
   /// Serializes this CityModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,9 +47,11 @@ abstract class $CityModelCopyWith<$Res> {
       _$CityModelCopyWithImpl<$Res, CityModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'dropi_id') int dropiId,
-      @JsonKey(name: 'department_id') int departmenId,
-      String name});
+      {@JsonKey(name: '_id') String? id,
+      @JsonKey(name: 'dropi_id') int? dropiId,
+      @JsonKey(name: 'department_id') int? departmenId,
+      @JsonKey(name: 'cod_dane') String? codeDane,
+      @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -62,23 +69,33 @@ class _$CityModelCopyWithImpl<$Res, $Val extends CityModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dropiId = null,
-    Object? departmenId = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? dropiId = freezed,
+    Object? departmenId = freezed,
+    Object? codeDane = freezed,
+    Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      dropiId: null == dropiId
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dropiId: freezed == dropiId
           ? _value.dropiId
           : dropiId // ignore: cast_nullable_to_non_nullable
-              as int,
-      departmenId: null == departmenId
+              as int?,
+      departmenId: freezed == departmenId
           ? _value.departmenId
           : departmenId // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      codeDane: freezed == codeDane
+          ? _value.codeDane
+          : codeDane // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -92,9 +109,11 @@ abstract class _$$CityModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'dropi_id') int dropiId,
-      @JsonKey(name: 'department_id') int departmenId,
-      String name});
+      {@JsonKey(name: '_id') String? id,
+      @JsonKey(name: 'dropi_id') int? dropiId,
+      @JsonKey(name: 'department_id') int? departmenId,
+      @JsonKey(name: 'cod_dane') String? codeDane,
+      @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -110,23 +129,33 @@ class __$$CityModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dropiId = null,
-    Object? departmenId = null,
-    Object? name = null,
+    Object? id = freezed,
+    Object? dropiId = freezed,
+    Object? departmenId = freezed,
+    Object? codeDane = freezed,
+    Object? name = freezed,
   }) {
     return _then(_$CityModelImpl(
-      dropiId: null == dropiId
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dropiId: freezed == dropiId
           ? _value.dropiId
           : dropiId // ignore: cast_nullable_to_non_nullable
-              as int,
-      departmenId: null == departmenId
+              as int?,
+      departmenId: freezed == departmenId
           ? _value.departmenId
           : departmenId // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      codeDane: freezed == codeDane
+          ? _value.codeDane
+          : codeDane // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -135,25 +164,34 @@ class __$$CityModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CityModelImpl implements _CityModel {
   const _$CityModelImpl(
-      {@JsonKey(name: 'dropi_id') required this.dropiId,
-      @JsonKey(name: 'department_id') required this.departmenId,
-      required this.name});
+      {@JsonKey(name: '_id') this.id,
+      @JsonKey(name: 'dropi_id') this.dropiId,
+      @JsonKey(name: 'department_id') this.departmenId,
+      @JsonKey(name: 'cod_dane') this.codeDane,
+      @JsonKey(name: 'name') this.name});
 
   factory _$CityModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CityModelImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
   @JsonKey(name: 'dropi_id')
-  final int dropiId;
+  final int? dropiId;
   @override
   @JsonKey(name: 'department_id')
-  final int departmenId;
+  final int? departmenId;
   @override
-  final String name;
+  @JsonKey(name: 'cod_dane')
+  final String? codeDane;
+  @override
+  @JsonKey(name: 'name')
+  final String? name;
 
   @override
   String toString() {
-    return 'CityModel(dropiId: $dropiId, departmenId: $departmenId, name: $name)';
+    return 'CityModel(id: $id, dropiId: $dropiId, departmenId: $departmenId, codeDane: $codeDane, name: $name)';
   }
 
   @override
@@ -161,15 +199,19 @@ class _$CityModelImpl implements _CityModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CityModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.dropiId, dropiId) || other.dropiId == dropiId) &&
             (identical(other.departmenId, departmenId) ||
                 other.departmenId == departmenId) &&
+            (identical(other.codeDane, codeDane) ||
+                other.codeDane == codeDane) &&
             (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, dropiId, departmenId, name);
+  int get hashCode =>
+      Object.hash(runtimeType, id, dropiId, departmenId, codeDane, name);
 
   /// Create a copy of CityModel
   /// with the given fields replaced by the non-null parameter values.
@@ -189,21 +231,30 @@ class _$CityModelImpl implements _CityModel {
 
 abstract class _CityModel implements CityModel {
   const factory _CityModel(
-      {@JsonKey(name: 'dropi_id') required final int dropiId,
-      @JsonKey(name: 'department_id') required final int departmenId,
-      required final String name}) = _$CityModelImpl;
+      {@JsonKey(name: '_id') final String? id,
+      @JsonKey(name: 'dropi_id') final int? dropiId,
+      @JsonKey(name: 'department_id') final int? departmenId,
+      @JsonKey(name: 'cod_dane') final String? codeDane,
+      @JsonKey(name: 'name') final String? name}) = _$CityModelImpl;
 
   factory _CityModel.fromJson(Map<String, dynamic> json) =
       _$CityModelImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
   @JsonKey(name: 'dropi_id')
-  int get dropiId;
+  int? get dropiId;
   @override
   @JsonKey(name: 'department_id')
-  int get departmenId;
+  int? get departmenId;
   @override
-  String get name;
+  @JsonKey(name: 'cod_dane')
+  String? get codeDane;
+  @override
+  @JsonKey(name: 'name')
+  String? get name;
 
   /// Create a copy of CityModel
   /// with the given fields replaced by the non-null parameter values.

@@ -84,12 +84,14 @@ class CreateProviderController extends GetxController {
 
   Future<void> saveInFirebase({
     required ProviderModel provider,
+    required String imagePath,
   }) async {
     _mainController.setDropiDialog(false);
 
     _mainController.setDropiMessage('saveInFirebase');
     Either<String, Unit> response = await _repository.saveProviderInFirebase(
       provider: provider,
+      imagePath: imagePath,
     );
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
@@ -127,11 +129,27 @@ class CreateProviderController extends GetxController {
       document: document,
       porcentage: porcentage,
     );
+
+    // Either<String, ProviderModel> response = await _repository.updateProvider(
+    //   externalId: '369908',
+    //   avatarURL: _imagePath!,
+    //   name: name,
+    //   surname: surname,
+    //   email: email,
+    //   phone: phone,
+    //   document: document,
+    //   porcentage: porcentage,
+    // );
+
     response.fold((failure) {
       _mainController.setDropiDialogError(true, failure);
     }, (provider) async {
       _mainController.setDropiMessage('Success!');
-      saveInFirebase(provider: provider);
+      saveInFirebase(provider: provider, imagePath: _imagePath!);
     });
+
+    // Either<String, Unit> response = await _repository.deleteProvider(
+    //   id: '676d9230218dd3004b4b1f5f',
+    // );
   }
 }

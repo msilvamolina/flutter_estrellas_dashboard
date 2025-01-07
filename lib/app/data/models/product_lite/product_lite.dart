@@ -12,15 +12,36 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
   const factory ProductLiteModel({
     @JsonKey(name: '_id') required String id,
     String? name,
-    String? externalId,
+    int? externalId,
     double? price,
     int? points,
+    int? stock,
     double? suggestedPrice,
     String? type,
     bool? isPercentage,
     bool? showInFeed,
     bool? active,
+    dynamic categories,
+    String? categoriesIds,
+    String? categoriesNames,
+    dynamic category,
+    dynamic descriptionFormatted,
+    String? descriptionPlainText,
+    dynamic detailsFormatted,
+    String? detailsPlainText,
+    dynamic warrantyFormatted,
+    String? warrantyPlainText,
     String? thumbnail,
+    String? fullImage,
+    String? standardImage,
+    String? defaultVariation,
+    dynamic attributes,
+    dynamic variations,
+    dynamic provider,
+    String? providerID,
+    String? providerName,
+    String? warehouseID,
+    String? warehouseName,
     String? createdAt,
     String? updatedAt,
   }) = _ProductLiteModel;
@@ -28,13 +49,21 @@ abstract class ProductLiteModel implements _$ProductLiteModel {
   factory ProductLiteModel.fromJson(Map<String, dynamic> json) =>
       _$ProductLiteModelFromJson(json);
 
-  Map<String, dynamic> toDocument(String? imageUrl) {
+  Map<String, dynamic> toDocument() {
     Map<String, dynamic> json = toJson();
 
-    if (imageUrl != null) {
-      json['thumbnail'] = imageUrl;
-    }
+    json['createdAt'] = ModelHelpers.dateToDocument(json['createdAt']);
+    json['updatedAt'] = ModelHelpers.dateToDocument(json['updatedAt']);
 
+    return json;
+  }
+
+  Map<String, dynamic> toDocumenWithoutImage() {
+    Map<String, dynamic> json = toJson();
+
+    json.remove('thumbnail');
+    json.remove('standardImage');
+    json.remove('fullImage');
     json['createdAt'] = ModelHelpers.dateToDocument(json['createdAt']);
     json['updatedAt'] = ModelHelpers.dateToDocument(json['updatedAt']);
 

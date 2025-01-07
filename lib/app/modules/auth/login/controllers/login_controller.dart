@@ -1,10 +1,17 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/controllers/main_controller.dart';
 import '../../../../components/snackbars/snackbars.dart';
+import '../../../../data/providers/local/local_storage.dart';
 import '../../../../data/providers/repositories/auth/auth_repository.dart';
+import '../../../../routes/app_pages.dart';
+import '../../../../services/user_permissions.dart';
+import '../../../../utils/encrypt.dart';
 
 enum Fields {
   email('email'),
@@ -14,12 +21,27 @@ enum Fields {
   final String name;
 }
 
+enum _SupportState {
+  unknown,
+  supported,
+  unsupported,
+}
+
 class LoginController extends GetxController {
   final AuthRepository _authRepository = AuthRepository();
 
   MainController mainController = Get.find();
   bool _buttonEnabled = true;
   bool get buttonEnabled => _buttonEnabled;
+  final LocalStorage _localStorage = Get.find<LocalStorage>();
+
+  final LocalAuthentication auth = LocalAuthentication();
+  _SupportState _supportState = _SupportState.unknown;
+  bool? _canCheckBiometrics;
+  List<BiometricType>? _availableBiometrics;
+
+  bool _faceIDEnabled = false;
+  bool get getFaceIdEnabled => _faceIDEnabled;
 
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.email.name: FormControl<String>(
@@ -37,13 +59,36 @@ class LoginController extends GetxController {
       });
 
   @override
-  void onInit() {
+  void onInit() async {
+    _faceIDEnabled = await _localStorage.getFaceIdEnabled();
+    update(['view']);
     super.onInit();
   }
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
+    openFaceId();
     super.onReady();
+  }
+
+  Future<void> openFaceId() async {
+    if (_faceIDEnabled) {
+      await auth.isDeviceSupported().then(
+            (bool isSupported) => _supportState = isSupported
+                ? _SupportState.supported
+                : _SupportState.unsupported,
+          );
+
+      await _checkBiometrics();
+
+      if (_canCheckBiometrics ?? false) {
+        _faceIdauthenticate();
+      }
+    }
+  }
+
+  void onFaceIdButtonCicked() {
+    openFaceId();
   }
 
   @override
@@ -51,16 +96,50 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  Future<void> sendForm(Map<String, Object?> data) async {
+  Future<void> _checkBiometrics() async {
+    late bool canCheckBiometrics;
+    try {
+      canCheckBiometrics = await auth.canCheckBiometrics;
+    } on PlatformException catch (e) {
+      canCheckBiometrics = false;
+      print(e);
+    }
+    _canCheckBiometrics = canCheckBiometrics;
+  }
+
+  Future<void> _faceIdauthenticate() async {
+    bool authenticated = false;
+    try {
+      authenticated = await auth.authenticate(
+        localizedReason:
+            'Scan your fingerprint (or face or whatever) to authenticate',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+          useErrorDialogs: false,
+          sensitiveTransaction: false,
+        ),
+      );
+    } on PlatformException catch (e) {
+      print(e);
+    }
+
+    if (authenticated) {
+      String email = await _localStorage.getFaceEmail();
+      String password = await _localStorage.getFaceP();
+
+      String pass = Encrypt.decryptString(password);
+      login(email, pass);
+    }
+  }
+
+  Future<void> login(String email, String password) async {
     _buttonEnabled = false;
     update(['loginButton']);
     mainController.showLoader(
       title: 'Iniciando sesión...',
       message: 'Por favor espere',
     );
-    String email = data[Fields.email.name].toString();
-    String password = data[Fields.password.name].toString();
-
     Either<String, Unit> authFailureOrSuccessOption =
         await _authRepository.signInWithEmailAndPassword(
       email: email,
@@ -74,12 +153,46 @@ class LoginController extends GetxController {
         update(['loginButton']);
         Snackbars.error(failure);
       },
-      (_) {
-        Get.back();
-        Get.back();
+      (_) async {
+        String pass = Encrypt.encryptString(password);
+        await _localStorage.setFaceEmail(email);
+        await saveClaims();
 
-        mainController.checkUser(login: true);
+        Get.offNamedUntil(Routes.HOME, (route) => false);
       },
     );
+  }
+
+  Future<void> sendForm(Map<String, Object?> data) async {
+    String email = data[Fields.email.name].toString();
+    String password = data[Fields.password.name].toString();
+    await login(email, password);
+  }
+
+  Future<void> saveClaims() async {
+    List<String> _list = <String>[];
+    Map<dynamic, dynamic>? _claims = await currentUserClaims();
+    if (_claims != null) {
+      Permissions.values.forEach((Permissions name) async {
+        String _permission = name.toString().split('.').elementAt(1);
+        if (_claims[_permission] != null) {
+          if (_claims[_permission]) {
+            _list.add(_permission);
+          }
+        }
+      });
+    }
+    mainController.onChangedUserPermissions(_list);
+  }
+
+  Future<Map<dynamic, dynamic>?> currentUserClaims() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    IdTokenResult? idTokenResult = await user?.getIdTokenResult(true);
+    if (idTokenResult != null) {
+      if (idTokenResult.claims != null) {
+        return idTokenResult.claims;
+      }
+    }
+    return null;
   }
 }

@@ -2,16 +2,32 @@ import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
+import '../modules/admin/copy_cities/bindings/copy_cities_binding.dart';
+import '../modules/admin/copy_cities/views/copy_cities_view.dart';
+import '../modules/admin/copy_departments/bindings/copy_departments_binding.dart';
+import '../modules/admin/copy_departments/views/copy_departments_view.dart';
+import '../modules/admin/permissions/bindings/permissions_binding.dart';
+import '../modules/admin/permissions/views/permissions_view.dart';
+import '../modules/admin/set_permissions/bindings/set_permissions_binding.dart';
+import '../modules/admin/set_permissions/views/set_permissions_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/splash/bindings/splash_binding.dart';
 import '../modules/auth/splash/views/splash_view.dart';
-import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
-import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/product_variants/product_add_variant/bindings/product_add_variant_binding.dart';
-import '../modules/product_variants/product_add_variant/views/product_add_variant_view.dart';
+import '../modules/new_variations/bindings/new_variations_binding.dart';
+import '../modules/new_variations/views/new_variations_view.dart';
+import '../modules/new_variations_custom_pickers/bindings/new_variations_custom_pickers_binding.dart';
+import '../modules/new_variations_custom_pickers/views/new_variations_custom_pickers_view.dart';
+import '../modules/new_variations_pickers/bindings/new_variations_pickers_binding.dart';
+import '../modules/new_variations_pickers/views/new_variations_pickers_view.dart';
+import '../modules/product_details/bindings/product_details_binding.dart';
+import '../modules/product_details/views/product_details_view.dart';
+import '../modules/product_info/bindings/product_info_binding.dart';
+import '../modules/product_info/views/product_info_view.dart';
+import '../modules/product_variants/edit_product_variant_combination/bindings/edit_product_variant_combination_binding.dart';
+import '../modules/product_variants/edit_product_variant_combination/views/edit_product_variant_combination_view.dart';
 import '../modules/product_variants/product_variant_combinations/bindings/product_variant_combinations_binding.dart';
 import '../modules/product_variants/product_variant_combinations/views/product_variant_combinations_view.dart';
 import '../modules/product_variants/product_variant_for_type/bindings/product_variant_for_type_binding.dart';
@@ -20,16 +36,15 @@ import '../modules/product_variants/product_variants/bindings/product_variants_b
 import '../modules/product_variants/product_variants/views/product_variants_view.dart';
 import '../modules/products/create_product/bindings/create_product_binding.dart';
 import '../modules/products/create_product/views/create_product_view.dart';
-import '../modules/products/product_add_image/bindings/product_add_image_binding.dart';
-import '../modules/products/product_add_image/views/product_add_image_view.dart';
 import '../modules/products/product_estrellas_1/bindings/product_estrellas_1_binding.dart';
 import '../modules/products/product_estrellas_1/views/product_estrellas_1_view.dart';
-import '../modules/products/product_estrellas_2/bindings/product_estrellas_2_binding.dart';
-import '../modules/products/product_estrellas_2/views/product_estrellas_2_view.dart';
 import '../modules/products/product_images/bindings/product_images_binding.dart';
 import '../modules/products/product_images/views/product_images_view.dart';
 import '../modules/products/products/bindings/products_binding.dart';
 import '../modules/products/products/views/products_view.dart';
+import '../modules/products/products/views/products_view2.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 import '../modules/providers/create_provider/bindings/create_provider_binding.dart';
 import '../modules/providers/create_provider/views/create_provider_view.dart';
 import '../modules/providers/create_warehouse/bindings/create_warehouse_binding.dart';
@@ -129,31 +144,19 @@ class AppPages {
       page: () => const VideosDetailsView(),
       binding: VideosDetailsBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_ESTRELLAS_2,
-      page: () => const ProductEstrellas2View(),
-      binding: ProductEstrellas2Binding(),
-    ),
+
     GetPage(
       name: _Paths.PRODUCT_IMAGES,
       page: () => const ProductImagesView(),
       binding: ProductImagesBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_ADD_IMAGE,
-      page: () => const ProductAddImageView(),
-      binding: ProductAddImageBinding(),
-    ),
+
     GetPage(
       name: _Paths.PRODUCT_VARIANTS,
       page: () => const ProductVariantsView(),
       binding: ProductVariantsBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_ADD_VARIANT,
-      page: () => const ProductAddVariantView(),
-      binding: ProductAddVariantBinding(),
-    ),
+
     GetPage(
       name: _Paths.CREATE_PRODUCT,
       page: () => const CreateProductView(),
@@ -209,20 +212,71 @@ class AppPages {
       page: () => const SelectProductView(),
       binding: SelectProductBinding(),
     ),
-    GetPage(
-      name: _Paths.PRODUCT_VARIANT_FOR_TYPE,
-      page: () => const ProductVariantForTypeView(),
-      binding: ProductVariantForTypeBinding(),
-    ),
-    GetPage(
-      name: _Paths.PRODUCT_VARIANT_COMBINATIONS,
-      page: () => const ProductVariantCombinationsView(),
-      binding: ProductVariantCombinationsBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.PRODUCT_VARIANT_FOR_TYPE,
+    //   page: () => const ProductVariantForTypeView(),
+    //   binding: ProductVariantForTypeBinding(),
+    // ),
+    // GetPage(
+    //   name: _Paths.PRODUCT_VARIANT_COMBINATIONS,
+    //   page: () => const ProductVariantCombinationsView(),
+    //   binding: ProductVariantCombinationsBinding(),
+    // ),
     GetPage(
       name: _Paths.EDIT_PRODUCT_VARIANT_COMBINATION,
       page: () => const EditProductVariantCombinationView(),
       binding: EditProductVariantCombinationBinding(),
+    ),
+    GetPage(
+      name: _Paths.COPY_DEPARTMENTS,
+      page: () => const CopyDepartmentsView(),
+      binding: CopyDepartmentsBinding(),
+    ),
+    GetPage(
+      name: _Paths.COPY_CITIES,
+      page: () => const CopyCitiesView(),
+      binding: CopyCitiesBinding(),
+    ),
+    GetPage(
+      name: _Paths.PERMISSIONS,
+      page: () => const PermissionsView(),
+      binding: PermissionsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.SET_PERMISSIONS,
+      page: () => const SetPermissionsView(),
+      binding: SetPermissionsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_VARIATIONS,
+      page: () => const NewVariationsView(),
+      binding: NewVariationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_VARIATIONS_PICKERS,
+      page: () => const NewVariationsPickersView(),
+      binding: NewVariationsPickersBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_DETAILS,
+      page: () => const ProductDetailsView(),
+      binding: ProductDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT_INFO,
+      page: () => const ProductInfoView(),
+      binding: ProductInfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_VARIATIONS_CUSTOM_PICKERS,
+      page: () => const NewVariationsCustomPickersView(),
+      binding: NewVariationsCustomPickersBinding(),
     ),
   ];
 }

@@ -1,6 +1,8 @@
+import 'package:estrellas_dashboard/app/components/adminscaffold/admin_scaffold.dart';
 import 'package:estrellas_dashboard/app/components/widgets/custom_floating_action_button.dart';
 import 'package:estrellas_dashboard/app/data/models/videos/video_post_model.dart';
 import 'package:estrellas_dashboard/app/routes/app_pages.dart';
+import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -20,19 +22,22 @@ class VideosListView extends GetView<VideosListController> {
         onPressed: () => Get.toNamed(Routes.CREATE_VIDEO),
       ),
       currentRoute: Routes.VIDEOS_LIST,
-      child: Obx(
-        () => controller.list.isNotEmpty
-            ? ListView.separated(
-                itemCount: controller.list.length,
-                itemBuilder: (context, index) {
-                  return VideoPostCard(
-                    videoPostModel: controller.list[index],
-                  );
-                },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 10),
-              )
-            : const Text('no data'),
+      child: AdminScaffold(
+        permission: Permissions.videosList,
+        child: Obx(
+          () => controller.list.isNotEmpty
+              ? ListView.separated(
+                  itemCount: controller.list.length,
+                  itemBuilder: (context, index) {
+                    return VideoPostCard(
+                      videoPostModel: controller.list[index],
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
+                )
+              : const Text('no data'),
+        ),
       ),
     );
   }

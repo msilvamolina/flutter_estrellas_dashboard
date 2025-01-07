@@ -83,6 +83,46 @@ class ApiServices {
     return response;
   }
 
+  Future<Response> postJsonWithToken({
+    required String url,
+    required dynamic body,
+  }) async {
+    MainController mainController = Get.find<MainController>();
+
+    String? token = await getToken();
+
+    Map<String, String>? headers = {
+      'x-token': token ?? 'token',
+      "Content-Type": "application/json",
+    };
+    var uri = Uri.https(baseUrl, url);
+    mainController.setDropiMessage('Conectando con $url');
+
+    Response response = await client.post(uri, headers: headers, body: body);
+
+    return response;
+  }
+
+  Future<Response> putWithToken({
+    required String url,
+    required dynamic body,
+  }) async {
+    MainController mainController = Get.find<MainController>();
+
+    String? token = await getToken();
+
+    Map<String, String>? headers = {
+      'x-token': token ?? 'token',
+      "Content-Type": "application/json",
+    };
+    var uri = Uri.https(baseUrl, url);
+    mainController.setDropiMessage('Conectando con $url');
+
+    Response response = await client.put(uri, headers: headers, body: body);
+
+    return response;
+  }
+
   Future<StreamedResponse> postWithFileAndToken({
     required String url,
     required Map<String, dynamic> fields,

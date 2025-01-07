@@ -19,7 +19,6 @@ abstract class Routes {
   static const VIDEOS_LIST = _Paths.VIDEOS_LIST;
   static const CREATE_VIDEO = _Paths.CREATE_VIDEO;
   static const VIDEOS_DETAILS = _Paths.VIDEOS_DETAILS;
-  static const PRODUCT_ESTRELLAS_2 = _Paths.PRODUCT_ESTRELLAS_2;
   static const PRODUCT_IMAGES = _Paths.PRODUCT_IMAGES;
   static const PRODUCT_ADD_IMAGE = _Paths.PRODUCT_ADD_IMAGE;
   static const PRODUCT_VARIANTS = _Paths.PRODUCT_VARIANTS;
@@ -40,6 +39,18 @@ abstract class Routes {
       _Paths.PRODUCT_VARIANT_COMBINATIONS;
   static const EDIT_PRODUCT_VARIANT_COMBINATION =
       _Paths.EDIT_PRODUCT_VARIANT_COMBINATION;
+  static const COPY_DEPARTMENTS = _Paths.COPY_DEPARTMENTS;
+  static const ADMIN = _Paths.ADMIN;
+  static const COPY_CITIES = _Paths.COPY_CITIES;
+  static const PERMISSIONS = _Paths.PERMISSIONS;
+  static const SET_PERMISSIONS = _Paths.SET_PERMISSIONS;
+  static const PROFILE = _Paths.PROFILE;
+  static const NEW_VARIATIONS = _Paths.NEW_VARIATIONS;
+  static const NEW_VARIATIONS_PICKERS = _Paths.NEW_VARIATIONS_PICKERS;
+  static const PRODUCTS_DETAILS = _Paths.PRODUCT_DETAILS;
+  static const PRODUCT_INFO = _Paths.PRODUCT_INFO;
+  static const NEW_VARIATIONS_CUSTOM_PICKERS =
+      _Paths.NEW_VARIATIONS_CUSTOM_PICKERS;
 }
 
 abstract class _Paths {
@@ -60,7 +71,6 @@ abstract class _Paths {
   static const VIDEOS_LIST = '/videos-list';
   static const CREATE_VIDEO = '/create-video';
   static const VIDEOS_DETAILS = '/videos-details';
-  static const PRODUCT_ESTRELLAS_2 = '/product-estrellas-2';
   static const PRODUCT_IMAGES = '/product-images';
   static const PRODUCT_ADD_IMAGE = '/product-add-image';
   static const PRODUCT_VARIANTS = '/product-variants';
@@ -80,4 +90,15 @@ abstract class _Paths {
   static const PRODUCT_VARIANT_COMBINATIONS = '/product-variant-combinations';
   static const EDIT_PRODUCT_VARIANT_COMBINATION =
       '/edit-product-variant-combination';
+  static const COPY_DEPARTMENTS = '/copy-departments';
+  static const ADMIN = '/admin';
+  static const COPY_CITIES = '/copy-cities';
+  static const PERMISSIONS = '/permissions';
+  static const SET_PERMISSIONS = '/set-permissions';
+  static const PROFILE = '/profile';
+  static const NEW_VARIATIONS = '/new-variations';
+  static const NEW_VARIATIONS_PICKERS = '/new-variations-pickers';
+  static const PRODUCT_DETAILS = '/product-details';
+  static const PRODUCT_INFO = '/product-info';
+  static const NEW_VARIATIONS_CUSTOM_PICKERS = '/new-variations-custom-pickers';
 }

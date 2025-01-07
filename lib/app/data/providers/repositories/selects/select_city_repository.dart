@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/models/city/city/city.dart';
 import 'package:estrellas_dashboard/app/data/models/product/product/product.dart';
 import 'package:estrellas_dashboard/app/data/models/product_image/product_image_model.dart';
@@ -26,18 +27,22 @@ import '../../../models/provider/provider/provider_model.dart';
 
 class SelectCityRepository {
   ApiServices services = ApiServices();
+  final FirebaseFirestore _firebaseFirestore = Get.find<FirebaseFirestore>();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseStorage _firebaseStorage = Get.find<FirebaseStorage>();
 
   Future<Either<String, List<DepartmentModel>>> getDepartments() async {
     String url = 'api/localities/departments';
     try {
       Response response = await services.getWithToken(url: url);
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
       dynamic json = jsonDecode(response.body);
       List<dynamic> bodyList = json['data'];
 
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
       if (bodyList.isEmpty) {
         return left('List Products is empty');
       }
@@ -58,12 +63,13 @@ class SelectCityRepository {
     try {
       Response response = await services.getWithToken(url: url);
 
-      if (response.statusCode != 200) {
-        return left('Error status code: ${response.statusCode}');
-      }
       dynamic json = jsonDecode(response.body);
       List<dynamic> bodyList = json['data'];
 
+      if (response.statusCode != 200) {
+        String? data = json['data'];
+        return left('Error status code: ${response.statusCode}.\n$data');
+      }
       if (bodyList.isEmpty) {
         return left('List Products is empty');
       }
@@ -76,6 +82,53 @@ class SelectCityRepository {
       return right(list);
     } catch (e) {
       return left(e.toString());
+    }
+  }
+
+  Future<Either<String, Unit>> saveDepartmentInFirebase({
+    required DepartmentModel department,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('departments')
+          .doc(department.dropiId.toString())
+          .set(department.toJson());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> saveCityInFirebase({
+    required CityModel city,
+  }) async {
+    MainController mainController = Get.find<MainController>();
+    mainController.setDropiMessage('Copiando ${city.name}');
+
+    try {
+      await _firebaseFirestore
+          .collection('cities')
+          .doc(city.id.toString())
+          .set(city.toJson());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> saveCityInFirebaseDepartment({
+    required CityModel city,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection('departments')
+          .doc(city.departmenId.toString())
+          .collection('cities')
+          .doc(city.id.toString())
+          .set(city.toJson());
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
     }
   }
 }

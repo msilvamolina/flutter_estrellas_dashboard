@@ -23,15 +23,36 @@ mixin _$ProductLiteModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  String? get externalId => throw _privateConstructorUsedError;
+  int? get externalId => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
+  int? get stock => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   bool? get isPercentage => throw _privateConstructorUsedError;
   bool? get showInFeed => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
+  dynamic get categories => throw _privateConstructorUsedError;
+  String? get categoriesIds => throw _privateConstructorUsedError;
+  String? get categoriesNames => throw _privateConstructorUsedError;
+  dynamic get category => throw _privateConstructorUsedError;
+  dynamic get descriptionFormatted => throw _privateConstructorUsedError;
+  String? get descriptionPlainText => throw _privateConstructorUsedError;
+  dynamic get detailsFormatted => throw _privateConstructorUsedError;
+  String? get detailsPlainText => throw _privateConstructorUsedError;
+  dynamic get warrantyFormatted => throw _privateConstructorUsedError;
+  String? get warrantyPlainText => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
+  String? get fullImage => throw _privateConstructorUsedError;
+  String? get standardImage => throw _privateConstructorUsedError;
+  String? get defaultVariation => throw _privateConstructorUsedError;
+  dynamic get attributes => throw _privateConstructorUsedError;
+  dynamic get variations => throw _privateConstructorUsedError;
+  dynamic get provider => throw _privateConstructorUsedError;
+  String? get providerID => throw _privateConstructorUsedError;
+  String? get providerName => throw _privateConstructorUsedError;
+  String? get warehouseID => throw _privateConstructorUsedError;
+  String? get warehouseName => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
 
@@ -54,15 +75,36 @@ abstract class $ProductLiteModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: '_id') String id,
       String? name,
-      String? externalId,
+      int? externalId,
       double? price,
       int? points,
+      int? stock,
       double? suggestedPrice,
       String? type,
       bool? isPercentage,
       bool? showInFeed,
       bool? active,
+      dynamic categories,
+      String? categoriesIds,
+      String? categoriesNames,
+      dynamic category,
+      dynamic descriptionFormatted,
+      String? descriptionPlainText,
+      dynamic detailsFormatted,
+      String? detailsPlainText,
+      dynamic warrantyFormatted,
+      String? warrantyPlainText,
       String? thumbnail,
+      String? fullImage,
+      String? standardImage,
+      String? defaultVariation,
+      dynamic attributes,
+      dynamic variations,
+      dynamic provider,
+      String? providerID,
+      String? providerName,
+      String? warehouseID,
+      String? warehouseName,
       String? createdAt,
       String? updatedAt});
 }
@@ -87,12 +129,33 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
     Object? externalId = freezed,
     Object? price = freezed,
     Object? points = freezed,
+    Object? stock = freezed,
     Object? suggestedPrice = freezed,
     Object? type = freezed,
     Object? isPercentage = freezed,
     Object? showInFeed = freezed,
     Object? active = freezed,
+    Object? categories = freezed,
+    Object? categoriesIds = freezed,
+    Object? categoriesNames = freezed,
+    Object? category = freezed,
+    Object? descriptionFormatted = freezed,
+    Object? descriptionPlainText = freezed,
+    Object? detailsFormatted = freezed,
+    Object? detailsPlainText = freezed,
+    Object? warrantyFormatted = freezed,
+    Object? warrantyPlainText = freezed,
     Object? thumbnail = freezed,
+    Object? fullImage = freezed,
+    Object? standardImage = freezed,
+    Object? defaultVariation = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
+    Object? provider = freezed,
+    Object? providerID = freezed,
+    Object? providerName = freezed,
+    Object? warehouseID = freezed,
+    Object? warehouseName = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -108,7 +171,7 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -116,6 +179,10 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stock: freezed == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
               as int?,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
@@ -137,9 +204,89 @@ class _$ProductLiteModelCopyWithImpl<$Res, $Val extends ProductLiteModel>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      categoriesIds: freezed == categoriesIds
+          ? _value.categoriesIds
+          : categoriesIds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoriesNames: freezed == categoriesNames
+          ? _value.categoriesNames
+          : categoriesNames // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionFormatted: freezed == descriptionFormatted
+          ? _value.descriptionFormatted
+          : descriptionFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionPlainText: freezed == descriptionPlainText
+          ? _value.descriptionPlainText
+          : descriptionPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailsFormatted: freezed == detailsFormatted
+          ? _value.detailsFormatted
+          : detailsFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      detailsPlainText: freezed == detailsPlainText
+          ? _value.detailsPlainText
+          : detailsPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warrantyFormatted: freezed == warrantyFormatted
+          ? _value.warrantyFormatted
+          : warrantyFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      warrantyPlainText: freezed == warrantyPlainText
+          ? _value.warrantyPlainText
+          : warrantyPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultVariation: freezed == defaultVariation
+          ? _value.defaultVariation
+          : defaultVariation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      provider: freezed == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      providerID: freezed == providerID
+          ? _value.providerID
+          : providerID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseID: freezed == warehouseID
+          ? _value.warehouseID
+          : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseName: freezed == warehouseName
+          ? _value.warehouseName
+          : warehouseName // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -164,15 +311,36 @@ abstract class _$$ProductLiteModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: '_id') String id,
       String? name,
-      String? externalId,
+      int? externalId,
       double? price,
       int? points,
+      int? stock,
       double? suggestedPrice,
       String? type,
       bool? isPercentage,
       bool? showInFeed,
       bool? active,
+      dynamic categories,
+      String? categoriesIds,
+      String? categoriesNames,
+      dynamic category,
+      dynamic descriptionFormatted,
+      String? descriptionPlainText,
+      dynamic detailsFormatted,
+      String? detailsPlainText,
+      dynamic warrantyFormatted,
+      String? warrantyPlainText,
       String? thumbnail,
+      String? fullImage,
+      String? standardImage,
+      String? defaultVariation,
+      dynamic attributes,
+      dynamic variations,
+      dynamic provider,
+      String? providerID,
+      String? providerName,
+      String? warehouseID,
+      String? warehouseName,
       String? createdAt,
       String? updatedAt});
 }
@@ -195,12 +363,33 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
     Object? externalId = freezed,
     Object? price = freezed,
     Object? points = freezed,
+    Object? stock = freezed,
     Object? suggestedPrice = freezed,
     Object? type = freezed,
     Object? isPercentage = freezed,
     Object? showInFeed = freezed,
     Object? active = freezed,
+    Object? categories = freezed,
+    Object? categoriesIds = freezed,
+    Object? categoriesNames = freezed,
+    Object? category = freezed,
+    Object? descriptionFormatted = freezed,
+    Object? descriptionPlainText = freezed,
+    Object? detailsFormatted = freezed,
+    Object? detailsPlainText = freezed,
+    Object? warrantyFormatted = freezed,
+    Object? warrantyPlainText = freezed,
     Object? thumbnail = freezed,
+    Object? fullImage = freezed,
+    Object? standardImage = freezed,
+    Object? defaultVariation = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
+    Object? provider = freezed,
+    Object? providerID = freezed,
+    Object? providerName = freezed,
+    Object? warehouseID = freezed,
+    Object? warehouseName = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -216,7 +405,7 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
       externalId: freezed == externalId
           ? _value.externalId
           : externalId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -224,6 +413,10 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stock: freezed == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
               as int?,
       suggestedPrice: freezed == suggestedPrice
           ? _value.suggestedPrice
@@ -245,9 +438,89 @@ class __$$ProductLiteModelImplCopyWithImpl<$Res>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as bool?,
+      categories: freezed == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      categoriesIds: freezed == categoriesIds
+          ? _value.categoriesIds
+          : categoriesIds // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoriesNames: freezed == categoriesNames
+          ? _value.categoriesNames
+          : categoriesNames // ignore: cast_nullable_to_non_nullable
+              as String?,
+      category: freezed == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionFormatted: freezed == descriptionFormatted
+          ? _value.descriptionFormatted
+          : descriptionFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      descriptionPlainText: freezed == descriptionPlainText
+          ? _value.descriptionPlainText
+          : descriptionPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      detailsFormatted: freezed == detailsFormatted
+          ? _value.detailsFormatted
+          : detailsFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      detailsPlainText: freezed == detailsPlainText
+          ? _value.detailsPlainText
+          : detailsPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warrantyFormatted: freezed == warrantyFormatted
+          ? _value.warrantyFormatted
+          : warrantyFormatted // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      warrantyPlainText: freezed == warrantyPlainText
+          ? _value.warrantyPlainText
+          : warrantyPlainText // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnail: freezed == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fullImage: freezed == fullImage
+          ? _value.fullImage
+          : fullImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      standardImage: freezed == standardImage
+          ? _value.standardImage
+          : standardImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultVariation: freezed == defaultVariation
+          ? _value.defaultVariation
+          : defaultVariation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      provider: freezed == provider
+          ? _value.provider
+          : provider // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      providerID: freezed == providerID
+          ? _value.providerID
+          : providerID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseID: freezed == warehouseID
+          ? _value.warehouseID
+          : warehouseID // ignore: cast_nullable_to_non_nullable
+              as String?,
+      warehouseName: freezed == warehouseName
+          ? _value.warehouseName
+          : warehouseName // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -270,12 +543,33 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
       this.externalId,
       this.price,
       this.points,
+      this.stock,
       this.suggestedPrice,
       this.type,
       this.isPercentage,
       this.showInFeed,
       this.active,
+      this.categories,
+      this.categoriesIds,
+      this.categoriesNames,
+      this.category,
+      this.descriptionFormatted,
+      this.descriptionPlainText,
+      this.detailsFormatted,
+      this.detailsPlainText,
+      this.warrantyFormatted,
+      this.warrantyPlainText,
       this.thumbnail,
+      this.fullImage,
+      this.standardImage,
+      this.defaultVariation,
+      this.attributes,
+      this.variations,
+      this.provider,
+      this.providerID,
+      this.providerName,
+      this.warehouseID,
+      this.warehouseName,
       this.createdAt,
       this.updatedAt})
       : super._();
@@ -289,11 +583,13 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final String? name;
   @override
-  final String? externalId;
+  final int? externalId;
   @override
   final double? price;
   @override
   final int? points;
+  @override
+  final int? stock;
   @override
   final double? suggestedPrice;
   @override
@@ -305,7 +601,47 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
   @override
   final bool? active;
   @override
+  final dynamic categories;
+  @override
+  final String? categoriesIds;
+  @override
+  final String? categoriesNames;
+  @override
+  final dynamic category;
+  @override
+  final dynamic descriptionFormatted;
+  @override
+  final String? descriptionPlainText;
+  @override
+  final dynamic detailsFormatted;
+  @override
+  final String? detailsPlainText;
+  @override
+  final dynamic warrantyFormatted;
+  @override
+  final String? warrantyPlainText;
+  @override
   final String? thumbnail;
+  @override
+  final String? fullImage;
+  @override
+  final String? standardImage;
+  @override
+  final String? defaultVariation;
+  @override
+  final dynamic attributes;
+  @override
+  final dynamic variations;
+  @override
+  final dynamic provider;
+  @override
+  final String? providerID;
+  @override
+  final String? providerName;
+  @override
+  final String? warehouseID;
+  @override
+  final String? warehouseName;
   @override
   final String? createdAt;
   @override
@@ -313,7 +649,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @override
   String toString() {
-    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, thumbnail: $thumbnail, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductLiteModel(id: $id, name: $name, externalId: $externalId, price: $price, points: $points, stock: $stock, suggestedPrice: $suggestedPrice, type: $type, isPercentage: $isPercentage, showInFeed: $showInFeed, active: $active, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, thumbnail: $thumbnail, fullImage: $fullImage, standardImage: $standardImage, defaultVariation: $defaultVariation, attributes: $attributes, variations: $variations, provider: $provider, providerID: $providerID, providerName: $providerName, warehouseID: $warehouseID, warehouseName: $warehouseName, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -327,6 +663,7 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
                 other.externalId == externalId) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.points, points) || other.points == points) &&
+            (identical(other.stock, stock) || other.stock == stock) &&
             (identical(other.suggestedPrice, suggestedPrice) ||
                 other.suggestedPrice == suggestedPrice) &&
             (identical(other.type, type) || other.type == type) &&
@@ -335,8 +672,46 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
             (identical(other.showInFeed, showInFeed) ||
                 other.showInFeed == showInFeed) &&
             (identical(other.active, active) || other.active == active) &&
+            const DeepCollectionEquality()
+                .equals(other.categories, categories) &&
+            (identical(other.categoriesIds, categoriesIds) ||
+                other.categoriesIds == categoriesIds) &&
+            (identical(other.categoriesNames, categoriesNames) ||
+                other.categoriesNames == categoriesNames) &&
+            const DeepCollectionEquality().equals(other.category, category) &&
+            const DeepCollectionEquality()
+                .equals(other.descriptionFormatted, descriptionFormatted) &&
+            (identical(other.descriptionPlainText, descriptionPlainText) ||
+                other.descriptionPlainText == descriptionPlainText) &&
+            const DeepCollectionEquality()
+                .equals(other.detailsFormatted, detailsFormatted) &&
+            (identical(other.detailsPlainText, detailsPlainText) ||
+                other.detailsPlainText == detailsPlainText) &&
+            const DeepCollectionEquality()
+                .equals(other.warrantyFormatted, warrantyFormatted) &&
+            (identical(other.warrantyPlainText, warrantyPlainText) ||
+                other.warrantyPlainText == warrantyPlainText) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.fullImage, fullImage) ||
+                other.fullImage == fullImage) &&
+            (identical(other.standardImage, standardImage) ||
+                other.standardImage == standardImage) &&
+            (identical(other.defaultVariation, defaultVariation) ||
+                other.defaultVariation == defaultVariation) &&
+            const DeepCollectionEquality()
+                .equals(other.attributes, attributes) &&
+            const DeepCollectionEquality()
+                .equals(other.variations, variations) &&
+            const DeepCollectionEquality().equals(other.provider, provider) &&
+            (identical(other.providerID, providerID) ||
+                other.providerID == providerID) &&
+            (identical(other.providerName, providerName) ||
+                other.providerName == providerName) &&
+            (identical(other.warehouseID, warehouseID) ||
+                other.warehouseID == warehouseID) &&
+            (identical(other.warehouseName, warehouseName) ||
+                other.warehouseName == warehouseName) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -345,21 +720,43 @@ class _$ProductLiteModelImpl extends _ProductLiteModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      externalId,
-      price,
-      points,
-      suggestedPrice,
-      type,
-      isPercentage,
-      showInFeed,
-      active,
-      thumbnail,
-      createdAt,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        name,
+        externalId,
+        price,
+        points,
+        stock,
+        suggestedPrice,
+        type,
+        isPercentage,
+        showInFeed,
+        active,
+        const DeepCollectionEquality().hash(categories),
+        categoriesIds,
+        categoriesNames,
+        const DeepCollectionEquality().hash(category),
+        const DeepCollectionEquality().hash(descriptionFormatted),
+        descriptionPlainText,
+        const DeepCollectionEquality().hash(detailsFormatted),
+        detailsPlainText,
+        const DeepCollectionEquality().hash(warrantyFormatted),
+        warrantyPlainText,
+        thumbnail,
+        fullImage,
+        standardImage,
+        defaultVariation,
+        const DeepCollectionEquality().hash(attributes),
+        const DeepCollectionEquality().hash(variations),
+        const DeepCollectionEquality().hash(provider),
+        providerID,
+        providerName,
+        warehouseID,
+        warehouseName,
+        createdAt,
+        updatedAt
+      ]);
 
   /// Create a copy of ProductLiteModel
   /// with the given fields replaced by the non-null parameter values.
@@ -382,15 +779,36 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   const factory _ProductLiteModel(
       {@JsonKey(name: '_id') required final String id,
       final String? name,
-      final String? externalId,
+      final int? externalId,
       final double? price,
       final int? points,
+      final int? stock,
       final double? suggestedPrice,
       final String? type,
       final bool? isPercentage,
       final bool? showInFeed,
       final bool? active,
+      final dynamic categories,
+      final String? categoriesIds,
+      final String? categoriesNames,
+      final dynamic category,
+      final dynamic descriptionFormatted,
+      final String? descriptionPlainText,
+      final dynamic detailsFormatted,
+      final String? detailsPlainText,
+      final dynamic warrantyFormatted,
+      final String? warrantyPlainText,
       final String? thumbnail,
+      final String? fullImage,
+      final String? standardImage,
+      final String? defaultVariation,
+      final dynamic attributes,
+      final dynamic variations,
+      final dynamic provider,
+      final String? providerID,
+      final String? providerName,
+      final String? warehouseID,
+      final String? warehouseName,
       final String? createdAt,
       final String? updatedAt}) = _$ProductLiteModelImpl;
   const _ProductLiteModel._() : super._();
@@ -404,11 +822,13 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   @override
   String? get name;
   @override
-  String? get externalId;
+  int? get externalId;
   @override
   double? get price;
   @override
   int? get points;
+  @override
+  int? get stock;
   @override
   double? get suggestedPrice;
   @override
@@ -420,7 +840,47 @@ abstract class _ProductLiteModel extends ProductLiteModel {
   @override
   bool? get active;
   @override
+  dynamic get categories;
+  @override
+  String? get categoriesIds;
+  @override
+  String? get categoriesNames;
+  @override
+  dynamic get category;
+  @override
+  dynamic get descriptionFormatted;
+  @override
+  String? get descriptionPlainText;
+  @override
+  dynamic get detailsFormatted;
+  @override
+  String? get detailsPlainText;
+  @override
+  dynamic get warrantyFormatted;
+  @override
+  String? get warrantyPlainText;
+  @override
   String? get thumbnail;
+  @override
+  String? get fullImage;
+  @override
+  String? get standardImage;
+  @override
+  String? get defaultVariation;
+  @override
+  dynamic get attributes;
+  @override
+  dynamic get variations;
+  @override
+  dynamic get provider;
+  @override
+  String? get providerID;
+  @override
+  String? get providerName;
+  @override
+  String? get warehouseID;
+  @override
+  String? get warehouseName;
   @override
   String? get createdAt;
   @override

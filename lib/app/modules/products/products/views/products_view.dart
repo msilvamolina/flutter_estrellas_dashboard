@@ -1,3 +1,6 @@
+import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
+import 'package:estrellas_dashboard/app/components/adminscaffold/admin_scaffold.dart';
+import 'package:estrellas_dashboard/app/services/user_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,37 +8,40 @@ import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/widgets/custom_floating_action_button.dart';
 import '../../../../routes/app_pages.dart';
 import '../controllers/products_controller.dart';
-import '../tabs/tab_estrellas_1.dart';
 import '../tabs/tab_estrellas_2.dart';
+import 'products_view2.dart';
 
 class ProductsView extends GetView<ProductsController> {
   const ProductsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: MainLayout(
-        floatingActionButton: CustomFloatingActionButton(
-          label: 'Agregar',
-          icon: Icons.add,
-          onPressed: () => Get.toNamed(Routes.CREATE_PRODUCT),
-        ),
-        maxWidth: double.infinity,
-        currentRoute: Routes.PRODUCTS,
-        appBarWidget: const TabBar(
-          tabs: [
-            Tab(text: 'Estrellas 1.0'),
-            Tab(text: 'Estrellas 2.0'),
-          ],
-        ),
-        child: TabBarView(
-          children: [
-            TabEstrellas1(controller: controller),
-            TabEstrellas2(controller: controller),
-          ],
-        ),
-      ),
-    );
+    MainController mainController = Get.find<MainController>();
+    bool userPermissions =
+        mainController.checkUserPermission(Permissions.productsV1V2);
+
+    return userPermissions
+        ? MainLayout(
+            floatingActionButton: CustomFloatingActionButton(
+              label: 'Agregar',
+              icon: Icons.add,
+              onPressed: () => Get.toNamed(Routes.CREATE_PRODUCT),
+            ),
+            maxWidth: double.infinity,
+            currentRoute: Routes.PRODUCTS,
+            child: AdminScaffold(
+              permission: Permissions.productList,
+              child: TabEstrellas2(controller: controller),
+            ),
+          )
+        : Scaffold(
+            body: Container(
+              width: double.infinity,
+              child: AdminScaffold(
+                permission: Permissions.productList,
+                child: ProductsView2(),
+              ),
+            ),
+          );
   }
 }

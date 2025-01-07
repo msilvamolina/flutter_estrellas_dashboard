@@ -16,7 +16,7 @@ abstract class ProductModel implements _$ProductModel {
     ProductProviderModel? provider,
     ProductCategoryModel? category,
     String? name,
-    String? externalId,
+    int? externalId,
     String? usefulId,
     String? videoUrl,
     String? description,

@@ -14,14 +14,22 @@ class SelectProviderController extends GetxController {
   String? _responseError;
   String? get responseError => _responseError;
 
+  bool? editMode;
+  String? providerID;
+
   @override
   void onInit() {
+    if (Get.arguments != null) {
+      editMode = Get.arguments[0];
+      providerID = Get.arguments[1];
+    }
     super.onInit();
   }
 
   @override
   Future<void> onReady() async {
     await getData();
+
     super.onReady();
   }
 
@@ -38,8 +46,21 @@ class SelectProviderController extends GetxController {
       _responseError = error;
     }, (list) {
       _data.clear();
-      _data.addAll(list);
+
+      if (editMode != null && editMode == true && providerID != null) {
+        // Agrega solo el elemento que cumple con el providerID
+        final matchingProvider = list.firstWhereOrNull(
+          (provider) => provider.id == providerID,
+        );
+
+        if (matchingProvider != null) {
+          _data.add(matchingProvider);
+        }
+      } else {
+        _data.addAll(list);
+      }
     });
+
     update(['view']);
   }
 }

@@ -11,12 +11,7 @@ class Utils {
   }
 
   static int colorToInt(Color color) {
-    String colorString = color.toString(); // Color(0x12345678)
-    String valueString =
-        colorString.split('(0x')[1].split(')')[0]; // kind of hacky..
-    int value = int.parse(valueString, radix: 16);
-
-    return value;
+    return color.value; // Color ya tiene la propiedad `value`
   }
 
   static Color intToColor(int value) {
@@ -36,8 +31,9 @@ class Utils {
     return timeago.format(time, locale: 'es');
   }
 
-  Color getColor(String color) {
+  static Color getColor(String originalColor) {
     try {
+      String color = originalColor.replaceAll('#', '');
       if (color.length == 6) {
         color = '0xff${color}';
       }
@@ -49,9 +45,12 @@ class Utils {
     }
   }
 
-  String doubleToString(dynamic numero) {
+  static String? doubleToString(dynamic number) {
+    if (number == null) {
+      return null;
+    }
     try {
-      String variable = numero.toString();
+      String variable = number.toString();
       variable = variable.replaceAll('.0', '');
 
       return variable.trim();

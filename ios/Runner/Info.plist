@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+		<key>ITSAppUsesNonExemptEncryption</key>
+		<false/>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
@@ -47,6 +49,8 @@
 		<true/>
 		<key>NSPhotoLibraryUsageDescription</key>
 		<string>Photo Library Needed</string>
+		<key>NSFaceIDUsageDescription</key>
+		<string>Why is my app authenticating using face id?</string>
 		<key>NSCameraUsageDescription</key>
 		<string>Camera Needed</string>
 		<key>NSMicrophoneUsageDescription</key>

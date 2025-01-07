@@ -1,3 +1,6 @@
+import 'package:estrellas_dashboard/app/modules/products/create_product/tabs/description_tab.dart';
+import 'package:estrellas_dashboard/app/modules/products/create_product/tabs/main_tab.dart';
+import 'package:estrellas_dashboard/app/modules/products/create_product/tabs/warranty_tab.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -5,189 +8,73 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
 import '../../../../components/appbars/appbar_title_with_back.dart';
+import '../../../../components/buttons/buttons.dart';
 import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/input_decoration.dart';
+import '../../../../themes/styles/colors.dart';
 import '../../../../themes/styles/typography.dart';
+import '../../../../themes/themes/default_light_theme.dart';
 import '../controllers/create_product_controller.dart';
+import '../tabs/details_tab.dart';
 
 class CreateProductView extends GetView<CreateProductController> {
   const CreateProductView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Color primary = Theme.of(context).colorScheme.primary;
-
-    return ReactiveFormBuilder(
-        form: controller.buildForm,
-        builder: (context, form, child) {
-          return MainLayout(
-            showMenu: false,
-            currentRoute: Routes.CREATE_PROVIDER,
-            appBarTitle: 'Crear producto',
-            child: GetBuilder<CreateProductController>(
-              id: 'view',
-              builder: (_) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Card(
-                      child: InkWell(
-                        onTap: controller.pickImage,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                controller.imagePath ??
-                                    'assets/images/picture.png',
-                                width: 80,
-                              ),
-                              const SizedBox(width: 12),
-                              // Elimina el Padding alrededor del Expanded
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Avatar Url',
-                                      style: TypographyStyle.bodyBlackLarge
-                                          .copyWith(color: primary),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      controller.imagePath ??
-                                          '(Selecciona una foto)',
-                                      style: TypographyStyle.bodyRegularSmall,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color: primary,
-                                size: 48,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Card(
-                      child: InkWell(
-                        onTap: controller.pickWarehouse,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/images/warehouse.png',
-                                width: 80,
-                              ),
-                              const SizedBox(width: 12),
-                              // Elimina el Padding alrededor del Expanded
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Bodega',
-                                      style: TypographyStyle.bodyBlackLarge
-                                          .copyWith(color: primary),
-                                    ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      (controller.warehouseModel != null
-                                              ? ('${controller.warehouseModel!.name}\n${controller.providerModel!.name!}')
-                                              : null) ??
-                                          '(Selecciona un proveedor)',
-                                      style: TypographyStyle.bodyRegularSmall,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color: primary,
-                                size: 48,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.name.name,
-                      keyboardType: TextInputType.text,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "Name",
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.price.name,
-                      keyboardType: TextInputType.number,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "Price",
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.suggestedPrice.name,
-                      keyboardType: TextInputType.number,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "Suggested Price",
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    ReactiveTextField(
-                      formControlName: Fields.points.name,
-                      keyboardType: TextInputType.number,
-                      decoration: CustomInputDecoration.inputDecoration(
-                        text: "Points",
-                      ),
-                    ),
-
-                    const SizedBox(height: 16),
-                    // Obx(
-                    //   () => DropDown(
-                    //     error: controller.productsError,
-                    //     selectedValue: controller.productSelected,
-                    //     values: controller.listProducts
-                    //         .map(
-                    //           (ProductFirebaseModel value) => OptionDropDown(
-                    //             text: value.name,
-                    //             value: value.id,
-                    //           ),
-                    //         )
-                    //         .toList(),
-                    //     onChanged: controller.onProductSelected,
-                    //   ),
-                    // ),
-                    const SizedBox(height: 26),
-                    ReactiveFormConsumer(
-                      builder: (context, form, child) => LoadingButton(
-                        label: 'Crear',
-                        // isLoading: controller.loading,
-                        isLoading: false,
+    return Theme(
+      data: defaultLightTheme,
+      child: DefaultTabController(
+        length: 4,
+        child: ReactiveFormBuilder(
+            form: controller.buildForm,
+            builder: (context, form, child) {
+              return MainLayout(
+                showMenu: false,
+                currentRoute: Routes.CREATE_PRODUCT,
+                appBarTitle: 'Crear producto',
+                bottomNavigationBar: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: ReactiveFormConsumer(
+                      builder: (context, form, child) => Button(
+                        style: controller.editMode.value
+                            ? ButtonStyles.primarySecondary
+                            : ButtonStyles.primary,
                         onPressed: (form.valid)
                             ? () => controller.sendForm(form.value)
                             : null,
+                        label:
+                            controller.editMode.value ? 'Actualizar' : 'Crear',
                       ),
                     ),
+                  ),
+                ),
+                appBarWidget: TabBar(
+                  labelStyle: TypographyStyle.bodyBlackMedium,
+                  indicatorColor: primaryBase,
+                  labelColor: secondaryBase,
+                  unselectedLabelColor: neutral700,
+                  dividerColor: neutral400,
+                  tabs: [
+                    Tab(text: 'Info'),
+                    Tab(text: 'Descripción'),
+                    Tab(text: 'Detalles'),
+                    Tab(text: 'Garantía'),
                   ],
-                );
-              },
-            ),
-          );
-        });
+                ),
+                child: TabBarView(
+                  children: [
+                    ProductMainTab(),
+                    ProductDescriptionTab(),
+                    ProductDetailsTab(),
+                    ProductWarrantyTab(),
+                  ],
+                ),
+              );
+            }),
+      ),
+    );
   }
 }
