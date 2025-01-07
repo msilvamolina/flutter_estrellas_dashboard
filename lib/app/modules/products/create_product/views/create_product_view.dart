@@ -30,47 +30,53 @@ class CreateProductView extends GetView<CreateProductController> {
         child: ReactiveFormBuilder(
             form: controller.buildForm,
             builder: (context, form, child) {
-              return MainLayout(
-                showMenu: false,
-                currentRoute: Routes.CREATE_PRODUCT,
-                appBarTitle: 'Crear producto',
-                bottomNavigationBar: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: ReactiveFormConsumer(
-                      builder: (context, form, child) => Button(
-                        style: controller.editMode.value
-                            ? ButtonStyles.primarySecondary
-                            : ButtonStyles.primary,
-                        onPressed: (form.valid)
-                            ? () => controller.sendForm(form.value)
-                            : null,
-                        label:
-                            controller.editMode.value ? 'Actualizar' : 'Crear',
+              return GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus(); // Esconde el teclado
+                },
+                child: MainLayout(
+                  showMenu: false,
+                  currentRoute: Routes.CREATE_PRODUCT,
+                  appBarTitle: 'Crear producto',
+                  bottomNavigationBar: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: ReactiveFormConsumer(
+                        builder: (context, form, child) => Button(
+                          style: controller.editMode.value
+                              ? ButtonStyles.primarySecondary
+                              : ButtonStyles.primary,
+                          onPressed: (form.valid)
+                              ? () => controller.sendForm(form.value)
+                              : null,
+                          label: controller.editMode.value
+                              ? 'Actualizar'
+                              : 'Crear',
+                        ),
                       ),
                     ),
                   ),
-                ),
-                appBarWidget: TabBar(
-                  labelStyle: TypographyStyle.bodyBlackMedium,
-                  indicatorColor: primaryBase,
-                  labelColor: secondaryBase,
-                  unselectedLabelColor: neutral700,
-                  dividerColor: neutral400,
-                  tabs: [
-                    Tab(text: 'Info'),
-                    Tab(text: 'Descripción'),
-                    Tab(text: 'Detalles'),
-                    Tab(text: 'Garantía'),
-                  ],
-                ),
-                child: TabBarView(
-                  children: [
-                    ProductMainTab(),
-                    ProductDescriptionTab(),
-                    ProductDetailsTab(),
-                    ProductWarrantyTab(),
-                  ],
+                  appBarWidget: TabBar(
+                    labelStyle: TypographyStyle.bodyBlackMedium,
+                    indicatorColor: primaryBase,
+                    labelColor: secondaryBase,
+                    unselectedLabelColor: neutral700,
+                    dividerColor: neutral400,
+                    tabs: [
+                      Tab(text: 'Info'),
+                      Tab(text: 'Descripción'),
+                      Tab(text: 'Detalles'),
+                      Tab(text: 'Garantía'),
+                    ],
+                  ),
+                  child: TabBarView(
+                    children: [
+                      ProductMainTab(),
+                      ProductDescriptionTab(),
+                      ProductDetailsTab(),
+                      ProductWarrantyTab(),
+                    ],
+                  ),
                 ),
               );
             }),
