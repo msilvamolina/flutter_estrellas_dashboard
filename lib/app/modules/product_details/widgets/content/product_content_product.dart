@@ -17,6 +17,9 @@ class ProductContentProduct extends StatelessWidget {
     return GetBuilder<ProductDetailsController>(
       id: 'content_product',
       builder: (controller) {
+        bool providerNeedExpanded =
+            (controller.product.providerName?.length ?? 0) > 20;
+
         return ProductCardContainer(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,13 +35,25 @@ class ProductContentProduct extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'ESTRELLAS',
-                    style: TypographyStyle.bodyRegularMedium.copyWith(
-                      color: neutral700,
-                      // fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                  providerNeedExpanded
+                      ? Expanded(
+                          child: Text(
+                            controller.product.providerName ?? 'ESTRELLAS',
+                            style: TypographyStyle.bodyRegularMedium.copyWith(
+                              color: neutral700,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        )
+                      : Text(
+                          controller.product.providerName ?? 'ESTRELLAS',
+                          style: TypographyStyle.bodyRegularMedium.copyWith(
+                            color: neutral700,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                   SizedBox(width: 6),
                   Padding(
                     padding: const EdgeInsets.only(top: 2),
@@ -57,7 +72,6 @@ class ProductContentProduct extends StatelessWidget {
                     '4.8',
                     style: TypographyStyle.bodyRegularMedium.copyWith(
                       color: neutral700,
-                      // fontWeight: FontWeight.w700,
                     ),
                   ),
                   SizedBox(width: 4),

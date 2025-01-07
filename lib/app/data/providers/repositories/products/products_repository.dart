@@ -912,6 +912,8 @@ class ProductsRepository {
         }
       }
 
+      print('havevariations true');
+
       await _firebaseFirestore
           .collection('admin')
           .doc('productsVariations')
@@ -921,6 +923,7 @@ class ProductsRepository {
         ...newVariant.toJson(),
         'createdAt': DateTime.now(),
       });
+
       return right(unit);
     } on FirebaseException catch (e) {
       return left(e.code);
@@ -944,6 +947,11 @@ class ProductsRepository {
         'createdBy': email,
         'createdAt': DateTime.now(),
       });
+
+      await _firebaseFirestore.collection('products').doc(productId).update({
+        'haveVariants': true,
+      });
+
       return right(unit);
     } on FirebaseException catch (e) {
       return left(e.code);
