@@ -2,7 +2,7 @@ name: estrellas_dashboard
 description: "Estrellas Dashboard"
 publish_to: "none"
 
-version: 1.0.15+15
+version: 1.0.20+20
 
 environment:
   sdk: ^3.5.3

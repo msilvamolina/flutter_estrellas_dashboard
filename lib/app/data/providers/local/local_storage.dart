@@ -11,7 +11,7 @@ class LocalStorage {
 
   Future<void> cleanAll() async {
     // await _getStorage.remove(USERKEY);
-    // await _getStorage.erase();
+    await _getStorage.erase();
   }
 
   /// Obtiene si el usuario quiere ver el tour de la pantalla
