@@ -42,99 +42,106 @@ class LoginView extends GetView<LoginController> {
                     child: ReactiveFormBuilder(
                         form: controller.buildForm,
                         builder: (context, form, child) {
-                          return Container(
-                            width: 400,
-                            child: ListBody(
-                              children: <Widget>[
-                                Center(
-                                  child: LogoApp(
-                                    size: 180,
+                          return GestureDetector(
+                            onTap: () {
+                              FocusScope.of(context)
+                                  .unfocus(); // Esconde el teclado
+                            },
+                            child: Container(
+                              width: 400,
+                              child: ListBody(
+                                children: <Widget>[
+                                  Center(
+                                    child: LogoApp(
+                                      size: 180,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 26),
-                                GetBuilder<MainController>(
-                                  id: 'input',
-                                  builder: (_) {
-                                    return ReactiveTextField(
-                                      formControlName: Fields.email.name,
-                                      keyboardType: TextInputType.emailAddress,
-                                      decoration:
-                                          CustomInputDecoration.inputDecoration(
-                                        isThemeModeDark: controller
-                                            .mainController.isThemeModeDark,
-                                        text: "E-mail",
-                                        icon: Icons.email,
-                                      ),
-                                    );
-                                  },
-                                ),
-                                SizedBox(height: 16),
-                                GetBuilder<MainController>(
-                                  id: 'input',
-                                  builder: (_) {
-                                    return ReactiveTextField(
-                                      obscureText: true,
-                                      formControlName: Fields.password.name,
-                                      keyboardType: TextInputType.text,
-                                      decoration:
-                                          CustomInputDecoration.inputDecoration(
-                                        isThemeModeDark: controller
-                                            .mainController.isThemeModeDark,
-                                        text: "Contraseña",
-                                        icon: Icons.security,
-                                      ),
-                                    );
-                                  },
-                                ),
-                                SizedBox(height: 26),
-                                GetBuilder<MainController>(
-                                  id: 'input',
-                                  builder: (_) {
-                                    return ReactiveFormConsumer(
-                                      builder: (context, form, child) =>
-                                          ElevatedButton(
-                                        onPressed: (form.valid &&
-                                                controller.buttonEnabled)
-                                            ? () =>
-                                                controller.sendForm(form.value)
-                                            : null,
-                                        child: Container(
-                                          padding: EdgeInsets.all(8),
-                                          width: double.infinity,
-                                          child: Text(
-                                            'Iniciar sesión',
-                                            textAlign: TextAlign.center,
-                                            style: TypographyStyle
-                                                .bodyRegularLarge
-                                                .copyWith(
-                                                    fontWeight:
-                                                        FontWeight.w400),
+                                  SizedBox(height: 26),
+                                  GetBuilder<MainController>(
+                                    id: 'input',
+                                    builder: (_) {
+                                      return ReactiveTextField(
+                                        formControlName: Fields.email.name,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        decoration: CustomInputDecoration
+                                            .inputDecoration(
+                                          isThemeModeDark: controller
+                                              .mainController.isThemeModeDark,
+                                          text: "E-mail",
+                                          icon: Icons.email,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(height: 16),
+                                  GetBuilder<MainController>(
+                                    id: 'input',
+                                    builder: (_) {
+                                      return ReactiveTextField(
+                                        obscureText: true,
+                                        formControlName: Fields.password.name,
+                                        keyboardType: TextInputType.text,
+                                        decoration: CustomInputDecoration
+                                            .inputDecoration(
+                                          isThemeModeDark: controller
+                                              .mainController.isThemeModeDark,
+                                          text: "Contraseña",
+                                          icon: Icons.security,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(height: 26),
+                                  GetBuilder<MainController>(
+                                    id: 'input',
+                                    builder: (_) {
+                                      return ReactiveFormConsumer(
+                                        builder: (context, form, child) =>
+                                            ElevatedButton(
+                                          onPressed: (form.valid &&
+                                                  controller.buttonEnabled)
+                                              ? () => controller
+                                                  .sendForm(form.value)
+                                              : null,
+                                          child: Container(
+                                            padding: EdgeInsets.all(8),
+                                            width: double.infinity,
+                                            child: Text(
+                                              'Iniciar sesión',
+                                              textAlign: TextAlign.center,
+                                              style: TypographyStyle
+                                                  .bodyRegularLarge
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  if (controller.getFaceIdEnabled)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 26),
+                                      child: GestureDetector(
+                                        onTap: controller.onFaceIdButtonCicked,
+                                        child: SvgPicture.asset(
+                                          'assets/svg/face-id.svg',
+                                          width: 78,
+                                          colorFilter: ColorFilter.mode(
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .primary
+                                                .withOpacity(0.7),
+                                            BlendMode.srcIn,
                                           ),
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
-                                if (controller.getFaceIdEnabled)
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 26),
-                                    child: GestureDetector(
-                                      onTap: controller.onFaceIdButtonCicked,
-                                      child: SvgPicture.asset(
-                                        'assets/svg/face-id.svg',
-                                        width: 78,
-                                        colorFilter: ColorFilter.mode(
-                                          Theme.of(context)
-                                              .colorScheme
-                                              .primary
-                                              .withOpacity(0.7),
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
                                     ),
-                                  ),
-                                SizedBox(height: 46),
-                              ],
+                                  SizedBox(height: 46),
+                                ],
+                              ),
                             ),
                           );
                         }),
