@@ -30,11 +30,12 @@ const Map<String, dynamic> firebaseConfigDevAndroid = <String, dynamic>{
 };
 
 const Map<String, dynamic> firebaseConfigProdAndroid = <String, dynamic>{
-  'apiKey': 'AIzaSyAKPnLSfaatepQ0sTfOzfiw3q4yNIhEyps',
-  'appId': '1:884162383516:android:956f9eb666b0ffd1f86759',
-  'messagingSenderId': '884162383516',
-  'projectId': 'compa-prod-4cb39',
+  'apiKey': 'AIzaSyCTuK3quSjQbtYsj0HKlQ94h17MAeJ6c4g',
+  'appId': '1:345787762684:android:35e180902d97601a711479',
+  'messagingSenderId': '345787762684',
+  'projectId': 'estrellas-176d3',
   'databaseURL': '',
   'measurementId': '',
   'trackingId': '',
+  'storageBucket': 'estrellas-176d3.firebasestorage.app',
 };

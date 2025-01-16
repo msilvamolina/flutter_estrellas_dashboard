@@ -7,28 +7,27 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
-import 'package:estrellas_dashboard/app/themes/themes/black.dart';
-import 'package:estrellas_dashboard/app/themes/themes/blue.dart';
-import 'package:estrellas_dashboard/app/themes/themes/red.dart';
-import 'package:estrellas_dashboard/app/themes/util.dart';
-import 'package:intl/date_symbol_data_local.dart';
+
 import 'app/app/bindings/main_binding.dart';
-import 'app/app/layouts/main_layout/main_layout.dart';
 import 'app/config/firebase_config.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/dependency_injection.dart';
+import 'app/services/environment.dart';
 import 'app/services/theme_service.dart';
-import 'app/themes/themes.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await initializeDateFormatting('es', null);
+  const String flavor = String.fromEnvironment('flavor', defaultValue: '');
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  await Environment.instance.init(env: flavor);
   await GetStorage.init();
+
   await initFirebase();
 
   DependecyInjection.init();
@@ -60,7 +59,10 @@ Future<void> initFirebase() async {
       storageBucket: firebaseConfig['storageBucket'],
     );
   } else if (Platform.isAndroid) {
-    Map<String, dynamic>? firebaseConfig = firebaseConfigDevAndroid;
+    Map<String, dynamic>? firebaseConfig =
+        Environment.instance.currentEnv == Env.prod
+            ? firebaseConfigProdAndroid
+            : firebaseConfigDevAndroid;
 
     firebaseOptions = FirebaseOptions(
       apiKey: firebaseConfig['apiKey']!,
@@ -84,13 +86,17 @@ class MyApp extends StatelessWidget {
     var theme = ThemeService.getTheme();
     bool isDark = ThemeService.isSavedDarkMode();
 
+    FlutterNativeSplash.remove();
+
     return FeatureDiscovery(
       child: GetMaterialApp(
         initialBinding: MainBinding(),
-        title: "Estrellas Dashboard",
+        title: Environment.instance.currentEnv == Env.prod
+            ? "Estrellas Dashboard"
+            : "Estrellas Dashboard DEV",
         locale: const Locale('es'),
         fallbackLocale: const Locale('es'),
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: Environment.instance.currentEnv == Env.dev,
         theme: isDark ? theme.theme.dark(context) : theme.theme.light(context),
         initialRoute: AppPages.INITIAL,
         localizationsDelegates: [
