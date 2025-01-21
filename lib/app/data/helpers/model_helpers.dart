@@ -8,12 +8,12 @@ class ModelHelpers {
     data['createdAt'] = dateFromDocument(data['createdAt']);
 
     if (data['updatedAt'] != null) {
-      data['updatedAt'] = dateFromDocument(data['updatedAt']);
+      // data['updatedAt'] = dateFromDocument(data['updatedAt']);
     } else {
-      data['updatedAt'] = data['createdAt'];
+      // data['updatedAt'] = data['createdAt'];
     }
     if (data['initDate'] != null) {
-      data['initDate'] = dateFromDocument(data['initDate']);
+      // data['initDate'] = dateFromDocument(data['initDate']);
     }
     return data;
   }
@@ -27,7 +27,7 @@ class ModelHelpers {
 
   static String dateFromDocument(dynamic date) {
     if (date != null) {
-      return date.toDate().toString();
+      // return date.toDate().toString();
     }
     return DateTime.now().toString();
   }
