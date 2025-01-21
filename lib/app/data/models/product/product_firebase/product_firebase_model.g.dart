@@ -51,7 +51,6 @@ _$ProductFirebaseModelImpl _$$ProductFirebaseModelImplFromJson(
       uploadDate: json['uploadDate'] as String?,
       searchField: json['searchField'] as String?,
       reference: json['reference'],
-      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$$ProductFirebaseModelImplToJson(
@@ -97,5 +96,4 @@ Map<String, dynamic> _$$ProductFirebaseModelImplToJson(
       'uploadDate': instance.uploadDate,
       'searchField': instance.searchField,
       'reference': instance.reference,
-      'updatedAt': instance.updatedAt,
     };

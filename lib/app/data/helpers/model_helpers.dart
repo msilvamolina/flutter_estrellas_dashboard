@@ -34,7 +34,7 @@ class ModelHelpers {
 
   static DateTime dateToDocument(String? date) {
     if (date != null) {
-      return DateTime.parse(date);
+      // return DateTime.parse(date);
     }
     return DateTime.now();
   }

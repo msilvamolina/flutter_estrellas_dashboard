@@ -52,7 +52,7 @@ abstract class ProductFirebaseModel implements _$ProductFirebaseModel {
     String? uploadDate,
     String? searchField,
     dynamic reference,
-    String? updatedAt,
+    // String? updatedAt,
   }) = _ProductFirebaseModel;
 
   factory ProductFirebaseModel.fromJson(Map<String, dynamic> json) =>
