@@ -94,8 +94,23 @@ class NewVariationsController extends GetxController {
     }
   }
 
-  Future<void> changeDefaultVariantAction(
-      ProductVariantModel variation) async {}
+  Future<void> changeDefaultVariantAction(ProductVariantModel variation) async {
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, dynamic> response = await _repository.changeDefaultVariant(
+      variant: variation,
+      productId: product.id,
+    );
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (imagesMap) async {
+      _mainController.setDropiMessage('Success!');
+      Get.back();
+    });
+  }
 
   Future<void> editVariation(ProductVariantModel variation) async {
     ProductVariantModel? newVariation = await editVariationDialog(variation);

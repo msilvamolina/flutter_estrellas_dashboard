@@ -992,4 +992,26 @@ class ProductsRepository {
       return null;
     }
   }
+
+  Future<Either<String, Unit>> changeDefaultVariant({
+    required String productId,
+    required ProductVariantModel variant,
+  }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
+    try {
+      await _firebaseFirestore.collection('products').doc(productId).update(
+        {
+          'defaultVariantID': variant.id,
+          'defaultVariantInfo': variant.toJson(),
+          'updatedAt': DateTime.now(),
+          'updatedBy': email,
+        },
+      );
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 }
