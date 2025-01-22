@@ -87,15 +87,17 @@ class ProductsRepository {
         String thumb = imagesMap?['80x80'] ?? '';
         String standardImage = imagesMap?['400x400'] ?? '';
         String fullImage = imagesMap?['800x800'] ?? '';
-
         mainController.setDropiMessage('Escribiendo en firebase');
 
+        String defaultVariantID =
+            (product.variations[0]?['externalID'] ?? '').toString();
         await _firebaseFirestore.collection('products').doc(product.id).set({
           ...product.toDocument(),
           'thumbnail': thumb,
           'fullImage': fullImage,
           'standardImage': standardImage,
           'imagesMap': imagesMap,
+          'defaultVariantID': defaultVariantID,
           'createdBy': email,
         });
       } else {
