@@ -18,11 +18,10 @@ _$VideoPostModelImpl _$$VideoPostModelImplFromJson(Map<String, dynamic> json) =>
       productId: json['productId'] as String?,
       product: json['product'] == null
           ? null
-          : ProductFirebaseLiteModel.fromJson(
+          : ProductFirebaseModel.fromJson(
               json['product'] as Map<String, dynamic>),
       searchField: json['searchField'] as String?,
       reference: json['reference'],
-      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$$VideoPostModelImplToJson(
@@ -39,5 +38,4 @@ Map<String, dynamic> _$$VideoPostModelImplToJson(
       'product': instance.product,
       'searchField': instance.searchField,
       'reference': instance.reference,
-      'updatedAt': instance.updatedAt,
     };

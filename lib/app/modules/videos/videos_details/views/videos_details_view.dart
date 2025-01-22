@@ -9,6 +9,7 @@ import '../../../../components/widgets/loadingButton.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../themes/styles/colors.dart';
 import '../../../../themes/styles/typography.dart';
+import '../../../products/products/widgets/product_firebase_card.dart';
 import '../controllers/videos_details_controller.dart';
 
 class VideosDetailsView extends GetView<VideosDetailsController> {
@@ -59,6 +60,24 @@ class VideosDetailsView extends GetView<VideosDetailsController> {
                         ),
                       ],
                     ),
+                  ),
+                  Divider(),
+                  const SizedBox(height: 8),
+                  if (controller.videoPostModel.product != null) ...[
+                    Text(
+                      'Producto vinculado:',
+                      style: TypographyStyle.bodyBlackLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    ProductFirebaseCard(
+                      product: controller.videoPostModel.product!,
+                    ),
+                  ],
+                  Divider(),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Video:',
+                    style: TypographyStyle.bodyBlackLarge,
                   ),
                   const SizedBox(height: 8),
                   VideoWidget(videoUrl: controller.videoPostModel.videoUrl),
