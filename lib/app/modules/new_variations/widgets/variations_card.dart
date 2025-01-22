@@ -53,6 +53,10 @@ class VariationsCard extends StatelessWidget {
                 ),
                 Spacer(),
                 IconButton(
+                  onPressed: () => controller.changeDefaultVariant(variation),
+                  icon: Icon(Icons.crisis_alert),
+                ),
+                IconButton(
                   onPressed: () => controller.editVariation(variation),
                   icon: Icon(Icons.edit),
                 ),

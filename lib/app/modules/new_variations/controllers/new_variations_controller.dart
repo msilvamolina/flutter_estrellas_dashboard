@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
 import 'package:feature_discovery/feature_discovery.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
@@ -66,6 +67,35 @@ class NewVariationsController extends GetxController {
     openGuideTour();
     super.onReady();
   }
+
+  Future<void> changeDefaultVariant(ProductVariantModel variation) async {
+    final result = await showDialog<bool>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Cambiar variación predeterminada'),
+          content: const Text(
+              '¿Estás seguro de que deseas elegir esta variación como predeterminada?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // Confirmar
+              },
+              child: const Text('Cambiar'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (result == true) {
+      // Acción a realizar si el usuario confirma salir
+      changeDefaultVariantAction(variation);
+    }
+  }
+
+  Future<void> changeDefaultVariantAction(
+      ProductVariantModel variation) async {}
 
   Future<void> editVariation(ProductVariantModel variation) async {
     ProductVariantModel? newVariation = await editVariationDialog(variation);
