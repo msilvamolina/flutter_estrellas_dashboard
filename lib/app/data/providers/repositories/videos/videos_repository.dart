@@ -120,6 +120,7 @@ class VideosRepository {
         'createdAt': DateTime.now(),
         'videoUrl': videoUrl,
         'thumbnail': thumbnail,
+        'productId': productFirebaseModel?.id,
         'product': productFirebaseModel?.toJson(),
       });
 

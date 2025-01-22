@@ -27,6 +27,7 @@ mixin _$VideoPostModel {
   String get videoUrl => throw _privateConstructorUsedError;
   String get createdByEmail => throw _privateConstructorUsedError;
   String get createdById => throw _privateConstructorUsedError;
+  String? get productId => throw _privateConstructorUsedError;
   ProductFirebaseLiteModel? get product => throw _privateConstructorUsedError;
   String? get searchField => throw _privateConstructorUsedError;
   dynamic get reference => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $VideoPostModelCopyWith<$Res> {
       String videoUrl,
       String createdByEmail,
       String createdById,
+      String? productId,
       ProductFirebaseLiteModel? product,
       String? searchField,
       dynamic reference,
@@ -86,6 +88,7 @@ class _$VideoPostModelCopyWithImpl<$Res, $Val extends VideoPostModel>
     Object? videoUrl = null,
     Object? createdByEmail = null,
     Object? createdById = null,
+    Object? productId = freezed,
     Object? product = freezed,
     Object? searchField = freezed,
     Object? reference = freezed,
@@ -120,6 +123,10 @@ class _$VideoPostModelCopyWithImpl<$Res, $Val extends VideoPostModel>
           ? _value.createdById
           : createdById // ignore: cast_nullable_to_non_nullable
               as String,
+      productId: freezed == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String?,
       product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -170,6 +177,7 @@ abstract class _$$VideoPostModelImplCopyWith<$Res>
       String videoUrl,
       String createdByEmail,
       String createdById,
+      String? productId,
       ProductFirebaseLiteModel? product,
       String? searchField,
       dynamic reference,
@@ -199,6 +207,7 @@ class __$$VideoPostModelImplCopyWithImpl<$Res>
     Object? videoUrl = null,
     Object? createdByEmail = null,
     Object? createdById = null,
+    Object? productId = freezed,
     Object? product = freezed,
     Object? searchField = freezed,
     Object? reference = freezed,
@@ -233,6 +242,10 @@ class __$$VideoPostModelImplCopyWithImpl<$Res>
           ? _value.createdById
           : createdById // ignore: cast_nullable_to_non_nullable
               as String,
+      productId: freezed == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String?,
       product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
@@ -264,6 +277,7 @@ class _$VideoPostModelImpl extends _VideoPostModel {
       required this.videoUrl,
       required this.createdByEmail,
       required this.createdById,
+      this.productId,
       this.product,
       this.searchField,
       this.reference,
@@ -288,6 +302,8 @@ class _$VideoPostModelImpl extends _VideoPostModel {
   @override
   final String createdById;
   @override
+  final String? productId;
+  @override
   final ProductFirebaseLiteModel? product;
   @override
   final String? searchField;
@@ -298,7 +314,7 @@ class _$VideoPostModelImpl extends _VideoPostModel {
 
   @override
   String toString() {
-    return 'VideoPostModel(name: $name, id: $id, createdAt: $createdAt, thumbnail: $thumbnail, videoUrl: $videoUrl, createdByEmail: $createdByEmail, createdById: $createdById, product: $product, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
+    return 'VideoPostModel(name: $name, id: $id, createdAt: $createdAt, thumbnail: $thumbnail, videoUrl: $videoUrl, createdByEmail: $createdByEmail, createdById: $createdById, productId: $productId, product: $product, searchField: $searchField, reference: $reference, updatedAt: $updatedAt)';
   }
 
   @override
@@ -318,6 +334,8 @@ class _$VideoPostModelImpl extends _VideoPostModel {
                 other.createdByEmail == createdByEmail) &&
             (identical(other.createdById, createdById) ||
                 other.createdById == createdById) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
             (identical(other.product, product) || other.product == product) &&
             (identical(other.searchField, searchField) ||
                 other.searchField == searchField) &&
@@ -337,6 +355,7 @@ class _$VideoPostModelImpl extends _VideoPostModel {
       videoUrl,
       createdByEmail,
       createdById,
+      productId,
       product,
       searchField,
       const DeepCollectionEquality().hash(reference),
@@ -368,6 +387,7 @@ abstract class _VideoPostModel extends VideoPostModel {
       required final String videoUrl,
       required final String createdByEmail,
       required final String createdById,
+      final String? productId,
       final ProductFirebaseLiteModel? product,
       final String? searchField,
       final dynamic reference,
@@ -391,6 +411,8 @@ abstract class _VideoPostModel extends VideoPostModel {
   String get createdByEmail;
   @override
   String get createdById;
+  @override
+  String? get productId;
   @override
   ProductFirebaseLiteModel? get product;
   @override
