@@ -70,6 +70,16 @@ class NewVariationsController extends GetxController {
     super.onReady();
   }
 
+  Future<void> loadInfoProduct() async {
+    ProductFirebaseModel? newProduct =
+        await _repository.getProductFromFirebaseById(product.id);
+
+    if (newProduct != null) {
+      defaultVariantID.value = newProduct.defaultVariantID ?? '';
+      update(['view']);
+    }
+  }
+
   Future<void> changeDefaultVariant(ProductVariantModel variation) async {
     final result = await showDialog<bool>(
       context: Get.context!,
@@ -193,6 +203,7 @@ class NewVariationsController extends GetxController {
       Routes.NEW_VARIATIONS_CUSTOM_PICKERS,
       arguments: [product, list],
     );
+    await loadInfoProduct();
     loadInfo();
   }
 
@@ -299,7 +310,7 @@ class NewVariationsController extends GetxController {
       _mainController.setDropiMessage('Guardando en Firebase');
       await _repository.updateFirebaseCombinations(product: product);
       _mainController.setDropiMessage('Success!');
-
+      loadInfoProduct();
       Future.delayed(Duration(milliseconds: 200), () {
         Get.back();
       });

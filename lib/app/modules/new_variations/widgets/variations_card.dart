@@ -63,14 +63,11 @@ class VariationsCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8),
-            Text(controller.defaultVariantID.value),
-            Text(variation.id),
-            Text((variation.externalID ?? '').toString()),
             Obx(
               () => controller.defaultVariantID.value ==
                       ((variation.externalID ?? '').toString())
                   ? Container(
+                      margin: EdgeInsets.only(top: 8),
                       padding: EdgeInsets.all(6),
                       color: Colors.amber,
                       width: double.infinity,
@@ -81,7 +78,7 @@ class VariationsCard extends StatelessWidget {
                             color: Colors.black,
                           ),
                           Text(
-                            'Esta es la variación por defecto',
+                            'Esta es la variante por defecto',
                             style: TypographyStyle.bodyBlackLarge
                                 .copyWith(color: Colors.black),
                           ),

@@ -353,6 +353,23 @@ class ProductsRepository {
     }
   }
 
+  Future<ProductFirebaseModel?> getProductFromFirebaseById(
+      String productId) async {
+    try {
+      DocumentSnapshot doc =
+          await _firebaseFirestore.collection('products').doc(productId).get();
+
+      if (doc.exists) {
+        return ProductFirebaseModel.fromDocument(doc);
+      } else {
+        return null; // En caso de que el documento no exista
+      }
+    } catch (e) {
+      print(e);
+      return null; // Manejo de errores devolviendo null
+    }
+  }
+
   Stream<List<ProductImageModel>> getProductImages(
       {required String productId}) async* {
     try {
