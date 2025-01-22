@@ -54,7 +54,7 @@ mixin _$ProductFirebaseModel {
   String? get warehouseName => throw _privateConstructorUsedError;
   String? get providerID => throw _privateConstructorUsedError;
   String? get providerName => throw _privateConstructorUsedError;
-  String? get defaultVariationID => throw _privateConstructorUsedError;
+  String? get defaultVariantID => throw _privateConstructorUsedError;
   dynamic get defaultVariantInfo => throw _privateConstructorUsedError;
   dynamic get attributes => throw _privateConstructorUsedError;
   dynamic get variations => throw _privateConstructorUsedError;
@@ -113,7 +113,7 @@ abstract class $ProductFirebaseModelCopyWith<$Res> {
       String? warehouseName,
       String? providerID,
       String? providerName,
-      String? defaultVariationID,
+      String? defaultVariantID,
       dynamic defaultVariantInfo,
       dynamic attributes,
       dynamic variations,
@@ -172,7 +172,7 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
     Object? warehouseName = freezed,
     Object? providerID = freezed,
     Object? providerName = freezed,
-    Object? defaultVariationID = freezed,
+    Object? defaultVariantID = freezed,
     Object? defaultVariantInfo = freezed,
     Object? attributes = freezed,
     Object? variations = freezed,
@@ -314,9 +314,9 @@ class _$ProductFirebaseModelCopyWithImpl<$Res,
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
               as String?,
-      defaultVariationID: freezed == defaultVariationID
-          ? _value.defaultVariationID
-          : defaultVariationID // ignore: cast_nullable_to_non_nullable
+      defaultVariantID: freezed == defaultVariantID
+          ? _value.defaultVariantID
+          : defaultVariantID // ignore: cast_nullable_to_non_nullable
               as String?,
       defaultVariantInfo: freezed == defaultVariantInfo
           ? _value.defaultVariantInfo
@@ -392,7 +392,7 @@ abstract class _$$ProductFirebaseModelImplCopyWith<$Res>
       String? warehouseName,
       String? providerID,
       String? providerName,
-      String? defaultVariationID,
+      String? defaultVariantID,
       dynamic defaultVariantInfo,
       dynamic attributes,
       dynamic variations,
@@ -448,7 +448,7 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
     Object? warehouseName = freezed,
     Object? providerID = freezed,
     Object? providerName = freezed,
-    Object? defaultVariationID = freezed,
+    Object? defaultVariantID = freezed,
     Object? defaultVariantInfo = freezed,
     Object? attributes = freezed,
     Object? variations = freezed,
@@ -590,9 +590,9 @@ class __$$ProductFirebaseModelImplCopyWithImpl<$Res>
           ? _value.providerName
           : providerName // ignore: cast_nullable_to_non_nullable
               as String?,
-      defaultVariationID: freezed == defaultVariationID
-          ? _value.defaultVariationID
-          : defaultVariationID // ignore: cast_nullable_to_non_nullable
+      defaultVariantID: freezed == defaultVariantID
+          ? _value.defaultVariantID
+          : defaultVariantID // ignore: cast_nullable_to_non_nullable
               as String?,
       defaultVariantInfo: freezed == defaultVariantInfo
           ? _value.defaultVariantInfo
@@ -663,7 +663,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
       this.warehouseName,
       this.providerID,
       this.providerName,
-      this.defaultVariationID,
+      this.defaultVariantID,
       this.defaultVariantInfo,
       this.attributes,
       this.variations,
@@ -753,7 +753,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
   @override
   final String? providerName;
   @override
-  final String? defaultVariationID;
+  final String? defaultVariantID;
   @override
   final dynamic defaultVariantInfo;
   @override
@@ -771,7 +771,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, standardImage: $standardImage, fullImage: $fullImage, imagesMap: $imagesMap, warehouseID: $warehouseID, warehouseName: $warehouseName, providerID: $providerID, providerName: $providerName, defaultVariationID: $defaultVariationID, defaultVariantInfo: $defaultVariantInfo, attributes: $attributes, variations: $variations, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference)';
+    return 'ProductFirebaseModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, stock: $stock, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, descriptionFormatted: $descriptionFormatted, descriptionPlainText: $descriptionPlainText, detailsFormatted: $detailsFormatted, detailsPlainText: $detailsPlainText, warrantyFormatted: $warrantyFormatted, warrantyPlainText: $warrantyPlainText, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, standardImage: $standardImage, fullImage: $fullImage, imagesMap: $imagesMap, warehouseID: $warehouseID, warehouseName: $warehouseName, providerID: $providerID, providerName: $providerName, defaultVariantID: $defaultVariantID, defaultVariantInfo: $defaultVariantInfo, attributes: $attributes, variations: $variations, createdAt: $createdAt, uploadDate: $uploadDate, searchField: $searchField, reference: $reference)';
   }
 
   @override
@@ -835,8 +835,8 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
                 other.providerID == providerID) &&
             (identical(other.providerName, providerName) ||
                 other.providerName == providerName) &&
-            (identical(other.defaultVariationID, defaultVariationID) ||
-                other.defaultVariationID == defaultVariationID) &&
+            (identical(other.defaultVariantID, defaultVariantID) ||
+                other.defaultVariantID == defaultVariantID) &&
             const DeepCollectionEquality()
                 .equals(other.defaultVariantInfo, defaultVariantInfo) &&
             const DeepCollectionEquality()
@@ -889,7 +889,7 @@ class _$ProductFirebaseModelImpl extends _ProductFirebaseModel {
         warehouseName,
         providerID,
         providerName,
-        defaultVariationID,
+        defaultVariantID,
         const DeepCollectionEquality().hash(defaultVariantInfo),
         const DeepCollectionEquality().hash(attributes),
         const DeepCollectionEquality().hash(variations),
@@ -952,7 +952,7 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
       final String? warehouseName,
       final String? providerID,
       final String? providerName,
-      final String? defaultVariationID,
+      final String? defaultVariantID,
       final dynamic defaultVariantInfo,
       final dynamic attributes,
       final dynamic variations,
@@ -1033,7 +1033,7 @@ abstract class _ProductFirebaseModel extends ProductFirebaseModel {
   @override
   String? get providerName;
   @override
-  String? get defaultVariationID;
+  String? get defaultVariantID;
   @override
   dynamic get defaultVariantInfo;
   @override

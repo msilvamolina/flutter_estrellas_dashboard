@@ -29,7 +29,7 @@ abstract class ProductFirebaseLiteModel implements _$ProductFirebaseLiteModel {
     dynamic categories,
     String? categoriesIds,
     String? categoriesNames,
-    String? defaultVariationID,
+    String? defaultVariantID,
     dynamic defaultVariantInfo,
     dynamic category,
     double? suggestedPrice,

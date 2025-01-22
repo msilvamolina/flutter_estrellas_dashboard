@@ -33,12 +33,14 @@ class NewVariationsController extends GetxController {
   VariantInfoModel? variantInfoModel;
 
   RxBool isLoading = true.obs;
-
   RxBool showSaveButton = false.obs;
+
+  RxString defaultVariantID = ''.obs;
 
   @override
   Future<void> onInit() async {
     product = Get.arguments as ProductFirebaseModel;
+    defaultVariantID.value = product.defaultVariantID ?? '';
     _list.bindStream(_repository.getAllProductVariants(productId: product.id));
     _listAttributes.bindStream(
         _repository.getAllProductVariantAttributes(productId: product.id));
@@ -108,6 +110,7 @@ class NewVariationsController extends GetxController {
       _mainController.setDropiDialogError(true, failure);
     }, (imagesMap) async {
       _mainController.setDropiMessage('Success!');
+      defaultVariantID.value = variation.id;
       Get.back();
     });
   }

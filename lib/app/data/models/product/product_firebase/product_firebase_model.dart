@@ -45,7 +45,7 @@ abstract class ProductFirebaseModel implements _$ProductFirebaseModel {
     String? warehouseName,
     String? providerID,
     String? providerName,
-    String? defaultVariationID,
+    String? defaultVariantID,
     dynamic defaultVariantInfo,
     dynamic attributes,
     dynamic variations,
