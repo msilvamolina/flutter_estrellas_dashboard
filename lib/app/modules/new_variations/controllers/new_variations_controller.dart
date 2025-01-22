@@ -110,7 +110,7 @@ class NewVariationsController extends GetxController {
       _mainController.setDropiDialogError(true, failure);
     }, (imagesMap) async {
       _mainController.setDropiMessage('Success!');
-      defaultVariantID.value = variation.id;
+      defaultVariantID.value = (variation.externalID ?? '').toString();
       Get.back();
     });
   }

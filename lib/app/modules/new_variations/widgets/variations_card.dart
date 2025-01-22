@@ -64,8 +64,12 @@ class VariationsCard extends StatelessWidget {
               ],
             ),
             SizedBox(height: 8),
+            Text(controller.defaultVariantID.value),
+            Text(variation.id),
+            Text((variation.externalID ?? '').toString()),
             Obx(
-              () => controller.defaultVariantID.value == variation.id
+              () => controller.defaultVariantID.value ==
+                      ((variation.externalID ?? '').toString())
                   ? Container(
                       padding: EdgeInsets.all(6),
                       color: Colors.amber,

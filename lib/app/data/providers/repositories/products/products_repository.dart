@@ -682,6 +682,8 @@ class ProductsRepository {
   Future<Either<String, Unit>> saveCombinations({
     required Map<String, dynamic> product,
   }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
     try {
       final productId = product['_id'] as String;
       final variantsRef = _firebaseFirestore
@@ -695,6 +697,7 @@ class ProductsRepository {
       }
 
       final variations = product['variations'] as List<dynamic>;
+
       for (var variation in variations) {
         final variationId = variation['_id'] as String;
 
@@ -712,6 +715,8 @@ class ProductsRepository {
           'sku': variation['sku'],
           'stock': variation['stock'],
           'values': variation['values'],
+          'createdAt': DateTime.now(),
+          'createdBt': email,
         });
       }
 
@@ -739,6 +744,8 @@ class ProductsRepository {
           'description': attribute['description'],
           'isVariation': attribute['isVariation'],
           'values': attribute['values'],
+          'createdAt': DateTime.now(),
+          'createdBt': email,
         });
       }
 
@@ -767,6 +774,7 @@ class ProductsRepository {
       }
 
       final variations = product['variations'] as List<dynamic>;
+
       for (var variation in variations) {
         final variationId = variation['_id'] as String;
 
@@ -781,6 +789,15 @@ class ProductsRepository {
           'values': variation['values'],
         });
       }
+      String? defaultVariantID =
+          (variations[0]?['externalID'] ?? '').toString();
+      dynamic defaultVariantInfo = variations[0];
+
+      await _firebaseFirestore.collection('products').doc(productId).update({
+        '_hola': 'hola2233',
+        'defaultVariantID': defaultVariantID,
+        'defaultVariantInfo': defaultVariantInfo,
+      });
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -1001,10 +1018,11 @@ class ProductsRepository {
   }) async {
     String email = _firebaseAuth.currentUser!.email!;
 
+    String defaultVariantID = (variant.externalID ?? '').toString();
     try {
       await _firebaseFirestore.collection('products').doc(productId).update(
         {
-          'defaultVariantID': variant.id,
+          'defaultVariantID': defaultVariantID,
           'defaultVariantInfo': variant.toJson(),
           'updatedAt': DateTime.now(),
           'updatedBy': email,
