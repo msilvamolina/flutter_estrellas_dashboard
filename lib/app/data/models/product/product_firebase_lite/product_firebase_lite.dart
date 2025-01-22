@@ -29,6 +29,8 @@ abstract class ProductFirebaseLiteModel implements _$ProductFirebaseLiteModel {
     dynamic categories,
     String? categoriesIds,
     String? categoriesNames,
+    String? defaultVariationID,
+    dynamic defaultVariantInfo,
     dynamic category,
     double? suggestedPrice,
     String? thumbnail,
