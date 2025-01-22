@@ -719,6 +719,14 @@ class ProductsRepository {
           'createdBt': email,
         });
       }
+      String? defaultVariantID =
+          (variations[0]?['externalID'] ?? '').toString();
+      dynamic defaultVariantInfo = variations[0];
+      await _firebaseFirestore.collection('products').doc(productId).update({
+        '_hola': 'hihi222',
+        'defaultVariantID': defaultVariantID,
+        'defaultVariantInfo': defaultVariantInfo,
+      });
 
       final variantsRef2 = _firebaseFirestore
           .collection('products')
@@ -930,8 +938,6 @@ class ProductsRepository {
           );
         }
       }
-
-      print('havevariations true');
 
       await _firebaseFirestore
           .collection('admin')
