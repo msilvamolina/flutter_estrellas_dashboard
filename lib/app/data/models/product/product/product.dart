@@ -25,6 +25,8 @@ abstract class ProductModel implements _$ProductModel {
     double? price,
     bool? active,
     bool? isPercentage,
+    dynamic attributes,
+    dynamic variations,
     int? points,
     double? suggestedPrice,
     String? thumbnail,

@@ -31,6 +31,8 @@ mixin _$ProductFirebaseLiteModel {
   double? get price => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
+  dynamic get attributes => throw _privateConstructorUsedError;
+  dynamic get variations => throw _privateConstructorUsedError;
   dynamic get categories => throw _privateConstructorUsedError;
   String? get categoriesIds => throw _privateConstructorUsedError;
   String? get categoriesNames => throw _privateConstructorUsedError;
@@ -65,6 +67,8 @@ abstract class $ProductFirebaseLiteModelCopyWith<$Res> {
       double? price,
       bool? active,
       int? points,
+      dynamic attributes,
+      dynamic variations,
       dynamic categories,
       String? categoriesIds,
       String? categoriesNames,
@@ -99,6 +103,8 @@ class _$ProductFirebaseLiteModelCopyWithImpl<$Res,
     Object? price = freezed,
     Object? active = freezed,
     Object? points = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? categories = freezed,
     Object? categoriesIds = freezed,
     Object? categoriesNames = freezed,
@@ -144,6 +150,14 @@ class _$ProductFirebaseLiteModelCopyWithImpl<$Res,
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       categories: freezed == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -195,6 +209,8 @@ abstract class _$$ProductFirebaseLiteModelImplCopyWith<$Res>
       double? price,
       bool? active,
       int? points,
+      dynamic attributes,
+      dynamic variations,
       dynamic categories,
       String? categoriesIds,
       String? categoriesNames,
@@ -228,6 +244,8 @@ class __$$ProductFirebaseLiteModelImplCopyWithImpl<$Res>
     Object? price = freezed,
     Object? active = freezed,
     Object? points = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? categories = freezed,
     Object? categoriesIds = freezed,
     Object? categoriesNames = freezed,
@@ -273,6 +291,14 @@ class __$$ProductFirebaseLiteModelImplCopyWithImpl<$Res>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as int?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       categories: freezed == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -318,6 +344,8 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
       this.price,
       this.active,
       this.points,
+      this.attributes,
+      this.variations,
       this.categories,
       this.categoriesIds,
       this.categoriesNames,
@@ -350,6 +378,10 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
   @override
   final int? points;
   @override
+  final dynamic attributes;
+  @override
+  final dynamic variations;
+  @override
   final dynamic categories;
   @override
   final String? categoriesIds;
@@ -366,7 +398,7 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
 
   @override
   String toString() {
-    return 'ProductFirebaseLiteModel(id: $id, name: $name, provider: $provider, externalId: $externalId, stock: $stock, type: $type, price: $price, active: $active, points: $points, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt)';
+    return 'ProductFirebaseLiteModel(id: $id, name: $name, provider: $provider, externalId: $externalId, stock: $stock, type: $type, price: $price, active: $active, points: $points, attributes: $attributes, variations: $variations, categories: $categories, categoriesIds: $categoriesIds, categoriesNames: $categoriesNames, category: $category, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt)';
   }
 
   @override
@@ -384,6 +416,10 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.active, active) || other.active == active) &&
             (identical(other.points, points) || other.points == points) &&
+            const DeepCollectionEquality()
+                .equals(other.attributes, attributes) &&
+            const DeepCollectionEquality()
+                .equals(other.variations, variations) &&
             const DeepCollectionEquality()
                 .equals(other.categories, categories) &&
             (identical(other.categoriesIds, categoriesIds) ||
@@ -412,6 +448,8 @@ class _$ProductFirebaseLiteModelImpl extends _ProductFirebaseLiteModel {
       price,
       active,
       points,
+      const DeepCollectionEquality().hash(attributes),
+      const DeepCollectionEquality().hash(variations),
       const DeepCollectionEquality().hash(categories),
       categoriesIds,
       categoriesNames,
@@ -448,6 +486,8 @@ abstract class _ProductFirebaseLiteModel extends ProductFirebaseLiteModel {
       final double? price,
       final bool? active,
       final int? points,
+      final dynamic attributes,
+      final dynamic variations,
       final dynamic categories,
       final String? categoriesIds,
       final String? categoriesNames,
@@ -479,6 +519,10 @@ abstract class _ProductFirebaseLiteModel extends ProductFirebaseLiteModel {
   bool? get active;
   @override
   int? get points;
+  @override
+  dynamic get attributes;
+  @override
+  dynamic get variations;
   @override
   dynamic get categories;
   @override
