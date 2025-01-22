@@ -45,10 +45,28 @@ class VideosRepository {
 
       await _firebaseFirestore.collection('videos').doc(id).set(
         {
-          'name': name,
-          'id': id,
           'createdBy': uid,
           'createdAt': DateTime.now(),
+        },
+      );
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateProductInVideo({
+    required String videoId,
+    required ProductFirebaseModel product,
+  }) async {
+    try {
+      String email = _firebaseAuth.currentUser!.email ?? '';
+
+      await _firebaseFirestore.collection('videos').doc(videoId).update(
+        {
+          'product': product.toJson(),
+          'updatedBy': email,
+          'updatedAt': DateTime.now(),
         },
       );
       return right(unit);
