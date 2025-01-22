@@ -255,7 +255,7 @@ class MainController extends GetxController {
     if (_userStatus == UserStatus.notLogged) {
       Get.offAllNamed(Routes.LOGIN);
     } else {
-      userRepository.signOut();
+      userRepository.signOut(deleteLocalStorage: false);
       Get.offAllNamed(Routes.LOGIN);
     }
   }

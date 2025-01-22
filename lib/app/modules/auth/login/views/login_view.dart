@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../../app/controllers/main_controller.dart';
+import '../../../../components/inputs/password_input.dart';
 import '../../../../components/logo/logo.dart';
 import '../../../../themes/input_decoration.dart';
 import '../../../../themes/styles/typography.dart';
@@ -75,22 +76,16 @@ class LoginView extends GetView<LoginController> {
                                     },
                                   ),
                                   SizedBox(height: 16),
-                                  GetBuilder<MainController>(
-                                    id: 'input',
-                                    builder: (_) {
-                                      return ReactiveTextField(
-                                        obscureText: true,
-                                        formControlName: Fields.password.name,
-                                        keyboardType: TextInputType.text,
-                                        decoration: CustomInputDecoration
-                                            .inputDecoration(
-                                          isThemeModeDark: controller
-                                              .mainController.isThemeModeDark,
-                                          text: "Contraseña",
-                                          icon: Icons.security,
-                                        ),
-                                      );
-                                    },
+                                  Obx(
+                                    () => PasswordInput(
+                                      autofocus: false,
+                                      isObscure: controller.isObscure.value,
+                                      obscurePressed: controller.obscurePressed,
+                                      formControlName: Fields.password.name,
+                                      keyboardType: TextInputType.text,
+                                      label: 'Contraseña',
+                                      hintText: 'Ingresa tu contraseña',
+                                    ),
                                   ),
                                   SizedBox(height: 26),
                                   GetBuilder<MainController>(

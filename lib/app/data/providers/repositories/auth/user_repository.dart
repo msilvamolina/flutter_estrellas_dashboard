@@ -13,10 +13,12 @@ class UserRepository {
 
   bool isUserLogged() => _firebaseAuth.currentUser != null;
 
-  Future<void> signOut() async {
+  Future<void> signOut({bool deleteLocalStorage = true}) async {
     if (_firebaseAuth.currentUser != null) {
       _firebaseAuth.signOut();
-      _localStorage.cleanAll();
+      if (deleteLocalStorage) {
+        _localStorage.cleanAll();
+      }
     }
   }
 

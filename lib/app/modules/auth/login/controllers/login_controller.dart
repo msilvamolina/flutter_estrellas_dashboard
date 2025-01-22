@@ -71,6 +71,12 @@ class LoginController extends GetxController {
     super.onReady();
   }
 
+  RxBool isObscure = true.obs;
+
+  void obscurePressed() {
+    isObscure.value = !isObscure.value;
+  }
+
   Future<void> openFaceId() async {
     if (_faceIDEnabled) {
       await auth.isDeviceSupported().then(
