@@ -5,8 +5,11 @@ import 'package:get/get.dart';
 
 class SelectProviderController extends GetxController {
   final ProvidersRepository _repository = ProvidersRepository();
-  final List<ProviderModel> _data = <ProviderModel>[];
-  List<ProviderModel> get data => _data;
+  // final List<ProviderModel> _data = <ProviderModel>[];
+  // List<ProviderModel> get data => _data;
+
+  final RxList<ProviderModel> _list = <ProviderModel>[].obs;
+  List<ProviderModel> get list => _list.toList();
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
@@ -23,12 +26,14 @@ class SelectProviderController extends GetxController {
       editMode = Get.arguments[0];
       providerID = Get.arguments[1];
     }
+    _list.bindStream(_repository.getProviersFromFirebase());
+
     super.onInit();
   }
 
   @override
   Future<void> onReady() async {
-    await getData();
+    // await getData();
 
     super.onReady();
   }
@@ -37,30 +42,30 @@ class SelectProviderController extends GetxController {
     // Get.back(result: city);
   }
 
-  Future<void> getData() async {
-    Either<String, List<ProviderModel>> response =
-        await _repository.getProvidersFromBackend();
-    _isLoading = false;
+  // Future<void> getData() async {
+  //   Either<String, List<ProviderModel>> response =
+  //       await _repository.getProvidersFromBackend();
+  //   _isLoading = false;
 
-    response.fold((error) {
-      _responseError = error;
-    }, (list) {
-      _data.clear();
+  //   response.fold((error) {
+  //     _responseError = error;
+  //   }, (list) {
+  //     _data.clear();
 
-      if (editMode != null && editMode == true && providerID != null) {
-        // Agrega solo el elemento que cumple con el providerID
-        final matchingProvider = list.firstWhereOrNull(
-          (provider) => provider.id == providerID,
-        );
+  //     if (editMode != null && editMode == true && providerID != null) {
+  //       // Agrega solo el elemento que cumple con el providerID
+  //       final matchingProvider = list.firstWhereOrNull(
+  //         (provider) => provider.id == providerID,
+  //       );
 
-        if (matchingProvider != null) {
-          _data.add(matchingProvider);
-        }
-      } else {
-        _data.addAll(list);
-      }
-    });
+  //       if (matchingProvider != null) {
+  //         _data.add(matchingProvider);
+  //       }
+  //     } else {
+  //       _data.addAll(list);
+  //     }
+  //   });
 
-    update(['view']);
-  }
+  //   update(['view']);
+  // }
 }
