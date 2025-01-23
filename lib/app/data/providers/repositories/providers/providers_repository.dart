@@ -30,6 +30,23 @@ class ProvidersRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseStorage _firebaseStorage = Get.find<FirebaseStorage>();
 
+  Stream<List<ProviderModel>> getProviersFromFirebase() async* {
+    try {
+      Stream<QuerySnapshot> snapshots = _firebaseFirestore
+          .collection('providers')
+          .orderBy('createdAt', descending: true)
+          .snapshots();
+
+      yield* snapshots.map((snapshot) {
+        return snapshot.docs
+            .map((doc) => ProviderModel.fromDocument(doc))
+            .toList();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<Either<String, List<ProviderModel>>> getProvidersFromBackend() async {
     String url = 'api/provider/get-all';
     try {
@@ -347,6 +364,7 @@ class ProvidersRepository {
         "provider": provider
       };
 
+      log(body.toString());
       Response response = await services.postWithToken(url: url, body: body);
 
       dynamic json = jsonDecode(response.body);

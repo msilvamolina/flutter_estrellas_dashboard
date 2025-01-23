@@ -30,10 +30,10 @@ mixin _$ProviderModel {
   String? get document => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   bool? get isActive => throw _privateConstructorUsedError;
-  int? get porcentage => throw _privateConstructorUsedError;
-  String? get createdAt => throw _privateConstructorUsedError;
-  String? get uploadDate => throw _privateConstructorUsedError;
-  String? get updatedAt => throw _privateConstructorUsedError;
+  int? get porcentage =>
+      throw _privateConstructorUsedError; // String? createdAt,
+// String? uploadDate,
+// String? updatedAt,
   String? get avatarUrl => throw _privateConstructorUsedError;
 
   /// Serializes this ProviderModel to a JSON map.
@@ -62,9 +62,6 @@ abstract class $ProviderModelCopyWith<$Res> {
       String? phone,
       bool? isActive,
       int? porcentage,
-      String? createdAt,
-      String? uploadDate,
-      String? updatedAt,
       String? avatarUrl});
 }
 
@@ -92,9 +89,6 @@ class _$ProviderModelCopyWithImpl<$Res, $Val extends ProviderModel>
     Object? phone = freezed,
     Object? isActive = freezed,
     Object? porcentage = freezed,
-    Object? createdAt = freezed,
-    Object? uploadDate = freezed,
-    Object? updatedAt = freezed,
     Object? avatarUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -134,18 +128,6 @@ class _$ProviderModelCopyWithImpl<$Res, $Val extends ProviderModel>
           ? _value.porcentage
           : porcentage // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      uploadDate: freezed == uploadDate
-          ? _value.uploadDate
-          : uploadDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
       avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -172,9 +154,6 @@ abstract class _$$ProviderModelImplCopyWith<$Res>
       String? phone,
       bool? isActive,
       int? porcentage,
-      String? createdAt,
-      String? uploadDate,
-      String? updatedAt,
       String? avatarUrl});
 }
 
@@ -200,9 +179,6 @@ class __$$ProviderModelImplCopyWithImpl<$Res>
     Object? phone = freezed,
     Object? isActive = freezed,
     Object? porcentage = freezed,
-    Object? createdAt = freezed,
-    Object? uploadDate = freezed,
-    Object? updatedAt = freezed,
     Object? avatarUrl = freezed,
   }) {
     return _then(_$ProviderModelImpl(
@@ -242,18 +218,6 @@ class __$$ProviderModelImplCopyWithImpl<$Res>
           ? _value.porcentage
           : porcentage // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      uploadDate: freezed == uploadDate
-          ? _value.uploadDate
-          : uploadDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
       avatarUrl: freezed == avatarUrl
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
@@ -275,9 +239,6 @@ class _$ProviderModelImpl extends _ProviderModel {
       this.phone,
       this.isActive,
       this.porcentage,
-      this.createdAt,
-      this.uploadDate,
-      this.updatedAt,
       this.avatarUrl})
       : _warehouses = warehouses,
         super._();
@@ -312,18 +273,15 @@ class _$ProviderModelImpl extends _ProviderModel {
   final bool? isActive;
   @override
   final int? porcentage;
-  @override
-  final String? createdAt;
-  @override
-  final String? uploadDate;
-  @override
-  final String? updatedAt;
+// String? createdAt,
+// String? uploadDate,
+// String? updatedAt,
   @override
   final String? avatarUrl;
 
   @override
   String toString() {
-    return 'ProviderModel(id: $id, warehouses: $warehouses, externalID: $externalID, name: $name, email: $email, document: $document, phone: $phone, isActive: $isActive, porcentage: $porcentage, createdAt: $createdAt, uploadDate: $uploadDate, updatedAt: $updatedAt, avatarUrl: $avatarUrl)';
+    return 'ProviderModel(id: $id, warehouses: $warehouses, externalID: $externalID, name: $name, email: $email, document: $document, phone: $phone, isActive: $isActive, porcentage: $porcentage, avatarUrl: $avatarUrl)';
   }
 
   @override
@@ -345,12 +303,6 @@ class _$ProviderModelImpl extends _ProviderModel {
                 other.isActive == isActive) &&
             (identical(other.porcentage, porcentage) ||
                 other.porcentage == porcentage) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.uploadDate, uploadDate) ||
-                other.uploadDate == uploadDate) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl));
   }
@@ -368,9 +320,6 @@ class _$ProviderModelImpl extends _ProviderModel {
       phone,
       isActive,
       porcentage,
-      createdAt,
-      uploadDate,
-      updatedAt,
       avatarUrl);
 
   /// Create a copy of ProviderModel
@@ -400,9 +349,6 @@ abstract class _ProviderModel extends ProviderModel {
       final String? phone,
       final bool? isActive,
       final int? porcentage,
-      final String? createdAt,
-      final String? uploadDate,
-      final String? updatedAt,
       final String? avatarUrl}) = _$ProviderModelImpl;
   const _ProviderModel._() : super._();
 
@@ -427,13 +373,9 @@ abstract class _ProviderModel extends ProviderModel {
   @override
   bool? get isActive;
   @override
-  int? get porcentage;
-  @override
-  String? get createdAt;
-  @override
-  String? get uploadDate;
-  @override
-  String? get updatedAt;
+  int? get porcentage; // String? createdAt,
+// String? uploadDate,
+// String? updatedAt,
   @override
   String? get avatarUrl;
 
