@@ -160,7 +160,8 @@ class VideosRepository {
     try {
       await _firebaseFirestore.collection('videos').doc(videoId).update({
         'order': order,
-        'updatedActiveBy': email,
+        'updatedOrderBy': email,
+        'updatedOrderAt': DateTime.now(),
       });
       return right(unit);
     } on FirebaseException catch (e) {
@@ -178,6 +179,7 @@ class VideosRepository {
       await _firebaseFirestore.collection('videos').doc(videoId).update({
         'active': active,
         'updatedActiveBy': email,
+        'updatedActiveAt': DateTime.now(),
       });
       return right(unit);
     } on FirebaseException catch (e) {
