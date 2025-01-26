@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
+import '../../../../components/discovery_feature/discover_feature_appbar_button.dart';
+import '../../../../themes/styles/colors.dart';
+import '../../../../themes/styles/typography.dart';
 import '../controllers/videos_list_controller.dart';
 import '../widgets/video_post_card.dart';
 
@@ -22,6 +25,21 @@ class VideosListView extends GetView<VideosListController> {
         onPressed: () => Get.toNamed(Routes.CREATE_VIDEO),
       ),
       currentRoute: Routes.VIDEOS_LIST,
+      appBarWidget: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(''),
+        surfaceTintColor: white,
+        actions: [
+          DiscoverFeatureAppBarButton(
+            featureId: controller.guideTourName,
+            icon: Icons.more_vert,
+            title: 'Más opciones al alcance de tu mano',
+            description:
+                'Aquí vas a encontrar todas las opciones para modificar los videos.',
+            onIconPressed: controller.moreOptions,
+          ),
+        ],
+      ),
       child: AdminScaffold(
         permission: Permissions.videosList,
         child: Obx(

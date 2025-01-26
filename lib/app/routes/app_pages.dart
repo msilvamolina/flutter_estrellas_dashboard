@@ -69,6 +69,8 @@ import '../modules/test_endpoints/test_get_products/bindings/test_get_products_b
 import '../modules/test_endpoints/test_get_products/views/test_get_products_view.dart';
 import '../modules/test_endpoints/test_login_app_dropi/bindings/test_login_app_dropi_binding.dart';
 import '../modules/test_endpoints/test_login_app_dropi/views/test_login_app_dropi_view.dart';
+import '../modules/videos/video_order/bindings/video_order_binding.dart';
+import '../modules/videos/video_order/views/video_order_view.dart';
 import '../modules/videos/create_video/bindings/create_video_binding.dart';
 import '../modules/videos/create_video/views/create_video_view.dart';
 import '../modules/videos/videos_details/bindings/videos_details_binding.dart';
@@ -277,6 +279,11 @@ class AppPages {
       name: _Paths.NEW_VARIATIONS_CUSTOM_PICKERS,
       page: () => const NewVariationsCustomPickersView(),
       binding: NewVariationsCustomPickersBinding(),
+    ),
+    GetPage(
+      name: _Paths.VIDEO_ORDER,
+      page: () => const VideoOrderView(),
+      binding: VideoOrderBinding(),
     ),
   ];
 }
