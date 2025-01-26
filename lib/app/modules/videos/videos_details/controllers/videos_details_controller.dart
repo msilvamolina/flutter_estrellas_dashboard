@@ -123,11 +123,18 @@ class VideosDetailsController extends GetxController {
   }
 
   Future<void> showDialogActive() async {
-    bool result = await showChangeStateActive(videoActive.value);
-    videoActive.value = result;
+    bool? result = await showChangeStateActive(videoActive.value);
+    if (result != null) {
+      bool active = result;
+      videoActive.value = active;
+      await _repository.updateVideoActive(
+        videoId: videoPostModel.id,
+        active: active,
+      );
+    }
   }
 
-  Future<bool> showChangeStateActive(bool active) async {
+  Future<bool?> showChangeStateActive(bool active) async {
     List<String>? result = await showDialog<List<String>?>(
       context: Get.context!,
       builder: (BuildContext context) {
@@ -172,6 +179,6 @@ class VideosDetailsController extends GetxController {
     if (result != null) {
       return result[0] == 'true';
     }
-    return false;
+    return null;
   }
 }

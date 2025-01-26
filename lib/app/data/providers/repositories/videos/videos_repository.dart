@@ -152,9 +152,29 @@ class VideosRepository {
     required String videoId,
     required int order,
   }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
     try {
       await _firebaseFirestore.collection('videos').doc(videoId).update({
         'order': order,
+        'updatedActiveBy': email,
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateVideoActive({
+    required String videoId,
+    required bool active,
+  }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
+    try {
+      await _firebaseFirestore.collection('videos').doc(videoId).update({
+        'active': active,
+        'updatedActiveBy': email,
       });
       return right(unit);
     } on FirebaseException catch (e) {
