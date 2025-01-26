@@ -23,6 +23,7 @@ class VideosDetailsController extends GetxController {
   @override
   void onInit() {
     videoPostModel = Get.arguments as VideoPostModel;
+    videoActive.value = videoPostModel.active;
     super.onInit();
   }
 

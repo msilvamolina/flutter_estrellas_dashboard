@@ -21,6 +21,7 @@ VideoPostModel _$VideoPostModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VideoPostModel {
   String get name => throw _privateConstructorUsedError;
+  bool get active => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $VideoPostModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String name,
+      bool active,
       String id,
       String createdAt,
       String thumbnail,
@@ -80,6 +82,7 @@ class _$VideoPostModelCopyWithImpl<$Res, $Val extends VideoPostModel>
   @override
   $Res call({
     Object? name = null,
+    Object? active = null,
     Object? id = null,
     Object? createdAt = null,
     Object? thumbnail = null,
@@ -96,6 +99,10 @@ class _$VideoPostModelCopyWithImpl<$Res, $Val extends VideoPostModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      active: null == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -164,6 +171,7 @@ abstract class _$$VideoPostModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String name,
+      bool active,
       String id,
       String createdAt,
       String thumbnail,
@@ -193,6 +201,7 @@ class __$$VideoPostModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? active = null,
     Object? id = null,
     Object? createdAt = null,
     Object? thumbnail = null,
@@ -209,6 +218,10 @@ class __$$VideoPostModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      active: null == active
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as bool,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -258,6 +271,7 @@ class __$$VideoPostModelImplCopyWithImpl<$Res>
 class _$VideoPostModelImpl extends _VideoPostModel {
   const _$VideoPostModelImpl(
       {required this.name,
+      this.active = false,
       required this.id,
       required this.createdAt,
       required this.thumbnail,
@@ -275,6 +289,9 @@ class _$VideoPostModelImpl extends _VideoPostModel {
 
   @override
   final String name;
+  @override
+  @JsonKey()
+  final bool active;
   @override
   final String id;
   @override
@@ -298,7 +315,7 @@ class _$VideoPostModelImpl extends _VideoPostModel {
 
   @override
   String toString() {
-    return 'VideoPostModel(name: $name, id: $id, createdAt: $createdAt, thumbnail: $thumbnail, videoUrl: $videoUrl, createdByEmail: $createdByEmail, createdById: $createdById, productId: $productId, product: $product, searchField: $searchField, reference: $reference)';
+    return 'VideoPostModel(name: $name, active: $active, id: $id, createdAt: $createdAt, thumbnail: $thumbnail, videoUrl: $videoUrl, createdByEmail: $createdByEmail, createdById: $createdById, productId: $productId, product: $product, searchField: $searchField, reference: $reference)';
   }
 
   @override
@@ -307,6 +324,7 @@ class _$VideoPostModelImpl extends _VideoPostModel {
         (other.runtimeType == runtimeType &&
             other is _$VideoPostModelImpl &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.active, active) || other.active == active) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -331,6 +349,7 @@ class _$VideoPostModelImpl extends _VideoPostModel {
   int get hashCode => Object.hash(
       runtimeType,
       name,
+      active,
       id,
       createdAt,
       thumbnail,
@@ -362,6 +381,7 @@ class _$VideoPostModelImpl extends _VideoPostModel {
 abstract class _VideoPostModel extends VideoPostModel {
   const factory _VideoPostModel(
       {required final String name,
+      final bool active,
       required final String id,
       required final String createdAt,
       required final String thumbnail,
@@ -379,6 +399,8 @@ abstract class _VideoPostModel extends VideoPostModel {
 
   @override
   String get name;
+  @override
+  bool get active;
   @override
   String get id;
   @override

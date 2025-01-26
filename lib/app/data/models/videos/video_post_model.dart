@@ -16,6 +16,7 @@ abstract class VideoPostModel implements _$VideoPostModel {
 
   const factory VideoPostModel({
     required String name,
+    @Default(false) bool active,
     required String id,
     required String createdAt,
     required String thumbnail,

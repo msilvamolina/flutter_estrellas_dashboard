@@ -9,6 +9,7 @@ part of 'video_post_model.dart';
 _$VideoPostModelImpl _$$VideoPostModelImplFromJson(Map<String, dynamic> json) =>
     _$VideoPostModelImpl(
       name: json['name'] as String,
+      active: json['active'] as bool? ?? false,
       id: json['id'] as String,
       createdAt: json['createdAt'] as String,
       thumbnail: json['thumbnail'] as String,
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$VideoPostModelImplToJson(
         _$VideoPostModelImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'active': instance.active,
       'id': instance.id,
       'createdAt': instance.createdAt,
       'thumbnail': instance.thumbnail,
