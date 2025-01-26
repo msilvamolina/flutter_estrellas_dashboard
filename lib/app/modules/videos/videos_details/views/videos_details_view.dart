@@ -43,24 +43,41 @@ class VideosDetailsView extends GetView<VideosDetailsController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    controller.videoPostModel.name,
-                    style: TypographyStyle.h4Mobile,
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.videoPostModel.name,
+                            style: TypographyStyle.h4Mobile,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Creado por: ',
+                            style: TypographyStyle.bodyBlackLarge,
+                          ),
+                          Text(
+                            controller.videoPostModel.createdByEmail,
+                            style: TypographyStyle.bodyRegularMedium,
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      Obx(
+                        () => GestureDetector(
+                          onTap: controller.showDialogActive,
+                          child: Image.asset(
+                            controller.videoActive.value
+                                ? 'assets/images/switchon.png'
+                                : 'assets/images/switchoff.png',
+                            width: 80,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
-                  RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                      text: 'Creado por: ',
-                      style: TypographyStyle.bodyBlackLarge,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: controller.videoPostModel.createdByEmail,
-                          style: TypographyStyle.bodyRegularMedium,
-                        ),
-                      ],
-                    ),
-                  ),
                   Divider(),
                   const SizedBox(height: 8),
                   if (controller.videoPostModel.product != null) ...[

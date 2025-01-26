@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../data/models/product/product_firebase/product_firebase_model.dart';
 import '../../../../data/providers/local/local_storage.dart';
 import '../../../../data/providers/repositories/videos/videos_repository.dart';
+import '../../../../themes/styles/typography.dart';
 
 class VideosDetailsController extends GetxController {
   late VideoPostModel videoPostModel;
@@ -18,6 +19,7 @@ class VideosDetailsController extends GetxController {
   final MainController _mainController = Get.find<MainController>();
   LocalStorage localStorage = Get.find<LocalStorage>();
 
+  RxBool videoActive = false.obs;
   @override
   void onInit() {
     videoPostModel = Get.arguments as VideoPostModel;
@@ -118,5 +120,58 @@ class VideosDetailsController extends GetxController {
       _mainController.setDropiDialogError(
           true, 'No se pudo obtener la información del producto');
     }
+  }
+
+  Future<void> showDialogActive() async {
+    bool result = await showChangeStateActive(videoActive.value);
+    videoActive.value = result;
+  }
+
+  Future<bool> showChangeStateActive(bool active) async {
+    List<String>? result = await showDialog<List<String>?>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return AlertDialog(
+              title: Text(
+                'Cambiar estado',
+                style: TypographyStyle.h4Mobile,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SwitchListTile(
+                    value: active, // Estado actual del switch
+                    onChanged: (bool value) {
+                      setState(() {
+                        active = value; // Actualiza el estado
+                      });
+                    },
+                    title: Text('Activo'),
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Get.back(result: [
+                      active.toString()
+                    ]); // Devuelve el estado como resultado
+                  },
+                  child: const Text('GUARDAR'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    if (result != null) {
+      return result[0] == 'true';
+    }
+    return false;
   }
 }
