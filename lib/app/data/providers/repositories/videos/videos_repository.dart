@@ -22,7 +22,7 @@ class VideosRepository {
     try {
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
           .collection('videos')
-          .orderBy('order', descending: false)
+          .orderBy('order', descending: true)
           .snapshots();
 
       yield* snapshots.map((snapshot) {
@@ -117,6 +117,7 @@ class VideosRepository {
     required String name,
     required String videoPath,
     required ProductFirebaseModel product,
+    required int order,
   }) async {
     try {
       String uid = _firebaseAuth.currentUser!.uid;
@@ -135,6 +136,8 @@ class VideosRepository {
         'id': videoId,
         'createdById': uid,
         'createdByEmail': email,
+        'order': order,
+        'active': false,
         'createdAt': DateTime.now(),
         'videoUrl': videoUrl,
         'thumbnail': thumbnail,

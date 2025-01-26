@@ -61,50 +61,53 @@ class VideoOrderView extends GetView<VideoOrderController> {
                   itemBuilder: (context, item, index) {
                     VideoPostModel? video = controller.getVideoByImage(item);
                     return Material(
-                      child: Stack(
-                        children: [
-                          Image.network(
-                            item,
-                            fit: BoxFit.cover,
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                border:
-                                    Border.all(color: Colors.white, width: 2),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 6,
-                                    offset: Offset(0, 4),
+                      child: Opacity(
+                        opacity: video!.active ? 1 : 0.4,
+                        child: Stack(
+                          children: [
+                            Image.network(
+                              item,
+                              fit: BoxFit.cover,
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black,
+                                      blurRadius: 6,
+                                      offset: Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.network(
+                                    video?.product?.thumbnail ?? '',
+                                    width: 60,
+                                    fit: BoxFit.cover,
                                   ),
-                                ],
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  video?.product?.thumbnail ?? '',
-                                  width: 60,
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(6),
-                            width: double.infinity,
-                            color: Colors.black.withOpacity(0.75),
-                            child: Text(
-                              video?.name ?? '',
-                              style: TypographyStyle.bodyBlackMedium,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
+                            Container(
+                              padding: EdgeInsets.all(6),
+                              width: double.infinity,
+                              color: Colors.black.withOpacity(0.75),
+                              child: Text(
+                                video?.name ?? '',
+                                style: TypographyStyle.bodyBlackMedium,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   },

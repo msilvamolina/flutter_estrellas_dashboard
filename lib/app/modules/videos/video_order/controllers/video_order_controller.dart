@@ -42,8 +42,11 @@ class VideoOrderController extends GetxController {
     _buttonSaveLoading = true;
     update(['list_changed']);
 
-    for (int index = 0; index < _list.length; index++) {
-      VideoPostModel? option = getVideoByImage(_newOrderList[index]);
+    // Invierte la lista antes de guardar
+    List<String> invertedOrderList = _newOrderList.reversed.toList();
+
+    for (int index = 0; index < invertedOrderList.length; index++) {
+      VideoPostModel? option = getVideoByImage(invertedOrderList[index]);
 
       if (option != null) {
         String videoId = option.id;

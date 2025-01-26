@@ -43,6 +43,8 @@ class CreateVideoController extends GetxController {
   ProductFirebaseModel? _productModel;
   ProductFirebaseModel? get productModel => _productModel;
 
+  int order = 0;
+
   FormGroup buildForm() => fb.group(<String, Object>{
         Fields.videoName.name: FormControl<String>(
           validators: [
@@ -57,7 +59,7 @@ class CreateVideoController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    _listProducts.bindStream(_productsRepository.getProductsFromFirebase());
+    order = Get.arguments as int;
 
     super.onInit();
   }
@@ -104,6 +106,7 @@ class CreateVideoController extends GetxController {
       name: videoName,
       videoPath: _videoPath!,
       product: _productModel!,
+      order: order,
     );
     Get.back();
     response.fold((failure) {

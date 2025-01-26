@@ -22,7 +22,7 @@ class VideosListView extends GetView<VideosListController> {
       floatingActionButton: CustomFloatingActionButton(
         label: 'Crear video',
         icon: Icons.add,
-        onPressed: () => Get.toNamed(Routes.CREATE_VIDEO),
+        onPressed: controller.goToCreatevideo,
       ),
       currentRoute: Routes.VIDEOS_LIST,
       appBarWidget: AppBar(

@@ -25,6 +25,10 @@ class VideosListController extends GetxController {
     openGuideTour();
   }
 
+  void goToCreatevideo() {
+    Get.toNamed(Routes.CREATE_VIDEO, arguments: list.length);
+  }
+
   String guideTourName = 'feature_video_order';
   Future<void> openGuideTour() async {
     bool userWantToSee = await localStorage.getGuideTourStatus(guideTourName);
