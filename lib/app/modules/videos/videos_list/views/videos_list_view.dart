@@ -44,15 +44,19 @@ class VideosListView extends GetView<VideosListController> {
         permission: Permissions.videosList,
         child: Obx(
           () => controller.list.isNotEmpty
-              ? ListView.separated(
+              ? GridView.builder(
                   itemCount: controller.list.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 9 / 16,
+                  ),
                   itemBuilder: (context, index) {
                     return VideoPostCard(
                       videoPostModel: controller.list[index],
                     );
                   },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
                 )
               : const Text('no data'),
         ),
