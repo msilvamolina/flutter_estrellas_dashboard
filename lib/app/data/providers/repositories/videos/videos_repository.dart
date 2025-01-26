@@ -147,4 +147,18 @@ class VideosRepository {
       return left(e.toString());
     }
   }
+
+  Future<Either<String, Unit>> updateVideoOrder({
+    required String videoId,
+    required int order,
+  }) async {
+    try {
+      await _firebaseFirestore.collection('videos').doc(videoId).update({
+        'order': order,
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
 }

@@ -46,13 +46,11 @@ class VideoOrderController extends GetxController {
       VideoPostModel? option = getVideoByImage(_newOrderList[index]);
 
       if (option != null) {
-        print('video id: $option');
-        print('order: $index');
-        // await _repository.updateImageOrder(
-        //   productId: product.id,
-        //   imageId: option.id,
-        //   order: index,
-        // );
+        String videoId = option.id;
+        await _repository.updateVideoOrder(
+          videoId: videoId,
+          order: index,
+        );
       }
     }
     _buttonSaveLoading = false;
