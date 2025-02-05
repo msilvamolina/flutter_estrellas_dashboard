@@ -52,8 +52,7 @@ class ProvidersEstrellas1View extends GetView<ProvidersEstrellas1Controller> {
             label: 'avatarUrl',
             widget: TableRowInsideColumn(
               cellWidth: 70,
-              imageUrl: 'https://storage.googleapis.com/dev_bucket_estrellas/' +
-                  (controller.provider.avatarUrl ?? ''),
+              imageUrl: (controller.provider.avatarUrl ?? ''),
               rows: [
                 TableRowStringsModel(
                   label: 'url',
@@ -92,20 +91,20 @@ class ProvidersEstrellas1View extends GetView<ProvidersEstrellas1Controller> {
             widget:
                 TableRowText(text: controller.provider.porcentage.toString()),
           ),
-          TableRowModel(
-            label: 'createdAt',
-            widget: TableRowDate(date: controller.provider.createdAt ?? ''),
-          ),
-          if (controller.provider.updatedAt != null)
-            TableRowModel(
-              label: 'updatedAt',
-              widget: TableRowDate(date: controller.provider.updatedAt ?? ''),
-            ),
-          if (controller.provider.uploadDate != null)
-            TableRowModel(
-              label: 'uploadDate',
-              widget: TableRowDate(date: controller.provider.uploadDate ?? ''),
-            ),
+          // TableRowModel(
+          //   label: 'createdAt',
+          //   widget: TableRowDate(date: controller.provider.createdAt ?? ''),
+          // ),
+          // if (controller.provider.updatedAt != null)
+          //   TableRowModel(
+          //     label: 'updatedAt',
+          //     widget: TableRowDate(date: controller.provider.updatedAt ?? ''),
+          //   ),
+          // if (controller.provider.uploadDate != null)
+          //   TableRowModel(
+          //     label: 'uploadDate',
+          //     widget: TableRowDate(date: controller.provider.uploadDate ?? ''),
+          //   ),
           TableRowModel(
             label: '',
             widget: SizedBox(

@@ -22,7 +22,7 @@ class VideosRepository {
     try {
       Stream<QuerySnapshot> snapshots = _firebaseFirestore
           .collection('videos')
-          .orderBy('createdAt', descending: true)
+          .orderBy('order', descending: true)
           .snapshots();
 
       yield* snapshots.map((snapshot) {
@@ -45,10 +45,28 @@ class VideosRepository {
 
       await _firebaseFirestore.collection('videos').doc(id).set(
         {
-          'name': name,
-          'id': id,
           'createdBy': uid,
           'createdAt': DateTime.now(),
+        },
+      );
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateProductInVideo({
+    required String videoId,
+    required ProductFirebaseModel product,
+  }) async {
+    try {
+      String email = _firebaseAuth.currentUser!.email ?? '';
+
+      await _firebaseFirestore.collection('videos').doc(videoId).update(
+        {
+          'product': product.toJson(),
+          'updatedBy': email,
+          'updatedAt': DateTime.now(),
         },
       );
       return right(unit);
@@ -99,6 +117,7 @@ class VideosRepository {
     required String name,
     required String videoPath,
     required ProductFirebaseModel product,
+    required int order,
   }) async {
     try {
       String uid = _firebaseAuth.currentUser!.uid;
@@ -117,15 +136,54 @@ class VideosRepository {
         'id': videoId,
         'createdById': uid,
         'createdByEmail': email,
+        'order': order,
+        'active': false,
         'createdAt': DateTime.now(),
         'videoUrl': videoUrl,
         'thumbnail': thumbnail,
+        'productId': productFirebaseModel?.id,
         'product': productFirebaseModel?.toJson(),
       });
 
       return right(unit);
     } catch (e) {
       return left(e.toString());
+    }
+  }
+
+  Future<Either<String, Unit>> updateVideoOrder({
+    required String videoId,
+    required int order,
+  }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
+    try {
+      await _firebaseFirestore.collection('videos').doc(videoId).update({
+        'order': order,
+        'updatedOrderBy': email,
+        'updatedOrderAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
+    }
+  }
+
+  Future<Either<String, Unit>> updateVideoActive({
+    required String videoId,
+    required bool active,
+  }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
+    try {
+      await _firebaseFirestore.collection('videos').doc(videoId).update({
+        'active': active,
+        'updatedActiveBy': email,
+        'updatedActiveAt': DateTime.now(),
+      });
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
     }
   }
 }

@@ -97,8 +97,6 @@ class MainController extends GetxController {
 
   Future<void> changeFaceId() async {
     if (_canCheckBiometrics ?? false) {
-      print('holis');
-
       _faceIdauthenticate();
     }
   }
@@ -255,7 +253,7 @@ class MainController extends GetxController {
     if (_userStatus == UserStatus.notLogged) {
       Get.offAllNamed(Routes.LOGIN);
     } else {
-      userRepository.signOut();
+      userRepository.signOut(deleteLocalStorage: false);
       Get.offAllNamed(Routes.LOGIN);
     }
   }

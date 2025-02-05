@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:estrellas_dashboard/app/app/controllers/main_controller.dart';
 import 'package:estrellas_dashboard/app/data/providers/local/local_storage.dart';
 import 'package:feature_discovery/feature_discovery.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/product/product_firebase/product_firebase_model.dart';
@@ -32,12 +33,14 @@ class NewVariationsController extends GetxController {
   VariantInfoModel? variantInfoModel;
 
   RxBool isLoading = true.obs;
-
   RxBool showSaveButton = false.obs;
+
+  RxString defaultVariantID = ''.obs;
 
   @override
   Future<void> onInit() async {
     product = Get.arguments as ProductFirebaseModel;
+    defaultVariantID.value = product.defaultVariantID ?? '';
     _list.bindStream(_repository.getAllProductVariants(productId: product.id));
     _listAttributes.bindStream(
         _repository.getAllProductVariantAttributes(productId: product.id));
@@ -65,6 +68,61 @@ class NewVariationsController extends GetxController {
   void onReady() {
     openGuideTour();
     super.onReady();
+  }
+
+  Future<void> loadInfoProduct() async {
+    ProductFirebaseModel? newProduct =
+        await _repository.getProductFromFirebaseById(product.id);
+
+    if (newProduct != null) {
+      defaultVariantID.value = newProduct.defaultVariantID ?? '';
+      update(['view']);
+    }
+  }
+
+  Future<void> changeDefaultVariant(ProductVariantModel variation) async {
+    final result = await showDialog<bool>(
+      context: Get.context!,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Cambiar variación predeterminada'),
+          content: const Text(
+              '¿Estás seguro de que deseas elegir esta variación como predeterminada?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // Confirmar
+              },
+              child: const Text('Cambiar'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (result == true) {
+      // Acción a realizar si el usuario confirma salir
+      changeDefaultVariantAction(variation);
+    }
+  }
+
+  Future<void> changeDefaultVariantAction(ProductVariantModel variation) async {
+    _mainController.setDropiDialog(false);
+    _mainController.showDropiLoader();
+    _mainController.setDropiMessage('Iniciando conexión');
+
+    Either<String, dynamic> response = await _repository.changeDefaultVariant(
+      variant: variation,
+      productId: product.id,
+    );
+
+    response.fold((failure) {
+      _mainController.setDropiDialogError(true, failure);
+    }, (imagesMap) async {
+      _mainController.setDropiMessage('Success!');
+      defaultVariantID.value = (variation.externalID ?? '').toString();
+      Get.back();
+    });
   }
 
   Future<void> editVariation(ProductVariantModel variation) async {
@@ -145,6 +203,7 @@ class NewVariationsController extends GetxController {
       Routes.NEW_VARIATIONS_CUSTOM_PICKERS,
       arguments: [product, list],
     );
+    await loadInfoProduct();
     loadInfo();
   }
 
@@ -251,7 +310,7 @@ class NewVariationsController extends GetxController {
       _mainController.setDropiMessage('Guardando en Firebase');
       await _repository.updateFirebaseCombinations(product: product);
       _mainController.setDropiMessage('Success!');
-
+      loadInfoProduct();
       Future.delayed(Duration(milliseconds: 200), () {
         Get.back();
       });

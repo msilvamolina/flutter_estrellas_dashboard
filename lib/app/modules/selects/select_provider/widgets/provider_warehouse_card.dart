@@ -40,9 +40,7 @@ class ProviderWarehouseCard extends StatelessWidget {
               children: [
                 CachedNetworkImage(
                   width: 60,
-                  imageUrl:
-                      'https://storage.googleapis.com/dev_bucket_estrellas/' +
-                          (provider.avatarUrl ?? ''),
+                  imageUrl: (provider.avatarUrl ?? ''),
                   placeholder: (context, url) =>
                       const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),

@@ -14,33 +14,26 @@ class SelectProviderView extends GetView<SelectProviderController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Elegí un proveedor'),
+        title: Text('Elegí una bodega'),
         centerTitle: true,
       ),
       body: GetBuilder<SelectProviderController>(
         id: 'view',
         builder: (_) {
-          if (!controller.isLoading) {
-            return ListView.builder(
-              itemCount: controller.data.length,
+          return Obx(
+            () => ListView.separated(
+              itemCount: controller.list.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: EdgeInsets.only(
-                      top: index == 0 ? 8 : 0,
-                      bottom: index == (controller.data.length - 1) ? 48 : 0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child:
-                        ProviderWarehouseCard(provider: controller.data[index]),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: ProviderWarehouseCard(
+                    provider: controller.list[index],
                   ),
                 );
               },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+              separatorBuilder: (context, index) => SizedBox(height: 8),
+            ),
+          );
         },
       ),
     );

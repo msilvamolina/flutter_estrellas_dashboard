@@ -1,6 +1,7 @@
 import 'package:estrellas_dashboard/app/themes/styles/typography.dart';
 import 'package:estrellas_dashboard/app/utils/money_amount.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../data/models/product_variant/product_variant_model.dart';
 import '../../../data/models/variant_variant/variant_variant.dart';
 import '../../new_variations_custom_pickers/widgets/variant_card.dart';
@@ -53,10 +54,38 @@ class VariationsCard extends StatelessWidget {
                 ),
                 Spacer(),
                 IconButton(
+                  onPressed: () => controller.changeDefaultVariant(variation),
+                  icon: Icon(Icons.crisis_alert),
+                ),
+                IconButton(
                   onPressed: () => controller.editVariation(variation),
                   icon: Icon(Icons.edit),
                 ),
               ],
+            ),
+            Obx(
+              () => controller.defaultVariantID.value ==
+                      ((variation.externalID ?? '').toString())
+                  ? Container(
+                      margin: EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.all(6),
+                      color: Colors.amber,
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.cyclone_rounded,
+                            color: Colors.black,
+                          ),
+                          Text(
+                            'Esta es la variante por defecto',
+                            style: TypographyStyle.bodyBlackLarge
+                                .copyWith(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    )
+                  : SizedBox.shrink(),
             ),
             SizedBox(height: 8),
             Row(

@@ -15,33 +15,38 @@ class NewVariationsView extends GetView<NewVariationsController> {
   const NewVariationsView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => DefaultTabController(
-        length: controller.list.isEmpty ? 0 : 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('Variantes'),
-          ),
-          body: Column(
-            children: [
-              TabBar(
-                tabs: [
-                  Tab(text: 'Variaciones'),
-                  Tab(text: 'Combinaciones'),
+    return GetBuilder<NewVariationsController>(
+      id: 'view',
+      builder: (_) {
+        return Obx(
+          () => DefaultTabController(
+            length: controller.list.isEmpty ? 0 : 2,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text('Variantes'),
+              ),
+              body: Column(
+                children: [
+                  TabBar(
+                    tabs: [
+                      Tab(text: 'Variaciones'),
+                      Tab(text: 'Combinaciones'),
+                    ],
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        ProductVariantsTab(controller: controller),
+                        ProductVariantsCombinationsTab(controller: controller),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    ProductVariantsTab(controller: controller),
-                    ProductVariantsCombinationsTab(controller: controller),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

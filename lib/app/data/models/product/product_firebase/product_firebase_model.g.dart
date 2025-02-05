@@ -44,14 +44,14 @@ _$ProductFirebaseModelImpl _$$ProductFirebaseModelImplFromJson(
       warehouseName: json['warehouseName'] as String?,
       providerID: json['providerID'] as String?,
       providerName: json['providerName'] as String?,
-      defaultVariation: json['defaultVariation'] as String?,
+      defaultVariantID: json['defaultVariantID'] as String?,
+      defaultVariantInfo: json['defaultVariantInfo'],
       attributes: json['attributes'],
       variations: json['variations'],
       createdAt: json['createdAt'] as String?,
       uploadDate: json['uploadDate'] as String?,
       searchField: json['searchField'] as String?,
       reference: json['reference'],
-      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$$ProductFirebaseModelImplToJson(
@@ -90,12 +90,12 @@ Map<String, dynamic> _$$ProductFirebaseModelImplToJson(
       'warehouseName': instance.warehouseName,
       'providerID': instance.providerID,
       'providerName': instance.providerName,
-      'defaultVariation': instance.defaultVariation,
+      'defaultVariantID': instance.defaultVariantID,
+      'defaultVariantInfo': instance.defaultVariantInfo,
       'attributes': instance.attributes,
       'variations': instance.variations,
       'createdAt': instance.createdAt,
       'uploadDate': instance.uploadDate,
       'searchField': instance.searchField,
       'reference': instance.reference,
-      'updatedAt': instance.updatedAt,
     };

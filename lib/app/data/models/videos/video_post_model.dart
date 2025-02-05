@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../helpers/friendly_helpers.dart';
 import '../../helpers/model_helpers.dart';
+import '../product/product_firebase/product_firebase_model.dart';
 
 part 'video_post_model.freezed.dart';
 part 'video_post_model.g.dart';
@@ -15,16 +16,17 @@ abstract class VideoPostModel implements _$VideoPostModel {
 
   const factory VideoPostModel({
     required String name,
+    @Default(false) bool active,
     required String id,
     required String createdAt,
     required String thumbnail,
     required String videoUrl,
     required String createdByEmail,
     required String createdById,
-    ProductFirebaseLiteModel? product,
+    String? productId,
+    ProductFirebaseModel? product,
     String? searchField,
     dynamic reference,
-    String? updatedAt,
   }) = _VideoPostModel;
 
   factory VideoPostModel.fromJson(Map<String, dynamic> json) =>

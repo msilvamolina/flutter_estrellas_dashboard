@@ -11,8 +11,8 @@ import '../../../../routes/app_pages.dart';
 
 class ProvidersListController extends GetxController {
   final ProvidersRepository _repository = ProvidersRepository();
-  final List<ProviderModel> _data = <ProviderModel>[];
-  List<ProviderModel> get data => _data;
+  // final List<ProviderModel> _data = <ProviderModel>[];
+  // List<ProviderModel> get data => _data;
 
   bool _isLoading = true;
   bool get isLoading => _isLoading;
@@ -23,11 +23,14 @@ class ProvidersListController extends GetxController {
   // final RxList<ProductFirebaseModel> _list = <ProductFirebaseModel>[].obs;
   // List<ProductFirebaseModel> get list => _list.toList();
 
+  final RxList<ProviderModel> _list = <ProviderModel>[].obs;
+  List<ProviderModel> get list => _list.toList();
+
   @override
   void onInit() {
-    getData();
+    // getData();
 
-    // _list.bindStream(_repository.getProductsFromFirebase());
+    _list.bindStream(_repository.getProviersFromFirebase());
     super.onInit();
   }
 
@@ -38,20 +41,20 @@ class ProvidersListController extends GetxController {
 
   Future<void> addProvider() async {
     await Get.toNamed(Routes.CREATE_PROVIDER);
-    await getData();
+    // await getData();
   }
 
-  Future<void> getData() async {
-    Either<String, List<ProviderModel>> response =
-        await _repository.getProvidersFromBackend();
-    _isLoading = false;
+  // Future<void> getData() async {
+  //   Either<String, List<ProviderModel>> response =
+  //       await _repository.getProvidersFromBackend();
+  //   _isLoading = false;
 
-    response.fold((error) {
-      _responseError = error;
-    }, (list) {
-      _data.clear();
-      _data.addAll(list);
-    });
-    update(['view']);
-  }
+  //   response.fold((error) {
+  //     _responseError = error;
+  //   }, (list) {
+  //     _data.clear();
+  //     _data.addAll(list);
+  //   });
+  //   update(['view']);
+  // }
 }

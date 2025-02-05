@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../app/layouts/main_layout/main_layout.dart';
+import '../../../../components/discovery_feature/discover_feature_appbar_button.dart';
+import '../../../../themes/styles/colors.dart';
+import '../../../../themes/styles/typography.dart';
 import '../controllers/videos_list_controller.dart';
 import '../widgets/video_post_card.dart';
 
@@ -19,22 +22,41 @@ class VideosListView extends GetView<VideosListController> {
       floatingActionButton: CustomFloatingActionButton(
         label: 'Crear video',
         icon: Icons.add,
-        onPressed: () => Get.toNamed(Routes.CREATE_VIDEO),
+        onPressed: controller.goToCreatevideo,
       ),
       currentRoute: Routes.VIDEOS_LIST,
+      appBarWidget: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(''),
+        surfaceTintColor: white,
+        actions: [
+          DiscoverFeatureAppBarButton(
+            featureId: controller.guideTourName,
+            icon: Icons.more_vert,
+            title: 'Más opciones al alcance de tu mano',
+            description:
+                'Aquí vas a encontrar todas las opciones para modificar los videos.',
+            onIconPressed: controller.moreOptions,
+          ),
+        ],
+      ),
       child: AdminScaffold(
         permission: Permissions.videosList,
         child: Obx(
           () => controller.list.isNotEmpty
-              ? ListView.separated(
+              ? GridView.builder(
                   itemCount: controller.list.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 9 / 16,
+                  ),
                   itemBuilder: (context, index) {
                     return VideoPostCard(
                       videoPostModel: controller.list[index],
                     );
                   },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
                 )
               : const Text('no data'),
         ),

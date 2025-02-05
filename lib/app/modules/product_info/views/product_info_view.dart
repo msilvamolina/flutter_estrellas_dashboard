@@ -147,10 +147,10 @@ class ProductInfoView extends GetView<ProductInfoController> {
             label: 'createdAt',
             widget: TableRowDate(date: controller.product.createdAt ?? ''),
           ),
-          TableRowModel(
-            label: 'updatedAt',
-            widget: TableRowDate(date: controller.product.updatedAt ?? ''),
-          ),
+          // TableRowModel(
+          //   label: 'updatedAt',
+          //   widget: TableRowDate(date: controller.product.updatedAt ?? ''),
+          // ),
           TableRowModel(
             label: 'description',
             widget: TableRowText(text: controller.product.description ?? ''),

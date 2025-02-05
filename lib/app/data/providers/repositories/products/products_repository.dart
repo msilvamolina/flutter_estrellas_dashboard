@@ -87,15 +87,17 @@ class ProductsRepository {
         String thumb = imagesMap?['80x80'] ?? '';
         String standardImage = imagesMap?['400x400'] ?? '';
         String fullImage = imagesMap?['800x800'] ?? '';
-
         mainController.setDropiMessage('Escribiendo en firebase');
 
+        String defaultVariantID =
+            (product.variations[0]?['externalID'] ?? '').toString();
         await _firebaseFirestore.collection('products').doc(product.id).set({
           ...product.toDocument(),
           'thumbnail': thumb,
           'fullImage': fullImage,
           'standardImage': standardImage,
           'imagesMap': imagesMap,
+          'defaultVariantID': defaultVariantID,
           'createdBy': email,
         });
       } else {
@@ -348,6 +350,23 @@ class ProductsRepository {
       });
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<ProductFirebaseModel?> getProductFromFirebaseById(
+      String productId) async {
+    try {
+      DocumentSnapshot doc =
+          await _firebaseFirestore.collection('products').doc(productId).get();
+
+      if (doc.exists) {
+        return ProductFirebaseModel.fromDocument(doc);
+      } else {
+        return null; // En caso de que el documento no exista
+      }
+    } catch (e) {
+      print(e);
+      return null; // Manejo de errores devolviendo null
     }
   }
 
@@ -680,6 +699,8 @@ class ProductsRepository {
   Future<Either<String, Unit>> saveCombinations({
     required Map<String, dynamic> product,
   }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
     try {
       final productId = product['_id'] as String;
       final variantsRef = _firebaseFirestore
@@ -693,6 +714,7 @@ class ProductsRepository {
       }
 
       final variations = product['variations'] as List<dynamic>;
+
       for (var variation in variations) {
         final variationId = variation['_id'] as String;
 
@@ -710,8 +732,18 @@ class ProductsRepository {
           'sku': variation['sku'],
           'stock': variation['stock'],
           'values': variation['values'],
+          'createdAt': DateTime.now(),
+          'createdBt': email,
         });
       }
+      String? defaultVariantID =
+          (variations[0]?['externalID'] ?? '').toString();
+      dynamic defaultVariantInfo = variations[0];
+      await _firebaseFirestore.collection('products').doc(productId).update({
+        '_hola': 'hihi222',
+        'defaultVariantID': defaultVariantID,
+        'defaultVariantInfo': defaultVariantInfo,
+      });
 
       final variantsRef2 = _firebaseFirestore
           .collection('products')
@@ -737,6 +769,8 @@ class ProductsRepository {
           'description': attribute['description'],
           'isVariation': attribute['isVariation'],
           'values': attribute['values'],
+          'createdAt': DateTime.now(),
+          'createdBt': email,
         });
       }
 
@@ -765,6 +799,7 @@ class ProductsRepository {
       }
 
       final variations = product['variations'] as List<dynamic>;
+
       for (var variation in variations) {
         final variationId = variation['_id'] as String;
 
@@ -779,6 +814,15 @@ class ProductsRepository {
           'values': variation['values'],
         });
       }
+      String? defaultVariantID =
+          (variations[0]?['externalID'] ?? '').toString();
+      dynamic defaultVariantInfo = variations[0];
+
+      await _firebaseFirestore.collection('products').doc(productId).update({
+        '_hola': 'hola2233',
+        'defaultVariantID': defaultVariantID,
+        'defaultVariantInfo': defaultVariantInfo,
+      });
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -912,8 +956,6 @@ class ProductsRepository {
         }
       }
 
-      print('havevariations true');
-
       await _firebaseFirestore
           .collection('admin')
           .doc('productsVariations')
@@ -990,6 +1032,29 @@ class ProductsRepository {
     } catch (e) {
       print('Error al obtener datos de Firebase: $e');
       return null;
+    }
+  }
+
+  Future<Either<String, Unit>> changeDefaultVariant({
+    required String productId,
+    required ProductVariantModel variant,
+  }) async {
+    String email = _firebaseAuth.currentUser!.email!;
+
+    String defaultVariantID = (variant.externalID ?? '').toString();
+    try {
+      await _firebaseFirestore.collection('products').doc(productId).update(
+        {
+          'defaultVariantID': defaultVariantID,
+          'defaultVariantInfo': variant.toJson(),
+          'updatedAt': DateTime.now(),
+          'updatedBy': email,
+        },
+      );
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(e.code);
     }
   }
 }

@@ -23,7 +23,7 @@ class ProvidersListWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: ProviderCard(
-              functionIsDone: functionIsDone,
+              // functionIsDone: functionIsDone,
               provider: list[index],
             ),
           ),

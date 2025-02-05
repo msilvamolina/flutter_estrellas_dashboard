@@ -34,6 +34,8 @@ mixin _$ProductModel {
   double? get price => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   bool? get isPercentage => throw _privateConstructorUsedError;
+  dynamic get attributes => throw _privateConstructorUsedError;
+  dynamic get variations => throw _privateConstructorUsedError;
   int? get points => throw _privateConstructorUsedError;
   double? get suggestedPrice => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
@@ -70,6 +72,8 @@ abstract class $ProductModelCopyWith<$Res> {
       double? price,
       bool? active,
       bool? isPercentage,
+      dynamic attributes,
+      dynamic variations,
       int? points,
       double? suggestedPrice,
       String? thumbnail,
@@ -108,6 +112,8 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? price = freezed,
     Object? active = freezed,
     Object? isPercentage = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? points = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
@@ -167,6 +173,14 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.isPercentage
           : isPercentage // ignore: cast_nullable_to_non_nullable
               as bool?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -241,6 +255,8 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       double? price,
       bool? active,
       bool? isPercentage,
+      dynamic attributes,
+      dynamic variations,
       int? points,
       double? suggestedPrice,
       String? thumbnail,
@@ -279,6 +295,8 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? price = freezed,
     Object? active = freezed,
     Object? isPercentage = freezed,
+    Object? attributes = freezed,
+    Object? variations = freezed,
     Object? points = freezed,
     Object? suggestedPrice = freezed,
     Object? thumbnail = freezed,
@@ -338,6 +356,14 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.isPercentage
           : isPercentage // ignore: cast_nullable_to_non_nullable
               as bool?,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      variations: freezed == variations
+          ? _value.variations
+          : variations // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       points: freezed == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
@@ -379,6 +405,8 @@ class _$ProductModelImpl extends _ProductModel {
       this.price,
       this.active,
       this.isPercentage,
+      this.attributes,
+      this.variations,
       this.points,
       this.suggestedPrice,
       this.thumbnail,
@@ -417,6 +445,10 @@ class _$ProductModelImpl extends _ProductModel {
   @override
   final bool? isPercentage;
   @override
+  final dynamic attributes;
+  @override
+  final dynamic variations;
+  @override
   final int? points;
   @override
   final double? suggestedPrice;
@@ -429,7 +461,7 @@ class _$ProductModelImpl extends _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate)';
+    return 'ProductModel(id: $id, provider: $provider, category: $category, name: $name, externalId: $externalId, usefulId: $usefulId, videoUrl: $videoUrl, description: $description, type: $type, sku: $sku, price: $price, active: $active, isPercentage: $isPercentage, attributes: $attributes, variations: $variations, points: $points, suggestedPrice: $suggestedPrice, thumbnail: $thumbnail, createdAt: $createdAt, uploadDate: $uploadDate)';
   }
 
   @override
@@ -457,6 +489,10 @@ class _$ProductModelImpl extends _ProductModel {
             (identical(other.active, active) || other.active == active) &&
             (identical(other.isPercentage, isPercentage) ||
                 other.isPercentage == isPercentage) &&
+            const DeepCollectionEquality()
+                .equals(other.attributes, attributes) &&
+            const DeepCollectionEquality()
+                .equals(other.variations, variations) &&
             (identical(other.points, points) || other.points == points) &&
             (identical(other.suggestedPrice, suggestedPrice) ||
                 other.suggestedPrice == suggestedPrice) &&
@@ -470,26 +506,29 @@ class _$ProductModelImpl extends _ProductModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      provider,
-      category,
-      name,
-      externalId,
-      usefulId,
-      videoUrl,
-      description,
-      type,
-      sku,
-      price,
-      active,
-      isPercentage,
-      points,
-      suggestedPrice,
-      thumbnail,
-      createdAt,
-      uploadDate);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        provider,
+        category,
+        name,
+        externalId,
+        usefulId,
+        videoUrl,
+        description,
+        type,
+        sku,
+        price,
+        active,
+        isPercentage,
+        const DeepCollectionEquality().hash(attributes),
+        const DeepCollectionEquality().hash(variations),
+        points,
+        suggestedPrice,
+        thumbnail,
+        createdAt,
+        uploadDate
+      ]);
 
   /// Create a copy of ProductModel
   /// with the given fields replaced by the non-null parameter values.
@@ -522,6 +561,8 @@ abstract class _ProductModel extends ProductModel {
       final double? price,
       final bool? active,
       final bool? isPercentage,
+      final dynamic attributes,
+      final dynamic variations,
       final int? points,
       final double? suggestedPrice,
       final String? thumbnail,
@@ -559,6 +600,10 @@ abstract class _ProductModel extends ProductModel {
   bool? get active;
   @override
   bool? get isPercentage;
+  @override
+  dynamic get attributes;
+  @override
+  dynamic get variations;
   @override
   int? get points;
   @override

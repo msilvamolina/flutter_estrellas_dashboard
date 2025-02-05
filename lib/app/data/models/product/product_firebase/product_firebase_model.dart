@@ -45,14 +45,15 @@ abstract class ProductFirebaseModel implements _$ProductFirebaseModel {
     String? warehouseName,
     String? providerID,
     String? providerName,
-    String? defaultVariation,
+    String? defaultVariantID,
+    dynamic defaultVariantInfo,
     dynamic attributes,
     dynamic variations,
     String? createdAt,
     String? uploadDate,
     String? searchField,
     dynamic reference,
-    String? updatedAt,
+    // String? updatedAt,
   }) = _ProductFirebaseModel;
 
   factory ProductFirebaseModel.fromJson(Map<String, dynamic> json) =>
